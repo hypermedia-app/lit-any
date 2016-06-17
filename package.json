@@ -1,0 +1,21 @@
+{
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "install": "npm install -g web-component-tester",
+    "test": "wct",
+    "build": "jspm bundle-sfx src/augeas augeas.js --global-name augeas --format global"
+  },
+  "jspm": {
+    "directories": {
+      "test": "tests"
+    },
+    "dependencies": {
+      "jsonld": "npm:jsonld@^0.4.11"
+    },
+    "devDependencies": {
+      "typescript": "npm:typescript@^1.6.2"
+    }
+  }
+}
