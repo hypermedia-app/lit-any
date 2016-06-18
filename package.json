@@ -5,7 +5,7 @@
   "scripts": {
     "install": "npm install -g web-component-tester",
     "test": "wct",
-    "build": "jspm bundle-sfx src/augeas augeas.js --global-name augeas --format global"
+    "build": "jspm bundle-sfx src/augeas - jsonld augeas.js --global-name augeas --format umd --minify --globals \"{ 'jsonld': 'jsonld' }\""
   },
   "jspm": {
     "directories": {

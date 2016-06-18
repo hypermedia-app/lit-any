@@ -13,7 +13,7 @@
     <script src="../augeas.js" ></script>
 </head>
 <body>
-    <template id="test-subject" is="ags-array-template">
+    <template id="test-subject" is="ags-literal-template">
         <div>[[model.length]]</div>
     </template>
 
@@ -21,7 +21,7 @@
 
         var subject;
 
-        describe('ags-array-template', function() {
+        describe('ags-literal-template', function() {
 
             beforeEach(function() {
                 subject = document.querySelector('#test-subject');
@@ -33,8 +33,34 @@
                 assert.equal(result, false);
             });
 
-            it('should match array', function() {
+            it('should not match array', function() {
                 var result = subject.objectMatches([]);
+
+                assert.equal(result, false);
+            });
+
+            it('should match number', function() {
+                var result = subject.objectMatches(10);
+
+                assert.equal(result, true);
+            });
+
+            it('should match string', function() {
+                var result = subject.objectMatches('xyz');
+
+                assert.equal(result, true);
+            });
+
+            it('should match boolean', function() {
+                var result = subject.objectMatches(true);
+
+                assert.equal(result, true);
+            });
+
+            it('should match JSON-LD literal object', function() {
+                var result = subject.objectMatches({
+                    '@value': 'test'
+                });
 
                 assert.equal(result, true);
             });
