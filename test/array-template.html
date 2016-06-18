@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ld-link-tests</title>
+    <title>ags-array-template tests</title>
     <script src="../jspm_packages/system.js"></script>
     <script src="../config.js"></script>
     <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
@@ -27,16 +27,19 @@
                 subject = document.querySelector('#test-subject');
             });
 
-            it('should not match object', function() {
-                var result = subject.objectMatches({});
+            describe('objectMatches', function () {
 
-                assert.equal(result, false);
-            });
+                it('should not match object', function() {
+                    var result = subject.objectMatches({});
 
-            it('should match array', function() {
-                var result = subject.objectMatches([]);
+                    assert.equal(result, false);
+                });
 
-                assert.equal(result, true);
+                it('should match array', function() {
+                    var result = subject.objectMatches([]);
+
+                    assert.equal(result, true);
+                });
             });
         });
 

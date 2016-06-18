@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ld-link-tests</title>
+    <title>ags-literal-templates tests</title>
     <script src="../jspm_packages/system.js"></script>
     <script src="../config.js"></script>
     <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
@@ -14,7 +14,6 @@
 </head>
 <body>
     <template id="test-subject" is="ags-literal-template">
-        <div>[[model.length]]</div>
     </template>
 
     <script>
@@ -27,42 +26,46 @@
                 subject = document.querySelector('#test-subject');
             });
 
-            it('should not match object', function() {
-                var result = subject.objectMatches({});
+            describe('objectMatches', function() {
 
-                assert.equal(result, false);
-            });
+                it('should not match object', function() {
+                    var result = subject.objectMatches({});
 
-            it('should not match array', function() {
-                var result = subject.objectMatches([]);
-
-                assert.equal(result, false);
-            });
-
-            it('should match number', function() {
-                var result = subject.objectMatches(10);
-
-                assert.equal(result, true);
-            });
-
-            it('should match string', function() {
-                var result = subject.objectMatches('xyz');
-
-                assert.equal(result, true);
-            });
-
-            it('should match boolean', function() {
-                var result = subject.objectMatches(true);
-
-                assert.equal(result, true);
-            });
-
-            it('should match JSON-LD literal object', function() {
-                var result = subject.objectMatches({
-                    '@value': 'test'
+                    assert.equal(result, false);
                 });
 
-                assert.equal(result, true);
+                it('should not match array', function() {
+                    var result = subject.objectMatches([]);
+
+                    assert.equal(result, false);
+                });
+
+                it('should match number', function() {
+                    var result = subject.objectMatches(10);
+
+                    assert.equal(result, true);
+                });
+
+                it('should match string', function() {
+                    var result = subject.objectMatches('xyz');
+
+                    assert.equal(result, true);
+                });
+
+                it('should match boolean', function() {
+                    var result = subject.objectMatches(true);
+
+                    assert.equal(result, true);
+                });
+
+                it('should match JSON-LD literal object', function() {
+                    var result = subject.objectMatches({
+                        '@value': 'test'
+                    });
+
+                    assert.equal(result, true);
+                });
+
             });
         });
 
