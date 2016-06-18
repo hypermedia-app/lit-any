@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ags-type-template tests</title>
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../config.js"></script>
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html"/>
+    <link rel="import" href="../bower_components/polymer-ts/polymer-ts.html"/>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js" ></script>
+    <script src="../augeas.js" ></script>
+</head>
+<body>
+    <template id="no-type" is="ags-type-template">
+    </template>
+
+    <template id="with-type" is="ags-type-template" type="http://example.org/onto#Type">
+    </template>
+
+    <script>
+
+        var subject;
+
+        describe('ags-type-template without type', function() {
+
+            beforeEach(function() {
+                subject = document.querySelector('#no-type');
+            });
+
+            describe('objectMatches', function () {
+
+                it('should not match anything', function() {
+                    var result = subject.objectMatches({});
+
+                    assert.equal(result, false);
+                });
+            });
+        });
+
+        describe('ags-type-template with type', function() {
+
+            beforeEach(function() {
+                subject = document.querySelector('#with-type');
+            });
+
+            describe('objectMatches', function () {
+
+                it('should match object with matching type', function() {
+                    var result = subject.objectMatches({
+                        '@type': 'http://example.org/onto#Type'
+                    });
+
+                    assert.equal(result, true);
+                });
+
+                it('should match object with matching type in array', function() {
+                    var result = subject.objectMatches({
+                        '@type': [
+                            'http://example.org/onto#AnotherType',
+                            'http://example.org/onto#Type'
+                        ]
+                    });
+
+                    assert.equal(result, true);
+                });
+
+                it('should not match object when none in array match', function() {
+                    var result = subject.objectMatches({
+                        '@type': [
+                            'http://example.org/onto#AnotherType',
+                            'http://example.org/onto#YetAnotherType'
+                        ]
+                    });
+
+                    assert.equal(result, false);
+                });
+
+                it('should not match object when @type differs', function() {
+                    var result = subject.objectMatches({
+                        '@type': 'http://example.org/onto#YetAnotherType'
+                    });
+
+                    assert.equal(result, false);
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
