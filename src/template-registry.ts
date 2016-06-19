@@ -52,12 +52,14 @@ export var AgsTemplate = {
 
     attached: function() {
         this.push('templates', this);
-        this.fire('ags-templates', {}, { bubble: true });
+        this.fire('ags-templates-changed', { templates: this.templates }, { bubbles: true });
     },
 
     detached: function() {
         this.pop('templates', this);
-        this.fire('ags-templates', {}, { bubble: true });
+        document.dispatchEvent(new CustomEvent('ags-templates-changed', {
+            detail: { templates: this.templates }
+        }));
     },
 
     isMatch: function(object, predicate, scope) {

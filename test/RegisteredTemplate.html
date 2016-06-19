@@ -17,83 +17,139 @@
     <script>
 
         var subject;
+        describe('RegisteredTemplate', function () {
 
-        describe('RegisteredTemplate defaults', function() {
+            describe('defaults', function () {
 
-            before(function() {
-                subject = document.getElementById('defaults');
-            });
+                before(function () {
+                    subject = document.getElementById('defaults');
+                });
 
-            describe('as property', function () {
+                describe('as property', function () {
 
-                it('should equal "model"', function(done) {
+                    it('should equal "model"', function (done) {
 
-                    System.import('test/test-elements/test-registered-template')
-                            .then(function() {
-                                assert.equal(subject.as, 'model');
-                                done();
-                            })
-                            .catch(done.fail);
+                        System.import('test/test-elements/test-registered-template')
+                                .then(function () {
+                                    assert.equal(subject.as, 'model');
+                                    done();
+                                })
+                                .catch(done.fail);
+                    });
+
+                });
+
+                describe('name property', function () {
+
+                    it('should be empty string', function (done) {
+
+                        System.import('test/test-elements/test-registered-template')
+                                .then(function () {
+                                    assert.equal(subject.name, '');
+                                    done();
+                                })
+                                .catch(done.fail);
+                    });
+
+                });
+
+                describe('scope property', function () {
+
+                    it('should be empty string', function (done) {
+
+                        System.import('test/test-elements/test-registered-template')
+                                .then(function () {
+                                    assert.equal(subject.scope, '');
+                                    done();
+                                })
+                                .catch(done.fail);
+                    });
+
+                });
+
+                describe('compactWith property', function () {
+
+                    it('should be null', function (done) {
+
+                        System.import('test/test-elements/test-registered-template')
+                                .then(function () {
+                                    assert.equal(subject.compactWith, null);
+                                    done();
+                                })
+                                .catch(done.fail);
+                    });
+
+                });
+
+                describe('predicate property', function () {
+
+                    it('should be null', function (done) {
+
+                        System.import('test/test-elements/test-registered-template')
+                                .then(function () {
+                                    assert.equal(subject.predicate, null);
+                                    done();
+                                })
+                                .catch(done.fail);
+                    });
+
                 });
 
             });
 
-            describe('name property', function () {
+            describe('adding to DOM', function () {
 
-                it('should be empty string', function(done) {
+                var node;
 
+                it('raises an event', function (done) {
                     System.import('test/test-elements/test-registered-template')
-                            .then(function() {
-                                assert.equal(subject.name, '');
-                                done();
-                            })
-                            .catch(done.fail);
+                            .then(function () {
+                                node = document.createElement('template', 'test-registered-template');
+                                node.setAttribute('id', 'dynamic');
+
+                                document.addEventListener('ags-templates-changed', listener);
+                                document.body.appendChild(node);
+
+                                function listener(e) {
+                                    assert.equal(e.detail.templates.length, 2);
+                                    assert.equal(e.detail.templates[1].id, 'dynamic');
+                                    done();
+                                    document.removeEventListener('ags-templates-changed', listener);
+                                }
+                            });
+                });
+
+                afterEach(function() {
+                    document.body.removeChild(node);
                 });
 
             });
 
-            describe('scope property', function () {
+            describe('removing from DOM', function () {
 
-                it('should be empty string', function(done) {
+                var node, listener;
 
+                it('raises an event', function (done) {
                     System.import('test/test-elements/test-registered-template')
-                            .then(function() {
-                                assert.equal(subject.scope, '');
-                                done();
-                            })
-                            .catch(done.fail);
+                            .then(function () {
+                                node = document.createElement('template', 'test-registered-template');
+                                node.setAttribute('id', 'to-remove');
+                                document.body.appendChild(node);
+
+                                document.addEventListener('ags-templates-changed', listener);
+
+                                document.body.removeChild(node);
+
+                                function listener(e) {
+                                    assert.equal(e.detail.templates.length, 1);
+                                    assert.equal(e.detail.templates[0].id, 'defaults');
+                                    done();
+                                    document.removeEventListener('ags-templates-changed', listener);
+                                }
+                            });
                 });
 
             });
-
-            describe('compactWith property', function () {
-
-                it('should be null', function(done) {
-
-                    System.import('test/test-elements/test-registered-template')
-                            .then(function() {
-                                assert.equal(subject.compactWith, null);
-                                done();
-                            })
-                            .catch(done.fail);
-                });
-
-            });
-
-            describe('predicate property', function () {
-
-                it('should be null', function(done) {
-
-                    System.import('test/test-elements/test-registered-template')
-                            .then(function() {
-                                assert.equal(subject.predicate, null);
-                                done();
-                            })
-                            .catch(done.fail);
-                });
-
-            });
-
         });
 
     </script>
