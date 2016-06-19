@@ -26,18 +26,24 @@ var TemplateStamper = {
     }
 };
 
-export var RegisteredTemplate = {
+export var AgsTemplate = {
     properties: {
         as: {
             type: String,
             value: 'model'
         },
-        compactWith: Object,
+        compactWith: {
+            type: Object,
+            value: null
+        },
         name: {
             type: String,
             value: ''
         },
-        predicate: String,
+        predicate: {
+            type: String,
+            value: null
+        },
         scope: {
             type: String,
             value: ''
@@ -90,5 +96,5 @@ function stamp(objectView, template, object) {
     return this.stamp(stampedModel).root;
 }
 
-export var RegisteredTemplate = [ RegisteredTemplate, TemplateRegistryAccess ];
+export var RegisteredTemplate = [ AgsTemplate, TemplateRegistryAccess ];
 export var RegisteredTemplateConsumer = [ Polymer.Templatizer, TemplateStamper, TemplateRegistryAccess ];

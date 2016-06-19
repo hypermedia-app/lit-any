@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegisteredTemplate tests</title>
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../config.js"></script>
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html"/>
+    <link rel="import" href="../bower_components/polymer-ts/polymer-ts.html"/>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+</head>
+<body>
+    <template id="defaults" is="test-registered-template">
+    </template>
+
+    <script>
+
+        var subject;
+
+        describe('RegisteredTemplate defaults', function() {
+
+            before(function() {
+                subject = document.getElementById('defaults');
+            });
+
+            describe('as property', function () {
+
+                it('should equal "model"', function(done) {
+
+                    System.import('test/test-elements/test-registered-template')
+                            .then(function() {
+                                assert.equal(subject.as, 'model');
+                                done();
+                            })
+                            .catch(done.fail);
+                });
+
+            });
+
+            describe('name property', function () {
+
+                it('should be empty string', function(done) {
+
+                    System.import('test/test-elements/test-registered-template')
+                            .then(function() {
+                                assert.equal(subject.name, '');
+                                done();
+                            })
+                            .catch(done.fail);
+                });
+
+            });
+
+            describe('scope property', function () {
+
+                it('should be empty string', function(done) {
+
+                    System.import('test/test-elements/test-registered-template')
+                            .then(function() {
+                                assert.equal(subject.scope, '');
+                                done();
+                            })
+                            .catch(done.fail);
+                });
+
+            });
+
+            describe('compactWith property', function () {
+
+                it('should be null', function(done) {
+
+                    System.import('test/test-elements/test-registered-template')
+                            .then(function() {
+                                assert.equal(subject.compactWith, null);
+                                done();
+                            })
+                            .catch(done.fail);
+                });
+
+            });
+
+            describe('predicate property', function () {
+
+                it('should be null', function(done) {
+
+                    System.import('test/test-elements/test-registered-template')
+                            .then(function() {
+                                assert.equal(subject.predicate, null);
+                                done();
+                            })
+                            .catch(done.fail);
+                });
+
+            });
+
+        });
+
+    </script>
+</body>
+</html>

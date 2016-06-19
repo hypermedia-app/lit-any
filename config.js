@@ -10,6 +10,9 @@ System.config({
   packages: {
     "src": {
       "defaultExtension": "ts"
+    },
+    "test": {
+      "defaultExtension": "ts"
     }
   },
 
