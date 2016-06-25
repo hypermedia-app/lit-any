@@ -63,13 +63,13 @@ export var AgsTemplate = {
     },
 
     isMatch: function(object, predicate, scope) {
-        var objectMatches, predicateMatches, scopeMatches;
+        var objectMatches, predicateMatches, isScopeMatch;
 
         objectMatches = this.objectMatches(object);
         predicateMatches = this.predicateMatches(predicate);
-        scopeMatches = this.scopeMatches(scope);
+        isScopeMatch = scopeMatches.call(this, scope);
 
-        return objectMatches && predicateMatches && scopeMatches;
+        return objectMatches && predicateMatches && isScopeMatch;
     },
 
     objectMatches: function(object) {
@@ -82,12 +82,12 @@ export var AgsTemplate = {
         }
 
         return true;
-    },
-
-    scopeMatches: function(scope) {
-        return this.scope == scope;
     }
 };
+
+function scopeMatches(scope) {
+    return this.scope == scope;
+}
 
 function stamp(objectView, template, object) {
     var stampedModel = { };
