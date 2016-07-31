@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../bower_components/polymer-ts/polymer-ts.html"/>
+    <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
+    <link rel="import" href="../augeas.html" />
+</head>
+<body>
+    <demo-snippet>
+        <template>
+            <ags-form id="f1"></ags-form>
+
+            <script>
+                document.getElementById('f1').contract = {
+                    body: [
+                        {
+                            property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
+                            range: 'http://www.w3.org/2001/XMLSchema#string'
+                        },
+                        {
+                            property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/createdAt',
+                            range: 'http://www.w3.org/2001/XMLSchema#dateTime'
+                        }
+                    ]
+                };
+            </script>
+        </template>
+    </demo-snippet>
+
+    <script>
+        //System.import('src/augeas');
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ags-form tests</title>
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html"/>
+    <link rel="import" href="../bower_components/polymer-ts/polymer-ts.html"/>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
+    <link rel="import" href="../augeas.html" />
+</head>
+<body>
+
+<test-fixture id="no-field-templates">
+    <template>
+        <ags-field></ags-field>
+    </template>
+</test-fixture>
+
+<script>
+
+    var subject, fixture;
+
+    describe('ags-field', function () {
+
+        it('should render a text input by default', function (done) {
+            subject = prepareFixture('no-field-templates');
+
+            subject.property = 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title';
+
+            flush(function() {
+                var field = subject.querySelector('input');
+
+                assert.equal(field.constructor, HTMLInputElement);
+                assert.equal(field.type, 'text');
+                done();
+            });
+        });
+
+        it('should render no field when property is not set', function(done) {
+            subject = prepareFixture('no-field-templates');
+
+            flush(function() {
+                var children = subject.querySelectorAll('ags-field');
+
+                assert.equal(children.length, 0);
+                done();
+            });
+        });
+
+        afterEach(function () {
+            fixture.restore();
+        });
+    });
+
+    function prepareFixture(fixtureId, selector) {
+        selector = selector || 'ags-field';
+
+        fixture = document.querySelector('test-fixture#' + fixtureId);
+        fixture.create();
+        return document.querySelector(selector);
+    }
+
+</script>
+</body>
+</html>

@@ -3,30 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>ags-object-template tests</title>
-    <script src="../jspm_packages/system.js"></script>
-    <script src="../config.js"></script>
     <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="../bower_components/polymer/polymer.html"/>
     <link rel="import" href="../bower_components/polymer-ts/polymer-ts.html"/>
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
-    <script src="../augeas.js"></script>
+    <link rel="import" href="../augeas.html" />
 </head>
 <body>
-<template id="test-subject" is="ags-object-template">
-    <span>is </span>
-</template>
+
+<test-fixture id="multiple-matching-templates">
+    <template>
+        <template is="ags-object-template">
+            <span>I'm first</span>
+        </template>
+
+        <template is="ags-object-template">
+            <span>I'm second</span>
+        </template>
+
+        <ags-view></ags-view>
+    </template>
+</test-fixture>
+
+<test-fixture id="view-with-params">
+    <template>
+        <template is="ags-object-template">
+            <span>[[params.value]]</span>
+        </template>
+
+        <ags-view params='{ "value": "some text" }'></ags-view>
+    </template>
+</test-fixture>
 
 <script>
 
-    var subject;
-
     describe('ags-view', function () {
 
-        beforeEach(function () {
-            subject = document.querySelector('#test-subject');
+        var fixture;
+
+        describe('multiple matching templates', function() {
+
+            beforeEach(function() {
+                fixture = document.querySelector('#multiple-matching-templates');
+                fixture.create();
+            });
+
+            it('should render first match', function (done) {
+                var view = document.querySelector('ags-view');
+
+                view.object = { '@id': '_:test' };
+
+                flush(function() {
+                    assert.equal("I'm first", view.querySelector('span').textContent);
+                    done();
+                });
+            });
         });
 
+        describe('view with params set', function () {
+
+            beforeEach(function() {
+                fixture = document.querySelector('#view-with-params');
+                fixture.create();
+            });
+
+            it('should pass params to template', function(done) {
+                var view = document.querySelector('ags-view');
+
+                view.object = { '@id': '_:test' };
+
+                flush(function() {
+                    assert.equal("some text", view.querySelector('span').textContent);
+                    done();
+                });
+            });
+
+        });
+
+        afterEach(function() {
+            fixture.restore();
+        });
 
     });
 

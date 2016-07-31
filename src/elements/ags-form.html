@@ -1,0 +1,9 @@
+<dom-module id="ags-form">
+    <template>
+        <fieldset>
+            <template is="dom-repeat" items="[[contract.body]]">
+                <ags-field property="[[item.property]]" range="[[item.range]]"></ags-field>
+            </template>
+        </fieldset>
+    </template>
+</dom-module>

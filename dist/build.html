@@ -1,0 +1,15 @@
+<html><head><meta charset="UTF-8"></head><body><div hidden="" by-vulcanize=""><dom-module id="ags-form" assetpath="../src/elements/">
+    <template>
+        <fieldset>
+            <template is="dom-repeat" items="[[contract.body]]">
+                <ags-field property="[[item.property]]" range="[[item.range]]"></ags-field>
+            </template>
+        </fieldset>
+    </template>
+</dom-module><dom-module id="ags-field" assetpath="../src/elements/">
+    <template>
+        <template is="dom-if" if="[[isReady]]">
+            <input type="text">
+        </template>
+    </template>
+</dom-module></div></body></html>

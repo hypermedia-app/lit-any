@@ -5,16 +5,19 @@
   "scripts": {
     "install": "npm install -g web-component-tester",
     "test": "wct",
-    "build": "jspm bundle-sfx src/augeas - jsonld augeas.js --global-name augeas --format umd --minify --globals \"{ 'jsonld': 'jsonld' }\""
+    "test-local": "wct -l chrome -p --skip-selenium-install",
+    "build": "jspm bundle-sfx src/augeas - jsonld dist/build.js --global-name augeas --format umd --globals \"{ 'jsonld': 'jsonld' }\""
   },
   "jspm": {
     "directories": {
       "test": "tests"
     },
     "dependencies": {
-      "jsonld": "npm:jsonld@^0.4.11"
+      "jsonld": "npm:jsonld@^0.4.11",
+      "wikibus/heracles": "github:wikibus/heracles@master"
     },
     "devDependencies": {
+      "html": "github:Hypercubed/systemjs-plugin-html@^0.0.8",
       "typescript": "npm:typescript@^1.6.2"
     }
   }

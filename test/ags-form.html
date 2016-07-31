@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ags-form tests</title>
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html"/>
+    <link rel="import" href="../bower_components/polymer-ts/polymer-ts.html"/>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
+    <link rel="import" href="../augeas.html" />
+</head>
+<body>
+
+<test-fixture id="no-fields-fixture">
+    <template>
+        <ags-form></ags-form>
+    </template>
+</test-fixture>
+
+<script>
+
+    var subject, fixture;
+
+    describe('ags-form', function () {
+
+        beforeEach(function () {
+            fixture = document.querySelector('test-fixture');
+            fixture.create();
+            subject = document.querySelector('ags-form');
+        });
+
+        it('should be registered', function () {
+            assert.notEqual(document.createElement('ags-form').constructor, HTMLElement);
+        });
+
+        it('should have null value by default', function () {
+            assert.strictEqual(subject.value, null);
+        });
+
+        it('should render ags-field for each property', function (done) {
+
+            var contract = {
+                body: [
+                    {
+                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
+                        range: 'http://www.w3.org/2001/XMLSchema#string'
+                    },
+                    {
+                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/createdAt',
+                        range: 'http://www.w3.org/2001/XMLSchema#dateTime'
+                    }
+                ]
+            };
+
+            subject.contract = contract;
+
+            flush(function () {
+                var fields = document.querySelectorAll('ags-form /deep/ ags-field');
+                assert.equal(fields.length, 2);
+                assert.equal(fields[0].property, 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title');
+                assert.equal(fields[0].range, 'http://www.w3.org/2001/XMLSchema#string');
+                assert.equal(fields[1].property, 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/createdAt');
+                assert.equal(fields[1].range, 'http://www.w3.org/2001/XMLSchema#dateTime');
+                done();
+            });
+
+        });
+
+        afterEach(function () {
+            fixture.restore();
+        });
+    });
+
+</script>
+</body>
+</html>
