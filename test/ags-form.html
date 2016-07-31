@@ -9,6 +9,7 @@
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
     <link rel="import" href="../augeas.html" />
+    <script src="_TestHelpers.js"></script>
 </head>
 <body>
 
@@ -20,22 +21,20 @@
 
 <script>
 
-    var subject, fixture;
+    var getSubject = function () {
+        return document.querySelector('ags-form');
+    };
 
     describe('ags-form', function () {
 
-        beforeEach(function () {
-            fixture = document.querySelector('test-fixture');
-            fixture.create();
-            subject = document.querySelector('ags-form');
-        });
+        prepareFixture('no-fields-fixture');
 
         it('should be registered', function () {
             assert.notEqual(document.createElement('ags-form').constructor, HTMLElement);
         });
 
         it('should have null value by default', function () {
-            assert.strictEqual(subject.value, null);
+            assert.strictEqual(getSubject().value, null);
         });
 
         it('should render ags-field for each property', function (done) {
@@ -53,7 +52,7 @@
                 ]
             };
 
-            subject.contract = contract;
+            getSubject().contract = contract;
 
             flush(function () {
                 var fields = document.querySelectorAll('ags-form /deep/ ags-field');
@@ -65,10 +64,6 @@
                 done();
             });
 
-        });
-
-        afterEach(function () {
-            fixture.restore();
         });
     });
 

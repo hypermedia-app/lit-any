@@ -421,6 +421,9 @@ $__System.register("b", ["a"], function(exports_1, context_1) {
                     property()
                 ], AgsField.prototype, "range", void 0);
                 __decorate([
+                    property({ value: null })
+                ], AgsField.prototype, "value", void 0);
+                __decorate([
                     computed()
                 ], AgsField.prototype, "isReady", null);
                 AgsField = __decorate([

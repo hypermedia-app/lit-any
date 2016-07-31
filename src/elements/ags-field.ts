@@ -9,6 +9,9 @@ class AgsField extends polymer.Base {
     @property()
     range:String;
 
+    @property({ value: null })
+    value:any;
+
     @computed()
     isReady(property) {
         return property != null;

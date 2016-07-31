@@ -8,7 +8,8 @@
     <link rel="import" href="../bower_components/polymer-ts/polymer-ts.html"/>
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
-    <link rel="import" href="../augeas.html" />
+    <link rel="import" href="../augeas.html"/>
+    <script src="_TestHelpers.js"></script>
 </head>
 <body>
 
@@ -20,47 +21,57 @@
 
 <script>
 
-    var subject, fixture;
+    var getSubject = function () {
+        return document.querySelector('ags-field');
+    };
 
     describe('ags-field', function () {
 
-        it('should render a text input by default', function (done) {
-            subject = prepareFixture('no-field-templates');
+        describe('with property not set', function() {
 
-            subject.property = 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title';
+            prepareFixture('no-field-templates');
 
-            flush(function() {
-                var field = subject.querySelector('input');
+            it('should render no field', function (done) {
+                flush(function () {
+                    var children = getSubject().querySelectorAll('input');
 
-                assert.equal(field.constructor, HTMLInputElement);
-                assert.equal(field.type, 'text');
-                done();
+                    assert.equal(children.length, 0);
+                    done();
+                });
             });
         });
 
-        it('should render no field when property is not set', function(done) {
-            subject = prepareFixture('no-field-templates');
+        describe('with no matching template', function () {
 
-            flush(function() {
-                var children = subject.querySelectorAll('ags-field');
+            prepareFixture('no-field-templates');
 
-                assert.equal(children.length, 0);
-                done();
+            beforeEach(function () {
+                getSubject().property = 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title';
             });
-        });
 
-        afterEach(function () {
-            fixture.restore();
+            it('should render a text input', function (done) {
+                flush(function () {
+                    var field = getSubject().querySelector('input');
+
+                    assert.equal(field.constructor, HTMLInputElement);
+                    assert.equal(field.type, 'text');
+                    done();
+                });
+            });
+
+            it('should set value property when input value is set', function (done) {
+
+                flush(function () {
+                    var input = getSubject().querySelector('input');
+
+                    setInputValue(input, 'I wrote this');
+
+                    assert.equal(getSubject().value, 'I wrote this');
+                    done();
+                });
+            });
         });
     });
-
-    function prepareFixture(fixtureId, selector) {
-        selector = selector || 'ags-field';
-
-        fixture = document.querySelector('test-fixture#' + fixtureId);
-        fixture.create();
-        return document.querySelector(selector);
-    }
 
 </script>
 </body>
