@@ -40,18 +40,15 @@
 
     describe('ags-view', function () {
 
-        var fixture;
+        var view;
 
         describe('multiple matching templates', function() {
 
             beforeEach(function() {
-                fixture = document.querySelector('#multiple-matching-templates');
-                fixture.create();
+                view = fixture('multiple-matching-templates')[2];
             });
 
             it('should render first match', function (done) {
-                var view = document.querySelector('ags-view');
-
                 view.object = { '@id': '_:test' };
 
                 flush(function() {
@@ -64,13 +61,11 @@
         describe('view with params set', function () {
 
             beforeEach(function() {
-                fixture = document.querySelector('#view-with-params');
-                fixture.create();
+                view = fixture('view-with-params')[1];
             });
 
             it('should pass params to template', function(done) {
-                var view = document.querySelector('ags-view');
-
+                debugger;
                 view.object = { '@id': '_:test' };
 
                 flush(function() {
@@ -79,10 +74,6 @@
                 });
             });
 
-        });
-
-        afterEach(function() {
-            fixture.restore();
         });
 
     });

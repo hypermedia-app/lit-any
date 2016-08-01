@@ -19,21 +19,27 @@
     </template>
 </test-fixture>
 
+<test-fixture id="field-with-property">
+    <template>
+        <ags-field property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title"></ags-field>
+    </template>
+</test-fixture>
+
 <script>
 
-    var getSubject = function () {
-        return document.querySelector('ags-field');
-    };
+    var subject;
 
     describe('ags-field', function () {
 
         describe('with property not set', function() {
 
-            prepareFixture('no-field-templates');
+            beforeEach(function(){
+                subject = fixture('no-field-templates');
+            });
 
             it('should render no field', function (done) {
                 flush(function () {
-                    var children = getSubject().querySelectorAll('input');
+                    var children = subject.querySelectorAll('input');
 
                     assert.equal(children.length, 0);
                     done();
@@ -43,15 +49,13 @@
 
         describe('with no matching template', function () {
 
-            prepareFixture('no-field-templates');
-
-            beforeEach(function () {
-                getSubject().property = 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title';
+            beforeEach(function(){
+                subject = fixture('field-with-property');
             });
 
             it('should render a text input', function (done) {
                 flush(function () {
-                    var field = getSubject().querySelector('input');
+                    var field = subject.querySelector('input');
 
                     assert.equal(field.constructor, HTMLInputElement);
                     assert.equal(field.type, 'text');
@@ -62,11 +66,11 @@
             it('should set value property when input value is set', function (done) {
 
                 flush(function () {
-                    var input = getSubject().querySelector('input');
+                    var input = subject.querySelector('input');
 
                     setInputValue(input, 'I wrote this');
 
-                    assert.equal(getSubject().value, 'I wrote this');
+                    assert.equal(subject.value, 'I wrote this');
                     done();
                 });
             });
