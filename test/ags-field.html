@@ -25,6 +25,16 @@
     </template>
 </test-fixture>
 
+<test-fixture id="field-template-for-property">
+    <template>
+        <template is="ags-field-property-template" property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description">
+            <textarea value="{{value::input}}"></textarea>
+        </template>
+
+        <ags-field property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title"></ags-field>
+    </template>
+</test-fixture>
+
 <script>
 
     var subject;
@@ -71,6 +81,21 @@
                     setInputValue(input, 'I wrote this');
 
                     assert.equal(subject.value, 'I wrote this');
+                    done();
+                });
+            });
+        });
+
+        describe('with template matched by property', function() {
+            beforeEach(function(){
+                subject = fixture('field-template-for-property')[1];
+            });
+
+            it('should render the template', function(done) {
+                flush(function() {
+                    var textarea = subject.$$('textarea');
+
+                    assert.isNotNull(textarea);
                     done();
                 });
             });
