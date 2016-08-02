@@ -1,7 +1,13 @@
 <dom-module id="ags-field">
     <template>
-        <template is="dom-if" if="[[isReady]]">
-            <input type="text" value="{{value::input}}"/>
-        </template>
+        <div id="fallbackField">
+            <template is="dom-if" if="[[property]]" restamp>
+                <template is="dom-if" if="[[noTemplateFound]]">
+                    <input type="text" value="{{value::input}}"/>
+                </template>
+            </template>
+        </div>
+
+        <div id="dynamicField"></div>
     </template>
 </dom-module>

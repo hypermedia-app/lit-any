@@ -1,6 +1,6 @@
 !function(e){function r(e,r,o){return 4===arguments.length?t.apply(this,arguments):void n(e,{declarative:!0,deps:r,declare:o})}function t(e,r,t,o){n(e,{declarative:!1,deps:r,executingRequire:t,execute:o})}function n(e,r){r.name=e,e in p||(p[e]=r),r.normalizedDeps=r.deps}function o(e,r){if(r[e.groupIndex]=r[e.groupIndex]||[],-1==v.call(r[e.groupIndex],e)){r[e.groupIndex].push(e);for(var t=0,n=e.normalizedDeps.length;n>t;t++){var a=e.normalizedDeps[t],u=p[a];if(u&&!u.evaluated){var d=e.groupIndex+(u.declarative!=e.declarative);if(void 0===u.groupIndex||u.groupIndex<d){if(void 0!==u.groupIndex&&(r[u.groupIndex].splice(v.call(r[u.groupIndex],u),1),0==r[u.groupIndex].length))throw new TypeError("Mixed dependency cycle detected");u.groupIndex=d}o(u,r)}}}}function a(e){var r=p[e];r.groupIndex=0;var t=[];o(r,t);for(var n=!!r.declarative==t.length%2,a=t.length-1;a>=0;a--){for(var u=t[a],i=0;i<u.length;i++){var s=u[i];n?d(s):l(s)}n=!n}}function u(e){return x[e]||(x[e]={name:e,dependencies:[],exports:{},importers:[]})}function d(r){if(!r.module){var t=r.module=u(r.name),n=r.module.exports,o=r.declare.call(e,function(e,r){if(t.locked=!0,"object"==typeof e)for(var o in e)n[o]=e[o];else n[e]=r;for(var a=0,u=t.importers.length;u>a;a++){var d=t.importers[a];if(!d.locked)for(var i=0;i<d.dependencies.length;++i)d.dependencies[i]===t&&d.setters[i](n)}return t.locked=!1,r},r.name);t.setters=o.setters,t.execute=o.execute;for(var a=0,i=r.normalizedDeps.length;i>a;a++){var l,s=r.normalizedDeps[a],c=p[s],v=x[s];v?l=v.exports:c&&!c.declarative?l=c.esModule:c?(d(c),v=c.module,l=v.exports):l=f(s),v&&v.importers?(v.importers.push(t),t.dependencies.push(v)):t.dependencies.push(null),t.setters[a]&&t.setters[a](l)}}}function i(e){var r,t=p[e];if(t)t.declarative?c(e,[]):t.evaluated||l(t),r=t.module.exports;else if(r=f(e),!r)throw new Error("Unable to load dependency "+e+".");return(!t||t.declarative)&&r&&r.__useDefault?r["default"]:r}function l(r){if(!r.module){var t={},n=r.module={exports:t,id:r.name};if(!r.executingRequire)for(var o=0,a=r.normalizedDeps.length;a>o;o++){var u=r.normalizedDeps[o],d=p[u];d&&l(d)}r.evaluated=!0;var c=r.execute.call(e,function(e){for(var t=0,n=r.deps.length;n>t;t++)if(r.deps[t]==e)return i(r.normalizedDeps[t]);throw new TypeError("Module "+e+" not declared as a dependency.")},t,n);c&&(n.exports=c),t=n.exports,t&&t.__esModule?r.esModule=t:r.esModule=s(t)}}function s(r){if(r===e)return r;var t={};if("object"==typeof r||"function"==typeof r)if(g){var n;for(var o in r)(n=Object.getOwnPropertyDescriptor(r,o))&&h(t,o,n)}else{var a=r&&r.hasOwnProperty;for(var o in r)(!a||r.hasOwnProperty(o))&&(t[o]=r[o])}return t["default"]=r,h(t,"__useDefault",{value:!0}),t}function c(r,t){var n=p[r];if(n&&!n.evaluated&&n.declarative){t.push(r);for(var o=0,a=n.normalizedDeps.length;a>o;o++){var u=n.normalizedDeps[o];-1==v.call(t,u)&&(p[u]?c(u,t):f(u))}n.evaluated||(n.evaluated=!0,n.module.execute.call(e))}}function f(e){if(D[e])return D[e];if("@node/"==e.substr(0,6))return y(e.substr(6));var r=p[e];if(!r)throw"Module "+e+" not present.";return a(e),c(e,[]),p[e]=void 0,r.declarative&&h(r.module.exports,"__esModule",{value:!0}),D[e]=r.declarative?r.module.exports:r.esModule}var p={},v=Array.prototype.indexOf||function(e){for(var r=0,t=this.length;t>r;r++)if(this[r]===e)return r;return-1},g=!0;try{Object.getOwnPropertyDescriptor({a:0},"a")}catch(m){g=!1}var h;!function(){try{Object.defineProperty({},"a",{})&&(h=Object.defineProperty)}catch(e){h=function(e,r,t){try{e[r]=t.value||t.get.call(e)}catch(n){}}}}();var x={},y="undefined"!=typeof System&&System._nodeRequire||"undefined"!=typeof require&&require.resolve&&"undefined"!=typeof process&&require,D={"@empty":{}};return function(e,n,o){return function(a){a(function(a){for(var u={_nodeRequire:y,register:r,registerDynamic:t,get:f,set:function(e,r){D[e]=r},newModule:function(e){return e}},d=0;d<n.length;d++)(function(e,r){r&&r.__esModule?D[e]=r:D[e]=s(r)})(n[d],arguments[d]);o(u);var i=f(e[0]);if(e.length>1)for(var d=1;d<e.length;d++)f(e[d]);return i.__useDefault?i["default"]:i})}}}("undefined"!=typeof self?self:global)
 
-(["1"], ["7"], function($__System) {
+(["1"], ["9"], function($__System) {
 
 $__System.register("2", ["3"], function(exports_1, context_1) {
     "use strict";
@@ -182,7 +182,46 @@ $__System.register("6", ["3"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("3", ["7"], function(exports_1, context_1) {
+$__System.register("7", ["8"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __extends = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var form_template_registry_1;
+    var AgsFieldTemplate;
+    return {
+        setters:[
+            function (form_template_registry_1_1) {
+                form_template_registry_1 = form_template_registry_1_1;
+            }],
+        execute: function() {
+            AgsFieldTemplate = (function (_super) {
+                __extends(AgsFieldTemplate, _super);
+                function AgsFieldTemplate() {
+                    _super.apply(this, arguments);
+                }
+                AgsFieldTemplate = __decorate([
+                    behavior(form_template_registry_1.RegisteredTemplate),
+                    extend('template'),
+                    component('ags-field-template')
+                ], AgsFieldTemplate);
+                return AgsFieldTemplate;
+            }(polymer.Base));
+            AgsFieldTemplate.register();
+        }
+    }
+});
+
+$__System.register("3", ["9"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var jsonld_1;
@@ -283,7 +322,7 @@ $__System.register("3", ["7"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("8", ["3"], function(exports_1, context_1) {
+$__System.register("a", ["3"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -383,11 +422,56 @@ $__System.register("8", ["3"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("9", [], function() { return { setters: [], execute: function() {} } });
+$__System.register("b", [], function() { return { setters: [], execute: function() {} } });
 
-$__System.register("a", [], function() { return { setters: [], execute: function() {} } });
+$__System.register("c", [], function() { return { setters: [], execute: function() {} } });
 
-$__System.register("b", ["a"], function(exports_1, context_1) {
+$__System.register("8", [], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var templates, FormTemplateRegistryAccess, AgsFormTemplate, RegisteredTemplate, AgsFieldStamper;
+    return {
+        setters:[],
+        execute: function() {
+            templates = [];
+            exports_1("FormTemplateRegistryAccess", FormTemplateRegistryAccess = {
+                properties: {
+                    templates: {
+                        type: Array,
+                        notify: true,
+                        readOnly: true,
+                        value: templates
+                    }
+                }
+            });
+            exports_1("AgsFormTemplate", AgsFormTemplate = {
+                properties: {
+                    property: {
+                        type: String
+                    }
+                },
+                attached: function () {
+                    this.push('templates', this);
+                },
+                detached: function () {
+                    this.pop('templates', this);
+                },
+                isMatch: function (property) {
+                    var propertyMatches;
+                    propertyMatches = this.propertyMatches(property);
+                    return propertyMatches;
+                },
+                propertyMatches: function (property) {
+                    return property == this.property;
+                }
+            });
+            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsFormTemplate, FormTemplateRegistryAccess]);
+            exports_1("AgsFieldStamper", AgsFieldStamper = [Polymer.Templatizer, FormTemplateRegistryAccess]);
+        }
+    }
+});
+
+$__System.register("d", ["c", "8"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -401,18 +485,41 @@ $__System.register("b", ["a"], function(exports_1, context_1) {
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
+    var form_template_registry_1;
     var AgsField;
     return {
         setters:[
-            function (_1) {}],
+            function (_1) {},
+            function (form_template_registry_1_1) {
+                form_template_registry_1 = form_template_registry_1_1;
+            }],
         execute: function() {
             AgsField = (function (_super) {
                 __extends(AgsField, _super);
                 function AgsField() {
                     _super.apply(this, arguments);
                 }
-                AgsField.prototype.isReady = function (property) {
-                    return property != null;
+                AgsField.prototype._draw = function (property) {
+                    var _this = this;
+                    this.async(function () {
+                        var templates = _this.templates || [];
+                        var found = false;
+                        var elementRoot = Polymer.dom(_this.$.dynamicField);
+                        while (elementRoot.firstChild) {
+                            elementRoot.removeChild(elementRoot.firstChild);
+                        }
+                        for (var i = 0; i < templates.length; i++) {
+                            var template = templates[i];
+                            if (!template.isMatch || !template.isMatch(property))
+                                continue;
+                            found = true;
+                            _this.templatize(template);
+                            var actualField = _this.stamp().root;
+                            elementRoot.appendChild(actualField);
+                            break;
+                        }
+                        _this._setNoTemplateFound(!found);
+                    });
                 };
                 __decorate([
                     property({ value: null })
@@ -424,10 +531,14 @@ $__System.register("b", ["a"], function(exports_1, context_1) {
                     property({ value: null })
                 ], AgsField.prototype, "value", void 0);
                 __decorate([
-                    computed()
-                ], AgsField.prototype, "isReady", null);
+                    property({ readOnly: true })
+                ], AgsField.prototype, "noTemplateFound", void 0);
+                __decorate([
+                    observe('property')
+                ], AgsField.prototype, "_draw", null);
                 AgsField = __decorate([
-                    component('ags-field')
+                    component('ags-field'),
+                    behavior(form_template_registry_1.AgsFieldStamper)
                 ], AgsField);
                 return AgsField;
             }(polymer.Base));
@@ -436,7 +547,7 @@ $__System.register("b", ["a"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("c", ["9", "b"], function(exports_1, context_1) {
+$__System.register("e", ["b", "d"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -477,7 +588,7 @@ $__System.register("c", ["9", "b"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("1", ["3", "2", "4", "5", "6", "8", "c"], function(exports_1, context_1) {
+$__System.register("1", ["3", "2", "4", "5", "6", "7", "a", "e"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var template_registry_1;
@@ -492,7 +603,8 @@ $__System.register("1", ["3", "2", "4", "5", "6", "8", "c"], function(exports_1,
             function (_3) {},
             function (_4) {},
             function (_5) {},
-            function (_6) {}],
+            function (_6) {},
+            function (_7) {}],
         execute: function() {
             exports_1("RegisteredTemplate", RegisteredTemplate = RegisteredTemplate);
         }
