@@ -11,11 +11,24 @@ class AgsField extends polymer.Base {
     @property()
     range:String;
 
-    @property({value: null})
+    @property({value: null, notify: true})
     value:any;
 
     @property({readOnly: true})
     noTemplateFound:Boolean;
+
+    ready() {
+        this._instanceProps = {
+            value: true
+        };
+    }
+
+    @observe('value')
+    _valueChanged(newValue) {
+        if (this._stampedTemplate) {
+            this._stampedTemplate.value = newValue;
+        }
+    }
 
     @observe('property')
     _draw(property) {
@@ -36,14 +49,22 @@ class AgsField extends polymer.Base {
                 found = true;
 
                 this.templatize(template);
-                var actualField = this.stamp().root;
-                elementRoot.appendChild(actualField);
+                this._stampedTemplate = this.stamp({
+                    value: this.value
+                });
+                elementRoot.appendChild(this._stampedTemplate.root);
 
                 break;
             }
 
             this._setNoTemplateFound(!found);
         });
+    }
+
+    _forwardInstanceProp(inst, path, value) {
+        if(this.value != value) {
+            this.set(path, value);
+        }
     }
 }
 

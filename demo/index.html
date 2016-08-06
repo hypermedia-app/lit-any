@@ -29,8 +29,26 @@
         </template>
     </demo-snippet>
 
-    <script>
-        //System.import('src/augeas');
-    </script>
+    <demo-snippet>
+        <template>
+            <template is="ags-field-template"
+                      property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description">
+                <textarea value="{{value::input}}"></textarea>
+            </template>
+
+            <ags-form id="f2"></ags-form>
+
+            <script>
+                document.getElementById('f2').contract = {
+                    body: [
+                        {
+                            property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
+                            range: 'http://www.w3.org/2001/XMLSchema#string'
+                        }
+                    ]
+                };
+            </script>
+        </template>
+    </demo-snippet>
 </body>
 </html>

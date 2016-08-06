@@ -99,6 +99,23 @@
                     done();
                 });
             });
+
+            it('should notify value when field changes', function(done) {
+                var inputText = 'some test text';
+
+                subject.addEventListener('value-changed', function(e) {
+                    assert.equal(e.detail.value, inputText);
+                    assert.equal(subject.value, inputText);
+
+                    done();
+                });
+
+                flush(function() {
+                    var textarea = subject.$$('textarea');
+
+                    setInputValue(textarea, inputText);
+                });
+            });
         });
     });
 

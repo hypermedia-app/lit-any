@@ -499,6 +499,16 @@ $__System.register("d", ["c", "8"], function(exports_1, context_1) {
                 function AgsField() {
                     _super.apply(this, arguments);
                 }
+                AgsField.prototype.ready = function () {
+                    this._instanceProps = {
+                        value: true
+                    };
+                };
+                AgsField.prototype._valueChanged = function (newValue) {
+                    if (this._stampedTemplate) {
+                        this._stampedTemplate.value = newValue;
+                    }
+                };
                 AgsField.prototype._draw = function (property) {
                     var _this = this;
                     this.async(function () {
@@ -514,12 +524,19 @@ $__System.register("d", ["c", "8"], function(exports_1, context_1) {
                                 continue;
                             found = true;
                             _this.templatize(template);
-                            var actualField = _this.stamp().root;
-                            elementRoot.appendChild(actualField);
+                            _this._stampedTemplate = _this.stamp({
+                                value: _this.value
+                            });
+                            elementRoot.appendChild(_this._stampedTemplate.root);
                             break;
                         }
                         _this._setNoTemplateFound(!found);
                     });
+                };
+                AgsField.prototype._forwardInstanceProp = function (inst, path, value) {
+                    if (this.value != value) {
+                        this.set(path, value);
+                    }
                 };
                 __decorate([
                     property({ value: null })
@@ -528,11 +545,14 @@ $__System.register("d", ["c", "8"], function(exports_1, context_1) {
                     property()
                 ], AgsField.prototype, "range", void 0);
                 __decorate([
-                    property({ value: null })
+                    property({ value: null, notify: true })
                 ], AgsField.prototype, "value", void 0);
                 __decorate([
                     property({ readOnly: true })
                 ], AgsField.prototype, "noTemplateFound", void 0);
+                __decorate([
+                    observe('value')
+                ], AgsField.prototype, "_valueChanged", null);
                 __decorate([
                     observe('property')
                 ], AgsField.prototype, "_draw", null);
