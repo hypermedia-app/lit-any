@@ -430,6 +430,9 @@ $__System.register("8", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var templates, FormTemplateRegistryAccess, AgsFormTemplate, RegisteredTemplate, AgsFieldStamper;
+    function isMatch(thisValue, otherValue) {
+        return thisValue && otherValue == thisValue;
+    }
     return {
         setters:[],
         execute: function() {
@@ -456,13 +459,11 @@ $__System.register("8", [], function(exports_1, context_1) {
                 detached: function () {
                     this.pop('templates', this);
                 },
-                isMatch: function (property) {
-                    var propertyMatches;
-                    propertyMatches = this.propertyMatches(property);
-                    return propertyMatches;
-                },
-                propertyMatches: function (property) {
-                    return property == this.property;
+                isMatch: function (property, range) {
+                    var propertyMatches, rangeMatches;
+                    propertyMatches = isMatch(this.property, property);
+                    rangeMatches = isMatch(this.range, range);
+                    return propertyMatches || rangeMatches;
                 }
             });
             exports_1("RegisteredTemplate", RegisteredTemplate = [AgsFormTemplate, FormTemplateRegistryAccess]);
@@ -509,7 +510,7 @@ $__System.register("d", ["c", "8"], function(exports_1, context_1) {
                         this._stampedTemplate.value = newValue;
                     }
                 };
-                AgsField.prototype._draw = function (property) {
+                AgsField.prototype._draw = function (property, range) {
                     var _this = this;
                     this.async(function () {
                         var templates = _this.templates || [];
@@ -520,7 +521,7 @@ $__System.register("d", ["c", "8"], function(exports_1, context_1) {
                         }
                         for (var i = 0; i < templates.length; i++) {
                             var template = templates[i];
-                            if (!template.isMatch || !template.isMatch(property))
+                            if (!template.isMatch || !template.isMatch(property, range))
                                 continue;
                             found = true;
                             _this.templatize(template);
@@ -542,7 +543,7 @@ $__System.register("d", ["c", "8"], function(exports_1, context_1) {
                     property({ value: null })
                 ], AgsField.prototype, 'property', void 0);
                 __decorate([
-                    property()
+                    property({ value: null })
                 ], AgsField.prototype, "range", void 0);
                 __decorate([
                     property({ value: null, notify: true })
@@ -554,7 +555,7 @@ $__System.register("d", ["c", "8"], function(exports_1, context_1) {
                     observe('value')
                 ], AgsField.prototype, "_valueChanged", null);
                 __decorate([
-                    observe('property')
+                    observe('property,range')
                 ], AgsField.prototype, "_draw", null);
                 AgsField = __decorate([
                     component('ags-field'),

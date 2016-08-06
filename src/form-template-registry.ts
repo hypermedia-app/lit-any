@@ -26,18 +26,19 @@ export var AgsFormTemplate = {
         this.pop('templates', this);
     },
 
-    isMatch: function(property) {
-        var propertyMatches;
+    isMatch: function(property, range) {
+        var propertyMatches, rangeMatches;
 
-        propertyMatches = this.propertyMatches(property);
+        propertyMatches = isMatch(this.property, property);
+        rangeMatches = isMatch(this.range, range);
 
-        return propertyMatches;
-    },
-
-    propertyMatches(property) {
-        return property == this.property;
+        return propertyMatches || rangeMatches;
     }
 };
+
+function isMatch(thisValue, otherValue) {
+    return thisValue && otherValue == thisValue;
+}
 
 export var RegisteredTemplate = [ AgsFormTemplate, FormTemplateRegistryAccess ];
 export var AgsFieldStamper = [ Polymer.Templatizer, FormTemplateRegistryAccess ];

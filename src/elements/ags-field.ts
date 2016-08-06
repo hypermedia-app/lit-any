@@ -8,7 +8,7 @@ class AgsField extends polymer.Base {
     @property({value: null})
     'property':String;
 
-    @property()
+    @property({value: null})
     range:String;
 
     @property({value: null, notify: true})
@@ -30,8 +30,8 @@ class AgsField extends polymer.Base {
         }
     }
 
-    @observe('property')
-    _draw(property) {
+    @observe('property,range')
+    _draw(property, range) {
         this.async(() => {
             var templates = this.templates || [];
             var found = false;
@@ -44,7 +44,7 @@ class AgsField extends polymer.Base {
             for (var i = 0; i < templates.length; i++) {
                 var template = templates[i];
 
-                if (!template.isMatch || !template.isMatch(property))continue;
+                if (!template.isMatch || !template.isMatch(property, range)) continue;
 
                 found = true;
 

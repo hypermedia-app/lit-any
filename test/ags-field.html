@@ -25,13 +25,13 @@
     </template>
 </test-fixture>
 
-<test-fixture id="field-template-for-property">
-    <template>
-        <template is="ags-field-template" property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description">
+<test-fixture id="field-template-bound">
+    <template is="dom-template">
+        <template is="ags-field-template" property="{{templateProperty}}" range="{{templateRange}}">
             <textarea value="{{value::input}}"></textarea>
         </template>
 
-        <ags-field property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description"></ags-field>
+        <ags-field property="{{fieldProperty}}" range="{{fieldRange}}"></ags-field>
     </template>
 </test-fixture>
 
@@ -88,7 +88,10 @@
 
         describe('with template matched by property', function() {
             beforeEach(function(){
-                subject = fixture('field-template-for-property')[1];
+                subject = fixture('field-template-bound', {
+                    templateProperty: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
+                    fieldProperty: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description'
+                })[1];
             });
 
             it('should render the template', function(done) {
@@ -114,6 +117,24 @@
                     var textarea = subject.$$('textarea');
 
                     setInputValue(textarea, inputText);
+                });
+            });
+        });
+
+        describe('with template matched by range', function() {
+            beforeEach(function(){
+                subject = fixture('field-template-bound', {
+                    templateRange: 'http://www.w3.org/2001/XMLSchema#string',
+                    fieldRange: 'http://www.w3.org/2001/XMLSchema#string'
+                })[1];
+            });
+
+            it('should render the template', function(done) {
+                flush(function() {
+                    var textarea = subject.$$('textarea');
+
+                    assert.isNotNull(textarea);
+                    done();
                 });
             });
         });
