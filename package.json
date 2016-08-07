@@ -9,6 +9,7 @@
     "build": "jspm bundle-sfx src/augeas - jsonld dist/build.js --global-name augeas --format umd --globals \"{ 'jsonld': 'jsonld' }\""
   },
   "jspm": {
+    "main": "dist/build.js",
     "directories": {
       "test": "tests"
     },
