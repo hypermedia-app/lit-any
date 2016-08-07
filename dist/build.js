@@ -685,7 +685,9 @@ $__System.register("10", [], function(exports_1, context_1) {
                 }
                 AgsHydraAdapter.prototype.contract = function (operation) {
                     var contract = {};
-                    contract.body = operation.expects.supportedProperties.map(function (prop) {
+                    contract.body = operation.expects.supportedProperties
+                        .filter(function (prop) { return prop.writable; })
+                        .map(function (prop) {
                         var fieldContract = {};
                         fieldContract.property = prop.property.id;
                         fieldContract.range = prop.property.range.id;

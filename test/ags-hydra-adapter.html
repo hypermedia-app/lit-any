@@ -26,6 +26,7 @@
                 expects: {
                     supportedProperties: [
                         {
+                            writable: true,
                             required: true,
                             property: {
                                 id: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
@@ -35,6 +36,7 @@
                             }
                         },
                         {
+                            writable: true,
                             required: false,
                             property: {
                                 id: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
@@ -65,6 +67,31 @@
                     }
                 ]
             });
+        });
+
+        it('should skip read-only hydra properties', function () {
+            // given
+            var operation = {
+                expects: {
+                    supportedProperties: [
+                        {
+                            writable: false,
+                            property: {
+                                id: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/dbid',
+                                range: {
+                                    id: 'http://www.w3.org/2001/XMLSchema#int'
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+
+            // when
+            adapter.operation = operation;
+
+            // then
+            assert.equal(adapter.contract.body.length, 0);
         });
 
     });
