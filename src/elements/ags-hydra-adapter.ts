@@ -6,22 +6,24 @@ export class AgsHydraAdapter extends polymer.Base {
 
     @computed()
     contract(operation: IOperation): IContract {
-        var contract:IContract = <IContract>{};
+        var contract: IContract = <IContract>{};
 
         contract.body = operation.expects.supportedProperties
             .filter(prop => prop.writable)
-            .map(prop => {
-                var fieldContract = <IFieldContract>{};
-
-                fieldContract.property = prop.property.id;
-                fieldContract.range = prop.property.range.id;
-                fieldContract.required = prop.required;
-
-                return fieldContract;
-            });
+            .map(transformSupportedProperty);
 
         return contract;
     }
+}
+
+function transformSupportedProperty(prop: ISupportedProperty): IFieldContract {
+    var fieldContract = <IFieldContract>{};
+
+    fieldContract.property = prop.property.id;
+    fieldContract.range = prop.property.range.id;
+    fieldContract.required = prop.required;
+
+    return fieldContract;
 }
 
 AgsHydraAdapter.register();

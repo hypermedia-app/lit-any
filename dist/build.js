@@ -675,6 +675,13 @@ $__System.register("10", [], function(exports_1, context_1) {
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var AgsHydraAdapter;
+    function transformSupportedProperty(prop) {
+        var fieldContract = {};
+        fieldContract.property = prop.property.id;
+        fieldContract.range = prop.property.range.id;
+        fieldContract.required = prop.required;
+        return fieldContract;
+    }
     return {
         setters:[],
         execute: function() {
@@ -687,13 +694,7 @@ $__System.register("10", [], function(exports_1, context_1) {
                     var contract = {};
                     contract.body = operation.expects.supportedProperties
                         .filter(function (prop) { return prop.writable; })
-                        .map(function (prop) {
-                        var fieldContract = {};
-                        fieldContract.property = prop.property.id;
-                        fieldContract.range = prop.property.range.id;
-                        fieldContract.required = prop.required;
-                        return fieldContract;
-                    });
+                        .map(transformSupportedProperty);
                     return contract;
                 };
                 __decorate([
