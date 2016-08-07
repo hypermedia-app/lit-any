@@ -8,5 +8,6 @@ import './templates/ags-field-property-template'
 import './templates/ags-field-range-template'
 import './elements/ags-view'
 import './elements/ags-form'
+import './elements/ags-hydra-adapter'
 
 export var RegisteredTemplate = RegisteredTemplate;

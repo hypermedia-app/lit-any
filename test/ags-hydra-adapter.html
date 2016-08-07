@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ags-hydra-adapter tests</title>
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html"/>
+    <link rel="import" href="../bower_components/polymer-ts/polymer-ts.html"/>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
+    <link rel="import" href="../augeas.html"/>
+</head>
+<body>
+
+<ags-hydra-adapter></ags-hydra-adapter>
+
+<script>
+
+    describe('ags-hydra-adapter', function () {
+
+        var adapter = document.querySelector('ags-hydra-adapter');
+
+        it('should translate heracles operation to contract', function () {
+            // given
+            var operation = {
+                expects: {
+                    supportedProperties: [
+                        {
+                            required: true,
+                            property: {
+                                id: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
+                                range: {
+                                    id: 'http://www.w3.org/2001/XMLSchema#string'
+                                }
+                            }
+                        },
+                        {
+                            required: false,
+                            property: {
+                                id: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
+                                range: {
+                                    id: 'http://www.w3.org/2001/XMLSchema#string'
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+
+            // when
+            adapter.operation = operation;
+
+            // then
+            assert.deepEqual(adapter.contract, {
+                body: [
+                    {
+                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
+                        range: 'http://www.w3.org/2001/XMLSchema#string',
+                        required: true
+                    },
+                    {
+                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
+                        range: 'http://www.w3.org/2001/XMLSchema#string',
+                        required: false
+                    }
+                ]
+            });
+        });
+
+    });
+
+</script>
+</body>
+</html>

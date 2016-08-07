@@ -660,7 +660,58 @@ $__System.register("f", ["c", "e"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("1", ["3", "2", "4", "5", "6", "7", "9", "b", "f"], function(exports_1, context_1) {
+$__System.register("10", [], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __extends = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var AgsHydraAdapter;
+    return {
+        setters:[],
+        execute: function() {
+            AgsHydraAdapter = (function (_super) {
+                __extends(AgsHydraAdapter, _super);
+                function AgsHydraAdapter() {
+                    _super.apply(this, arguments);
+                }
+                AgsHydraAdapter.prototype.contract = function (operation) {
+                    var contract = {};
+                    contract.body = operation.expects.supportedProperties.map(function (prop) {
+                        var fieldContract = {};
+                        fieldContract.property = prop.property.id;
+                        fieldContract.range = prop.property.range.id;
+                        fieldContract.required = prop.required;
+                        return fieldContract;
+                    });
+                    return contract;
+                };
+                __decorate([
+                    property()
+                ], AgsHydraAdapter.prototype, "operation", void 0);
+                __decorate([
+                    computed()
+                ], AgsHydraAdapter.prototype, "contract", null);
+                AgsHydraAdapter = __decorate([
+                    component('ags-hydra-adapter')
+                ], AgsHydraAdapter);
+                return AgsHydraAdapter;
+            }(polymer.Base));
+            exports_1("AgsHydraAdapter", AgsHydraAdapter);
+            AgsHydraAdapter.register();
+        }
+    }
+});
+
+$__System.register("1", ["3", "2", "4", "5", "6", "7", "9", "b", "f", "10"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var template_registry_1;
@@ -677,7 +728,8 @@ $__System.register("1", ["3", "2", "4", "5", "6", "7", "9", "b", "f"], function(
             function (_5) {},
             function (_6) {},
             function (_7) {},
-            function (_8) {}],
+            function (_8) {},
+            function (_9) {}],
         execute: function() {
             exports_1("RegisteredTemplate", RegisteredTemplate = RegisteredTemplate);
         }
