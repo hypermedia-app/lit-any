@@ -41,7 +41,8 @@ class AgsField extends polymer.Base {
                 elementRoot.removeChild(elementRoot.firstChild);
             }
 
-            for (var i = 0; i < templates.length; i++) {
+            for (var i = templates.length - 1; i >= 0; i--) {
+                debugger;
                 var template = templates[i];
 
                 if (!template.isMatch || !template.isMatch(property, range)) continue;

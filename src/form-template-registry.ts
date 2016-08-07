@@ -15,6 +15,9 @@ export var AgsFormTemplate = {
     properties: {
         property: {
             type: String
+        },
+        range: {
+            type: String
         }
     },
 
@@ -27,18 +30,9 @@ export var AgsFormTemplate = {
     },
 
     isMatch: function(property, range) {
-        var propertyMatches, rangeMatches;
-
-        propertyMatches = isMatch(this.property, property);
-        rangeMatches = isMatch(this.range, range);
-
-        return propertyMatches || rangeMatches;
+        return false;
     }
 };
-
-function isMatch(thisValue, otherValue) {
-    return thisValue && otherValue == thisValue;
-}
 
 export var RegisteredTemplate = [ AgsFormTemplate, FormTemplateRegistryAccess ];
 export var AgsFieldStamper = [ Polymer.Templatizer, FormTemplateRegistryAccess ];
