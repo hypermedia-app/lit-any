@@ -17,6 +17,9 @@ class AgsField extends polymer.Base {
     @property({readOnly: true})
     noTemplateFound:Boolean;
 
+    @property({ value: false })
+    required:Boolean;
+
     ready() {
         this._instanceProps = {
             value: true

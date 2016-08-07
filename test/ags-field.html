@@ -25,6 +25,12 @@
     </template>
 </test-fixture>
 
+<test-fixture id="field-required">
+    <template>
+        <ags-field required property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title"></ags-field>
+    </template>
+</test-fixture>
+
 <test-fixture id="field-template-by-property">
     <template is="dom-template">
         <template is="ags-field-property-template" property="{{templateProperty}}">
@@ -97,11 +103,9 @@
 
         describe('with no matching template', function () {
 
-            beforeEach(function(){
-                subject = fixture('field-with-property');
-            });
-
             it('should render a text input', function (done) {
+                subject = fixture('field-with-property');
+
                 flush(function () {
                     var field = subject.querySelector('input');
 
@@ -111,7 +115,19 @@
                 });
             });
 
+            it('should make the default input required when necessary', function (done) {
+                subject = fixture('field-required');
+
+                flush(function () {
+                    var field = subject.querySelector('input');
+
+                    assert.isNotNull(field.getAttribute('required'));
+                    done();
+                });
+            });
+
             it('should set value property when input value is set', function (done) {
+                subject = fixture('field-with-property');
 
                 flush(function () {
                     var input = subject.querySelector('input');

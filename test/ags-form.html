@@ -54,6 +54,27 @@
 
         });
 
+        it('should mark ags-field required when necessary', function (done) {
+            subject = fixture('no-fields-fixture');
+
+            subject.contract = {
+                body: [
+                    {
+                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
+                        range: 'http://www.w3.org/2001/XMLSchema#string',
+                        required: true
+                    }
+                ]
+            };
+
+            flush(function () {
+                var field = document.querySelector('ags-form /deep/ ags-field');
+                assert.equal(field.required, true);
+                done();
+            });
+
+        });
+
         describe('when ags-fields notify', function () {
 
             beforeEach(function() {

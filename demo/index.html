@@ -14,12 +14,16 @@
 
             <script>
                 document.getElementById('f1').contract = {
+                    title: 'Create issue',
                     body: [
                         {
+                            title: 'Issue title',
                             property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
-                            range: 'http://www.w3.org/2001/XMLSchema#string'
+                            range: 'http://www.w3.org/2001/XMLSchema#string',
+                            required: true
                         },
                         {
+                            title: 'Time raised',
                             property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/createdAt',
                             range: 'http://www.w3.org/2001/XMLSchema#dateTime'
                         }
@@ -31,7 +35,7 @@
 
     <demo-snippet>
         <template>
-            <template is="ags-field-template"
+            <template is="ags-field-property-template"
                       property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description">
                 <textarea value="{{value::input}}"></textarea>
             </template>
@@ -40,6 +44,7 @@
 
             <script>
                 document.getElementById('f2').contract = {
+                    title: 'Create issue',
                     body: [
                         {
                             property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',

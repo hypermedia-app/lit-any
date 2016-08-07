@@ -3,7 +3,7 @@
         <div id="fallbackField">
             <template is="dom-if" if="[[property]]">
                 <template is="dom-if" if="[[noTemplateFound]]">
-                    <input type="text" value="{{value::input}}"/>
+                    <input type="text" value="{{value::input}}" required$="[[required]]"/>
                 </template>
             </template>
         </div>

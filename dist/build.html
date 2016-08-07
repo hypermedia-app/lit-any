@@ -1,11 +1,11 @@
 <html><head><meta charset="UTF-8"></head><body><div hidden="" by-vulcanize=""><dom-module id="ags-form" assetpath="../src/elements/">
     <template>
         <fieldset>
-            <legend>[[contract.title]]</legend>
+            <legend hidden$="[[!contract.title]]">[[contract.title]]</legend>
             <template is="dom-repeat" items="[[contract.body]]">
                 <label>
                     [[item.title]]
-                    <ags-field property="[[item.property]]" range="[[item.range]]" on-value-changed="_fieldValueChanged"></ags-field>
+                    <ags-field property="[[item.property]]" range="[[item.range]]" required="[[item.required]]" on-value-changed="_fieldValueChanged"></ags-field>
                 </label>
             </template>
         </fieldset>
@@ -15,7 +15,7 @@
         <div id="fallbackField">
             <template is="dom-if" if="[[property]]">
                 <template is="dom-if" if="[[noTemplateFound]]">
-                    <input type="text" value="{{value::input}}">
+                    <input type="text" value="{{value::input}}" required$="[[required]]">
                 </template>
             </template>
         </div>

@@ -594,6 +594,9 @@ $__System.register("e", ["d", "8"], function(exports_1, context_1) {
                     property({ readOnly: true })
                 ], AgsField.prototype, "noTemplateFound", void 0);
                 __decorate([
+                    property({ value: false })
+                ], AgsField.prototype, "required", void 0);
+                __decorate([
                     observe('value')
                 ], AgsField.prototype, "_valueChanged", null);
                 __decorate([
