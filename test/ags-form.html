@@ -9,6 +9,7 @@
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
     <link rel="import" href="../augeas.html" />
+    <link rel="import" href="test-elements/fake-ags-field.html" />
 </head>
 <body>
 
@@ -24,32 +25,20 @@
 
     describe('ags-form', function () {
 
-        beforeEach(function(){
-            subject = fixture('no-fields-fixture');
-        });
-
         it('should be registered', function () {
+            subject = fixture('no-fields-fixture');
+
             assert.notEqual(document.createElement('ags-form').constructor, HTMLElement);
         });
 
         it('should have null value by default', function () {
+            subject = fixture('no-fields-fixture');
+
             assert.strictEqual(subject.value, null);
         });
 
         it('should render ags-field for each property', function (done) {
-
-            var contract = {
-                body: [
-                    {
-                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
-                        range: 'http://www.w3.org/2001/XMLSchema#string'
-                    },
-                    {
-                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/createdAt',
-                        range: 'http://www.w3.org/2001/XMLSchema#dateTime'
-                    }
-                ]
-            };
+            subject = fixture('no-fields-fixture');
 
             subject.contract = contract;
 
@@ -64,7 +53,55 @@
             });
 
         });
+
+        describe('when ags-fields notify', function () {
+
+            beforeEach(function() {
+                replace('ags-field').with('fake-ags-field');
+
+                subject = fixture('no-fields-fixture');
+            });
+
+            it('value should equal JSON-LD object with field values', function(done) {
+
+                subject.contract = contract;
+
+                flush(function() {
+                    var i = 1;
+                    document.querySelectorAll('body /deep/ fake-ags-field')
+                            .forEach(function(field) {
+                                field.value = 'value ' + i++;
+                            });
+
+                    assert.deepEqual(subject.value, {
+                        'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title': [
+                            { '@value': 'value 1' }
+                        ],
+                        'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/createdAt': [
+                            { '@value': 'value 2' }
+                        ]
+                    });
+
+                    done();
+                });
+
+            });
+
+        });
     });
+
+    var contract = {
+        body: [
+            {
+                property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
+                range: 'http://www.w3.org/2001/XMLSchema#string'
+            },
+            {
+                property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/createdAt',
+                range: 'http://www.w3.org/2001/XMLSchema#dateTime'
+            }
+        ]
+    };
 
 </script>
 </body>

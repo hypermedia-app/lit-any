@@ -562,7 +562,6 @@ $__System.register("e", ["d", "8"], function(exports_1, context_1) {
                             elementRoot.removeChild(elementRoot.firstChild);
                         }
                         for (var i = templates.length - 1; i >= 0; i--) {
-                            debugger;
                             var template = templates[i];
                             if (!template.isMatch || !template.isMatch(property, range))
                                 continue;
@@ -636,6 +635,15 @@ $__System.register("f", ["c", "e"], function(exports_1, context_1) {
                 function AgsForm() {
                     _super.apply(this, arguments);
                 }
+                AgsForm.prototype._fieldValueChanged = function (e) {
+                    if (!e.detail.value)
+                        return;
+                    var value = this.value || {};
+                    value[e.model.item.property] = [{
+                            '@value': e.detail.value
+                        }];
+                    this.set('value', value);
+                };
                 __decorate([
                     property({ type: Object, value: null })
                 ], AgsForm.prototype, "value", void 0);

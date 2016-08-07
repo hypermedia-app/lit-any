@@ -2,7 +2,7 @@
     <template>
         <fieldset>
             <template is="dom-repeat" items="[[contract.body]]">
-                <ags-field property="[[item.property]]" range="[[item.range]]"></ags-field>
+                <ags-field property="[[item.property]]" range="[[item.range]]" on-value-changed="_fieldValueChanged"></ags-field>
             </template>
         </fieldset>
     </template>

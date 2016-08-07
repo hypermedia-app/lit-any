@@ -13,6 +13,18 @@ class AgsForm extends polymer.Base {
 
     @property({ type: Object })
     contract: IContract;
+
+    _fieldValueChanged(e) {
+        if(!e.detail.value) return;
+
+        var value = this.value || {};
+
+        value[e.model.item.property] = [{
+            '@value': e.detail.value
+        }];
+
+        this.set('value', value);
+    }
 }
 
 AgsForm.register();
