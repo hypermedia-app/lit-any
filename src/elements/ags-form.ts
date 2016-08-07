@@ -8,7 +8,7 @@ interface IContract {
 @component('ags-form')
 class AgsForm extends polymer.Base {
 
-    @property({ type: Object, value: null })
+    @property({ type: Object, value: null, notify: true })
     value: Object;
 
     @property({ type: Object })

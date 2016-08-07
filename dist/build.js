@@ -645,7 +645,7 @@ $__System.register("f", ["c", "e"], function(exports_1, context_1) {
                     this.set('value', value);
                 };
                 __decorate([
-                    property({ type: Object, value: null })
+                    property({ type: Object, value: null, notify: true })
                 ], AgsForm.prototype, "value", void 0);
                 __decorate([
                     property({ type: Object })

@@ -84,7 +84,24 @@
 
                     done();
                 });
+            });
 
+            it('should notify value', function(done) {
+                subject.contract = contract;
+
+                subject.addEventListener('value-changed', function(e) {
+                    assert.isNotNull(e.detail.value);
+
+                    done();
+                });
+
+                flush(function() {
+                    var i = 1;
+                    document.querySelectorAll('body /deep/ fake-ags-field')
+                            .forEach(function(field) {
+                                field.value = 'value ' + i++;
+                            });
+                });
             });
 
         });
