@@ -4,7 +4,7 @@ export class AgsHydraAdapter extends polymer.Base {
     @property()
     operation: IOperation;
 
-    @computed()
+    @computed({ notify: true })
     contract(operation: IOperation): IContract {
         var contract: IContract = <IContract>{};
 

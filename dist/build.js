@@ -703,7 +703,7 @@ $__System.register("10", [], function(exports_1, context_1) {
                     property()
                 ], AgsHydraAdapter.prototype, "operation", void 0);
                 __decorate([
-                    computed()
+                    computed({ notify: true })
                 ], AgsHydraAdapter.prototype, "contract", null);
                 AgsHydraAdapter = __decorate([
                     component('ags-hydra-adapter')

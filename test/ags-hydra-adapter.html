@@ -12,13 +12,17 @@
 </head>
 <body>
 
-<ags-hydra-adapter></ags-hydra-adapter>
+<test-fixture id="ags-hydra-adapter">
+    <template>
+        <ags-hydra-adapter></ags-hydra-adapter>
+    </template>
+</test-fixture>
 
 <script>
 
     describe('ags-hydra-adapter', function () {
 
-        var adapter = document.querySelector('ags-hydra-adapter');
+        var adapter = fixture('ags-hydra-adapter');
 
         it('should translate heracles operation to contract', function () {
             // given
@@ -102,6 +106,33 @@
             assert.equal(adapter.contract.body.length, 0);
         });
 
+        it('should notify contract change', function(done) {
+            // given
+            var operation = {
+                expects: {
+                    supportedProperties: [
+                        {
+                            writable: false,
+                            property: {
+                                id: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/dbid',
+                                range: {
+                                    id: 'http://www.w3.org/2001/XMLSchema#int'
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+            adapter.addEventListener('contract-changed', changeCallback);
+
+            // when
+            adapter.operation = operation;
+
+            // then
+            function changeCallback() {
+                done();
+            }
+        });
     });
 
 </script>
