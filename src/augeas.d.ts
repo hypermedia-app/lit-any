@@ -5,5 +5,7 @@ interface IContract {
 interface IFieldContract {
     property: String,
     range: String,
-    required: Boolean
+    required: Boolean,
+    title: String,
+    description: String
 }

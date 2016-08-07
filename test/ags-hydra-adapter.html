@@ -26,6 +26,8 @@
                 expects: {
                     supportedProperties: [
                         {
+                            title: 'Issue title',
+                            description: 'Issue title longer',
                             writable: true,
                             required: true,
                             property: {
@@ -36,6 +38,8 @@
                             }
                         },
                         {
+                            title: 'Issue description',
+                            description: 'Issue description longer',
                             writable: true,
                             required: false,
                             property: {
@@ -56,11 +60,15 @@
             assert.deepEqual(adapter.contract, {
                 body: [
                     {
+                        title: 'Issue title',
+                        description: 'Issue title longer',
                         property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
                         range: 'http://www.w3.org/2001/XMLSchema#string',
                         required: true
                     },
                     {
+                        title: 'Issue description',
+                        description: 'Issue description longer',
                         property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
                         range: 'http://www.w3.org/2001/XMLSchema#string',
                         required: false

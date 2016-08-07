@@ -22,6 +22,8 @@ function transformSupportedProperty(prop: ISupportedProperty): IFieldContract {
     fieldContract.property = prop.property.id;
     fieldContract.range = prop.property.range.id;
     fieldContract.required = prop.required;
+    fieldContract.title = prop.title;
+    fieldContract.description = prop.description;
 
     return fieldContract;
 }
