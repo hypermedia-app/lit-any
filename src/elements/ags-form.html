@@ -1,8 +1,12 @@
 <dom-module id="ags-form">
     <template>
         <fieldset>
+            <legend>[[contract.title]]</legend>
             <template is="dom-repeat" items="[[contract.body]]">
-                <ags-field property="[[item.property]]" range="[[item.range]]" on-value-changed="_fieldValueChanged"></ags-field>
+                <label>
+                    [[item.title]]
+                    <ags-field property="[[item.property]]" range="[[item.range]]" on-value-changed="_fieldValueChanged"></ags-field>
+                </label>
             </template>
         </fieldset>
     </template>

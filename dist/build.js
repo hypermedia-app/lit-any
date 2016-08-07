@@ -694,6 +694,8 @@ $__System.register("10", [], function(exports_1, context_1) {
                 }
                 AgsHydraAdapter.prototype.contract = function (operation) {
                     var contract = {};
+                    contract.title = operation.title;
+                    contract.description = operation.description;
                     contract.body = operation.expects.supportedProperties
                         .filter(function (prop) { return prop.writable; })
                         .map(transformSupportedProperty);

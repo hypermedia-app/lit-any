@@ -24,7 +24,7 @@
 
         var adapter = fixture('ags-hydra-adapter');
 
-        it('should translate heracles operation to contract', function () {
+        it('should translate heracles operation properties to contract body', function () {
             // given
             var operation = {
                 expects: {
@@ -61,24 +61,22 @@
             adapter.operation = operation;
 
             // then
-            assert.deepEqual(adapter.contract, {
-                body: [
-                    {
-                        title: 'Issue title',
-                        description: 'Issue title longer',
-                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
-                        range: 'http://www.w3.org/2001/XMLSchema#string',
-                        required: true
-                    },
-                    {
-                        title: 'Issue description',
-                        description: 'Issue description longer',
-                        property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
-                        range: 'http://www.w3.org/2001/XMLSchema#string',
-                        required: false
-                    }
-                ]
-            });
+            assert.deepEqual(adapter.contract.body,[
+                {
+                    title: 'Issue title',
+                    description: 'Issue title longer',
+                    property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/title',
+                    range: 'http://www.w3.org/2001/XMLSchema#string',
+                    required: true
+                },
+                {
+                    title: 'Issue description',
+                    description: 'Issue description longer',
+                    property: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
+                    range: 'http://www.w3.org/2001/XMLSchema#string',
+                    required: false
+                }
+            ]);
         });
 
         it('should skip read-only hydra properties', function () {
@@ -130,8 +128,27 @@
 
             // then
             function changeCallback() {
+                adapter.removeEventListener('contract-changed', changeCallback);
                 done();
             }
+        });
+
+        it('should copy operation title and description', function () {
+            // given
+            var operation = {
+                title: 'Some operation',
+                description: 'its longer, informative description',
+                expects: {
+                    supportedProperties: [ ]
+                }
+            };
+
+            // when
+            adapter.operation = operation;
+
+            // then
+            assert.equal('Some operation', adapter.contract.title);
+            assert.equal('its longer, informative description', adapter.contract.description);
         });
     });
 
