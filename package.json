@@ -6,10 +6,13 @@
     "install": "npm install -g web-component-tester",
     "test": "wct",
     "test-local": "wct -l chrome -p --skip-selenium-install",
-    "build": "jspm bundle-sfx src/augeas - jsonld dist/build.js --global-name augeas --format umd --globals \"{ 'jsonld': 'jsonld' }\""
+    "build": "npm run build-bower && npm run build-jspm",
+    "build-bower": "jspm bundle-sfx src/augeas - jsonld dist/bower/build.js --global-name augeas --format global --globals \"{'jsonld': 'jsonld'}\"",
+    "build-jspm": "jspm bundle src/augeas - jsonld dist/jspm/build.js"
   },
   "jspm": {
-    "main": "dist/build.js",
+    "main": "augeas.js",
+    "format": "es6",
     "directories": {
       "test": "tests"
     },
