@@ -750,11 +750,6 @@ System.register('src/elements/ags-form.html!github:Hypercubed/systemjs-plugin-ht
 System.register('src/elements/ags-field.html!github:Hypercubed/systemjs-plugin-html@0.0.8.js', [], false, function() {});
 })
 (function(factory) {
-  if (typeof define == 'function' && define.amd)
-    define(["jsonld"], factory);
-  else if (typeof module == 'object' && module.exports && typeof require == 'function')
-    module.exports = factory(require("jsonld"));
-  else
-    augeas = factory(jsonld);
+  augeas = factory(jsonld);
 });
 //# sourceMappingURL=build.js.map
