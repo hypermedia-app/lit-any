@@ -695,7 +695,7 @@ System.register("src/elements/ags-hydra-adapter.ts", [], function(exports_1, con
                     var contract = {};
                     contract.title = operation.title;
                     contract.description = operation.description;
-                    contract.body = operation.expects.supportedProperties
+                    contract.body = ((operation.expects || {}).supportedProperties || [])
                         .filter(function (prop) { return prop.writable; })
                         .map(transformSupportedProperty);
                     return contract;

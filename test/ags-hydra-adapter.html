@@ -150,6 +150,31 @@
             assert.equal('Some operation', adapter.contract.title);
             assert.equal('its longer, informative description', adapter.contract.description);
         });
+
+        it('should handle missing expects gracefully', function () {
+            // given
+            var operation = {
+            };
+
+            // when
+            adapter.operation = operation;
+
+            // then
+            assert.equal(adapter.contract.body.length, 0);
+        });
+
+        it('should handle missing supported properties gracefully', function () {
+            // given
+            var operation = {
+                expects: {}
+            };
+
+            // when
+            adapter.operation = operation;
+
+            // then
+            assert.equal(adapter.contract.body.length, 0);
+        });
     });
 
 </script>

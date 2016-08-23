@@ -19,7 +19,7 @@
     },
     "dependencies": {
       "jsonld": "npm:jsonld@^0.4.11",
-      "wikibus/heracles": "github:wikibus/heracles@master"
+      "wikibus/heracles": "github:wikibus/heracles@^0.1.0"
     },
     "devDependencies": {
       "html": "github:Hypercubed/systemjs-plugin-html@^0.0.8",

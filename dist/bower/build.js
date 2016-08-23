@@ -699,7 +699,7 @@ $__System.register("10", [], function(exports_1, context_1) {
                     var contract = {};
                     contract.title = operation.title;
                     contract.description = operation.description;
-                    contract.body = operation.expects.supportedProperties
+                    contract.body = ((operation.expects || {}).supportedProperties || [])
                         .filter(function (prop) { return prop.writable; })
                         .map(transformSupportedProperty);
                     return contract;
