@@ -40,9 +40,7 @@ class AgsView extends polymer.Base {
         var templates = this._getTemplates('view') || [];
         var found;
         var elementRoot = Polymer.dom(this.root);
-        alert(Array.prototype.map.call(templates, function (t) {
-            return t.id;
-        }));
+
         while (elementRoot.firstChild) {
             elementRoot.removeChild(elementRoot.firstChild);
         }
