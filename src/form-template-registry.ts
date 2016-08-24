@@ -1,15 +1,4 @@
-var templates = [];
-
-export var FormTemplateRegistryAccess = {
-    properties: {
-        templates: {
-            type: Array,
-            notify: true,
-            readOnly: true,
-            value: templates
-        }
-    }
-};
+import {TemplateRegistryAccess} from './template-registry';
 
 export var AgsFormTemplate = {
     properties: {
@@ -18,15 +7,11 @@ export var AgsFormTemplate = {
         },
         range: {
             type: String
+        },
+        kind: {
+            readOnly: true,
+            value: 'form'
         }
-    },
-
-    attached: function() {
-        this.push('templates', this);
-    },
-
-    detached: function() {
-        this.pop('templates', this);
     },
 
     isMatch: function(property, range) {
@@ -34,5 +19,5 @@ export var AgsFormTemplate = {
     }
 };
 
-export var RegisteredTemplate = [ AgsFormTemplate, FormTemplateRegistryAccess ];
-export var AgsFieldStamper = [ Polymer.Templatizer, FormTemplateRegistryAccess ];
+export var RegisteredTemplate = [ AgsFormTemplate ];
+export var AgsFieldStamper = [ Polymer.Templatizer, TemplateRegistryAccess ];

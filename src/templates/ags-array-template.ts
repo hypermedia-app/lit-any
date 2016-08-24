@@ -1,4 +1,4 @@
-import {RegisteredTemplate} from '../template-registry';
+import {RegisteredTemplate} from '../view-template-registry';
 
 @component('ags-array-template')
 @behavior(RegisteredTemplate)

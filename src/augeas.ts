@@ -1,4 +1,4 @@
-import {RegisteredTemplate} from "./template-registry";
+import {RegisteredTemplate} from "./view-template-registry";
 
 import './templates/ags-array-template'
 import './templates/ags-literal-template'

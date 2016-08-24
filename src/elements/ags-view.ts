@@ -1,4 +1,4 @@
-import {RegisteredTemplateConsumer} from "../template-registry";
+import {RegisteredTemplateConsumer} from "../view-template-registry";
 
 @template(`<style>
             :host {
@@ -37,10 +37,12 @@ class AgsView extends polymer.Base {
 
     @observe('object,predicate,templateScope,ignoreMissing,params')
     _draw(object, predicate, templateScope, ignoreMissing, params) {
-        var templates = this.templates || [];
+        var templates = this._getTemplates('view') || [];
         var found;
         var elementRoot = Polymer.dom(this.root);
-
+        alert(Array.prototype.map.call(templates, function (t) {
+            return t.id;
+        }));
         while (elementRoot.firstChild) {
             elementRoot.removeChild(elementRoot.firstChild);
         }

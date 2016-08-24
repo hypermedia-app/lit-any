@@ -36,7 +36,7 @@ class AgsField extends polymer.Base {
     @observe('property,range')
     _draw(property, range) {
         this.async(() => {
-            var templates = this.templates || [];
+            var templates = this._getTemplates('form') || [];
             var found = false;
             var elementRoot = Polymer.dom(this.$.dynamicField);
 

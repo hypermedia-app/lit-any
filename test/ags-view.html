@@ -13,20 +13,6 @@
 
 <test-fixture id="multiple-matching-templates">
     <template>
-        <template is="ags-object-template">
-            <span>I'm first</span>
-        </template>
-
-        <template is="ags-object-template">
-            <span>I'm second</span>
-        </template>
-
-        <ags-view></ags-view>
-    </template>
-</test-fixture>
-
-<test-fixture id="multiple-matching-templates-delayed">
-    <template>
         <template is="ags-object-template" id="first">
             <span>I'm first</span>
         </template>
@@ -73,19 +59,19 @@
 
         describe('multiple matching templates, loaded dynamically', function () {
 
-            var dynTemplate, fixtureElement = document.querySelector('#multiple-matching-templates-delayed');
+            var dynTemplate, fixtureElement = document.querySelector('#multiple-matching-templates');
 
             beforeEach(function () {
-                view = fixture('multiple-matching-templates-delayed')[2];
+                view = fixture('multiple-matching-templates')[2];
 
                 dynTemplate = document.createElement('contains-templates');
             });
 
             it('should render first match', function (done) {
-                view.object = {'@id': '_:test'};
-
                 dynTemplate.text = 'I was loaded dynamically';
                 fixtureElement.insertBefore(dynTemplate, document.querySelector('#first'));
+
+                view.object = {'@id': '_:test'};
 
                 flush(function () {
                     assert.equal("I was loaded dynamically", view.querySelector('span').textContent);

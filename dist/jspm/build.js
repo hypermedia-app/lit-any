@@ -1,4 +1,4 @@
-System.register("src/templates/ags-array-template.ts", ["src/template-registry.ts"], function(exports_1, context_1) {
+System.register("src/templates/ags-array-template.ts", ["src/view-template-registry.ts"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -12,12 +12,12 @@ System.register("src/templates/ags-array-template.ts", ["src/template-registry.t
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var ArrayTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             ArrayTemplate = (function (_super) {
@@ -30,7 +30,7 @@ System.register("src/templates/ags-array-template.ts", ["src/template-registry.t
                 };
                 ArrayTemplate = __decorate([
                     component('ags-array-template'),
-                    behavior(template_registry_1.RegisteredTemplate),
+                    behavior(view_template_registry_1.RegisteredTemplate),
                     extend('template')
                 ], ArrayTemplate);
                 return ArrayTemplate;
@@ -40,7 +40,7 @@ System.register("src/templates/ags-array-template.ts", ["src/template-registry.t
     }
 });
 
-System.register("src/templates/ags-literal-template.ts", ["src/template-registry.ts"], function(exports_1, context_1) {
+System.register("src/templates/ags-literal-template.ts", ["src/view-template-registry.ts"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -54,12 +54,12 @@ System.register("src/templates/ags-literal-template.ts", ["src/template-registry
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var AnyLiteralTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             AnyLiteralTemplate = (function (_super) {
@@ -71,7 +71,7 @@ System.register("src/templates/ags-literal-template.ts", ["src/template-registry
                     return !(typeof resource === 'object') || !!resource['@value'];
                 };
                 AnyLiteralTemplate = __decorate([
-                    behavior(template_registry_1.RegisteredTemplate),
+                    behavior(view_template_registry_1.RegisteredTemplate),
                     extend('template'),
                     component('ags-literal-template')
                 ], AnyLiteralTemplate);
@@ -82,7 +82,7 @@ System.register("src/templates/ags-literal-template.ts", ["src/template-registry
     }
 });
 
-System.register("src/templates/ags-object-template.ts", ["src/template-registry.ts"], function(exports_1, context_1) {
+System.register("src/templates/ags-object-template.ts", ["src/view-template-registry.ts"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -96,12 +96,12 @@ System.register("src/templates/ags-object-template.ts", ["src/template-registry.
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var AnyObjectTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             AnyObjectTemplate = (function (_super) {
@@ -114,7 +114,7 @@ System.register("src/templates/ags-object-template.ts", ["src/template-registry.
                     return isObject;
                 };
                 AnyObjectTemplate = __decorate([
-                    behavior(template_registry_1.RegisteredTemplate),
+                    behavior(view_template_registry_1.RegisteredTemplate),
                     extend('template'),
                     component('ags-object-template')
                 ], AnyObjectTemplate);
@@ -125,7 +125,7 @@ System.register("src/templates/ags-object-template.ts", ["src/template-registry.
     }
 });
 
-System.register("src/templates/ags-type-template.ts", ["src/template-registry.ts"], function(exports_1, context_1) {
+System.register("src/templates/ags-type-template.ts", ["src/view-template-registry.ts"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -139,12 +139,12 @@ System.register("src/templates/ags-type-template.ts", ["src/template-registry.ts
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var TypeTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             TypeTemplate = (function (_super) {
@@ -168,7 +168,7 @@ System.register("src/templates/ags-type-template.ts", ["src/template-registry.ts
                 ], TypeTemplate.prototype, "type", void 0);
                 TypeTemplate = __decorate([
                     component('ags-type-template'),
-                    behavior(template_registry_1.RegisteredTemplate),
+                    behavior(view_template_registry_1.RegisteredTemplate),
                     extend('template')
                 ], TypeTemplate);
                 return TypeTemplate;
@@ -262,11 +262,11 @@ System.register("src/templates/ags-field-range-template.ts", ["src/form-template
     }
 });
 
-System.register("src/template-registry.ts", ["npm:jsonld@0.4.11.js"], function(exports_1, context_1) {
+System.register("src/view-template-registry.ts", ["npm:jsonld@0.4.11.js", "src/template-registry.ts"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var jsonld_1;
-    var templates, TemplateRegistryAccess, TemplateStamper, AgsTemplate, RegisteredTemplate, RegisteredTemplateConsumer;
+    var jsonld_1, template_registry_1;
+    var TemplateStamper, AgsViewTemplate, RegisteredTemplate, RegisteredTemplateConsumer;
     function scopeMatches(scope) {
         return this.scope == scope;
     }
@@ -281,19 +281,11 @@ System.register("src/template-registry.ts", ["npm:jsonld@0.4.11.js"], function(e
         setters:[
             function (jsonld_1_1) {
                 jsonld_1 = jsonld_1_1;
+            },
+            function (template_registry_1_1) {
+                template_registry_1 = template_registry_1_1;
             }],
         execute: function() {
-            templates = [];
-            exports_1("TemplateRegistryAccess", TemplateRegistryAccess = {
-                properties: {
-                    templates: {
-                        type: Array,
-                        notify: true,
-                        readOnly: true,
-                        value: templates
-                    }
-                }
-            });
             TemplateStamper = {
                 getStamped: function (objectView, template, object) {
                     var _this = this;
@@ -307,7 +299,7 @@ System.register("src/template-registry.ts", ["npm:jsonld@0.4.11.js"], function(e
                     }
                 }
             };
-            exports_1("AgsTemplate", AgsTemplate = {
+            exports_1("AgsViewTemplate", AgsViewTemplate = {
                 properties: {
                     as: {
                         type: String,
@@ -328,17 +320,17 @@ System.register("src/template-registry.ts", ["npm:jsonld@0.4.11.js"], function(e
                     scope: {
                         type: String,
                         value: ''
+                    },
+                    kind: {
+                        readOnly: true,
+                        value: 'view'
                     }
                 },
                 attached: function () {
-                    this.push('templates', this);
-                    this.fire('ags-templates-changed', { templates: this.templates }, { bubbles: true });
+                    this.fire('ags-templates-changed', {}, { bubbles: true });
                 },
                 detached: function () {
-                    this.pop('templates', this);
-                    document.dispatchEvent(new CustomEvent('ags-templates-changed', {
-                        detail: { templates: this.templates }
-                    }));
+                    document.dispatchEvent(new CustomEvent('ags-templates-changed'));
                 },
                 isMatch: function (object, predicate, scope) {
                     var objectMatches, predicateMatches, isScopeMatch;
@@ -357,13 +349,13 @@ System.register("src/template-registry.ts", ["npm:jsonld@0.4.11.js"], function(e
                     return true;
                 }
             });
-            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsTemplate, TemplateRegistryAccess]);
-            exports_1("RegisteredTemplateConsumer", RegisteredTemplateConsumer = [Polymer.Templatizer, TemplateStamper, TemplateRegistryAccess]);
+            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsViewTemplate]);
+            exports_1("RegisteredTemplateConsumer", RegisteredTemplateConsumer = [Polymer.Templatizer, TemplateStamper, template_registry_1.TemplateRegistryAccess]);
         }
     }
 });
 
-System.register("src/elements/ags-view.ts", ["src/template-registry.ts"], function(exports_1, context_1) {
+System.register("src/elements/ags-view.ts", ["src/view-template-registry.ts"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -377,7 +369,7 @@ System.register("src/elements/ags-view.ts", ["src/template-registry.ts"], functi
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var AgsView;
     function replaceContent(elementRoot, newContent) {
         elementRoot.appendChild(newContent);
@@ -385,8 +377,8 @@ System.register("src/elements/ags-view.ts", ["src/template-registry.ts"], functi
     }
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             AgsView = (function (_super) {
@@ -403,9 +395,12 @@ System.register("src/elements/ags-view.ts", ["src/template-registry.ts"], functi
                 };
                 AgsView.prototype._draw = function (object, predicate, templateScope, ignoreMissing, params) {
                     var _this = this;
-                    var templates = this.templates || [];
+                    var templates = this._getTemplates('view') || [];
                     var found;
                     var elementRoot = Polymer.dom(this.root);
+                    alert(Array.prototype.map.call(templates, function (t) {
+                        return t.id;
+                    }));
                     while (elementRoot.firstChild) {
                         elementRoot.removeChild(elementRoot.firstChild);
                     }
@@ -454,7 +449,7 @@ System.register("src/elements/ags-view.ts", ["src/template-registry.ts"], functi
                 AgsView = __decorate([
                     template("<style>\n            :host {\n                display: block;\n                @apply(--object-view);\n            }\n        </style>"),
                     component('ags-view'),
-                    behavior(template_registry_1.RegisteredTemplateConsumer)
+                    behavior(view_template_registry_1.RegisteredTemplateConsumer)
                 ], AgsView);
                 return AgsView;
             }(polymer.Base));
@@ -467,24 +462,36 @@ System.register("src/elements/ags-form.html!github:Hypercubed/systemjs-plugin-ht
 
 System.register("src/elements/ags-field.html!github:Hypercubed/systemjs-plugin-html@0.0.8.js", [], function() { return { setters: [], execute: function() {} } });
 
-System.register("src/form-template-registry.ts", [], function(exports_1, context_1) {
+System.register("src/template-registry.ts", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var templates, FormTemplateRegistryAccess, AgsFormTemplate, RegisteredTemplate, AgsFieldStamper;
+    var TemplateRegistryAccess;
     return {
         setters:[],
         execute: function() {
-            templates = [];
-            exports_1("FormTemplateRegistryAccess", FormTemplateRegistryAccess = {
-                properties: {
-                    templates: {
-                        type: Array,
-                        notify: true,
-                        readOnly: true,
-                        value: templates
-                    }
+            exports_1("TemplateRegistryAccess", TemplateRegistryAccess = {
+                _getTemplates: function (kind) {
+                    var filter = Array.prototype.filter;
+                    return filter.call(document.querySelectorAll('body /deep/ template'), function (template) {
+                        return template.kind === kind && template.isMatch && typeof template.isMatch === 'function';
+                    });
                 }
             });
+        }
+    }
+});
+
+System.register("src/form-template-registry.ts", ["src/template-registry.ts"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var template_registry_1;
+    var AgsFormTemplate, RegisteredTemplate, AgsFieldStamper;
+    return {
+        setters:[
+            function (template_registry_1_1) {
+                template_registry_1 = template_registry_1_1;
+            }],
+        execute: function() {
             exports_1("AgsFormTemplate", AgsFormTemplate = {
                 properties: {
                     property: {
@@ -492,20 +499,18 @@ System.register("src/form-template-registry.ts", [], function(exports_1, context
                     },
                     range: {
                         type: String
+                    },
+                    kind: {
+                        readOnly: true,
+                        value: 'form'
                     }
-                },
-                attached: function () {
-                    this.push('templates', this);
-                },
-                detached: function () {
-                    this.pop('templates', this);
                 },
                 isMatch: function (property, range) {
                     return false;
                 }
             });
-            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsFormTemplate, FormTemplateRegistryAccess]);
-            exports_1("AgsFieldStamper", AgsFieldStamper = [Polymer.Templatizer, FormTemplateRegistryAccess]);
+            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsFormTemplate]);
+            exports_1("AgsFieldStamper", AgsFieldStamper = [Polymer.Templatizer, template_registry_1.TemplateRegistryAccess]);
         }
     }
 });
@@ -551,7 +556,7 @@ System.register("src/elements/ags-field.ts", ["src/elements/ags-field.html!githu
                 AgsField.prototype._draw = function (property, range) {
                     var _this = this;
                     this.async(function () {
-                        var templates = _this.templates || [];
+                        var templates = _this._getTemplates('form') || [];
                         var found = false;
                         var elementRoot = Polymer.dom(_this.$.dynamicField);
                         while (elementRoot.firstChild) {
@@ -717,15 +722,15 @@ System.register("src/elements/ags-hydra-adapter.ts", [], function(exports_1, con
     }
 });
 
-System.register("src/augeas.ts", ["src/template-registry.ts", "src/templates/ags-array-template.ts", "src/templates/ags-literal-template.ts", "src/templates/ags-object-template.ts", "src/templates/ags-type-template.ts", "src/templates/ags-field-property-template.ts", "src/templates/ags-field-range-template.ts", "src/elements/ags-view.ts", "src/elements/ags-form.ts", "src/elements/ags-hydra-adapter.ts"], function(exports_1, context_1) {
+System.register("src/augeas.ts", ["src/view-template-registry.ts", "src/templates/ags-array-template.ts", "src/templates/ags-literal-template.ts", "src/templates/ags-object-template.ts", "src/templates/ags-type-template.ts", "src/templates/ags-field-property-template.ts", "src/templates/ags-field-range-template.ts", "src/elements/ags-view.ts", "src/elements/ags-form.ts", "src/elements/ags-hydra-adapter.ts"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var template_registry_1;
+    var view_template_registry_1;
     var RegisteredTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             },
             function (_1) {},
             function (_2) {},

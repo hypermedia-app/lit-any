@@ -16,12 +16,12 @@ $__System.register("2", ["3"], function(exports_1, context_1) {
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var ArrayTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             ArrayTemplate = (function (_super) {
@@ -34,7 +34,7 @@ $__System.register("2", ["3"], function(exports_1, context_1) {
                 };
                 ArrayTemplate = __decorate([
                     component('ags-array-template'),
-                    behavior(template_registry_1.RegisteredTemplate),
+                    behavior(view_template_registry_1.RegisteredTemplate),
                     extend('template')
                 ], ArrayTemplate);
                 return ArrayTemplate;
@@ -58,12 +58,12 @@ $__System.register("4", ["3"], function(exports_1, context_1) {
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var AnyLiteralTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             AnyLiteralTemplate = (function (_super) {
@@ -75,7 +75,7 @@ $__System.register("4", ["3"], function(exports_1, context_1) {
                     return !(typeof resource === 'object') || !!resource['@value'];
                 };
                 AnyLiteralTemplate = __decorate([
-                    behavior(template_registry_1.RegisteredTemplate),
+                    behavior(view_template_registry_1.RegisteredTemplate),
                     extend('template'),
                     component('ags-literal-template')
                 ], AnyLiteralTemplate);
@@ -100,12 +100,12 @@ $__System.register("5", ["3"], function(exports_1, context_1) {
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var AnyObjectTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             AnyObjectTemplate = (function (_super) {
@@ -118,7 +118,7 @@ $__System.register("5", ["3"], function(exports_1, context_1) {
                     return isObject;
                 };
                 AnyObjectTemplate = __decorate([
-                    behavior(template_registry_1.RegisteredTemplate),
+                    behavior(view_template_registry_1.RegisteredTemplate),
                     extend('template'),
                     component('ags-object-template')
                 ], AnyObjectTemplate);
@@ -143,12 +143,12 @@ $__System.register("6", ["3"], function(exports_1, context_1) {
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var TypeTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             TypeTemplate = (function (_super) {
@@ -172,7 +172,7 @@ $__System.register("6", ["3"], function(exports_1, context_1) {
                 ], TypeTemplate.prototype, "type", void 0);
                 TypeTemplate = __decorate([
                     component('ags-type-template'),
-                    behavior(template_registry_1.RegisteredTemplate),
+                    behavior(view_template_registry_1.RegisteredTemplate),
                     extend('template')
                 ], TypeTemplate);
                 return TypeTemplate;
@@ -266,11 +266,11 @@ $__System.register("9", ["8"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("3", ["a"], function(exports_1, context_1) {
+$__System.register("3", ["a", "b"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var jsonld_1;
-    var templates, TemplateRegistryAccess, TemplateStamper, AgsTemplate, RegisteredTemplate, RegisteredTemplateConsumer;
+    var jsonld_1, template_registry_1;
+    var TemplateStamper, AgsViewTemplate, RegisteredTemplate, RegisteredTemplateConsumer;
     function scopeMatches(scope) {
         return this.scope == scope;
     }
@@ -285,19 +285,11 @@ $__System.register("3", ["a"], function(exports_1, context_1) {
         setters:[
             function (jsonld_1_1) {
                 jsonld_1 = jsonld_1_1;
+            },
+            function (template_registry_1_1) {
+                template_registry_1 = template_registry_1_1;
             }],
         execute: function() {
-            templates = [];
-            exports_1("TemplateRegistryAccess", TemplateRegistryAccess = {
-                properties: {
-                    templates: {
-                        type: Array,
-                        notify: true,
-                        readOnly: true,
-                        value: templates
-                    }
-                }
-            });
             TemplateStamper = {
                 getStamped: function (objectView, template, object) {
                     var _this = this;
@@ -311,7 +303,7 @@ $__System.register("3", ["a"], function(exports_1, context_1) {
                     }
                 }
             };
-            exports_1("AgsTemplate", AgsTemplate = {
+            exports_1("AgsViewTemplate", AgsViewTemplate = {
                 properties: {
                     as: {
                         type: String,
@@ -332,17 +324,17 @@ $__System.register("3", ["a"], function(exports_1, context_1) {
                     scope: {
                         type: String,
                         value: ''
+                    },
+                    kind: {
+                        readOnly: true,
+                        value: 'view'
                     }
                 },
                 attached: function () {
-                    this.push('templates', this);
-                    this.fire('ags-templates-changed', { templates: this.templates }, { bubbles: true });
+                    this.fire('ags-templates-changed', {}, { bubbles: true });
                 },
                 detached: function () {
-                    this.pop('templates', this);
-                    document.dispatchEvent(new CustomEvent('ags-templates-changed', {
-                        detail: { templates: this.templates }
-                    }));
+                    document.dispatchEvent(new CustomEvent('ags-templates-changed'));
                 },
                 isMatch: function (object, predicate, scope) {
                     var objectMatches, predicateMatches, isScopeMatch;
@@ -361,13 +353,13 @@ $__System.register("3", ["a"], function(exports_1, context_1) {
                     return true;
                 }
             });
-            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsTemplate, TemplateRegistryAccess]);
-            exports_1("RegisteredTemplateConsumer", RegisteredTemplateConsumer = [Polymer.Templatizer, TemplateStamper, TemplateRegistryAccess]);
+            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsViewTemplate]);
+            exports_1("RegisteredTemplateConsumer", RegisteredTemplateConsumer = [Polymer.Templatizer, TemplateStamper, template_registry_1.TemplateRegistryAccess]);
         }
     }
 });
 
-$__System.register("b", ["3"], function(exports_1, context_1) {
+$__System.register("c", ["3"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -381,7 +373,7 @@ $__System.register("b", ["3"], function(exports_1, context_1) {
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var template_registry_1;
+    var view_template_registry_1;
     var AgsView;
     function replaceContent(elementRoot, newContent) {
         elementRoot.appendChild(newContent);
@@ -389,8 +381,8 @@ $__System.register("b", ["3"], function(exports_1, context_1) {
     }
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             }],
         execute: function() {
             AgsView = (function (_super) {
@@ -407,9 +399,12 @@ $__System.register("b", ["3"], function(exports_1, context_1) {
                 };
                 AgsView.prototype._draw = function (object, predicate, templateScope, ignoreMissing, params) {
                     var _this = this;
-                    var templates = this.templates || [];
+                    var templates = this._getTemplates('view') || [];
                     var found;
                     var elementRoot = Polymer.dom(this.root);
+                    alert(Array.prototype.map.call(templates, function (t) {
+                        return t.id;
+                    }));
                     while (elementRoot.firstChild) {
                         elementRoot.removeChild(elementRoot.firstChild);
                     }
@@ -458,7 +453,7 @@ $__System.register("b", ["3"], function(exports_1, context_1) {
                 AgsView = __decorate([
                     template("<style>\n            :host {\n                display: block;\n                @apply(--object-view);\n            }\n        </style>"),
                     component('ags-view'),
-                    behavior(template_registry_1.RegisteredTemplateConsumer)
+                    behavior(view_template_registry_1.RegisteredTemplateConsumer)
                 ], AgsView);
                 return AgsView;
             }(polymer.Base));
@@ -467,28 +462,40 @@ $__System.register("b", ["3"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("c", [], function() { return { setters: [], execute: function() {} } });
-
 $__System.register("d", [], function() { return { setters: [], execute: function() {} } });
 
-$__System.register("8", [], function(exports_1, context_1) {
+$__System.register("e", [], function() { return { setters: [], execute: function() {} } });
+
+$__System.register("b", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var templates, FormTemplateRegistryAccess, AgsFormTemplate, RegisteredTemplate, AgsFieldStamper;
+    var TemplateRegistryAccess;
     return {
         setters:[],
         execute: function() {
-            templates = [];
-            exports_1("FormTemplateRegistryAccess", FormTemplateRegistryAccess = {
-                properties: {
-                    templates: {
-                        type: Array,
-                        notify: true,
-                        readOnly: true,
-                        value: templates
-                    }
+            exports_1("TemplateRegistryAccess", TemplateRegistryAccess = {
+                _getTemplates: function (kind) {
+                    var filter = Array.prototype.filter;
+                    return filter.call(document.querySelectorAll('body /deep/ template'), function (template) {
+                        return template.kind === kind && template.isMatch && typeof template.isMatch === 'function';
+                    });
                 }
             });
+        }
+    }
+});
+
+$__System.register("8", ["b"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var template_registry_1;
+    var AgsFormTemplate, RegisteredTemplate, AgsFieldStamper;
+    return {
+        setters:[
+            function (template_registry_1_1) {
+                template_registry_1 = template_registry_1_1;
+            }],
+        execute: function() {
             exports_1("AgsFormTemplate", AgsFormTemplate = {
                 properties: {
                     property: {
@@ -496,25 +503,23 @@ $__System.register("8", [], function(exports_1, context_1) {
                     },
                     range: {
                         type: String
+                    },
+                    kind: {
+                        readOnly: true,
+                        value: 'form'
                     }
-                },
-                attached: function () {
-                    this.push('templates', this);
-                },
-                detached: function () {
-                    this.pop('templates', this);
                 },
                 isMatch: function (property, range) {
                     return false;
                 }
             });
-            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsFormTemplate, FormTemplateRegistryAccess]);
-            exports_1("AgsFieldStamper", AgsFieldStamper = [Polymer.Templatizer, FormTemplateRegistryAccess]);
+            exports_1("RegisteredTemplate", RegisteredTemplate = [AgsFormTemplate]);
+            exports_1("AgsFieldStamper", AgsFieldStamper = [Polymer.Templatizer, template_registry_1.TemplateRegistryAccess]);
         }
     }
 });
 
-$__System.register("e", ["d", "8"], function(exports_1, context_1) {
+$__System.register("f", ["e", "8"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -555,7 +560,7 @@ $__System.register("e", ["d", "8"], function(exports_1, context_1) {
                 AgsField.prototype._draw = function (property, range) {
                     var _this = this;
                     this.async(function () {
-                        var templates = _this.templates || [];
+                        var templates = _this._getTemplates('form') || [];
                         var found = false;
                         var elementRoot = Polymer.dom(_this.$.dynamicField);
                         while (elementRoot.firstChild) {
@@ -613,7 +618,7 @@ $__System.register("e", ["d", "8"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("f", ["c", "e"], function(exports_1, context_1) {
+$__System.register("10", ["d", "f"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -663,7 +668,7 @@ $__System.register("f", ["c", "e"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("10", [], function(exports_1, context_1) {
+$__System.register("11", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -721,15 +726,15 @@ $__System.register("10", [], function(exports_1, context_1) {
     }
 });
 
-$__System.register("1", ["3", "2", "4", "5", "6", "7", "9", "b", "f", "10"], function(exports_1, context_1) {
+$__System.register("1", ["3", "2", "4", "5", "6", "7", "9", "c", "10", "11"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var template_registry_1;
+    var view_template_registry_1;
     var RegisteredTemplate;
     return {
         setters:[
-            function (template_registry_1_1) {
-                template_registry_1 = template_registry_1_1;
+            function (view_template_registry_1_1) {
+                view_template_registry_1 = view_template_registry_1_1;
             },
             function (_1) {},
             function (_2) {},
