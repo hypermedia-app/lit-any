@@ -1,5 +1,3 @@
-import {RegisteredTemplate} from "./view-template-registry";
-
 import './templates/ags-array-template'
 import './templates/ags-literal-template'
 import './templates/ags-object-template'
@@ -10,4 +8,5 @@ import './elements/ags-view'
 import './elements/ags-form'
 import './elements/ags-hydra-adapter'
 
-export var RegisteredTemplate = RegisteredTemplate;
+export {AgsViewTemplate} from './view-template-registry';
+export {AgsFormTemplate} from './form-template-registry';

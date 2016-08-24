@@ -19,5 +19,4 @@ export var AgsFormTemplate = {
     }
 };
 
-export var RegisteredTemplate = [ AgsFormTemplate ];
 export var AgsFieldStamper = [ Polymer.Templatizer, TemplateRegistryAccess ];

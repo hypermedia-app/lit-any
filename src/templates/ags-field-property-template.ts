@@ -1,6 +1,6 @@
-import {RegisteredTemplate} from "../form-template-registry";
+import {AgsFormTemplate} from "../form-template-registry";
 
-@behavior(RegisteredTemplate)
+@behavior(AgsFormTemplate)
 @extend('template')
 @component('ags-field-property-template')
 class AgsFieldPropertyTemplate extends polymer.Base {

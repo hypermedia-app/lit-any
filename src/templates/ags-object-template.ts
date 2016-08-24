@@ -1,6 +1,6 @@
-import {RegisteredTemplate} from "../view-template-registry";
+import {AgsViewTemplate} from "../view-template-registry";
 
-@behavior(RegisteredTemplate)
+@behavior(AgsViewTemplate)
 @extend('template')
 @component('ags-object-template')
 class AnyObjectTemplate extends polymer.Base {

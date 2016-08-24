@@ -1,7 +1,7 @@
-import {RegisteredTemplate} from '../view-template-registry';
+import {AgsViewTemplate} from '../view-template-registry';
 
 @component('ags-type-template')
-@behavior(RegisteredTemplate)
+@behavior(AgsViewTemplate)
 @extend('template')
 class TypeTemplate extends polymer.Base {
 

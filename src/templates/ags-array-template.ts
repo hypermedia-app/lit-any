@@ -1,7 +1,7 @@
-import {RegisteredTemplate} from '../view-template-registry';
+import {AgsViewTemplate} from '../view-template-registry';
 
 @component('ags-array-template')
-@behavior(RegisteredTemplate)
+@behavior(AgsViewTemplate)
 @extend('template')
 class ArrayTemplate extends polymer.Base {
     objectMatches(res) {

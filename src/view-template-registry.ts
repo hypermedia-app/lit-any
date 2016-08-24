@@ -86,5 +86,4 @@ function stamp(objectView, template, object) {
     return this.stamp(stampedModel).root;
 }
 
-export var RegisteredTemplate = [ AgsViewTemplate ];
 export var RegisteredTemplateConsumer = [ Polymer.Templatizer, TemplateStamper, TemplateRegistryAccess ];
