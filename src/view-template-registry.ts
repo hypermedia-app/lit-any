@@ -43,11 +43,11 @@ export var AgsViewTemplate = {
     },
 
     attached: function() {
-        this.fire('ags-templates-changed', { }, { bubbles: true });
+        this.fire('ags-view-templates-changed', { }, { bubbles: true });
     },
 
     detached: function() {
-        document.dispatchEvent(new CustomEvent('ags-templates-changed'));
+        document.dispatchEvent(new CustomEvent('ags-view-templates-changed'));
     },
 
     isMatch: function(object, predicate, scope) {

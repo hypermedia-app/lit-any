@@ -12,16 +12,16 @@
 </head>
 <body>
 
-    <template id="defaults" is="test-registered-template">
+    <template id="defaults" is="test-view-template">
     </template>
 
-    <template id="with-scope" is="test-registered-template" scope="some scope"></template>
-    <template id="to-remove" is="test-registered-template"></template>
+    <template id="with-scope" is="test-view-template" scope="some scope"></template>
+    <template id="to-remove" is="test-view-template"></template>
 
     <script>
 
         var subject;
-        describe('RegisteredTemplate', function () {
+        describe('AgsViewTemplate', function () {
 
             describe('defaults', function () {
 
@@ -33,7 +33,7 @@
 
                     it('should equal "model"', function (done) {
 
-                        System.import('test/test-elements/test-registered-template')
+                        System.import('test/test-elements/test-templates')
                                 .then(function () {
                                     assert.equal(subject.as, 'model');
                                     done();
@@ -47,7 +47,7 @@
 
                     it('should be empty string', function (done) {
 
-                        System.import('test/test-elements/test-registered-template')
+                        System.import('test/test-elements/test-templates')
                                 .then(function () {
                                     assert.equal(subject.name, '');
                                     done();
@@ -61,7 +61,7 @@
 
                     it('should be empty string', function (done) {
 
-                        System.import('test/test-elements/test-registered-template')
+                        System.import('test/test-elements/test-templates')
                                 .then(function () {
                                     assert.equal(subject.scope, '');
                                     done();
@@ -75,7 +75,7 @@
 
                     it('should be null', function (done) {
 
-                        System.import('test/test-elements/test-registered-template')
+                        System.import('test/test-elements/test-templates')
                                 .then(function () {
                                     assert.equal(subject.compactWith, null);
                                     done();
@@ -89,7 +89,7 @@
 
                     it('should be null', function (done) {
 
-                        System.import('test/test-elements/test-registered-template')
+                        System.import('test/test-elements/test-templates')
                                 .then(function () {
                                     assert.equal(subject.predicate, null);
                                     done();
@@ -108,23 +108,21 @@
                 it('raises an event', function (done) {
 
                     listener = function(e) {
-                        assert.equal(e.detail.templates.length, 4);
-                        assert.equal(e.detail.templates[3].id, 'dynamic');
                         done();
                     };
 
-                    System.import('test/test-elements/test-registered-template')
+                    System.import('test/test-elements/test-templates')
                             .then(function () {
-                                node = document.createElement('template', 'test-registered-template');
+                                node = document.createElement('template', 'test-view-template');
                                 node.setAttribute('id', 'dynamic');
 
-                                document.addEventListener('ags-templates-changed', listener);
+                                document.addEventListener('ags-view-templates-changed', listener);
                                 document.body.appendChild(node);
                             });
                 });
 
                 afterEach(function() {
-                    document.removeEventListener('ags-templates-changed', listener);
+                    document.removeEventListener('ags-view-templates-changed', listener);
                     document.body.removeChild(node);
                 });
 
@@ -137,22 +135,21 @@
                 it('raises an event', function (done) {
 
                     listener = function(e) {
-                        assert.equal(e.detail.templates.length, 2);
                         done();
                     };
 
-                    System.import('test/test-elements/test-registered-template')
+                    System.import('test/test-elements/test-templates')
                             .then(function () {
                                 node = document.getElementById('to-remove');
 
-                                document.addEventListener('ags-templates-changed', listener);
+                                document.addEventListener('ags-view-templates-changed', listener);
 
                                 document.body.removeChild(node);
                             });
                 });
 
                 afterEach(function() {
-                    document.removeEventListener('ags-templates-changed', listener);
+                    document.removeEventListener('ags-view-templates-changed', listener);
                 });
 
             });

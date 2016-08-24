@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegisteredTemplate tests</title>
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../config.js"></script>
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
+    <link rel="import" href="../augeas.html"/>
+</head>
+<body>
+
+<template id="to-remove" is="test-form-template"></template>
+
+<script>
+
+    var subject;
+    describe('AgsFormTemplate', function () {
+
+        describe('adding to DOM', function () {
+
+            var node, listener;
+
+            it('raises an event', function (done) {
+
+                listener = function(e) {
+                    done();
+                };
+
+                System.import('test/test-elements/test-templates')
+                        .then(function () {
+                            node = document.createElement('template', 'test-form-template');
+                            node.setAttribute('id', 'dynamic');
+
+                            document.addEventListener('ags-form-templates-changed', listener);
+                            document.body.appendChild(node);
+                        });
+            });
+
+            afterEach(function() {
+                document.removeEventListener('ags-form-templates-changed', listener);
+                document.body.removeChild(node);
+            });
+
+        });
+
+        describe('removing from DOM', function () {
+
+            var node, listener;
+
+            it('raises an event', function (done) {
+
+                listener = function(e) {
+                    done();
+                };
+
+                System.import('test/test-elements/test-templates')
+                        .then(function () {
+                            node = document.getElementById('to-remove');
+
+                            document.addEventListener('ags-form-templates-changed', listener);
+
+                            document.body.removeChild(node);
+                        });
+            });
+
+            afterEach(function() {
+                document.removeEventListener('ags-form-templates-changed', listener);
+            });
+
+        });
+    });
+</script>
+
+</body>
+</html>
