@@ -309,9 +309,6 @@ $__System.register("a", ["3"], function(exports_1, context_1) {
                     var templates = this._getTemplates('view') || [];
                     var found;
                     var elementRoot = Polymer.dom(this.root);
-                    alert(Array.prototype.map.call(templates, function (t) {
-                        return t.id;
-                    }));
                     while (elementRoot.firstChild) {
                         elementRoot.removeChild(elementRoot.firstChild);
                     }
@@ -645,10 +642,10 @@ $__System.register("3", ["10", "11"], function(exports_1, context_1) {
                     }
                 },
                 attached: function () {
-                    this.fire('ags-templates-changed', {}, { bubbles: true });
+                    this.fire('ags-view-templates-changed', {}, { bubbles: true });
                 },
                 detached: function () {
-                    document.dispatchEvent(new CustomEvent('ags-templates-changed'));
+                    document.dispatchEvent(new CustomEvent('ags-view-templates-changed'));
                 },
                 isMatch: function (object, predicate, scope) {
                     var objectMatches, predicateMatches, isScopeMatch;
@@ -714,6 +711,12 @@ $__System.register("8", ["11"], function(exports_1, context_1) {
                         readOnly: true,
                         value: 'form'
                     }
+                },
+                attached: function () {
+                    this.fire('ags-form-templates-changed', {}, { bubbles: true });
+                },
+                detached: function () {
+                    document.dispatchEvent(new CustomEvent('ags-form-templates-changed'));
                 },
                 isMatch: function (property, range) {
                     return false;

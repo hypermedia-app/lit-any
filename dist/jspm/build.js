@@ -305,9 +305,6 @@ System.register("src/elements/ags-view.ts", ["src/view-template-registry.ts"], f
                     var templates = this._getTemplates('view') || [];
                     var found;
                     var elementRoot = Polymer.dom(this.root);
-                    alert(Array.prototype.map.call(templates, function (t) {
-                        return t.id;
-                    }));
                     while (elementRoot.firstChild) {
                         elementRoot.removeChild(elementRoot.firstChild);
                     }
@@ -641,10 +638,10 @@ System.register("src/view-template-registry.ts", ["npm:jsonld@0.4.11.js", "src/t
                     }
                 },
                 attached: function () {
-                    this.fire('ags-templates-changed', {}, { bubbles: true });
+                    this.fire('ags-view-templates-changed', {}, { bubbles: true });
                 },
                 detached: function () {
-                    document.dispatchEvent(new CustomEvent('ags-templates-changed'));
+                    document.dispatchEvent(new CustomEvent('ags-view-templates-changed'));
                 },
                 isMatch: function (object, predicate, scope) {
                     var objectMatches, predicateMatches, isScopeMatch;
@@ -710,6 +707,12 @@ System.register("src/form-template-registry.ts", ["src/template-registry.ts"], f
                         readOnly: true,
                         value: 'form'
                     }
+                },
+                attached: function () {
+                    this.fire('ags-form-templates-changed', {}, { bubbles: true });
+                },
+                detached: function () {
+                    document.dispatchEvent(new CustomEvent('ags-form-templates-changed'));
                 },
                 isMatch: function (property, range) {
                     return false;
