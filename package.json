@@ -4,8 +4,8 @@
     "test": "tests"
   },
   "scripts": {
-    "install": "npm install -g web-component-tester",
-    "test": "wct",
+    "install": "npm install -g web-component-tester wct-local wct-sauce bower typings typescript jspm",
+    "test": "wct --plugin sauce",
     "test-local": "wct -l chrome -p --skip-selenium-install",
     "build": "npm run build-bower && npm run build-jspm",
     "build-bower": "jspm bundle-sfx src/augeas - jsonld dist/bower/build.js --global-name augeas --format global --globals \"{'jsonld': 'jsonld'}\"",
@@ -25,5 +25,11 @@
       "html": "github:Hypercubed/systemjs-plugin-html@^0.0.8",
       "typescript": "npm:typescript@^1.6.2"
     }
+  },
+  "local-web-server": {
+    "rewrite": [
+      { "from": "/polymer/*", "to": "/bower_components/polymer/$1" },
+      { "from": "/polymer-ts/*", "to": "/bower_components/polymer-ts/$1" }
+    ]
   }
 }
