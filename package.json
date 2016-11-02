@@ -4,7 +4,7 @@
     "test": "tests"
   },
   "scripts": {
-    "install": "npm install -g web-component-tester wct-local wct-sauce bower typings typescript jspm",
+    "install": "npm install -g web-component-tester wct-local wct-sauce bower typings typescript jspm vulcanize",
     "test": "wct --plugin sauce",
     "test-local": "wct -l chrome -p --skip-selenium-install",
     "build": "npm run build-bower && npm run build-jspm",
