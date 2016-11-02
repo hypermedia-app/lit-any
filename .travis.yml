@@ -5,6 +5,7 @@ node_js:
 install:
   - npm i
   - jspm i
+  - bower i
 before_script:
   - npm run build
 branches:
