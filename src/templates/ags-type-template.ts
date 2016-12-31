@@ -3,7 +3,7 @@ import {AgsViewTemplate} from '../view-template-registry';
 @component('ags-type-template')
 @behavior(AgsViewTemplate)
 @extend('template')
-class TypeTemplate extends polymer.Base {
+class TypeTemplate {
 
     @property()
     type: String;
@@ -21,5 +21,3 @@ class TypeTemplate extends polymer.Base {
         return res['@type'] === this.type;
     }
 }
-
-TypeTemplate.register();

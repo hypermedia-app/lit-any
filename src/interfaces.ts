@@ -1,10 +1,10 @@
-interface IContract {
+export interface IContract {
     title: String;
     description: String;
     body: Array<IFieldContract>;
 }
 
-interface IFieldContract {
+export interface IFieldContract {
     property: String;
     range: String;
     required: Boolean;

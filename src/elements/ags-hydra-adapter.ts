@@ -1,10 +1,12 @@
-@component('ags-hydra-adapter')
-export class AgsHydraAdapter extends polymer.Base {
+import { IFieldContract, IContract } from '../interfaces';
+import { IOperation, ISupportedProperty } from 'heracles';
 
-    @property()
+export class AgsHydraAdapter {
+
     operation: IOperation;
 
-    @computed({ notify: true })
+    @notify
+    @computed
     contract(operation: IOperation): IContract {
         var contract: IContract = <IContract>{};
 
@@ -29,5 +31,3 @@ function transformSupportedProperty(prop: ISupportedProperty): IFieldContract {
 
     return fieldContract;
 }
-
-AgsHydraAdapter.register();

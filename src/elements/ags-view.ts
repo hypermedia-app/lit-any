@@ -1,34 +1,29 @@
+import "../view-template-registry";
 import {RegisteredTemplateConsumer} from "../view-template-registry";
 
-@template(`<style>
-            :host {
-                display: block;
-                @apply(--object-view);
-            }
-        </style>`)
+@style(`:host {
+            display: block;
+            @apply(--object-view);
+        }`)
 @component('ags-view')
 @behavior(RegisteredTemplateConsumer)
-class AgsView extends polymer.Base {
+export class AgsView {
 
-    @property()
     object:Object;
 
-    @property({ value: null })
-    predicate:String;
+    predicate:String = null;
 
-    @property({ value: '' })
-    templateScope: String;
+    templateScope: String = '';
 
-    @property({ value: false })
-    ignoreMissing: Boolean;
+    ignoreMissing: Boolean = false;
 
-    @property({ readOnly: true, notify: true, value: false })
-    hasBeenRendered: Boolean;
+    @readOnly
+    @notify
+    hasBeenRendered: Boolean = false;
 
-    @property({ type: Object, value: {} })
-    params: Object;
+    params: Object = {};
 
-    attached() {
+    connectedCallback() {
         document.addEventListener('ags-templates', (() => {
             if(this.object)
                 this._draw(this.object, this.predicate, this.templateScope, this.ignoreMissing, this.params);
@@ -79,5 +74,3 @@ function replaceContent(elementRoot, newContent) {
 
     this._setHasBeenRendered(true);
 }
-
-AgsView.register();

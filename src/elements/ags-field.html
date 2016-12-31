@@ -1,13 +1,9 @@
-<dom-module id="ags-field">
-    <template>
-        <div id="fallbackField">
-            <template is="dom-if" if="[[property]]">
-                <template is="dom-if" if="[[noTemplateFound]]">
-                    <input type="text" value="{{value::input}}" required$="[[required]]"/>
-                </template>
-            </template>
-        </div>
-
-        <div id="dynamicField"></div>
+<div id="fallbackField">
+    <template is="dom-if" if="[[property]]">
+        <template is="dom-if" if="[[noTemplateFound]]">
+            <input type="text" value="{{value::input}}" required$="[[required]]"/>
+        </template>
     </template>
-</dom-module>
+</div>
+
+<div id="dynamicField"></div>

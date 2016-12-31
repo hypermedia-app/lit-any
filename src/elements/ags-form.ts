@@ -1,13 +1,12 @@
-import 'src/elements/ags-form.html!';
-import 'src/elements/ags-field';
+import 'link!ags-field.html';
+import { IContract } from '../interfaces';
 
-@component('ags-form')
-class AgsForm extends polymer.Base {
+@template('ags-form.html')
+export class AgsForm {
 
-    @property({ type: Object, value: null, notify: true })
-    value: Object;
+    @notify
+    value: Object = null;
 
-    @property({ type: Object })
     contract: IContract;
 
     _fieldValueChanged(e) {
@@ -22,5 +21,3 @@ class AgsForm extends polymer.Base {
         this.set('value', value);
     }
 }
-
-AgsForm.register();

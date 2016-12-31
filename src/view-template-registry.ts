@@ -78,7 +78,7 @@ function scopeMatches(scope) {
 }
 
 function stamp(objectView, template, object) {
-    var stampedModel = { };
+    var stampedModel:any = { };
     stampedModel[template.as] = object;
     stampedModel.predicate = this.predicate;
     stampedModel.params = objectView.params;

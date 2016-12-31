@@ -1,24 +1,20 @@
-import './ags-field.html!'
 import {AgsFieldStamper} from '../form-template-registry';
 
-@component('ags-field')
 @behavior(AgsFieldStamper)
-class AgsField extends polymer.Base {
+@template('ags-field.html')
+export class AgsField {
 
-    @property({value: null})
-    'property':String;
+    'property':String = null;
 
-    @property({value: null})
-    range:String;
+    range:String = null;
 
-    @property({value: null, notify: true})
-    value:any;
+    @notify
+    value:any = null;
 
-    @property({readOnly: true})
+    @readOnly
     noTemplateFound:Boolean;
 
-    @property({ value: false })
-    required:Boolean;
+    required:Boolean = false;
 
     ready() {
         this._instanceProps = {
@@ -71,5 +67,3 @@ class AgsField extends polymer.Base {
         }
     }
 }
-
-AgsField.register();
