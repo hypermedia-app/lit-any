@@ -1,12 +1,11 @@
-import "../view-template-registry";
-import {RegisteredTemplateConsumer} from "../view-template-registry";
+import "link!../behaviors/RegisteredTemplateConsumer.html";
+import {notify, behavior, style, observe} from "twc/annotations/polymer";
 
 @style(`:host {
             display: block;
             @apply(--object-view);
         }`)
-@component('ags-view')
-@behavior(RegisteredTemplateConsumer)
+@behavior(Augeas.RegisteredTemplateConsumer)
 export class AgsView {
 
     object:Object;
@@ -17,9 +16,8 @@ export class AgsView {
 
     ignoreMissing: Boolean = false;
 
-    @readOnly
     @notify
-    hasBeenRendered: Boolean = false;
+    readonly hasBeenRendered: Boolean = false;
 
     params: Object = {};
 

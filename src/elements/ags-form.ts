@@ -1,12 +1,21 @@
 import 'link!ags-field.html';
 import { IContract } from '../interfaces';
+import {notify, template} from "twc/annotations/polymer";
 
+/**
+ * Uber element `<ags-form>`
+ *
+ * @demo ../demo/fp-category-page-demo.html
+ */
 @template('ags-form.html')
 export class AgsForm {
 
     @notify
     value: Object = null;
 
+    /**
+     * Whatever
+     */
     contract: IContract;
 
     _fieldValueChanged(e) {

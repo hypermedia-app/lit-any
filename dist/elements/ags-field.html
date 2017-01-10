@@ -1,3 +1,4 @@
+<link rel="import" href="../behaviors/AgsFieldStamper.html">
 <dom-module id="ags-field">
     <template>
         <div id="fallbackField">
@@ -30,7 +31,8 @@
                         observer: "_valueChanged"
                     },
                     noTemplateFound: {
-                        type: Boolean
+                        type: Boolean,
+                        readOnly: true
                     },
                     required: {
                         type: Boolean,
@@ -38,7 +40,7 @@
                     }
                 },
                 observers: ["_draw(property, range)"],
-                behaviors: [form_template_registry_1.AgsFieldStamper],
+                behaviors: [Augeas.AgsFieldStamper],
                 ready: function() {
                     this._instanceProps = {
                         value: true

@@ -1,12 +1,9 @@
-import {AgsFormTemplate} from "../form-template-registry";
+import "link!../behaviors/AgsFormTemplate.html";
+import {behavior} from "twc/annotations/polymer";
 
-@behavior(AgsFormTemplate)
-@extend('template')
-@component('ags-field-range-template')
-class AgsFieldRangeTemplate extends polymer.Base {
+@behavior(Augeas.AgsFormTemplate)
+export class AgsFieldRangeTemplate {
     isMatch(property, range) {
         return this.range && this.range == range;
     }
 }
-
-AgsFieldRangeTemplate.register();

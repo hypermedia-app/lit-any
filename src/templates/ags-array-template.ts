@@ -1,7 +1,7 @@
-import {AgsViewTemplate} from '../view-template-registry';
+import "link!../behaviors/AgsViewTemplate.html";
+import {behavior} from "twc/annotations/polymer";
 
-@behavior(AgsViewTemplate)
-@extend('template')
+@behavior(Augeas.AgsViewTemplate)
 export class AgsArrayTemplate {
     objectMatches(res) {
         return Array.isArray(res);

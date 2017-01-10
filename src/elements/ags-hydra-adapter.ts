@@ -1,11 +1,12 @@
 import { IFieldContract, IContract } from '../interfaces';
 import { IOperation, ISupportedProperty } from 'heracles';
+import {notify, computed} from "twc/annotations/polymer";
 
 export class AgsHydraAdapter {
 
     operation: IOperation;
 
-    @notify
+    //@notify
     @computed
     contract(operation: IOperation): IContract {
         var contract: IContract = <IContract>{};

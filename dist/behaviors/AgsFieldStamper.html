@@ -1,0 +1,10 @@
+<link rel="import" href="TemplateRegistry.html" />
+
+<script>
+  (function (augeas) {
+
+    /** @polymerBehavior Augeas.AgsFieldStamper */
+    augeas.AgsFieldStamper = [ Polymer.Templatizer, Augeas.TemplateRegistryAccess ];
+
+  })(window.Augeas || (window.Augeas = {}));
+</script>

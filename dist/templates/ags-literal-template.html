@@ -1,0 +1,19 @@
+<link rel="import" href="../behaviors/AgsViewTemplate.html">
+<dom-module id="any-literal-template">
+    <script>
+        (function() {
+            "use strict";
+        
+            var AnyLiteralTemplate = Polymer({
+                is: "any-literal-template",
+                behaviors: [Augeas.AgsViewTemplate],
+                objectMatches: function(resource) {
+                    return !(typeof resource === 'object') || !!resource['@value'];
+                }
+            });
+        
+        
+        
+        }());
+    </script>
+</dom-module>

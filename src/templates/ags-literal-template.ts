@@ -1,12 +1,9 @@
-import {AgsViewTemplate} from "../view-template-registry";
+import "link!../behaviors/AgsViewTemplate.html";
+import {behavior} from "twc/annotations/polymer";
 
-@behavior(AgsViewTemplate)
-@extend('template')
-@component('ags-literal-template')
-class AnyLiteralTemplate extends polymer.Base {
+@behavior(Augeas.AgsViewTemplate)
+export class AnyLiteralTemplate {
     objectMatches(resource) {
         return !(typeof resource === 'object') || !! resource['@value'];
     }
 }
-
-AnyLiteralTemplate.register();

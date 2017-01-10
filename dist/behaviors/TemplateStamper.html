@@ -1,0 +1,19 @@
+<script>
+  (function (augeas) {
+
+    /** @polymerBehavior Augeas.TemplateStamper */
+    augeas.TemplateStamper = {
+      getStamped: function (objectView, template, object) {
+        this.templatize(template);
+
+        if (template.compactWith) {
+          return jsonld.compact(object, template.compactWith)
+            .then(compacted => stamp.call(this, objectView, template, compacted));
+        } else {
+          return Promise.resolve(stamp.call(this, objectView, template, object));
+        }
+      }
+    };
+
+  })(window.Augeas || (window.Augeas = {}));
+</script>

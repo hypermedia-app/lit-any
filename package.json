@@ -3,33 +3,17 @@
   "directories": {
     "test": "tests"
   },
+  "main": "augeas.html",
   "scripts": {
-    "install": "npm install -g web-component-tester wct-local wct-sauce bower typings typescript jspm vulcanize",
+    "install": "npm install -g web-component-tester wct-local wct-sauce bower typings",
     "test": "wct --plugin sauce",
     "test-local": "wct -l chrome -p --skip-selenium-install",
-    "build": "npm run build-bower && npm run build-jspm",
-    "build-bower": "jspm bundle-sfx src/augeas - jsonld dist/bower/build.js --global-name augeas --format global --globals \"{'jsonld': 'jsonld'}\"",
-    "build-jspm": "jspm bundle src/augeas - jsonld dist/jspm/build.js"
+    "build": "twc --out-dir dist  "
   },
-  "jspm": {
-    "main": "augeas.js",
-    "format": "es6",
-    "directories": {
-      "test": "tests"
-    },
-    "dependencies": {
-      "jsonld": "npm:jsonld@^0.4.11",
-      "wikibus/heracles": "github:wikibus/heracles@^0.1.0"
-    },
-    "devDependencies": {
-      "html": "github:Hypercubed/systemjs-plugin-html@^0.0.8",
-      "typescript": "npm:typescript@^1.6.2"
-    }
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
   },
-  "local-web-server": {
-    "rewrite": [
-      { "from": "/polymer/*", "to": "/bower_components/polymer/$1" },
-      { "from": "/polymer-ts/*", "to": "/bower_components/polymer-ts/$1" }
-    ]
+  "devDependencies": {
+    "twc": "^0.1.9"
   }
 }

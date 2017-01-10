@@ -1,4 +1,4 @@
-import {AgsViewTemplate} from '../../src/view-template-registry.ts';
+import {AgsViewTemplate} from '../../dist/behaviors/view-template-registry.ts';
 import {AgsFormTemplate} from '../../src/form-template-registry.ts';
 
 @component('test-view-template')

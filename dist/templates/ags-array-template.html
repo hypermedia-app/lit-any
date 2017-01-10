@@ -1,0 +1,19 @@
+<link rel="import" href="../behaviors/AgsViewTemplate.html">
+<dom-module id="ags-array-template">
+    <script>
+        (function() {
+            "use strict";
+        
+            var AgsArrayTemplate = Polymer({
+                is: "ags-array-template",
+                behaviors: [Augeas.AgsViewTemplate],
+                objectMatches: function(res) {
+                    return Array.isArray(res);
+                }
+            });
+        
+        
+        
+        }());
+    </script>
+</dom-module>

@@ -1,8 +1,9 @@
+import 'link!../behaviors/AgsFieldStamper.html';
 export declare class AgsField {
     'property': String;
     range: String;
     value: any;
-    noTemplateFound: Boolean;
+    readonly noTemplateFound: Boolean;
     required: Boolean;
     ready(): void;
     _valueChanged(newValue: any): void;

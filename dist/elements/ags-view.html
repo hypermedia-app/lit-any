@@ -1,3 +1,4 @@
+<link rel="import" href="../behaviors/RegisteredTemplateConsumer.html">
 <dom-module id="ags-view">
     <template>
         <style>
@@ -32,6 +33,7 @@
                     hasBeenRendered: {
                         type: Boolean,
                         value: false,
+                        readOnly: true,
                         notify: true
                     },
                     params: {
@@ -42,7 +44,7 @@
                     }
                 },
                 observers: ["_draw(object, predicate, templateScope, ignoreMissing, params)"],
-                behaviors: [view_template_registry_1.RegisteredTemplateConsumer],
+                behaviors: [Augeas.RegisteredTemplateConsumer],
                 attached: function() {
                     var _this = this;
                     document.addEventListener('ags-templates', (function() {

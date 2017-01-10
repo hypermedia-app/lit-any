@@ -1,0 +1,11 @@
+<link rel="import" href="TemplateStamper.html" />
+<link rel="import" href="TemplateRegistry.html" />
+
+<script>
+  (function (augeas) {
+
+    /** @polymerBehavior Augeas.RegisteredTemplateConsumer */
+    augeas.RegisteredTemplateConsumer = [Polymer.Templatizer, Augeas.TemplateStamper, Augeas.TemplateRegistryAccess];
+
+  })(window.Augeas || (window.Augeas = {}));
+</script>

@@ -1,11 +1,9 @@
-import {AgsViewTemplate} from '../view-template-registry';
+import "link!../behaviors/AgsViewTemplate.html";
+import {behavior} from "twc/annotations/polymer";
 
-@component('ags-type-template')
-@behavior(AgsViewTemplate)
-@extend('template')
-class TypeTemplate {
+@behavior(Augeas.AgsViewTemplate)
+export class AgsTypeTemplate {
 
-    @property()
     type: String;
 
     objectMatches(res) {

@@ -1,6 +1,7 @@
-import {AgsFieldStamper} from '../form-template-registry';
+import 'link!../behaviors/AgsFieldStamper.html';
+import {notify, behavior, template, observe} from "twc/annotations/polymer";
 
-@behavior(AgsFieldStamper)
+@behavior(Augeas.AgsFieldStamper)
 @template('ags-field.html')
 export class AgsField {
 
@@ -11,8 +12,7 @@ export class AgsField {
     @notify
     value:any = null;
 
-    @readOnly
-    noTemplateFound:Boolean;
+    readonly noTemplateFound:Boolean;
 
     required:Boolean = false;
 
