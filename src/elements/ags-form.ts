@@ -21,7 +21,7 @@ export class AgsForm {
     _fieldValueChanged(e) {
         if(!e.detail.value) return;
 
-        var value = this.value || {};
+        const value = this.value || {};
 
         value[e.model.item.property] = [{
             '@value': e.detail.value

@@ -4,8 +4,6 @@ import {behavior} from "twc/annotations/polymer";
 @behavior(Augeas.AgsViewTemplate)
 export class AnyObjectTemplate {
     objectMatches(resource) {
-        var isObject = typeof resource === 'object' && !!resource['@id'];
-
-        return isObject;
+        return typeof resource === 'object' && !!resource['@id'];
     }
 }

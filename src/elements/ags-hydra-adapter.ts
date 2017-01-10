@@ -9,7 +9,7 @@ export class AgsHydraAdapter {
     //@notify
     @computed
     contract(operation: IOperation): IContract {
-        var contract: IContract = <IContract>{};
+        const contract: IContract = <IContract>{};
 
         contract.title = operation.title;
         contract.description = operation.description;
@@ -22,7 +22,7 @@ export class AgsHydraAdapter {
 }
 
 function transformSupportedProperty(prop: ISupportedProperty): IFieldContract {
-    var fieldContract = <IFieldContract>{};
+    const fieldContract = <IFieldContract>{};
 
     fieldContract.property = prop.property.id;
     fieldContract.range = prop.property.range.id;

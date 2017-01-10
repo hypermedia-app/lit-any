@@ -8,9 +8,9 @@ import {notify, behavior, style, observe} from "twc/annotations/polymer";
 @behavior(Augeas.RegisteredTemplateConsumer)
 export class AgsView {
 
-    object:Object;
+    object: Object;
 
-    predicate:String = null;
+    predicate: String = null;
 
     templateScope: String = '';
 
@@ -23,8 +23,9 @@ export class AgsView {
 
     connectedCallback() {
         document.addEventListener('ags-templates', (() => {
-            if(this.object)
+            if (this.object) {
                 this._draw(this.object, this.predicate, this.templateScope, this.ignoreMissing, this.params);
+            }
         }).bind(this));
     }
 

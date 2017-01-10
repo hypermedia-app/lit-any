@@ -32,17 +32,17 @@ export class AgsField {
     @observe('property,range')
     _draw(property, range) {
         this.async(() => {
-            var templates = this._getTemplates('form') || [];
-            var found = false;
-            var elementRoot = Polymer.dom(this.$.dynamicField);
+            const templates = this._getTemplates('form') || [];
+            let found = false;
+            const elementRoot = Polymer.dom(this.$.dynamicField);
 
             while (elementRoot.firstChild) {
                 elementRoot.removeChild(elementRoot.firstChild);
             }
 
-            for (var i = templates.length - 1; i >= 0; i--) {
+            for (let i = templates.length - 1; i >= 0; i--) {
 
-                var template = templates[i];
+                const template = templates[i];
 
                 if (!template.isMatch || !template.isMatch(property, range)) continue;
 
