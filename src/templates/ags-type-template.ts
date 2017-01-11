@@ -1,6 +1,9 @@
 import "link!../behaviors/AgsViewTemplate.html";
 import {behavior} from "twc/annotations/polymer";
 
+/**
+ * Uber element
+ */
 @behavior(Augeas.AgsViewTemplate)
 export class AgsTypeTemplate {
 

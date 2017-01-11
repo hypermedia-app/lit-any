@@ -8,8 +8,7 @@
                 is: "any-object-template",
                 behaviors: [Augeas.AgsViewTemplate],
                 objectMatches: function(resource) {
-                    var isObject = typeof resource === 'object' && !!resource['@id'];
-                    return isObject;
+                    return typeof resource === 'object' && !!resource['@id'];
                 }
             });
         
