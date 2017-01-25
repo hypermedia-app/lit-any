@@ -6,7 +6,8 @@
     <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
-    <link rel="import" href="../augeas.html"/>
+    <script src="_TestHelpers.js"></script>
+    <link rel="import" href="../dist/elements/ags-hydra-adapter.html"/>
 </head>
 <body>
 
@@ -119,16 +120,13 @@
                     ]
                 }
             };
-            adapter.addEventListener('contract-changed', changeCallback);
+
+            testHandler(adapter, 'contract-changed', function() {
+                done();
+            });
 
             // when
             adapter.operation = operation;
-
-            // then
-            function changeCallback() {
-                adapter.removeEventListener('contract-changed', changeCallback);
-                done();
-            }
         });
 
         it('should copy operation title and description', function () {

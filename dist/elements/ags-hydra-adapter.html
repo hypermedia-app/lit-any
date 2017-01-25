@@ -1,8 +1,10 @@
+<link rel="import" href="../../../polymer/polymer.html">
+
 <dom-module id="ags-hydra-adapter">
     <script>
         (function() {
             "use strict";
-        
+
             var AgsHydraAdapter = Polymer({
                 is: "ags-hydra-adapter",
                 properties: {
@@ -10,6 +12,7 @@
                         type: Object
                     },
                     contract: {
+                        notify: true,
                         type: Object,
                         computed: "_computeContract(operation)"
                     }
@@ -26,8 +29,7 @@
                     return contract;
                 }
             });
-        
-        
+
             function transformSupportedProperty(prop) {
                 var fieldContract = {};
                 fieldContract.property = prop.property.id;
@@ -37,7 +39,8 @@
                 fieldContract.description = prop.description;
                 return fieldContract;
             }
-        
+
         }());
+
     </script>
 </dom-module>
