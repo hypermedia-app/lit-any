@@ -16,7 +16,7 @@
        * @returns {*} ags-template
        * @private
        */
-      _getTemplates(kind) {
+      _getTemplates: function(kind) {
         var filter = Array.prototype.filter;
         return filter.call(document.querySelectorAll('body /deep/ [ags-template]'), function (template) {
           return template._kind() === kind && template.isMatch && typeof template.isMatch === 'function';
