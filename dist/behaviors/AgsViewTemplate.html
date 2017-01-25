@@ -4,31 +4,49 @@
 
   (function (augeas){
 
-    /** @polymerBehavior Augeas.AgsViewTemplate */
+    /**
+     *
+     * @polymerBehavior Augeas.AgsViewTemplate */
     var agsViewTemplate = {
       properties: {
+        /**
+         * The name of variable which will be available for binding with the template
+         */
         as: {
           type: String,
           value: 'model'
         },
+        /**
+         * If not null, it will be used as `@contect` in JSON-LD API to compact the object before
+         * binding with the rendered template
+         */
         compactWith: {
           type: Object,
           value: null
         },
         name: {
-          type: String,
-          value: ''
+          type: String
         },
+        /**
+         * If truthy, it constrains the values its `<template>` will render to only those
+         * that are values of specific properties (predicates)
+         */
         predicate: {
-          type: String,
-          value: null
+          type: String
         },
+        /**
+         * If truthy, it constraints the applicable usage of this element to only `<ags-view>` instances
+         * with matching scope property.
+         */
         scope: {
-          type: String,
-          value: ''
+          type: String
         },
       },
 
+      /**
+       * Determines whether the provided `object`, `predicate` and `scope` allow the `object`
+       * to be rendered by this instance's template.
+       */
       isMatch: function(object, predicate, scope) {
         var objectMatches, predicateMatches, isScopeMatch;
 
@@ -39,13 +57,27 @@
         return objectMatches && predicateMatches && isScopeMatch;
       },
 
+      /**
+       * Determines whether the object can be displayed by this instance's template
+       *
+       * @param object
+       * @returns {boolean}
+       */
       objectMatches: function(object) {
         return true;
       },
 
+      /**
+       * Determines whether this predicate (property) can be displayed by this instance's template.
+       *
+       * In other words, it checks whether objects attached to that property can be displayed
+       *
+       * @param predicate
+       * @returns {boolean}
+       */
       predicateMatches: function(predicate) {
-        if(this.predicate){
-          return this.predicate == predicate;
+        if(this.predicate) {
+          return this.predicate === predicate;
         }
 
         return true;

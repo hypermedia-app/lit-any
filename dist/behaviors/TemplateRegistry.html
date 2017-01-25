@@ -3,9 +3,19 @@
 <script>
   (function (augeas) {
 
-    /** @polymerBehavior Augeas.TemplateRegistry */
+    /**
+     * Provides access to instances of `<ags-template>` available in the document
+     *
+     * @polymerBehavior Augeas.TemplateRegistry */
     augeas.TemplateRegistry = {
 
+      /**
+       * Gets templates of given `kind`
+       *
+       * @param kind `view` or `form` are supported
+       * @returns {*} ags-template
+       * @private
+       */
       _getTemplates(kind) {
         var filter = Array.prototype.filter;
         return filter.call(document.querySelectorAll('body /deep/ [ags-template]'), function (template) {

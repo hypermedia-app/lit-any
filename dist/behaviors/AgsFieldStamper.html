@@ -3,7 +3,10 @@
 <script>
   (function (augeas) {
 
-    /** @polymerBehavior Augeas.AgsFieldStamper */
+    /**
+     * When mixed into an element, allows stamping of `<ags-templates>`
+     *
+     * @polymerBehavior Augeas.AgsFieldStamper */
     augeas.AgsFieldStamper = [ Polymer.Templatizer, Augeas.TemplateRegistry ];
 
   })(window.Augeas || (window.Augeas = {}));

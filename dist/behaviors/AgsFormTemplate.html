@@ -4,21 +4,33 @@
 
   (function (augeas) {
 
-    /** @polymerBehavior Augeas.AgsFormTemplate */
+    /**
+     * This behavior adds turns an element into a basic form field template which
+     * can be constrained to displaying controls based on field's property and data type (range).
+     *
+     * @polymerBehavior Augeas.AgsFormTemplate */
     var agsFormTemplate = {
       properties: {
+        /**
+         * The property name (key) compatible with the rendered control
+         */
         property: {
           type: String
         },
+        /**
+         * The data type (range) compatible with the rendered control
+         */
         range: {
           type: String
         }
       },
 
-      isMatch: function(property, range) {
-        return false;
-      },
-
+      /**
+       * Returns the string `'form'`. Not intended for hiding in derived elements
+       *
+       * @returns {string}
+       * @private
+       */
       _kind: function () {
         return 'form';
       }
