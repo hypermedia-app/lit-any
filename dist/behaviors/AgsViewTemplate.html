@@ -62,15 +62,6 @@
       return this.scope == scope;
     }
 
-    function stamp(objectView, template, object) {
-      var stampedModel = { };
-      stampedModel[template.as] = object;
-      stampedModel.predicate = this.predicate;
-      stampedModel.params = objectView.params;
-
-      return this.stamp(stampedModel).root;
-    }
-
   })(window.Augeas || (window.Augeas = {}));
 
 </script>

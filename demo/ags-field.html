@@ -1,10 +1,17 @@
 <!doctype html>
 <html>
 <head>
-    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
     <link rel="import" href="../augeas.html" />
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
 </head>
 <body>
     <demo-snippet>
@@ -34,10 +41,12 @@
 
     <demo-snippet>
         <template>
-            <template is="ags-field-property-template"
-                      property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description">
-                <textarea value="{{value::input}}"></textarea>
-            </template>
+            <ags-field-property-template
+                    property="http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description">
+                <template>
+                    <textarea value="{{value::input}}"></textarea>
+                </template>
+            </ags-field-property-template>
 
             <ags-form id="f2"></ags-form>
 

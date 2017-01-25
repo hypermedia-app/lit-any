@@ -2,18 +2,31 @@
   (function (augeas) {
 
     /** @polymerBehavior Augeas.TemplateStamper */
-    augeas.TemplateStamper = {
+    var templateStamper = {
       getStamped: function (objectView, template, object) {
         this.templatize(template);
 
         if (template.compactWith) {
           return jsonld.compact(object, template.compactWith)
-            .then(compacted => stamp.call(this, objectView, template, compacted));
+            .then(function(compacted ) {
+              stamp(this, objectView, template, compacted)
+            }.bind(this));
         } else {
-          return Promise.resolve(stamp.call(this, objectView, template, object));
+          return Promise.resolve(stamp(this, objectView, template, object));
         }
       }
     };
+
+    augeas.TemplateStamper = [ Polymer.Templatizer, templateStamper ];
+
+    function stamp(templatizer, objectView, template, object) {
+      var stampedModel = { };
+      stampedModel[template.as] = object;
+      stampedModel.predicate = this.predicate;
+      stampedModel.params = objectView.params;
+
+      return templatizer.stamp(stampedModel).root;
+    }
 
   })(window.Augeas || (window.Augeas = {}));
 </script>

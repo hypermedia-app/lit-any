@@ -1,17 +1,15 @@
 <link rel="import" href="../behaviors/RegisteredTemplateConsumer.html">
+
 <dom-module id="ags-view">
-    <template>
-        <style>
-            :host {
-                        display: block;
-                        @apply(--object-view);
-                    }
-        </style>
-    </template>
+    <template><style>:host {
+            display: block;
+            @apply(--object-view);
+        }</style>
+</template>
     <script>
         (function() {
             "use strict";
-        
+
             var AgsView = Polymer({
                 is: "ags-view",
                 properties: {
@@ -48,8 +46,9 @@
                 attached: function() {
                     var _this = this;
                     document.addEventListener('ags-templates', (function() {
-                        if (_this.object)
+                        if (_this.object) {
                             _this._draw(_this.object, _this.predicate, _this.templateScope, _this.ignoreMissing, _this.params);
+                        }
                     }).bind(this));
                 },
                 _draw: function(object, predicate, templateScope, ignoreMissing, params) {
@@ -62,6 +61,8 @@
                     }
                     for (var i = 0; i < templates.length; i++) {
                         var template = templates[i];
+                        if (!template.template)
+                            continue;
                         if (!template.isMatch)
                             continue;
                         if (!template.isMatch(object, predicate, templateScope))
@@ -70,7 +71,7 @@
                         if (template.name) {
                             this.setAttribute('data-template', template.name);
                         }
-                        this.getStamped(this, template, object)
+                        this.getStamped(this, template.template, object)
                             .then(function(stamped) {
                                 return replaceContent.call(_this, elementRoot, stamped);
                             });
@@ -84,13 +85,13 @@
                     }
                 }
             });
-        
-        
+
             function replaceContent(elementRoot, newContent) {
                 elementRoot.appendChild(newContent);
                 this._setHasBeenRendered(true);
             }
-        
+
         }());
+
     </script>
 </dom-module>

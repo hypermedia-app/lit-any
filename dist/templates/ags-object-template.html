@@ -1,11 +1,11 @@
 <link rel="import" href="../behaviors/AgsViewTemplate.html">
-<dom-module id="any-object-template">
+<dom-module id="ags-object-template">
     <script>
         (function() {
             "use strict";
         
-            var AnyObjectTemplate = Polymer({
-                is: "any-object-template",
+            var AgsObjectTemplate = Polymer({
+                is: "ags-object-template",
                 behaviors: [Augeas.AgsViewTemplate],
                 objectMatches: function(resource) {
                     return typeof resource === 'object' && !!resource['@id'];

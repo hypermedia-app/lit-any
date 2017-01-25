@@ -3,12 +3,13 @@
 <script>
   (function (augeas) {
 
-    /** @polymerBehavior Augeas.TemplateRegistryAccess */
-    augeas.TemplateRegistryAccess = {
+    /** @polymerBehavior Augeas.TemplateRegistry */
+    augeas.TemplateRegistry = {
+
       _getTemplates(kind) {
         var filter = Array.prototype.filter;
-        return filter.call(document.querySelectorAll('body /deep/ template'), function (template) {
-          return template.kind === kind && template.isMatch && typeof template.isMatch === 'function';
+        return filter.call(document.querySelectorAll('body /deep/ [ags-template]'), function (template) {
+          return template._kind() === kind && template.isMatch && typeof template.isMatch === 'function';
         });
       }
     };

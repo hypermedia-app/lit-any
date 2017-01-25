@@ -1,4 +1,4 @@
-<link rel="import" href="../../../polymer/polymer.html">
+<link rel="import" href="TemplateRegistry.html">
 
 <script>
 
@@ -7,11 +7,25 @@
     /** @polymerBehavior Augeas.AgsTemplate */
     augeas.AgsTemplate = {
 
-      attached: function() {
-        this.fire(`ags-${this._kind()}-templates-changed`, { }, { bubbles: true });
+      properties: {
+        template: {
+          readOnly: true,
+          value: function() {
+            return this.$$('template');
+          }
+        }
       },
+
+      ready: function() {
+        this.setAttribute('ags-template', '');
+      },
+
+      attached: function() {
+        this.fire('ags-' + this._kind() + '-templates-changed', { }, { bubbles: true });
+      },
+
       detached: function() {
-        document.dispatchEvent(new CustomEvent(`ags-${this._kind()}-templates-changed`));
+        document.dispatchEvent(new CustomEvent('ags-' + this._kind() + '-templates-changed'));
       },
 
       _kind: function () {

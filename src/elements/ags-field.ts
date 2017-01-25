@@ -1,6 +1,10 @@
 import 'link!../behaviors/AgsFieldStamper.html';
 import {notify, behavior, template, observe} from "twc/annotations/polymer";
 
+/**
+ * @demo demo/ags-field.html
+ */
+
 @behavior(Augeas.AgsFieldStamper)
 @template('ags-field.html')
 export class AgsField {
@@ -44,11 +48,11 @@ export class AgsField {
 
                 const template = templates[i];
 
-                if (!template.isMatch || !template.isMatch(property, range)) continue;
+                if (!template.template || !template.isMatch || !template.isMatch(property, range)) continue;
 
                 found = true;
 
-                this.templatize(template);
+                this.templatize(template.template);
                 this._stampedTemplate = this.stamp({
                     value: this.value
                 });

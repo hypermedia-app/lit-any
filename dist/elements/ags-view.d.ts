@@ -1,4 +1,7 @@
 import "link!../behaviors/RegisteredTemplateConsumer.html";
+/**
+ *
+ */
 export declare class AgsView {
     object: Object;
     predicate: String;

@@ -1,6 +1,10 @@
 import "link!../behaviors/RegisteredTemplateConsumer.html";
 import {notify, behavior, style, observe} from "twc/annotations/polymer";
 
+/**
+ *
+ */
+
 @style(`:host {
             display: block;
             @apply(--object-view);
@@ -42,6 +46,8 @@ export class AgsView {
         for (var i = 0; i < templates.length; i++) {
             var template = templates[i];
 
+            if (!template.template) continue;
+
             if (!template.isMatch) continue;
 
             if (!template.isMatch(object, predicate, templateScope)) continue;
@@ -52,7 +58,7 @@ export class AgsView {
                 this.setAttribute('data-template', template.name);
             }
 
-            this.getStamped(this, template, object)
+            this.getStamped(this, template.template, object)
                 .then(stamped => replaceContent.call(this, elementRoot, stamped));
 
             break;

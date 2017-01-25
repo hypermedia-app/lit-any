@@ -2,24 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ags-object-template tests</title>
+    <title>ags-view tests</title>
     <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
-    <link rel="import" href="../augeas.html"/>
+    <link rel="import" href="../dist/templates/ags-object-template.html"/>
+    <link rel="import" href="../dist/elements/ags-view.html"/>
     <link rel="import" href="test-elements/contains-templates.html"/>
 </head>
 <body>
 
 <test-fixture id="multiple-matching-templates">
     <template>
-        <template is="ags-object-template" id="first">
-            <span>I'm first</span>
-        </template>
+        <ags-object-template id="first">
+            <template>
+                <span>I'm first</span>
+            </template>
+        </ags-object-template>
 
-        <template is="ags-object-template">
-            <span>I'm second</span>
-        </template>
+        <ags-object-template>
+            <template>
+                <span>I'm second</span>
+            </template>
+        </ags-object-template>
 
         <ags-view></ags-view>
     </template>
@@ -27,9 +32,11 @@
 
 <test-fixture id="view-with-params">
     <template>
-        <template is="ags-object-template">
-            <span>[[params.value]]</span>
-        </template>
+        <ags-object-template>
+            <template>
+                <span>[[params.value]]</span>
+            </template>
+        </ags-object-template>
 
         <ags-view params='{ "value": "some text" }'></ags-view>
     </template>
@@ -87,7 +94,6 @@
             });
 
             it('should pass params to template', function (done) {
-                debugger;
                 view.object = {'@id': '_:test'};
 
                 flush(function () {
