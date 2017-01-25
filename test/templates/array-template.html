@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>ags-array-template tests</title>
-    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="../../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
-    <link rel="import" href="../augeas.html" />
+    <link rel="import" href="../../dist/templates/ags-array-template.html" />
 </head>
 <body>
-    <template id="test-subject" is="ags-array-template">
-        <div>[[model.length]]</div>
-    </template>
+    <ags-array-template id="test-subject">
+        <template>
+            <div>[[model.length]]</div>
+        </template>
+    </ags-array-template>
 
     <script>
 
