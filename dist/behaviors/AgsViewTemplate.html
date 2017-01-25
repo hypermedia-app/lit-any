@@ -1,9 +1,11 @@
+<link rel="import" href="AgsTemplate.html">
+
 <script>
 
   (function (augeas){
 
     /** @polymerBehavior Augeas.AgsViewTemplate */
-    augeas.AgsViewTemplate = {
+    var agsViewTemplate = {
       properties: {
         as: {
           type: String,
@@ -25,18 +27,6 @@
           type: String,
           value: ''
         },
-        kind: {
-          readOnly: true,
-          value: 'view'
-        }
-      },
-
-      attached: function() {
-        this.fire('ags-view-templates-changed', { }, { bubbles: true });
-      },
-
-      detached: function() {
-        document.dispatchEvent(new CustomEvent('ags-view-templates-changed'));
       },
 
       isMatch: function(object, predicate, scope) {
@@ -59,8 +49,14 @@
         }
 
         return true;
+      },
+
+      _kind: function () {
+        return 'view';
       }
     };
+
+    augeas.AgsViewTemplate = [ augeas.AgsTemplate, agsViewTemplate ];
 
     function scopeMatches(scope) {
       return this.scope == scope;

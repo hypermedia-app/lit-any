@@ -2,6 +2,17 @@
 <link rel="import" href="../../dist/behaviors/AgsViewTemplate.html" >
 
 <script>
+
+  Polymer({
+    is: 'ags-test-template',
+    behaviors: [
+      Augeas.AgsTemplate
+    ],
+    _kind: function() {
+      return 'test';
+    }
+  });
+
   Polymer({
     is: 'test-view-template',
     behaviors: [

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgsViewTemplate tests</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="../../bower_components/web-component-tester/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
+    <script src="../_TestHelpers.js"></script>
+    <link rel="import" href="../test-elements/test-templates.html" />
+</head>
+<body>
+
+    <test-view-template id="defaults">
+    </test-view-template>
+
+    <test-view-template id="with-scope" scope="some scope"></test-view-template>
+    <test-view-template id="to-remove"></test-view-template>
+
+    <test-fixture id="dynamic">
+        <template>
+            <test-view-template></test-view-template>
+        </template>
+    </test-fixture>
+
+    <script>
+
+        var subject;
+        describe('AgsViewTemplate', function () {
+
+            describe('defaults', function () {
+
+                before(function () {
+                    subject = document.getElementById('defaults');
+                });
+
+                describe('as property', function () {
+
+                    it('should equal "model"', function () {
+
+                        assert.equal(subject.as, 'model');
+                    });
+
+                });
+
+                describe('name property', function () {
+
+                    it('should be empty string', function () {
+
+                        assert.equal(subject.name, '');
+                    });
+
+                });
+
+                describe('scope property', function () {
+
+                    it('should be empty string', function () {
+
+                        assert.equal(subject.scope, '');
+                    });
+
+                });
+
+                describe('compactWith property', function () {
+
+                    it('should be null', function () {
+
+                        assert.equal(subject.compactWith, null);
+                    });
+
+                });
+
+                describe('predicate property', function () {
+
+                    it('should be null', function () {
+
+                        assert.equal(subject.predicate, null);
+                    });
+
+                });
+
+            });
+
+            describe('adding to DOM', function () {
+
+                it('raises an event', function (done) {
+
+                    testHandler(document, 'ags-view-templates-changed', function(){
+                        done();
+                    });
+
+                    fixture('dynamic');
+                });
+
+            });
+
+            describe('removing from DOM', function () {
+
+                it('raises an event', function (done) {
+
+                    testHandler(document, 'ags-view-templates-changed', function(){
+                        done();
+                    });
+
+                    var node = document.getElementById('to-remove');
+
+                    document.body.removeChild(node);
+                });
+
+            });
+
+            describe('isMatch method', function() {
+
+                it('matches when scope matches', function() {
+
+                    subject = document.getElementById('with-scope');
+
+                    var isMatch = subject.isMatch({}, null, 'some scope');
+
+                    assert.equal(isMatch, true);
+
+                });
+
+                it('doesn\'t match when predicate is provided and not set on template', function() {
+
+                    subject = document.getElementById('defaults');
+
+                    var isMatch = subject.isMatch({}, 'some predicate');
+
+                    assert.equal(isMatch, false);
+
+                });
+
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,4 +1,7 @@
 import 'link!../behaviors/AgsFieldStamper.html';
+/**
+ * @demo demo/ags-field.html
+ */
 export declare class AgsField {
     'property': String;
     range: String;

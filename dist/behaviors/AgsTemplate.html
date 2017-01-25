@@ -1,0 +1,23 @@
+<link rel="import" href="../../../polymer/polymer.html">
+
+<script>
+
+  (function (augeas) {
+
+    /** @polymerBehavior Augeas.AgsTemplate */
+    augeas.AgsTemplate = {
+
+      attached: function() {
+        this.fire(`ags-${this._kind()}-templates-changed`, { }, { bubbles: true });
+      },
+      detached: function() {
+        document.dispatchEvent(new CustomEvent(`ags-${this._kind()}-templates-changed`));
+      },
+
+      _kind: function () {
+        throw Error('ags-template element must implement private method _kind()');
+      },
+    };
+
+  })(window.Augeas || (window.Augeas = {}));
+</script>

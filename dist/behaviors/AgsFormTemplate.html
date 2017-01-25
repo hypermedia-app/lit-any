@@ -1,34 +1,30 @@
+<link rel="import" href="AgsTemplate.html">
+
 <script>
 
   (function (augeas) {
 
     /** @polymerBehavior Augeas.AgsFormTemplate */
-    augeas.AgsFormTemplate = {
+    var agsFormTemplate = {
       properties: {
         property: {
           type: String
         },
         range: {
           type: String
-        },
-        kind: {
-          readOnly: true,
-          value: 'form'
         }
-      },
-
-      attached: function() {
-        this.fire('ags-form-templates-changed', { }, { bubbles: true });
-      },
-
-      detached: function() {
-        document.dispatchEvent(new CustomEvent('ags-form-templates-changed'));
       },
 
       isMatch: function(property, range) {
         return false;
+      },
+
+      _kind: function () {
+        return 'form';
       }
     };
+
+    augeas.AgsFormTemplate = [ augeas.AgsTemplate, agsFormTemplate ];
 
   })(window.Augeas || (window.Augeas = {}));
 </script>

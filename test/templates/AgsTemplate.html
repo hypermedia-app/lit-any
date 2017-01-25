@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>RegisteredTemplate tests</title>
-    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="../../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
-    <script src="_TestHelpers.js"></script>
-    <link rel="import" href="test-elements/test-templates.html"/>
+    <script src="../_TestHelpers.js"></script>
+    <link rel="import" href="../test-elements/test-templates.html"/>
 </head>
 <body>
 
-<test-form-template id="to-remove"></test-form-template>
+<ags-test-template id="to-remove"></ags-test-template>
 
-<test-fixture id="test-form-template">
+<test-fixture id="created-template">
     <template>
-        <test-form-template></test-form-template>
+        <ags-test-template></ags-test-template>
     </template>
 </test-fixture>
 
@@ -27,11 +27,11 @@
 
             it('raises an event', function (done) {
 
-                testHandler(document, 'ags-form-templates-changed', function() {
+                testHandler(document, 'ags-test-templates-changed', function() {
                     done();
                 });
 
-                fixture('test-form-template');
+                fixture('created-template');
             });
 
         });
@@ -40,7 +40,7 @@
 
             it('raises an event', function (done) {
 
-                testHandler(document, 'ags-form-templates-changed', function() {
+                testHandler(document, 'ags-test-templates-changed', function() {
                     done();
                 });
 
