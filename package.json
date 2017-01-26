@@ -10,9 +10,7 @@
     "test-local": "wct -l chrome -p --skip-selenium-install",
     "build": "twc --out-dir dist  "
   },
-  "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "twc": "^0.1.9"
   }
