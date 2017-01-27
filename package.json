@@ -1,16 +1,13 @@
 {
-  "version": "0.1.2",
   "directories": {
     "test": "tests"
   },
-  "main": "augeas.html",
   "scripts": {
     "install": "npm install -g web-component-tester wct-local wct-sauce bower typings",
     "test": "wct --plugin sauce",
     "test-local": "wct -l chrome -p --skip-selenium-install",
     "build": "twc --out-dir dist  "
   },
-  "dependencies": {},
   "devDependencies": {
     "twc": "^0.1.9"
   }
