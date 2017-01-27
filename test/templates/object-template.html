@@ -24,6 +24,15 @@
 
         describe('objectMatches', function () {
 
+            describe('compactWith property', function () {
+
+              it('should be null', function () {
+
+                assert.equal(subject.compactWith, null);
+              });
+
+            });
+
             it('should match JSON-LD object', function () {
                 var result = subject.objectMatches({
                     '@id': '_:b10'

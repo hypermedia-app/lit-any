@@ -5,6 +5,7 @@
   (function (augeas){
 
     /**
+     * This behavior turns an element into a template used to render read-only views of provided objects
      *
      * @polymerBehavior Augeas.AgsViewTemplate */
     var agsViewTemplate = {
@@ -17,29 +18,28 @@
           value: 'model'
         },
         /**
-         * If not null, it will be used as `@contect` in JSON-LD API to compact the object before
-         * binding with the rendered template
+         * If truthy, the name is set as attribute on the instance of an `<ags-view>`
+         * when this template is used to render the object
          */
-        compactWith: {
-          type: Object,
-          value: null
-        },
         name: {
-          type: String
+          type: String,
+          value: ''
         },
         /**
          * If truthy, it constrains the values its `<template>` will render to only those
          * that are values of specific properties (predicates)
          */
         predicate: {
-          type: String
+          type: String,
+          value: null
         },
         /**
          * If truthy, it constraints the applicable usage of this element to only `<ags-view>` instances
          * with matching scope property.
          */
         scope: {
-          type: String
+          type: String,
+          value: ''
         },
       },
 

@@ -1,4 +1,8 @@
 {
+  "suites": [
+    "test/templates/*.html",
+    "test/elements/*.html"
+  ],
   "plugins": {
     "sauce": {
       "disabled": true,

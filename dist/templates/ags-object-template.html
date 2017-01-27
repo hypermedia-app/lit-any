@@ -1,19 +1,32 @@
 <link rel="import" href="../behaviors/AgsViewTemplate.html">
+
 <dom-module id="ags-object-template">
     <script>
         (function() {
             "use strict";
-        
+
             var AgsObjectTemplate = Polymer({
                 is: "ags-object-template",
+                properties: {
+                    /**
+                     * If truthy, it will be used as `@context` in JSON-LD API to compact the object before
+                     * binding with the rendered template
+                     */
+                    compactWith: {
+                        type: Object,
+                        value: null
+                    }
+                },
                 behaviors: [Augeas.AgsViewTemplate],
+                /**
+                 * Returns true if the value is a JS object and contains and `@id`
+                 */
                 objectMatches: function(resource) {
                     return typeof resource === 'object' && !!resource['@id'];
                 }
             });
-        
-        
-        
+
         }());
+
     </script>
 </dom-module>
