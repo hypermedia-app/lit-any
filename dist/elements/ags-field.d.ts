@@ -3,7 +3,7 @@ import 'link!../behaviors/AgsFieldStamper.html';
  * @demo demo/ags-field.html
  */
 export declare class AgsField {
-    'property': String;
+    property: String;
     range: String;
     value: any;
     readonly noTemplateFound: Boolean;

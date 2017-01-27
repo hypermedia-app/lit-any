@@ -6,7 +6,7 @@
     <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="../../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
-    <link rel="import" href="../../dist/elements/ags-field.html"/>
+    <link rel="import" href="../../augeas.html"/>
     <script src="../_TestHelpers.js"></script>
 </head>
 <body>
@@ -31,9 +31,11 @@
 
 <test-fixture id="field-template-by-property">
     <template is="dom-template">
-        <template is="ags-field-property-template" property="{{templateProperty}}">
-            <textarea value="{{value::input}}"></textarea>
-        </template>
+        <ags-field-property-template property="{{templateProperty}}">
+            <template>
+                <textarea value="{{value::input}}"></textarea>
+            </template>
+        </ags-field-property-template>
 
         <ags-field property="{{fieldProperty}}" range="{{fieldRange}}"></ags-field>
     </template>
@@ -41,11 +43,14 @@
 
 <test-fixture id="field-template-by-range">
     <template is="dom-template">
-        <template is="ags-field-range-template" range="{{templateRange}}">
-            <textarea value="{{value::input}}"></textarea>
-        </template>
 
-        <ags-field property="{{fieldProperty}}" range="{{fieldRange}}"></ags-field>
+        <ags-field-range-template range="{{range}}">
+            <template>
+                <textarea value="{{value::input}}"></textarea>
+            </template>
+        </ags-field-range-template>
+
+        <ags-field property="{{fieldProperty}}" range="{{range}}"></ags-field>
     </template>
 </test-fixture>
 
@@ -53,13 +58,17 @@
     <template>
         <ags-field property="http://some.prop" range="http://www.w3.org/2001/XMLSchema#string"></ags-field>
 
-        <template is="ags-field-range-template" range="http://www.w3.org/2001/XMLSchema#string">
-            <textarea first></textarea>
-        </template>
+        <ags-field-range-template range="http://www.w3.org/2001/XMLSchema#string">
+            <template>
+                <textarea first></textarea>
+            </template>
+        </ags-field-range-template>
 
-        <template is="ags-field-range-template" range="http://www.w3.org/2001/XMLSchema#string">
-            <textarea last></textarea>
-        </template>
+        <ags-field-range-template range="http://www.w3.org/2001/XMLSchema#string">
+            <template>
+                <textarea last></textarea>
+            </template>
+        </ags-field-range-template>
     </template>
 </test-fixture>
 
@@ -67,13 +76,17 @@
     <template>
         <ags-field property="http://www.w3.org/2001/XMLSchema#string"></ags-field>
 
-        <template is="ags-field-property-template" property="http://www.w3.org/2001/XMLSchema#string">
-            <textarea first></textarea>
-        </template>
+        <ags-field-property-template property="http://www.w3.org/2001/XMLSchema#string">
+            <template>
+                <textarea first></textarea>
+            </template>
+        </ags-field-property-template>
 
-        <template is="ags-field-property-template" property="http://www.w3.org/2001/XMLSchema#string">
-            <textarea last></textarea>
-        </template>
+        <ags-field-property-template property="http://www.w3.org/2001/XMLSchema#string">
+            <template>
+                <textarea last></textarea>
+            </template>
+        </ags-field-property-template>
     </template>
 </test-fixture>
 
@@ -148,7 +161,6 @@
 
             it('should render the template', function(done) {
                 flush(function() {
-                  debugger;
                     var textarea = subject.$$('textarea');
 
                     assert.isNotNull(textarea);
@@ -177,8 +189,7 @@
         describe('with template matched by range', function() {
             beforeEach(function(){
                 subject = fixture('field-template-by-range', {
-                    templateRange: 'http://www.w3.org/2001/XMLSchema#string',
-                    fieldRange: 'http://www.w3.org/2001/XMLSchema#string'
+                    range: 'http://www.w3.org/2001/XMLSchema#string'
                 })[1];
             });
 

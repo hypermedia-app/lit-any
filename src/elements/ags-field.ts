@@ -9,7 +9,7 @@ import {notify, behavior, template, observe} from "twc/annotations/polymer";
 @template('ags-field.html')
 export class AgsField {
 
-    'property':String = null;
+    property:String = null;
 
     range:String = null;
 
