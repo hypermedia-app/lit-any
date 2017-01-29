@@ -54,6 +54,30 @@
     </template>
 </test-fixture>
 
+<test-fixture id="default-bound-variable">
+    <template>
+        <ags-object-template>
+            <template>
+                <span>[[model.value]]</span>
+            </template>
+        </ags-object-template>
+
+        <ags-view></ags-view>
+    </template>
+</test-fixture>
+
+<test-fixture id="custom-bound-variable">
+    <template>
+        <ags-object-template as="myVariable">
+            <template>
+                <span>[[myVariable.value]]</span>
+            </template>
+        </ags-object-template>
+
+        <ags-view></ags-view>
+    </template>
+</test-fixture>
+
 <script>
 
     describe('ags-view', function () {
@@ -75,6 +99,42 @@
                 done();
             });
         });
+
+        it('should bind with "model" variable', function(done) {
+            // given
+            view = fixture('default-bound-variable')[1];
+
+            // when
+            view.object = {
+              '@id': 'test',
+              value: 'test'
+            };
+
+            // then
+            flush(function() {
+                var span = view.querySelector('span');
+                assert.equal('test', span.textContent);
+                done();
+            });
+        });
+
+      it('should bind with changed variable', function(done) {
+        // given
+        view = fixture('custom-bound-variable')[1];
+
+        // when
+        view.object = {
+          '@id': 'test',
+          value: 'test'
+        };
+
+        // then
+        flush(function() {
+          var span = view.querySelector('span');
+          assert.equal('test', span.textContent);
+          done();
+        });
+      });
 
         describe('multiple matching templates', function () {
 

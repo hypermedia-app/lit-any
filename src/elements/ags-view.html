@@ -71,7 +71,7 @@
                         if (template.name) {
                             this.setAttribute('data-template', template.name);
                         }
-                        this.getStamped(this, template.template, object)
+                        this.getStamped(this, template, object)
                             .then(function(stamped) {
                                 return replaceContent.call(_this, elementRoot, stamped);
                             })

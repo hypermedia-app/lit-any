@@ -58,7 +58,7 @@ export class AgsView {
                 this.setAttribute('data-template', template.name);
             }
 
-            this.getStamped(this, template.template, object)
+            this.getStamped(this, template, object)
                 .then(stamped => replaceContent.call(this, elementRoot, stamped))
                 .then(_ => notifyStamped(template, object));
 
