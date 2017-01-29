@@ -6,10 +6,23 @@
     <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="../../bower_components/web-component-tester/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/0.4.11/jsonld.min.js"></script>
+    <script src="../_TestHelpers.js"></script>
     <link rel="import" href="../../augeas.html" />
     <link rel="import" href="../test-elements/contains-templates.html"/>
 </head>
 <body>
+
+<test-fixture id="single-template">
+    <template>
+        <ags-object-template>
+            <template>
+                <span>I'm first</span>
+            </template>
+        </ags-object-template>
+
+        <ags-view></ags-view>
+    </template>
+</test-fixture>
 
 <test-fixture id="multiple-matching-templates">
     <template>
@@ -46,6 +59,22 @@
     describe('ags-view', function () {
 
         var view;
+
+        it('should fire stamped event on selected template', function(done) {
+            //given
+            var fixtureElements = fixture('single-template');
+            var template = fixtureElements[0];
+            view = fixtureElements[1];
+
+            // when
+            view.object = {'@id': '_:test'};
+
+            // then
+            testHandler(template, 'stamped', function(e) {
+                assert.equal(e.detail.object, view.object);
+                done();
+            });
+        });
 
         describe('multiple matching templates', function () {
 

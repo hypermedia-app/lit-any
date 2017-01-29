@@ -58,6 +58,8 @@ export class AgsField {
                 });
                 elementRoot.appendChild(this._stampedTemplate.root);
 
+                notifyStamped(template, this.value);
+
                 break;
             }
 
@@ -70,4 +72,12 @@ export class AgsField {
             this.set(path, value);
         }
     }
+}
+
+function notifyStamped(template: HTMLElement, value: any) {
+    template.dispatchEvent(new CustomEvent('stamped', {
+        detail: {
+            value: value
+        }
+    }));
 }

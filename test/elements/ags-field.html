@@ -96,6 +96,21 @@
 
     describe('ags-field', function () {
 
+        it('should fire stamped event on selected template', function(done) {
+            //given
+            var fixtureElements = fixture('field-template-by-property', {
+              templateProperty: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description',
+              fieldProperty: 'http://www.markus-lanthaler.com/hydra/api-demo/vocab#Issue/description'
+            });
+            var template = fixtureElements[0];
+            subject = fixtureElements[1];
+
+            // then
+            testHandler(template, 'stamped', function(e) {
+              done();
+            });
+      });
+
         describe('with property not set', function() {
 
             beforeEach(function(){

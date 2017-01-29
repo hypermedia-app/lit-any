@@ -59,7 +59,8 @@ export class AgsView {
             }
 
             this.getStamped(this, template.template, object)
-                .then(stamped => replaceContent.call(this, elementRoot, stamped));
+                .then(stamped => replaceContent.call(this, elementRoot, stamped))
+                .then(_ => notifyStamped(template, object));
 
             break;
         }
@@ -78,4 +79,12 @@ function replaceContent(elementRoot, newContent) {
     elementRoot.appendChild(newContent);
 
     this._setHasBeenRendered(true);
+}
+
+function notifyStamped(template: HTMLElement, object: any) {
+    template.dispatchEvent(new CustomEvent('stamped', {
+        detail: {
+            object: object
+        }
+    }));
 }

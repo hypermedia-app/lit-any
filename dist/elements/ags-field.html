@@ -74,6 +74,7 @@
                                 value: _this.value
                             });
                             elementRoot.appendChild(_this._stampedTemplate.root);
+                            notifyStamped(template_1, _this.value);
                             break;
                         }
                         _this._setNoTemplateFound(!found);
@@ -85,6 +86,14 @@
                     }
                 }
             });
+
+            function notifyStamped(template, value) {
+                template.dispatchEvent(new CustomEvent('stamped', {
+                    detail: {
+                        value: value
+                    }
+                }));
+            }
 
         }());
 

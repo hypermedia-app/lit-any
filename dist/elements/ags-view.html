@@ -74,6 +74,9 @@
                         this.getStamped(this, template.template, object)
                             .then(function(stamped) {
                                 return replaceContent.call(_this, elementRoot, stamped);
+                            })
+                            .then(function(_) {
+                                return notifyStamped(template, object);
                             });
                         break;
                     }
@@ -89,6 +92,14 @@
             function replaceContent(elementRoot, newContent) {
                 elementRoot.appendChild(newContent);
                 this._setHasBeenRendered(true);
+            }
+
+            function notifyStamped(template, object) {
+                template.dispatchEvent(new CustomEvent('stamped', {
+                    detail: {
+                        object: object
+                    }
+                }));
             }
 
         }());
