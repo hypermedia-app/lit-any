@@ -5,8 +5,17 @@ import {notify, behavior, template, observe} from "twc/annotations/polymer";
  * @demo demo/ags-field.html
  */
 
+@template(`<div id="fallbackField">
+    <template is="dom-if" if="[[property]]">
+        <template is="dom-if" if="[[noTemplateFound]]">
+            <input type="text" value="{{value::input}}" required$="[[required]]"/>
+        </template>
+    </template>
+</div>
+
+<div id="dynamicField"></div>`)
+
 @behavior(Augeas.AgsFieldStamper)
-@template('ags-field.html')
 export class AgsField {
 
     property:String = null;

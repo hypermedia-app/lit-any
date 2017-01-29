@@ -7,7 +7,17 @@ import {notify, template} from "twc/annotations/polymer";
  *
  * @demo ../demo/fp-category-page-demo.html
  */
-@template('ags-form.html')
+
+@template(`<fieldset>
+    <legend hidden$="[[!contract.title]]">[[contract.title]]</legend>
+    <template is="dom-repeat" items="[[contract.body]]">
+        <label>
+            [[item.title]]
+            <ags-field property="[[item.property]]" range="[[item.range]]" required="[[item.required]]" on-value-changed="_fieldValueChanged"></ags-field>
+        </label>
+    </template>
+</fieldset>`)
+
 export class AgsForm {
 
     @notify

@@ -1,9 +1,0 @@
-<fieldset>
-    <legend hidden$="[[!contract.title]]">[[contract.title]]</legend>
-    <template is="dom-repeat" items="[[contract.body]]">
-        <label>
-            [[item.title]]
-            <ags-field property="[[item.property]]" range="[[item.range]]" required="[[item.required]]" on-value-changed="_fieldValueChanged"></ags-field>
-        </label>
-    </template>
-</fieldset>
