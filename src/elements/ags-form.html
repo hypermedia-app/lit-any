@@ -1,25 +1,24 @@
 <link rel="import" href="ags-field.html">
+<!--
+Uber element `<ags-form>`
+
+@demo ../demo/fp-category-page-demo.html
+-->
 <dom-module id="ags-form">
-    <template>
-        <fieldset>
-            <legend hidden$="[[!contract.title]]">[[contract.title]]</legend>
-            <template is="dom-repeat" items="[[contract.body]]">
-                <label>[[item.title]]
-                    <ags-field property="[[item.property]]" range="[[item.range]]"
-                    required="[[item.required]]" on-value-changed="_fieldValueChanged"></ags-field>
-                </label>
-            </template>
-        </fieldset>
+    <template><fieldset>
+    <legend hidden$="[[!contract.title]]">[[contract.title]]</legend>
+    <template is="dom-repeat" items="[[contract.body]]">
+        <label>
+            [[item.title]]
+            <ags-field property="[[item.property]]" range="[[item.range]]" required="[[item.required]]" on-value-changed="_fieldValueChanged"></ags-field>
+        </label>
+    </template>
+    </fieldset>
     </template>
     <script>
         (function() {
             "use strict";
-            /**
-             * Uber element `<ags-form>`
-             *
-             * @demo ../demo/fp-category-page-demo.html
-             */
-        
+
             var AgsForm = Polymer({
                 is: "ags-form",
                 properties: {
@@ -28,6 +27,9 @@
                         value: null,
                         notify: true
                     },
+                    /**
+                     * Whatever
+                     */
                     contract: {
                         type: Object
                     }
@@ -42,9 +44,8 @@
                     this.set('value', value);
                 }
             });
-        
-        
-        
+
         }());
+
     </script>
 </dom-module>

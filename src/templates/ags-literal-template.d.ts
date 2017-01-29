@@ -1,4 +1,4 @@
 import "link!../behaviors/AgsViewTemplate.html";
-export declare class AnyLiteralTemplate {
+export declare class AgsLiteralTemplate {
     objectMatches(resource: any): boolean;
 }

@@ -1,9 +1,10 @@
 <link rel="import" href="../behaviors/AgsFormTemplate.html">
+
 <dom-module id="ags-field-property-template">
     <script>
         (function() {
             "use strict";
-        
+
             var AgsFieldPropertyTemplate = Polymer({
                 is: "ags-field-property-template",
                 behaviors: [Augeas.AgsFormTemplate],
@@ -11,9 +12,8 @@
                     return this.property && this.property == property;
                 }
             });
-        
-        
-        
+
         }());
+
     </script>
 </dom-module>

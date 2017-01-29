@@ -1,11 +1,13 @@
 <link rel="import" href="../behaviors/AgsViewTemplate.html">
-
+<!--
+Uber element
+-->
 <dom-module id="ags-type-template">
     <script>
         (function() {
             "use strict";
 
-            Polymer({
+            var AgsTypeTemplate = Polymer({
                 is: "ags-type-template",
                 properties: {
                     type: {
@@ -27,9 +29,8 @@
                     return res['@type'] === this.type;
                 }
             });
-        
-        
-        
+
         }());
+
     </script>
 </dom-module>
