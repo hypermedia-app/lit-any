@@ -1,4 +1,4 @@
-import 'link!../../../polymer/polymer.html';
+import 'link!../../polymer/polymer.html';
 
 import { IFieldContract, IContract } from '../interfaces';
 import { IOperation, ISupportedProperty } from 'heracles';

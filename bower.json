@@ -1,7 +1,7 @@
 {
   "name": "augeas",
   "description": "Extensible web components for building REST-friendly UI declaratively",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "augeas.html",
   "authors": [
     "tpluscode <tpluscode@users.noreply.github.com>"
