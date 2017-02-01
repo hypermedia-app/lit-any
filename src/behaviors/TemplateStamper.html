@@ -16,10 +16,10 @@
 
         this.templatize(template);
 
-        if (template.compactWith) {
-          return jsonld.compact(object, template.compactWith)
-            .then(function(compacted ) {
-              stamp(this, agsView, agsTemplate, compacted);
+        if (agsTemplate.compactWith) {
+          return jsonld.promises.compact(object, agsTemplate.compactWith)
+            .then(function(compacted) {
+              return stamp(this, agsView, agsTemplate, compacted);
             }.bind(this));
         } else {
           return Promise.resolve(stamp(this, agsView, agsTemplate, object));

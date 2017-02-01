@@ -55,8 +55,8 @@
 </test-fixture>
 
 <test-fixture id="default-bound-variable">
-    <template>
-        <ags-object-template>
+    <template is="dom-template">
+        <ags-object-template compact-with="[[context]]">
             <template>
                 <span>[[model.value]]</span>
             </template>
@@ -116,6 +116,28 @@
                 assert.equal('test', span.textContent);
                 done();
             });
+        });
+
+        it('should compact object when context is provided', function(done) {
+          // given
+          view = fixture('default-bound-variable', {
+            context: {
+              'value': 'http://example.com/test'
+            }
+          })[1];
+
+          // when
+          view.object = {
+            '@id': 'test',
+            'http://example.com/test': 'test'
+          };
+
+          // then
+          flush(function() {
+            var span = view.querySelector('span');
+            assert.equal('test', span.textContent);
+            done();
+          });
         });
 
       it('should bind with changed variable', function(done) {
