@@ -1,7 +1,7 @@
 import '../../src/elements/ags-view';
 import {ViewTemplates} from '../../src/template-registry';
-import {Template} from '../../src/template-registry/template-registry';
-import {html, TemplateResult} from "lit-html";
+import {Template} from '../../src/templates';
+import {html} from "lit-html";
 
 class TestTemplate extends Template {
     template(object) {

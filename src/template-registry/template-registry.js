@@ -1,19 +1,13 @@
 import {TemplateResult} from 'lit-html';
 
-export class Template {
-    get name() {
-        return '';
-    }
-
-    template(object) {}
-
-    matches(object, predicate, scope) {}
-}
-
 export class TemplateRegistry {
 
     constructor() {
         this._templates = [];
+    }
+
+    get count() {
+        return this._templates.length;
     }
 
     getTemplate(object, predicate, scope) {

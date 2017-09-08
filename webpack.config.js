@@ -1,8 +1,12 @@
 const path = require('path');
 const glob_entries = require('webpack-glob-entries');
 
-module.exports = {
-    entry: glob_entries('./test/*.js'),
+const entries = Object.assign({},
+    glob_entries('./test/elements/*.js'),
+    glob_entries('./test/templates/*.js'));
+
+const createConfig = (glob, targetPath) => ({
+    entry: glob_entries(glob),
     module: {
         rules: [
             {
@@ -17,9 +21,14 @@ module.exports = {
         mainFields: ['jsnext:main', 'browser', 'main']
     },
     output: {
-        path: path.resolve(__dirname, 'test/transpiled'),
+        path: path.resolve(__dirname, `test/transpiled/${targetPath}`),
         filename: '[name].es5.js',
         libraryTarget: 'umd'
     },
-    devtool: 'inline'
-};
+    devtool: 'source-map'
+});
+
+module.exports = [
+    createConfig('./test/elements/*.js', 'elements'),
+    createConfig('./test/templates/*.js', 'templates')
+];

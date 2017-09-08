@@ -44,12 +44,14 @@ export class AgsView extends PropertyAccessors(HTMLElement) {
     }
 
     _render() {
+        let template;
+
         if(this.object) {
             if (!this.shadowRoot) {
                 this.attachShadow({mode: 'open'});
             }
 
-            const template = ViewTemplates.getTemplate(this.object, this.predicate, this.templateScope);
+            template = ViewTemplates.getTemplate(this.object, this.predicate, this.templateScope);
             let result;
 
             if (template) {

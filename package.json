@@ -9,10 +9,10 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "webpack && wct --plugin sauce",
-    "test-local": "webpack && wct -l chrome -p --skip-selenium-install",
+    "test": "npm run build-tests && wct --plugin sauce",
+    "test-local": "npm run build-tests && wct -l chrome -p --skip-selenium-install",
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "build-tests": "webpack"
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",

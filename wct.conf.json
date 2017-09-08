@@ -1,6 +1,6 @@
 {
   "suites": [
-    "test/templates/*.html",
+    "test/transpiled/templates/*.js",
     "test/elements/*.html"
   ],
   "plugins": {
