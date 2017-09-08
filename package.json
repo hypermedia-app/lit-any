@@ -1,14 +1,35 @@
 {
+  "main": "dist/augeas.js",
+  "browser": "dist/augeas.browser.js",
+  "config": {
+    "src": "src/index.js",
+    "moduleName": "Augeas"
+  },
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "install": "npm install -g web-component-tester wct-local wct-sauce bower typings",
-    "test": "wct --plugin sauce",
-    "test-local": "wct -l chrome -p --skip-selenium-install",
-    "build": "twc --out-dir dist  "
+    "test": "webpack && wct --plugin sauce",
+    "test-local": "webpack && wct -l chrome -p --skip-selenium-install",
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
   },
   "devDependencies": {
-    "twc": "^0.1.9"
+    "babel-loader": "^7.1.2",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "rollup": "^0.49.2",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-watch": "^4.3.1",
+    "wct-sauce": "^1.8.6",
+    "web-component-tester": "^6.1.5",
+    "webpack": "^3.5.6",
+    "webpack-glob-entries": "^1.0.1"
+  },
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0-pre.1",
+    "lit-html": "^0.6.0"
   }
 }
