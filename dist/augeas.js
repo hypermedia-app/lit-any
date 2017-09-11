@@ -1232,21 +1232,21 @@ const PropertyAccessors = dedupingMixin(superClass => {
 class TemplateRegistry {
 
     constructor() {
-        this._templates = [];
+        this._selectors = [];
     }
 
     getTemplate(object, predicate, scope) {
-        return this._templates.find(template => {
+        return this._selectors.find(template => {
             return template.matches(object, predicate, scope);
         });
     }
 
     push(template) {
-        this._templates.push(template);
+        this._selectors.push(template);
     }
 
     _clear() {
-        this._templates = [];
+        this._selectors = [];
     }
 }
 

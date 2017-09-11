@@ -1,26 +1,19 @@
 import '../../src/elements/ags-view';
 import {ViewTemplates} from '../../src/template-registry';
-import {Template} from '../../src/templates';
 import {html} from "lit-html";
-
-class TestTemplate extends Template {
-    template(object) {
-        return html`<span>${object.value}</span>`;
-    }
-
-    matches(object, predicate, scope) {
-        return true;
-    }
-
-}
 
 describe('ags-view', () => {
 
     let agsView;
+    let getTemplate;
 
     beforeEach(() => {
-        ViewTemplates._clear();
         agsView = document.querySelector('ags-view');
+        getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+    });
+
+    afterEach(() => {
+        getTemplate.restore();
     });
 
     it('should render nothing when object is undefined', (done) => {
@@ -33,7 +26,9 @@ describe('ags-view', () => {
     });
 
     it('should render found template', (done) => {
-        ViewTemplates.push(new TestTemplate());
+        getTemplate.returns({
+            render: (object) => html`<span>${object.value}</span>`
+        });
 
         testHandler(agsView, 'render', () => {
             const span = agsView.shadowRoot.querySelector('span');
@@ -46,6 +41,14 @@ describe('ags-view', () => {
             '@id': 'test',
             value: 'test'
         };
+    });
+
+    describe('rendering nested templates', () => {
+
+        it('should render', () => {
+
+        });
+
     });
 
 });

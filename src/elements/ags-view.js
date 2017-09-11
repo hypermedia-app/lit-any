@@ -9,8 +9,8 @@ const defaultWrapper = (view) => html`
     display: block;
     @apply(--object-view);
 }
-${view}
-</style>`;
+</style>
+${view}`;
 
 const notFoundTemplate = html`<div>Template not found</div>`;
 
@@ -59,7 +59,7 @@ export class AgsView extends PropertyAccessors(HTMLElement) {
                     this.setAttribute('data-template', template.name);
                 }
 
-                result = defaultWrapper(template.template(this.object));
+                result = defaultWrapper(template.render(this.object));
             } else if (!this.ignoreMissing) {
                 result = notFoundTemplate;
 

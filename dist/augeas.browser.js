@@ -1708,25 +1708,25 @@ var TemplateRegistry = function () {
     function TemplateRegistry() {
         classCallCheck(this, TemplateRegistry);
 
-        this._templates = [];
+        this._selectors = [];
     }
 
     createClass(TemplateRegistry, [{
         key: 'getTemplate',
         value: function getTemplate(object, predicate, scope) {
-            return this._templates.find(function (template) {
+            return this._selectors.find(function (template) {
                 return template.matches(object, predicate, scope);
             });
         }
     }, {
         key: 'push',
         value: function push(template) {
-            this._templates.push(template);
+            this._selectors.push(template);
         }
     }, {
         key: '_clear',
         value: function _clear() {
-            this._templates = [];
+            this._selectors = [];
         }
     }]);
     return TemplateRegistry;

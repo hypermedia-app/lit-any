@@ -1,5 +1,5 @@
 import {TemplateRegistry} from '../../src/template-registry/template-registry'
-import {Template} from '../../src/templates'
+import {html} from 'lit-html';
 
 describe('Template Registry', () => {
 
@@ -17,13 +17,13 @@ describe('Template Registry', () => {
 
     });
 
-    describe('when adding templates', () => {
+    describe('when adding selectors', () => {
 
         it('should count them', () => {
 
-            registry.push(new Template());
-            registry.push(new Template());
-            registry.push(new Template());
+            registry.when.value(() => true).renders(html``);
+            registry.when.property(() => true).renders(html``);
+            registry.when.scope(() => true).renders(html``);
 
             expect(registry.count).to.be.equal(3);
 
