@@ -1,9 +1,8 @@
+import { html } from 'lit-html';
 import '../../src/elements/ags-view';
-import {ViewTemplates} from '../../src/template-registry';
-import {html} from "lit-html";
+import { ViewTemplates } from '../../src/template-registry';
 
 describe('ags-view', () => {
-
     let agsView;
     let getTemplate;
 
@@ -27,28 +26,25 @@ describe('ags-view', () => {
 
     it('should render found template', (done) => {
         getTemplate.returns({
-            render: (object) => html`<span>${object.value}</span>`
+            render: object => html`<span>${object.value}</span>`,
         });
 
         testHandler(agsView, 'render', () => {
             const span = agsView.shadowRoot.querySelector('span');
 
-            assert.equal(span.textContent, 'test');
+            expect(span.textContent).to.equal('test');
             done();
         });
 
         agsView.object = {
             '@id': 'test',
-            value: 'test'
+            value: 'test',
         };
     });
 
     describe('rendering nested templates', () => {
-
         it('should render', () => {
 
         });
-
     });
-
 });

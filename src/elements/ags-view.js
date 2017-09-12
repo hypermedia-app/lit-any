@@ -1,9 +1,9 @@
-import {html} from 'lit-html';
-import {render} from 'lit-html/lib/lit-extended';
-import {PropertyAccessors} from '@polymer/polymer/lib/mixins/property-accessors';
-import {ViewTemplates} from '../template-registry';
+import { html } from 'lit-html';
+import { render } from 'lit-html/lib/lit-extended';
+import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessors';
+import { ViewTemplates } from '../template-registry';
 
-const defaultWrapper = (view) => html`
+const defaultWrapper = view => html`
 <style>
 :host {
     display: block;
@@ -14,9 +14,8 @@ ${view}`;
 
 const notFoundTemplate = html`<div>Template not found</div>`;
 
-export class AgsView extends PropertyAccessors(HTMLElement) {
-
-    constructor(){
+export default class AgsView extends PropertyAccessors(HTMLElement) {
+    constructor() {
         super();
 
         this.predicate = null;
@@ -31,7 +30,7 @@ export class AgsView extends PropertyAccessors(HTMLElement) {
             'object',
             'predicate',
             'templateScope',
-            'ignoreMissing'
+            'ignoreMissing',
         ];
     }
 
@@ -46,9 +45,9 @@ export class AgsView extends PropertyAccessors(HTMLElement) {
     _render() {
         let template;
 
-        if(this.object) {
+        if (this.object) {
             if (!this.shadowRoot) {
-                this.attachShadow({mode: 'open'});
+                this.attachShadow({ mode: 'open' });
             }
 
             template = ViewTemplates.getTemplate(this.object, this.predicate, this.templateScope);
@@ -71,8 +70,8 @@ export class AgsView extends PropertyAccessors(HTMLElement) {
 
         this.dispatchEvent(new CustomEvent('render', {
             detail: {
-                template
-            }
+                template,
+            },
         }));
     }
 }

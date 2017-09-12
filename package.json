@@ -9,15 +9,23 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "npm run build-tests && wct --plugin sauce",
-    "test-local": "npm run build-tests && wct -l chrome -p --skip-selenium-install",
+    "test": "npm run lint && npm run build-tests && wct --plugin sauce",
+    "test-local": "npm run lint && npm run build-tests && npm run wct",
     "build": "rollup -c",
-    "build-tests": "webpack"
+    "build-tests": "webpack",
+    "lint": "eslint src/**/*.js test/**/*.js",
+    "wct": "wct -l chrome -p --skip-selenium-install"
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-chai": "0.0.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jasmine": "^2.8.4",
+    "eslint-plugin-sinon": "^0.2.0",
     "rollup": "^0.49.2",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",

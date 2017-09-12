@@ -1,5 +1,5 @@
 export default class TemplateSelector {
-    constructor(){
+    constructor() {
         this.name = '';
         this._matchers = [];
     }

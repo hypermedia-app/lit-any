@@ -1,32 +1,25 @@
-import TemplateSelector from "./TemplateSelector";
+import TemplateSelector from './TemplateSelector';
 
-export class TemplateSelectorBuilder {
-
+export default class TemplateSelectorBuilder {
     constructor(registry) {
         this._registry = registry;
         this._selector = new TemplateSelector();
     }
 
     value(valueMatcher) {
-        this._selector._matchers.push((v, p, o) => {
-            return valueMatcher(v);
-        });
+        this._selector._matchers.push(v => valueMatcher(v));
 
         return this;
     }
 
     property(propertyMatcher) {
-        this._selector._matchers.push((v, p, s) => {
-            return propertyMatcher(p);
-        });
+        this._selector._matchers.push((v, p) => propertyMatcher(p));
 
         return this;
     }
 
     scope(scopeMatcher) {
-        this._selector._matchers.push((v, p, s) => {
-            return scopeMatcher(s);
-        });
+        this._selector._matchers.push((v, p, s) => scopeMatcher(s));
 
         return this;
     }

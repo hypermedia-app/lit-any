@@ -1,12 +1,11 @@
-import {TemplateRegistry} from '../../src/template-registry/template-registry'
-import {html, render} from 'lit-html';
+import { html, render } from 'lit-html';
+import TemplateRegistry from '../../src/template-registry/template-registry';
 
 describe('Template Registry', () => {
-
     let registry;
 
     const matchAllSelector = {
-        matches: () => true
+        matches: () => true,
     };
 
     beforeEach(() => {
@@ -14,15 +13,12 @@ describe('Template Registry', () => {
     });
 
     describe('initially', () => {
-
         it('should be empty', () => {
             expect(registry.count).to.be.equal(0);
         });
-
     });
 
     describe('when adding selectors', () => {
-
         it('should count them', () => {
             // given
             registry.when.value(() => true).renders(html``);
@@ -32,11 +28,9 @@ describe('Template Registry', () => {
             // then
             expect(registry.count).to.be.equal(3);
         });
-
     });
 
     describe('when selecting template', () => {
-
         const templateFunc = () => html``;
 
         it('should return name and template func', () => {
@@ -78,5 +72,4 @@ describe('Template Registry', () => {
             expect(renderTarget.textContent).to.equal('test');
         });
     });
-
 });

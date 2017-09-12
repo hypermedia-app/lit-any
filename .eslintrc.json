@@ -1,0 +1,22 @@
+{
+    "extends": "airbnb-base",
+    "root": true,
+    "rules": {
+        "no-console": 0,
+        "indent": [ "error", 4 ],
+        "no-underscore-dangle": "off"
+    },
+    "plugins": [
+        "jasmine",
+        "sinon",
+        "chai"
+    ],
+    "env": {
+        "jasmine": true,
+        "browser": true
+    },
+    "globals": {
+        "testHandler": true,
+        "sinon": true
+    }
+}

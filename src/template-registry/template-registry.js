@@ -1,8 +1,6 @@
-import {TemplateResult} from 'lit-html';
-import {TemplateSelectorBuilder} from "./TemplateSelectorBuilder";
+import TemplateSelectorBuilder from './TemplateSelectorBuilder';
 
-export class TemplateRegistry {
-
+export default class TemplateRegistry {
     constructor() {
         this._templates = [];
     }
@@ -20,28 +18,26 @@ export class TemplateRegistry {
     }
 
     getTemplate(value, predicate, scope) {
-        const selectedTemplate = this._templates.find(template => {
-            return template.selector.matches(value, predicate, scope);
-        });
+        const selectedTemplate = this._templates.find(template =>
+            template.selector.matches(value, predicate, scope));
 
         return {
-          render: selectedTemplate.templateFunc,
-          name: selectedTemplate.name || null
+            render: selectedTemplate.templateFunc,
+            name: selectedTemplate.name || null,
         };
     }
 
     push(selector, templateFuncOrResult, name) {
         let templateFunc = templateFuncOrResult;
 
-        if(typeof templateFunc !== 'function') {
+        if (typeof templateFunc !== 'function') {
             templateFunc = () => templateFuncOrResult;
         }
 
         this._templates.push({
             selector,
             templateFunc,
-            name
+            name,
         });
     }
 }
-
