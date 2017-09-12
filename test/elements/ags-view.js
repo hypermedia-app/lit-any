@@ -26,7 +26,7 @@ describe('ags-view', () => {
 
     it('should render found template', (done) => {
         getTemplate.returns({
-            render: object => html`<span>${object.value}</span>`,
+            render: (_, object) => html`<span>${object.value}</span>`,
         });
 
         testHandler(agsView, 'render', () => {
@@ -43,8 +43,39 @@ describe('ags-view', () => {
     });
 
     describe('rendering nested templates', () => {
-        it('should render', () => {
+        it('should use render parameter', (done) => {
+            // given
+            getTemplate.returns({
+                render: (render, object) => {
+                    if (object.child) {
+                        return html`<p class$="${object.clazz}">${render(object.child)}</p>`;
+                    }
 
+                    return html`<span>${object.value}</span>`;
+                },
+            });
+
+            // then
+            testHandler(agsView, 'render', () => {
+                const span = agsView.shadowRoot.querySelector('p.l1 p.l2 p.l3 span');
+
+                expect(span.textContent).to.equal("I'm deep");
+                done();
+            });
+
+            // when
+            agsView.object = {
+                clazz: 'l1',
+                child: {
+                    clazz: 'l2',
+                    child: {
+                        clazz: 'l3',
+                        child: {
+                            value: "I'm deep",
+                        },
+                    },
+                },
+            };
         });
     });
 });

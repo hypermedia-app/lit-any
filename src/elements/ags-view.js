@@ -14,6 +14,22 @@ ${view}`;
 
 const notFoundTemplate = html`<div>Template not found</div>`;
 
+function renderT(agsView) {
+    return (value) => {
+        const template = ViewTemplates.getTemplate(
+            agsView.object,
+            agsView.predicate,
+            agsView.templateScope,
+        );
+
+        if (template) {
+            return template.render(renderT(agsView), value);
+        }
+
+        return notFoundTemplate;
+    };
+}
+
 export default class AgsView extends PropertyAccessors(HTMLElement) {
     constructor() {
         super();
@@ -58,7 +74,7 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
                     this.setAttribute('data-template', template.name);
                 }
 
-                result = defaultWrapper(template.render(this.object));
+                result = defaultWrapper(template.render(renderT(this), this.object));
             } else if (!this.ignoreMissing) {
                 result = notFoundTemplate;
 
