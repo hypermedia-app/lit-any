@@ -1,14 +1,14 @@
 import {TemplateResult} from 'lit-html';
-import TemplateSelector from "./TemplateSelector";
+import {TemplateSelectorBuilder} from "./TemplateSelectorBuilder";
 
 export class TemplateRegistry {
 
     constructor() {
-        this._selectors = [];
+        this._templates = [];
     }
 
     get count() {
-        return this._selectors.length;
+        return this._templates.length;
     }
 
     /**
@@ -20,49 +20,28 @@ export class TemplateRegistry {
     }
 
     getTemplate(value, predicate, scope) {
-        return this._selectors.find(selector => {
-            return selector.matches(value, predicate, scope);
+        const selectedTemplate = this._templates.find(template => {
+            return template.selector.matches(value, predicate, scope);
         });
+
+        return {
+          render: selectedTemplate.templateFunc,
+          name: selectedTemplate.name || null
+        };
     }
 
-    push(selector) {
-        this._selectors.push(selector);
+    push(selector, templateFuncOrResult, name) {
+        let templateFunc = templateFuncOrResult;
+
+        if(typeof templateFunc !== 'function') {
+            templateFunc = () => templateFuncOrResult;
+        }
+
+        this._templates.push({
+            selector,
+            templateFunc,
+            name
+        });
     }
 }
 
-class TemplateSelectorBuilder {
-
-    constructor(registry) {
-        this._registry = registry;
-        this._selector = new TemplateSelector();
-    }
-
-    value(valueMatcher) {
-        this._selector._matchers.push((v, p, o) => {
-            return valueMatcher(v);
-        });
-
-        return this;
-    }
-
-    property(propertyMatcher) {
-        this._selector._matchers.push((v, p, s) => {
-            return propertyMatcher(p);
-        });
-
-        return this;
-    }
-
-    scope(scopeMatcher) {
-        this._selector._matchers.push((v, p, s) => {
-            return scopeMatcher(s);
-        });
-
-        return this;
-    }
-
-    renders(fn) {
-        this._registry.push(this._selector);
-        return this._registry;
-    }
-}
