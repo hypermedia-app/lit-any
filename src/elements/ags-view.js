@@ -1,21 +1,10 @@
-import { html } from 'lit-html';
 import { render } from 'lit-html/lib/lit-extended';
 import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessors';
 import { ViewTemplates } from '../template-registry';
 
-const defaultWrapper = view => html`
-<style>
-:host {
-    display: block;
-    @apply(--object-view);
-}
-</style>
-${view}`;
-
-const notFoundTemplate = html`<div>Template not found</div>`;
-
-function renderT(agsView) {
+function recurseTemplates(agsView, root) {
     return (value) => {
+        let templateResult;
         const template = ViewTemplates.getTemplate(
             agsView.object,
             agsView.predicate,
@@ -23,10 +12,20 @@ function renderT(agsView) {
         );
 
         if (template) {
-            return template.render(renderT(agsView), value);
+            if (root && template.name) {
+                agsView.setAttribute('data-template', template.name);
+            }
+
+            templateResult = template.render(recurseTemplates(agsView, false), value);
+        } else if (agsView.ignoreMissing) {
+            templateResult = '';
+        } else {
+            templateResult = 'Template not found';
+            console.warn('Template not found for', agsView.object);
         }
 
-        return notFoundTemplate;
+
+        return templateResult;
     };
 }
 
@@ -59,36 +58,17 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
     }
 
     _render() {
-        let template;
-
         if (this.object) {
             if (!this.shadowRoot) {
                 this.attachShadow({ mode: 'open' });
             }
 
-            template = ViewTemplates.getTemplate(this.object, this.predicate, this.templateScope);
-            let result;
+            const templateFunc = recurseTemplates(this, true);
 
-            if (template) {
-                if (template.name) {
-                    this.setAttribute('data-template', template.name);
-                }
-
-                result = defaultWrapper(template.render(renderT(this), this.object));
-            } else if (!this.ignoreMissing) {
-                result = notFoundTemplate;
-
-                console.warn('Template not found for', this.object);
-            }
-
-            render(result, this.shadowRoot);
+            render(templateFunc(this.object), this.shadowRoot);
         }
 
-        this.dispatchEvent(new CustomEvent('render', {
-            detail: {
-                template,
-            },
-        }));
+        this.dispatchEvent(new CustomEvent('render'));
     }
 }
 
