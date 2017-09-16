@@ -1235,9 +1235,9 @@ class TemplateRegistry {
         this._selectors = [];
     }
 
-    getTemplate(object, predicate, scope) {
+    getTemplate(object, scope) {
         return this._selectors.find(template => {
-            return template.matches(object, predicate, scope);
+            return template.matches(object, scope);
         });
     }
 

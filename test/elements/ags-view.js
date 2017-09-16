@@ -15,56 +15,53 @@ describe('ags-view', () => {
         getTemplate.restore();
     });
 
-    it('should render nothing when object is undefined', (done) => {
-        testHandler(agsView, 'render', () => {
-            expect(agsView.shadowRoot).to.be.null;
+    it('should render nothing when object is undefined', () => {
+        agsView._render();
+
+        expect(agsView.shadowRoot).to.be.null;
+    });
+
+    it('should raise event when value changes', (done) => {
+        // then
+        testHandler(agsView, 'ags-render', () => {
             done();
         });
 
-        agsView._render();
+        // when
+        agsView.value = {};
     });
 
-    it('should render found template', (done) => {
+    it('should render found template', () => {
+        // given
         getTemplate.returns({
             render: (_, object) => html`<span>${object.value}</span>`,
         });
 
-        testHandler(agsView, 'render', () => {
-            const span = agsView.shadowRoot.querySelector('span');
-
-            expect(span.textContent).to.equal('test');
-            done();
-        });
-
-        agsView.object = {
+        agsView.value = {
             '@id': 'test',
             value: 'test',
         };
+
+        // when
+        agsView._render();
+
+        // then
+        const span = agsView.shadowRoot.querySelector('span');
+        expect(span.textContent).to.equal('test');
     });
 
     describe('rendering nested templates', () => {
-        it('should use render parameter', (done) => {
+        it('should use render parameter', () => {
             // given
             getTemplate.returns({
-                render: (render, object) => {
-                    if (object.child) {
-                        return html`<p class$="${object.clazz}">${render(object.child)}</p>`;
-                    }
-
-                    return html`<span>${object.value}</span>`;
-                },
+                render: (render, object) => html`<p class$="${object.clazz}">${render(object.child)}</p>`,
             });
-
-            // then
-            testHandler(agsView, 'render', () => {
-                const span = agsView.shadowRoot.querySelector('p.l1 p.l2 p.l3 span');
-
-                expect(span.textContent).to.equal("I'm deep");
-                done();
+            getTemplate.onCall(3).returns({
+                render: (render, object) => html`<span>${object.value}</span>`,
             });
 
             // when
-            agsView.object = {
+            agsView.value = {
                 clazz: 'l1',
                 child: {
                     clazz: 'l2',
@@ -76,6 +73,17 @@ describe('ags-view', () => {
                     },
                 },
             };
+            agsView._render();
+
+            // then
+            const span = agsView.shadowRoot.querySelector('p.l1 p.l2 p.l3 span');
+            expect(span.textContent).to.equal("I'm deep");
+        });
+    });
+
+    describe('when template is not found', () => {
+        it('should render fallback template', () => {
+
         });
     });
 });

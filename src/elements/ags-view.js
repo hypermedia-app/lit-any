@@ -1,13 +1,13 @@
 import { render } from 'lit-html/lib/lit-extended';
 import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessors';
+import { html } from 'lit-html';
 import { ViewTemplates } from '../template-registry';
 
 function recurseTemplates(agsView, root) {
     return (value) => {
         let templateResult;
         const template = ViewTemplates.getTemplate(
-            agsView.object,
-            agsView.predicate,
+            agsView.value,
             agsView.templateScope,
         );
 
@@ -20,10 +20,9 @@ function recurseTemplates(agsView, root) {
         } else if (agsView.ignoreMissing) {
             templateResult = '';
         } else {
-            templateResult = 'Template not found';
-            console.warn('Template not found for', agsView.object);
+            templateResult = html`Template not found`;
+            console.warn('Template not found for', agsView.value);
         }
-
 
         return templateResult;
     };
@@ -33,17 +32,14 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
     constructor() {
         super();
 
-        this.predicate = null;
         this.templateScope = null;
-        this.object = null;
+        this.value = null;
         this.ignoreMissing = false;
-        this.hasBeenRendered = false;
     }
 
     static get observedAttributes() {
         return [
-            'object',
-            'predicate',
+            'value',
             'templateScope',
             'ignoreMissing',
         ];
@@ -58,17 +54,17 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
     }
 
     _render() {
-        if (this.object) {
+        if (this.value) {
             if (!this.shadowRoot) {
                 this.attachShadow({ mode: 'open' });
             }
 
             const templateFunc = recurseTemplates(this, true);
 
-            render(templateFunc(this.object), this.shadowRoot);
+            render(templateFunc(this.value), this.shadowRoot);
         }
 
-        this.dispatchEvent(new CustomEvent('render'));
+        this.dispatchEvent(new CustomEvent('ags-render'));
     }
 }
 

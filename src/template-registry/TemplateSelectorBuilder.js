@@ -12,12 +12,6 @@ export default class TemplateSelectorBuilder {
         return this;
     }
 
-    property(propertyMatcher) {
-        this._selector._matchers.push((v, p) => propertyMatcher(p));
-
-        return this;
-    }
-
     scope(scopeMatcher) {
         this._selector._matchers.push((v, p, s) => scopeMatcher(s));
 

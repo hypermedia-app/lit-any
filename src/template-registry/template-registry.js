@@ -17,9 +17,9 @@ export default class TemplateRegistry {
         return new TemplateSelectorBuilder(this);
     }
 
-    getTemplate(value, predicate, scope) {
+    getTemplate(value, scope) {
         const selectedTemplate = this._templates.find(template =>
-            template.selector.matches(value, predicate, scope));
+            template.selector.matches(value, scope));
 
         return {
             render: selectedTemplate.templateFunc,

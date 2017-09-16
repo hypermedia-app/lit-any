@@ -22,7 +22,7 @@ describe('Template Registry', () => {
         it('should count them', () => {
             // given
             registry.when.value(() => true).renders(html``);
-            registry.when.property(() => true).renders(html``);
+            registry.when.value(() => true).renders(html``);
             registry.when.scope(() => true).renders(html``);
 
             // then
