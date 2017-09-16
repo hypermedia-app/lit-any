@@ -1,4 +1,5 @@
 {
+  "name": "augeas",
   "main": "dist/augeas.js",
   "browser": "dist/augeas.browser.js",
   "config": {
