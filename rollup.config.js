@@ -21,11 +21,16 @@ const rollupCommon = {
 const rollupEs6 = {
     output: {
         file: pkg.main,
-        format: 'cjs'
+        format: 'es'
     },
     plugins: [
         babel(),
         nodePlugin
+    ],
+    external: [
+        'lit-html',
+        'lit-html/lib/lit-extended',
+        '@polymer/polymer/lib/mixins/property-accessors'
     ]
 };
 

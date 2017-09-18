@@ -273,7 +273,7 @@ var TemplateResult = function TemplateResult(template, values) {
  * To update a container with new values, reevaluate the template literal and
  * call `render` with the new result.
  */
-function render(result, container) {
+function render$1(result, container) {
     var partCallback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPartCallback;
 
     var instance = container.__templateInstance;
@@ -764,8 +764,8 @@ var TemplateInstance = function () {
  *     html`<button on-click=${(e)=> this.onClickHandler(e)}>Buy Now</button>`
  *
  */
-function render$1(result, container) {
-    render(result, container, extendedPartCallback);
+function render$$1(result, container) {
+    render$1(result, container, extendedPartCallback);
 }
 var extendedPartCallback = function extendedPartCallback(instance, templatePart, node) {
     if (templatePart.type === 'attribute') {
@@ -1684,49 +1684,100 @@ var PropertyAccessors = dedupingMixin(function (superClass) {
   return PropertyAccessors;
 });
 
-var Template$1 = function () {
-    function Template$$1() {
-        classCallCheck(this, Template$$1);
+var TemplateSelector = function TemplateSelector() {
+    classCallCheck(this, TemplateSelector);
+
+    this.name = '';
+    this._matchers = [];
+};
+
+var TemplateSelectorBuilder = function () {
+    function TemplateSelectorBuilder(registry) {
+        classCallCheck(this, TemplateSelectorBuilder);
+
+        this._registry = registry;
+        this._selector = new TemplateSelector();
     }
 
-    createClass(Template$$1, [{
-        key: 'template',
-        value: function template(object) {}
+    createClass(TemplateSelectorBuilder, [{
+        key: 'value',
+        value: function value(valueMatcher) {
+            this._selector._matchers.push(function (v) {
+                return valueMatcher(v);
+            });
+
+            return this;
+        }
     }, {
-        key: 'matches',
-        value: function matches(object, predicate, scope) {}
+        key: 'scope',
+        value: function scope(scopeMatcher) {
+            this._selector._matchers.push(function (v, p, s) {
+                return scopeMatcher(s);
+            });
+
+            return this;
+        }
     }, {
-        key: 'name',
-        get: function get$$1() {
-            return '';
+        key: 'renders',
+        value: function renders(fn) {
+            this._registry.push(this._selector, fn);
+            return this._registry;
         }
     }]);
-    return Template$$1;
+    return TemplateSelectorBuilder;
 }();
 
 var TemplateRegistry = function () {
     function TemplateRegistry() {
         classCallCheck(this, TemplateRegistry);
 
-        this._selectors = [];
+        this._templates = [];
     }
 
     createClass(TemplateRegistry, [{
         key: 'getTemplate',
-        value: function getTemplate(object, predicate, scope) {
-            return this._selectors.find(function (template) {
-                return template.matches(object, predicate, scope);
+        value: function getTemplate(value, scope) {
+            var selectedTemplate = this._templates.find(function (template) {
+                return template.selector.matches(value, scope);
             });
+
+            return {
+                render: selectedTemplate.templateFunc,
+                name: selectedTemplate.name || null
+            };
         }
     }, {
         key: 'push',
-        value: function push(template) {
-            this._selectors.push(template);
+        value: function push(selector, templateFuncOrResult, name) {
+            var templateFunc = templateFuncOrResult;
+
+            if (typeof templateFunc !== 'function') {
+                templateFunc = function templateFunc() {
+                    return templateFuncOrResult;
+                };
+            }
+
+            this._templates.push({
+                selector: selector,
+                templateFunc: templateFunc,
+                name: name
+            });
         }
     }, {
-        key: '_clear',
-        value: function _clear() {
-            this._selectors = [];
+        key: 'count',
+        get: function get$$1() {
+            return this._templates.length;
+        }
+
+        /**
+         *
+         * @returns {TemplateSelectorBuilder}
+         */
+
+    }, {
+        key: 'when',
+        get: function get$$1() {
+            return new TemplateSelectorBuilder(this);
         }
     }]);
     return TemplateRegistry;
@@ -1735,14 +1786,29 @@ var TemplateRegistry = function () {
 var ViewTemplates = new TemplateRegistry();
 var FormTemplates = new TemplateRegistry();
 
-var _templateObject = taggedTemplateLiteral(['\n<style>\n:host {\n    display: block;\n    @apply(--object-view);\n}\n', '\n</style>'], ['\n<style>\n:host {\n    display: block;\n    @apply(--object-view);\n}\n', '\n</style>']);
-var _templateObject2 = taggedTemplateLiteral(['<div>Template not found</div>'], ['<div>Template not found</div>']);
+var _templateObject = taggedTemplateLiteral(['Template not found'], ['Template not found']);
 
-var defaultWrapper = function defaultWrapper(view) {
-    return html(_templateObject, view);
-};
+function recurseTemplates(agsView, root) {
+    return function (value) {
+        var templateResult = void 0;
+        var template = ViewTemplates.getTemplate(agsView.value, agsView.templateScope);
 
-var notFoundTemplate = html(_templateObject2);
+        if (template) {
+            if (root && template.name) {
+                agsView.setAttribute('data-template', template.name);
+            }
+
+            templateResult = template.render(recurseTemplates(agsView, false), value);
+        } else if (agsView.ignoreMissing) {
+            templateResult = '';
+        } else {
+            templateResult = html(_templateObject);
+            console.warn('Template not found for', agsView.value);
+        }
+
+        return templateResult;
+    };
+}
 
 var AgsView = function (_PropertyAccessors) {
     inherits(AgsView, _PropertyAccessors);
@@ -1752,12 +1818,9 @@ var AgsView = function (_PropertyAccessors) {
 
         var _this = possibleConstructorReturn(this, (AgsView.__proto__ || Object.getPrototypeOf(AgsView)).call(this));
 
-        _this.predicate = null;
         _this.templateScope = null;
-        _this.object = null;
+        _this.value = null;
         _this.ignoreMissing = false;
-        _this.hasBeenRendered = false;
-        _this.params = {};
         return _this;
     }
 
@@ -1774,35 +1837,22 @@ var AgsView = function (_PropertyAccessors) {
     }, {
         key: '_render',
         value: function _render() {
-            if (this.object) {
+            if (this.value) {
                 if (!this.shadowRoot) {
                     this.attachShadow({ mode: 'open' });
                 }
 
-                var template = ViewTemplates.getTemplate(this.object, this.predicate, this.templateScope);
-                var result = void 0;
+                var templateFunc = recurseTemplates(this, true);
 
-                if (template) {
-                    if (template.name) {
-                        this.setAttribute('data-template', template.name);
-                    }
-
-                    result = defaultWrapper(template.template(this.object, this.params));
-                } else if (!this.ignoreMissing) {
-                    result = notFoundTemplate;
-
-                    console.warn('Template not found for', this.object);
-                }
-
-                render$1(result, this.shadowRoot);
+                render$$1(templateFunc(this.value), this.shadowRoot);
             }
 
-            this.dispatchEvent(new CustomEvent('render', {}));
+            this.dispatchEvent(new CustomEvent('ags-render'));
         }
     }], [{
         key: 'observedAttributes',
         get: function get$$1() {
-            return ['object', 'predicate', 'templateScope', 'ignoreMissing', 'params'];
+            return ['value', 'templateScope', 'ignoreMissing'];
         }
     }]);
     return AgsView;
