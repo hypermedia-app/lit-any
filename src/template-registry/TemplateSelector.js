@@ -3,4 +3,8 @@ export default class TemplateSelector {
         this.name = '';
         this._matchers = [];
     }
+
+    matches(...rest) {
+        return this._matchers.every(matcher => matcher.apply(matcher, rest));
+    }
 }
