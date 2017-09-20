@@ -79,6 +79,61 @@ describe('ags-view', () => {
             const span = agsView.shadowRoot.querySelector('p.l1 p.l2 p.l3 span');
             expect(span.textContent).to.equal("I'm deep");
         });
+
+        it('should select template for selected value', () => {
+            // given
+            getTemplate.returns({
+                render: (render, v) => {
+                    if (v.child) {
+                        return html`${render(v.child)}`;
+                    }
+
+                    return html``;
+                },
+            });
+
+            // when
+            agsView.value = {
+                child: 10,
+            };
+            agsView._render();
+
+            // then
+            expect(getTemplate.firstCall.calledWith({ child: 10 })).to.be.true;
+            expect(getTemplate.secondCall.calledWith(10)).to.be.true;
+        });
+
+        it('should allow changing scope', (done) => {
+            // given
+            getTemplate.returns({
+                render: (render, v) => {
+                    if (v.child) {
+                        if (v.scope) {
+                            return html`${render(v.child, v.scope)}`;
+                        }
+                        return html`${render(v.child)}`;
+                    }
+
+                    return html``;
+                },
+            });
+
+            testHandler(agsView, 'ags-render', () => {
+                // then
+                expect(getTemplate.firstCall.args[1]).to.be.null;
+                expect(getTemplate.secondCall.args[1]).to.equal('nested');
+                expect(getTemplate.thirdCall.args[1]).to.equal('nested');
+                done();
+            });
+
+            // when
+            agsView.value = {
+                scope: 'nested',
+                child: {
+                    child: {},
+                },
+            };
+        });
     });
 
     describe('when template is not found', () => {

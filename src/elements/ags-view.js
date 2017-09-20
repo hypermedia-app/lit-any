@@ -3,12 +3,13 @@ import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessor
 import { html } from 'lit-html';
 import { ViewTemplates } from '../template-registry';
 
-function recurseTemplates(agsView, root) {
-    return (value) => {
+function recurseTemplates(agsView, root, inheritedScope) {
+    return (value, currentScope) => {
         let templateResult;
+        const scope = currentScope || inheritedScope;
         const template = ViewTemplates.getTemplate(
-            agsView.value,
-            agsView.templateScope,
+            value,
+            scope,
         );
 
         if (template) {
@@ -16,12 +17,12 @@ function recurseTemplates(agsView, root) {
                 agsView.setAttribute('data-template', template.name);
             }
 
-            templateResult = template.render(recurseTemplates(agsView, false), value);
+            templateResult = template.render(recurseTemplates(agsView, false, scope), value);
         } else if (agsView.ignoreMissing) {
             templateResult = '';
         } else {
             templateResult = html`Template not found`;
-            console.warn('Template not found for', agsView.value);
+            console.warn('Template not found for', value);
         }
 
         return templateResult;
@@ -59,7 +60,7 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
                 this.attachShadow({ mode: 'open' });
             }
 
-            const templateFunc = recurseTemplates(this, true);
+            const templateFunc = recurseTemplates(this, true, this.templateScope);
 
             render(templateFunc(this.value), this.shadowRoot);
         }
