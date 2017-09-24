@@ -1,9 +1,9 @@
 sudo: false
 language: node_js
 node_js:
-  - 5.5
-install:
-  - npm i
+  - 8
+before_install:
+  - npm i -g bower
   - bower i
 before_script:
   - npm run build
