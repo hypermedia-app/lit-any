@@ -55,6 +55,23 @@ describe('Template Registry', () => {
             // then
             expect(template.name).to.be.null;
         });
+
+        it('should return matching template for value', () => {
+            // given
+            registry._templates.push({
+                selector: {
+                    matches: c => c.value === 'test',
+                },
+            });
+
+            // when
+            const template = registry.getTemplate({
+                value: 'test',
+            });
+
+            // then
+            !expect(template.name).to.be.null;
+        });
     });
 
     describe('when adding TemplateResult instance', () => {

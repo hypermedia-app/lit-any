@@ -4,7 +4,7 @@ export default class TemplateSelector {
         this._matchers = [];
     }
 
-    matches(...rest) {
-        return this._matchers.every(matcher => matcher.apply(matcher, rest));
+    matches(criteria) {
+        return this._matchers.every(matcher => matcher.call(matcher, criteria));
     }
 }

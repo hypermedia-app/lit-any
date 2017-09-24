@@ -8,8 +8,8 @@ class TemplateSelector {
         this._matchers = [];
     }
 
-    matches(...rest) {
-        return this._matchers.every(matcher => matcher.apply(matcher, rest));
+    matches(criteria) {
+        return this._matchers.every(matcher => matcher.call(matcher, criteria));
     }
 }
 
@@ -20,13 +20,13 @@ class TemplateSelectorBuilder {
     }
 
     value(valueMatcher) {
-        this._selector._matchers.push(v => valueMatcher(v));
+        this._selector._matchers.push(contraint => valueMatcher(contraint.value));
 
         return this;
     }
 
     scope(scopeMatcher) {
-        this._selector._matchers.push((v, p, s) => scopeMatcher(s));
+        this._selector._matchers.push(contraint => scopeMatcher(contraint.scope));
 
         return this;
     }

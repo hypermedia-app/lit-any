@@ -37,10 +37,10 @@ describe('TemplateSelector', () => {
             selector._matchers.push(spy);
 
             // when
-            selector.matches(value, property, scope);
+            selector.matches({ value, property, scope });
 
             // then
-            expect(spy.calledWith(value, property, scope)).to.be.true;
+            expect(spy.calledWith({ value, property, scope })).to.be.true;
         });
     });
 });

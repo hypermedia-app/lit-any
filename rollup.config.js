@@ -9,31 +9,24 @@ const nodePlugin = nodeResolve({
     jsnext: true,
     browser: true,
     extensions: ['.js', '.json'],
-    preferBuiltins: false
+    preferBuiltins: false,
 });
 
-const rollupCommon = {
+export default {
     input: pkg.config.src,
     name: pkg.config.moduleName,
-    sourcemap: true
-};
-
-const rollupEs6 = {
+    sourcemap: true,
     output: {
         file: pkg.main,
-        format: 'es'
+        format: 'es',
     },
     plugins: [
         babel(),
-        nodePlugin
+        nodePlugin,
     ],
     external: [
         'lit-html',
         'lit-html/lib/lit-extended',
         '@polymer/polymer/lib/mixins/property-accessors'
-    ]
+    ],
 };
-
-export default [
-    Object.assign(rollupEs6, rollupCommon),
-]
