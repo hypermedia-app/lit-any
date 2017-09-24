@@ -70,7 +70,7 @@ describe('Template Registry', () => {
             });
 
             // then
-            !expect(template.name).to.be.null;
+            expect(template.name).to.be.null;
         });
     });
 
