@@ -38,7 +38,7 @@ describe('Template Registry', () => {
             registry.push(matchAllSelector, templateFunc, 'test-template');
 
             // when
-            const template = registry.getTemplate();
+            const template = registry.getTemplate({ value: 'whatever' });
 
             // then
             expect(template.render).to.equal(templateFunc);
@@ -50,7 +50,7 @@ describe('Template Registry', () => {
             registry.push(matchAllSelector, templateFunc);
 
             // when
-            const template = registry.getTemplate();
+            const template = registry.getTemplate({ value: 'whatever' });
 
             // then
             expect(template.name).to.be.null;
@@ -72,6 +72,108 @@ describe('Template Registry', () => {
             // then
             expect(template.name).to.be.null;
         });
+
+        it('should pass value to matcher', () => {
+            // given
+            const template = {
+                selector: {
+                    matches: sinon.spy(),
+                },
+            };
+            registry._templates.push(template);
+
+            // when
+            registry.getTemplate({
+                value: 'test',
+            });
+
+            // then
+            expect(template.selector.matches.calledWith({
+                value: 'test',
+            })).to.be.true;
+        });
+
+        it('should return null if not found', () => {
+            // when
+            const result = registry.getTemplate({
+                value: 'test',
+            });
+
+            // then
+            expect(result).to.be.null;
+        });
+
+        it('should not call matchers if value is null', () => {
+            // given
+            const template = {
+                selector: {
+                    matches: sinon.spy(),
+                },
+            };
+            registry._templates.push(template);
+
+            // when
+            registry.getTemplate({
+                value: null,
+            });
+
+            // then
+            expect(template.selector.matches.called).to.be.false;
+        });
+
+        it('should not call matchers if value is undefined', () => {
+            // given
+            const template = {
+                selector: {
+                    matches: sinon.spy(),
+                },
+            };
+            registry._templates.push(template);
+
+            // when
+            registry.getTemplate({
+                value: undefined,
+            });
+
+            // then
+            expect(template.selector.matches.called).to.be.false;
+        });
+
+        it('should not call matchers if value is empty string', () => {
+            // given
+            const template = {
+                selector: {
+                    matches: sinon.spy(),
+                },
+            };
+            registry._templates.push(template);
+
+            // when
+            registry.getTemplate({
+                value: '',
+            });
+
+            // then
+            expect(template.selector.matches.called).to.be.true;
+        });
+
+        it('should not call matchers if value is empty zero', () => {
+            // given
+            const template = {
+                selector: {
+                    matches: sinon.spy(),
+                },
+            };
+            registry._templates.push(template);
+
+            // when
+            registry.getTemplate({
+                value: 0,
+            });
+
+            // then
+            expect(template.selector.matches.called).to.be.true;
+        });
     });
 
     describe('when adding TemplateResult instance', () => {
@@ -81,7 +183,7 @@ describe('Template Registry', () => {
             const renderTarget = document.createElement('span');
 
             // when
-            const template = registry.getTemplate();
+            const template = registry.getTemplate({ value: 'whatever' });
 
             // then
             expect(template.render).to.be.a('function');

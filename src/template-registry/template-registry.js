@@ -17,9 +17,16 @@ export default class TemplateRegistry {
         return new TemplateSelectorBuilder(this);
     }
 
-    getTemplate(value, scope) {
-        const selectedTemplate = this._templates.find(template =>
-            template.selector.matches(value, scope));
+    getTemplate(criteria) {
+        let selectedTemplate;
+        if (criteria.value !== null && typeof criteria.value !== 'undefined') {
+            selectedTemplate = this._templates.find(template =>
+                template.selector.matches(criteria));
+        }
+
+        if (!selectedTemplate) {
+            return null;
+        }
 
         return {
             render: selectedTemplate.templateFunc,

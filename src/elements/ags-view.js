@@ -7,10 +7,10 @@ function recurseTemplates(agsView, root, inheritedScope) {
     return (value, currentScope) => {
         let templateResult;
         const scope = currentScope || inheritedScope;
-        const template = ViewTemplates.getTemplate(
+        const template = ViewTemplates.getTemplate({
             value,
             scope,
-        );
+        });
 
         if (template) {
             if (root && template.name) {

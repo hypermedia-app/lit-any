@@ -50,6 +50,20 @@ describe('ags-view', () => {
         expect(span.textContent).to.equal('test');
     });
 
+    it('should select template for given value', () => {
+        // given
+        agsView.value = 'a string';
+
+        // when
+        agsView._render();
+
+        // then
+        expect(getTemplate.calledWith({
+            value: 'a string',
+            scope: null,
+        })).to.be.true;
+    });
+
     describe('rendering nested templates', () => {
         it('should use render parameter', () => {
             // given
@@ -99,8 +113,8 @@ describe('ags-view', () => {
             agsView._render();
 
             // then
-            expect(getTemplate.firstCall.calledWith({ child: 10 })).to.be.true;
-            expect(getTemplate.secondCall.calledWith(10)).to.be.true;
+            expect(getTemplate.firstCall.args[0].value).to.deep.equal({ child: 10 });
+            expect(getTemplate.secondCall.args[0].value).to.equal(10);
         });
 
         it('should allow changing scope', (done) => {
@@ -120,9 +134,9 @@ describe('ags-view', () => {
 
             testHandler(agsView, 'ags-render', () => {
                 // then
-                expect(getTemplate.firstCall.args[1]).to.be.null;
-                expect(getTemplate.secondCall.args[1]).to.equal('nested');
-                expect(getTemplate.thirdCall.args[1]).to.equal('nested');
+                expect(getTemplate.firstCall.args[0].scope).to.be.null;
+                expect(getTemplate.secondCall.args[0].scope).to.equal('nested');
+                expect(getTemplate.thirdCall.args[0].scope).to.equal('nested');
                 done();
             });
 
