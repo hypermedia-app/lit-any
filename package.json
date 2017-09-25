@@ -1,18 +1,14 @@
 {
   "name": "augeas",
-  "main": "dist/augeas.js",
+  "main": "src/index.js",
+  "module": "src/index.js",
   "version": "0.2.0-aloha",
-  "config": {
-    "src": "src/index.js",
-    "moduleName": "Augeas"
-  },
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "test": "npm run lint && npm run build-tests && wct --plugin sauce",
     "test-local": "npm run lint && npm run build-tests && npm run wct",
-    "build": "rollup -c",
     "build-tests": "webpack",
     "lint": "eslint src/**/*.js test/**/*.js",
     "wct": "wct -l chrome -p --skip-selenium-install"
@@ -27,11 +23,6 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jasmine": "^2.8.4",
     "eslint-plugin-sinon": "^0.2.0",
-    "rollup": "^0.49.2",
-    "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-typescript": "^0.8.1",
-    "rollup-watch": "^4.3.1",
     "wct-sauce": "^1.8.6",
     "web-component-tester": "^6.1.5",
     "webpack": "^3.5.6",
