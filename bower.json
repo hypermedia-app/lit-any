@@ -1,28 +1,5 @@
 {
-  "name": "augeas",
-  "description": "Extensible web components for building REST-friendly UI declaratively",
-  "version": "0.1.7",
-  "main": "augeas.html",
-  "authors": [
-    "tpluscode <tpluscode@users.noreply.github.com>"
-  ],
-  "license": "MIT",
-  "keywords": [
-    "rest",
-    "hypermedia",
-    "hydra",
-    "json-ld",
-    "webcomponents",
-    "polymer"
-  ],
-  "homepage": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "private": true,
   "devDependencies": {
     "web-component-tester": "~4.2.2",
     "webcomponentsjs": "^1.0.10"

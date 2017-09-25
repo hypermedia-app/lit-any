@@ -2,7 +2,6 @@
   "name": "augeas",
   "main": "dist/augeas.js",
   "version": "0.2.0-aloha",
-  "browser": "dist/augeas.browser.js",
   "config": {
     "src": "src/index.js",
     "moduleName": "Augeas"
