@@ -17,7 +17,7 @@ function recurseTemplates(agsView, root, inheritedScope) {
                 agsView.setAttribute('data-template', template.name);
             }
 
-            templateResult = template.render(recurseTemplates(agsView, false, scope), value);
+            templateResult = template.render(recurseTemplates(agsView, false, scope), value, scope);
         } else if (agsView.ignoreMissing) {
             templateResult = '';
         } else {
@@ -36,6 +36,8 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
         this.templateScope = null;
         this.value = null;
         this.ignoreMissing = false;
+
+        this.__connected = false;
     }
 
     static get observedAttributes() {
@@ -48,6 +50,11 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
 
     connectedCallback() {
         this._enableProperties();
+        this.__connected = true;
+    }
+
+    disconnectedCallback() {
+        this.__connected = false;
     }
 
     _propertiesChanged() {
@@ -55,7 +62,7 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
     }
 
     _render() {
-        if (this.value) {
+        if (this.value && this.__connected) {
             if (!this.shadowRoot) {
                 this.attachShadow({ mode: 'open' });
             }

@@ -1,6 +1,7 @@
 {
     "rules": {
         "no-unused-expressions": "off",
-        "no-debugger": "off"
+        "no-debugger": "off",
+        "no-undef": "warn"
     }
 }

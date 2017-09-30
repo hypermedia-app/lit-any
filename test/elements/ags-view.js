@@ -7,64 +7,94 @@ describe('ags-view', () => {
     let getTemplate;
 
     beforeEach(() => {
-        agsView = document.querySelector('ags-view');
-        getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+        agsView = fixture('ags-view');
     });
 
-    afterEach(() => {
-        getTemplate.restore();
-    });
-
-    it('should render nothing when object is undefined', () => {
-        agsView._render();
-
-        expect(agsView.shadowRoot).to.be.null;
-    });
-
-    it('should raise event when value changes', (done) => {
-        // then
-        testHandler(agsView, 'ags-render', () => {
-            done();
+    describe('rendering template', () => {
+        beforeEach(() => {
+            getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
         });
 
-        // when
-        agsView.value = {};
-    });
-
-    it('should render found template', () => {
-        // given
-        getTemplate.returns({
-            render: (_, object) => html`<span>${object.value}</span>`,
+        afterEach(() => {
+            getTemplate.restore();
         });
 
-        agsView.value = {
-            '@id': 'test',
-            value: 'test',
-        };
+        it('should render nothing when object is undefined', () => {
+            agsView._render();
 
-        // when
-        agsView._render();
+            expect(agsView.shadowRoot).to.be.null;
+        });
 
-        // then
-        const span = agsView.shadowRoot.querySelector('span');
-        expect(span.textContent).to.equal('test');
-    });
+        it('should raise event when value changes', (done) => {
+            // then
+            testHandler(agsView, 'ags-render', () => {
+                done();
+            });
 
-    it('should select template for given value', () => {
-        // given
-        agsView.value = 'a string';
+            // when
+            agsView.value = {};
+        });
 
-        // when
-        agsView._render();
+        it('should render found template', () => {
+            // given
+            getTemplate.returns({
+                render: (_, object) => html`<span>${object.value}</span>`,
+            });
 
-        // then
-        expect(getTemplate.calledWith({
-            value: 'a string',
-            scope: null,
-        })).to.be.true;
+            agsView.value = {
+                '@id': 'test',
+                value: 'test',
+            };
+
+            // when
+            agsView._render();
+
+            // then
+            const span = agsView.shadowRoot.querySelector('span');
+            expect(span.textContent).to.equal('test');
+        });
+
+        it('should select template for given value', () => {
+            // given
+            agsView.value = 'a string';
+
+            // when
+            agsView._render();
+
+            // then
+            expect(getTemplate.calledWith({
+                value: 'a string',
+                scope: null,
+            })).to.be.true;
+        });
+
+        it('should render pass scope to template', () => {
+            // given
+            getTemplate.returns({
+                render: (_1, _2, scope) => html`<span>${scope}</span>`,
+            });
+
+            agsView.value = {};
+            agsView.templateScope = 'scope test';
+
+            // when
+            agsView._render();
+
+            // then
+            const span = agsView.shadowRoot.querySelector('span');
+            expect(span.textContent).to.equal('scope test');
+        });
     });
 
     describe('rendering nested templates', () => {
+        beforeEach(() => {
+            getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+        });
+
+        afterEach(() => {
+            getTemplate.restore();
+        });
+
         it('should use render parameter', () => {
             // given
             getTemplate.returns({
@@ -132,6 +162,7 @@ describe('ags-view', () => {
                 },
             });
 
+            debugger;
             testHandler(agsView, 'ags-render', () => {
                 // then
                 expect(getTemplate.firstCall.args[0].scope).to.be.null;
@@ -151,6 +182,14 @@ describe('ags-view', () => {
     });
 
     describe('when template is not found', () => {
+        beforeEach(() => {
+            getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+        });
+
+        afterEach(() => {
+            getTemplate.restore();
+        });
+
         it('should render fallback template', () => {
 
         });
