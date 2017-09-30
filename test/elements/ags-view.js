@@ -194,4 +194,33 @@ describe('ags-view', () => {
 
         });
     });
+
+    describe('when value is set before inserting to DOM', () => {
+        let manualView;
+
+        beforeEach(() => {
+            getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+            manualView = document.createElement('ags-view');
+            manualView.value = {
+                inserted: 'manually',
+            };
+        });
+
+        it('should render correctly', (done) => {
+            // given
+            getTemplate.returns({
+                render: (_, object) => html`<span>${object.inserted}</span>`,
+            });
+
+            // then
+            testHandler(manualView, 'ags-render', () => {
+                const span = manualView.shadowRoot.querySelector('span');
+                expect(span.textContent).to.equal('manually');
+                done();
+            });
+
+            // when
+            document.body.appendChild(manualView);
+        });
+    });
 });

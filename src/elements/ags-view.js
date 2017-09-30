@@ -51,6 +51,7 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
     connectedCallback() {
         this._enableProperties();
         this.__connected = true;
+        this._render();
     }
 
     disconnectedCallback() {
@@ -70,9 +71,9 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
             const templateFunc = recurseTemplates(this, true, this.templateScope);
 
             render(templateFunc(this.value), this.shadowRoot);
-        }
 
-        this.dispatchEvent(new CustomEvent('ags-render'));
+            this.dispatchEvent(new CustomEvent('ags-render'));
+        }
     }
 }
 
