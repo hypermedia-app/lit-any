@@ -1,4 +1,5 @@
 {
+  "name": "augeas",
   "private": true,
   "devDependencies": {
     "web-component-tester": "~4.2.2",
