@@ -7,9 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "npm run lint && npm run build-tests && wct --plugin sauce",
-    "test-local": "npm run lint && npm run build-tests && npm run wct",
-    "build-tests": "webpack",
+    "test": "npm run lint && webpack && wct --plugin sauce",
+    "test-local": "npm run lint && webpack && npm run wct",
     "lint": "eslint src/**/*.js test/**/*.js",
     "wct": "wct -l chrome -p --skip-selenium-install"
   },
