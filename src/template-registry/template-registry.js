@@ -1,3 +1,5 @@
+import 'core-js/modules/es6.array.find';
+
 import TemplateSelectorBuilder from './TemplateSelectorBuilder';
 
 export default class TemplateRegistry {

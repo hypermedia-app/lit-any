@@ -9,6 +9,7 @@
   "scripts": {
     "test": "npm run lint && webpack && wct --plugin sauce",
     "test-local": "npm run lint && webpack && npm run wct",
+    "build-tests": "webpack",
     "lint": "eslint src/**/*.js test/**/*.js",
     "wct": "wct -l chrome -p --skip-selenium-install"
   },
@@ -29,6 +30,7 @@
   },
   "dependencies": {
     "@polymer/polymer": "^3.0.0-pre.1",
+    "core-js": "^2.5.1",
     "lit-html": "^0.7.1"
   }
 }
