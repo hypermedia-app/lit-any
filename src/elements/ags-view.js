@@ -1,33 +1,5 @@
-import { render } from 'lit-html/lib/lit-extended';
 import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessors';
-import { html } from 'lit-html';
-import { ViewTemplates } from '../template-registry';
-
-function recurseTemplates(agsView, root, inheritedScope) {
-    return (value, currentScope) => {
-        let templateResult;
-        const scope = currentScope || inheritedScope;
-        const template = ViewTemplates.getTemplate({
-            value,
-            scope,
-        });
-
-        if (template) {
-            if (root && template.name) {
-                agsView.setAttribute('data-template', template.name);
-            }
-
-            templateResult = template.render(recurseTemplates(agsView, false, scope), value, scope);
-        } else if (agsView.ignoreMissing) {
-            templateResult = '';
-        } else {
-            templateResult = html`Template not found`;
-            console.warn('Template not found for', value);
-        }
-
-        return templateResult;
-    };
-}
+import render from '../render';
 
 export default class AgsView extends PropertyAccessors(HTMLElement) {
     constructor() {
@@ -68,9 +40,7 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
                 this.attachShadow({ mode: 'open' });
             }
 
-            const templateFunc = recurseTemplates(this, true, this.templateScope);
-
-            render(templateFunc(this.value), this.shadowRoot);
+            render({ value: this.value, scope: this.templateScope }, this.shadowRoot);
 
             this.dispatchEvent(new CustomEvent('ags-render'));
         }

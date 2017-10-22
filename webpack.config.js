@@ -30,5 +30,6 @@ const createConfig = (glob, targetPath) => ({
 
 module.exports = [
     createConfig('./test/elements/*.js', 'elements'),
-    createConfig('./test/templates/*.js', 'templates')
+    createConfig('./test/templates/*.js', 'templates'),
+    createConfig('./test/render/*.js', 'render'),
 ];
