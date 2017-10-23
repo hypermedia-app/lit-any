@@ -15,8 +15,8 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
     static get observedAttributes() {
         return [
             'value',
-            'templateScope',
-            'ignoreMissing',
+            'template-scope',
+            'ignore-missing',
         ];
     }
 
@@ -43,6 +43,14 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
             render({ value: this.value, scope: this.templateScope }, this.shadowRoot);
 
             this.dispatchEvent(new CustomEvent('ags-render'));
+        }
+    }
+
+    _attributeToProperty(attribute, value, type) {
+        if (attribute === 'ignore-missing') {
+            super._attributeToProperty(attribute, value, Boolean);
+        } else {
+            super._attributeToProperty(attribute, value, type);
         }
     }
 }

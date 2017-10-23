@@ -6,13 +6,27 @@ describe('ags-view', () => {
     let agsView;
     let getTemplate;
 
-    beforeEach(() => {
-        agsView = fixture('ags-view');
+    describe('with attributes', () => {
+        beforeEach(() => {
+            agsView = fixture('ags-view-attrs');
+        });
+
+        it('sets scope', () => {
+            expect(agsView.templateScope).to.equal('some scope');
+        });
+
+        it('sets ignore', () => {
+            expect(agsView.ignoreMissing).to.be.true;
+        });
     });
 
     describe('rendering template', () => {
         beforeEach(() => {
             getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+        });
+
+        beforeEach(() => {
+            agsView = fixture('ags-view');
         });
 
         afterEach(() => {
@@ -89,6 +103,10 @@ describe('ags-view', () => {
     describe('rendering nested templates', () => {
         beforeEach(() => {
             getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+        });
+
+        beforeEach(() => {
+            agsView = fixture('ags-view');
         });
 
         afterEach(() => {
@@ -186,6 +204,10 @@ describe('ags-view', () => {
             getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
         });
 
+        beforeEach(() => {
+            agsView = fixture('ags-view');
+        });
+
         afterEach(() => {
             getTemplate.restore();
         });
@@ -204,6 +226,10 @@ describe('ags-view', () => {
             manualView.value = {
                 inserted: 'manually',
             };
+        });
+
+        beforeEach(() => {
+            agsView = fixture('ags-view');
         });
 
         it('should render correctly', (done) => {
