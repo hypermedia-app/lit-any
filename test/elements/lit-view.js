@@ -41,7 +41,7 @@ describe('lit-view', () => {
 
         it('should raise event when value changes', (done) => {
             // then
-            testHandler(agsView, 'ags-render', () => {
+            testHandler(agsView, 'ly-render', () => {
                 done();
             });
 
@@ -180,8 +180,7 @@ describe('lit-view', () => {
                 },
             });
 
-            debugger;
-            testHandler(agsView, 'ags-render', () => {
+            testHandler(agsView, 'ly-render', () => {
                 // then
                 expect(getTemplate.firstCall.args[0].scope).to.be.null;
                 expect(getTemplate.secondCall.args[0].scope).to.equal('nested');
@@ -239,7 +238,7 @@ describe('lit-view', () => {
             });
 
             // then
-            testHandler(manualView, 'ags-render', () => {
+            testHandler(manualView, 'ly-render', () => {
                 const span = manualView.shadowRoot.querySelector('span');
                 expect(span.textContent).to.equal('manually');
                 done();
