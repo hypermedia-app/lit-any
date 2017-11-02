@@ -61,7 +61,7 @@ be rendered based on the presence of the `large` property.
 To do actual rendering you don't really need a dedicated custom element. Any container will be fine
 
 ```html
-<div id="personCoontainer"></div>
+<div id="personContainer"></div>
 ```
 
 ```javascript
@@ -85,7 +85,7 @@ render({ value: person }, personContainer);
 Alternatively you can use the `lit-view` instead of rendering directly to any node.
 
 ```html
-<lit-view id="personCoontainer"></lit-view>
+<lit-view id="personContainer"></lit-view>
 ```
 
 ```javascript
@@ -100,6 +100,62 @@ const person = {
 const personContainer = document.querySelector('#personContainer');
 
 personContainer.value = person;
+```
+
+## More features
+
+### Scoping
+
+When you want to display same data differently in different context.
+
+```javascript
+import { ViewTemplates } from 'lit-any';
+import { html } from 'lit-html';
+import * as moment from 'moment';
+
+// show nicely formatted date by default
+ViewTemplates.when
+    .value(v => (v instanceOf Date))
+    .renders((_, date) => html`<span>${moment(date).format('LL')}</span>`);
+
+// but display calendar in 'event-large' scope
+ViewTemplates.when
+    .value(v => (v instanceOf Date))
+    .scope('event-large')
+    .renders((_, date) => html`<datetime-picker disabled datetime="${date}"></datetime-picker>`);
+```
+
+Then set the scope on `lit-view` element:
+
+```html
+<lit-view value="{{someDate}}" template-scope="event-large"></lit-view>
+``` 
+
+Or pass to the `render` function:
+
+```javascript
+import { render } from 'lit-any';
+
+const eventDateElement = document.querySelector('#eventDate').
+
+render({
+    value: new Date(),
+    scope: 'event-large',
+}, eventDateElement);
+```
+
+Or override from parent template:
+
+```javascript
+ViewTemplates.when
+    .value(v => v.type === 'Event')
+    .renders((renderChild, event) => html`
+        <my-event-element>
+            <div slot="calendar">
+                ${renderChild(event.date, 'event-large')}
+            </div>
+        </my-event-element>
+    `);
 ```
 
 ## To Do
