@@ -1,8 +1,0 @@
-{
-  "name": "augeas",
-  "private": true,
-  "devDependencies": {
-    "web-component-tester": "^6.3.0",
-    "webcomponentsjs": "^1.0.10"
-  }
-}
