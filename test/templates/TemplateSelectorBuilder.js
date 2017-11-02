@@ -38,4 +38,20 @@ describe('TemplateSelectorBuilder', () => {
             })).to.be.true;
         });
     });
+
+    describe('adding scope matcher shorthand', () => {
+        it('creates a matcher', () => {
+            // given
+            const valueToMatch = 'the scope';
+
+            // when
+            builder.scope('the scope');
+
+            // then
+            const matcher = builder._selector._matchers[0];
+            expect(matcher({
+                scope: valueToMatch,
+            })).to.be.true;
+        });
+    });
 });

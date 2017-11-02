@@ -7,13 +7,17 @@ export default class TemplateSelectorBuilder {
     }
 
     value(valueMatcher) {
-        this._selector._matchers.push(contraint => valueMatcher(contraint.value));
+        this._selector._matchers.push(constraint => valueMatcher(constraint.value));
 
         return this;
     }
 
     scope(scopeMatcher) {
-        this._selector._matchers.push(contraint => scopeMatcher(contraint.scope));
+        if (typeof scopeMatcher === 'string') {
+            return this.scope(s => s === scopeMatcher);
+        }
+
+        this._selector._matchers.push(constraint => scopeMatcher(constraint.scope));
 
         return this;
     }
