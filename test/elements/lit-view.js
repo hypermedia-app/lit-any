@@ -1,14 +1,14 @@
 import { html } from 'lit-html';
-import '../../src/elements/ags-view';
+import '../../src/elements/lit-view';
 import { ViewTemplates } from '../../src/template-registry';
 
-describe('ags-view', () => {
+describe('lit-view', () => {
     let agsView;
     let getTemplate;
 
     describe('with attributes', () => {
         beforeEach(() => {
-            agsView = fixture('ags-view-attrs');
+            agsView = fixture('lit-view-attrs');
         });
 
         it('sets scope', () => {
@@ -26,7 +26,7 @@ describe('ags-view', () => {
         });
 
         beforeEach(() => {
-            agsView = fixture('ags-view');
+            agsView = fixture('lit-view');
         });
 
         afterEach(() => {
@@ -106,7 +106,7 @@ describe('ags-view', () => {
         });
 
         beforeEach(() => {
-            agsView = fixture('ags-view');
+            agsView = fixture('lit-view');
         });
 
         afterEach(() => {
@@ -205,7 +205,7 @@ describe('ags-view', () => {
         });
 
         beforeEach(() => {
-            agsView = fixture('ags-view');
+            agsView = fixture('lit-view');
         });
 
         afterEach(() => {
@@ -222,14 +222,14 @@ describe('ags-view', () => {
 
         beforeEach(() => {
             getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
-            manualView = document.createElement('ags-view');
+            manualView = document.createElement('lit-view');
             manualView.value = {
                 inserted: 'manually',
             };
         });
 
         beforeEach(() => {
-            agsView = fixture('ags-view');
+            agsView = fixture('lit-view');
         });
 
         it('should render correctly', (done) => {

@@ -1,7 +1,7 @@
 import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessors';
 import render from '../render';
 
-export default class AgsView extends PropertyAccessors(HTMLElement) {
+export default class LitView extends PropertyAccessors(HTMLElement) {
     constructor() {
         super();
 
@@ -42,7 +42,7 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
 
             render({ value: this.value, scope: this.templateScope }, this.shadowRoot);
 
-            this.dispatchEvent(new CustomEvent('ags-render'));
+            this.dispatchEvent(new CustomEvent('ly-render'));
         }
     }
 
@@ -55,6 +55,6 @@ export default class AgsView extends PropertyAccessors(HTMLElement) {
     }
 }
 
-AgsView.createPropertiesForAttributes();
+LitView.createPropertiesForAttributes();
 
-window.customElements.define('ags-view', AgsView);
+window.customElements.define('lit-view', LitView);

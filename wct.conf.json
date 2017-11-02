@@ -2,7 +2,7 @@
   "suites": [
     "test/transpiled/render/*.js",
     "test/transpiled/templates/*.js",
-    "test/elements/ags-view.html"
+    "test/elements/lit-view.html"
   ],
   "plugins": {
     "sauce": {

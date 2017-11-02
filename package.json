@@ -1,8 +1,8 @@
 {
-  "name": "augeas",
+  "name": "lit-any",
   "main": "src/index.js",
   "module": "src/index.js",
-  "version": "0.2.0-aloha",
+  "version": "0.3.0",
   "directories": {
     "test": "tests"
   },
