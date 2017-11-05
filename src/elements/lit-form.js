@@ -1,10 +1,7 @@
 import { render as litRender } from 'lit-html/lib/lit-extended';
 import { html } from 'lit-html';
 import LitAnyBase from './lit-any-base';
-
-function hasAnythingToRender(contract) {
-    return !!contract.title;
-}
+import contract from './contract-helpers';
 
 export default class LitForm extends LitAnyBase {
     constructor() {
@@ -38,7 +35,7 @@ export default class LitForm extends LitAnyBase {
     __formTemplate() {
         return html`
             <form>
-                ${hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
+                ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
             </form>`;
     }
 
