@@ -2,6 +2,7 @@ import { render as litRender } from 'lit-html/lib/lit-extended';
 import { html } from 'lit-html';
 import LitAnyBase from './lit-any-base';
 import contract from './contract-helpers';
+import render from '../render';
 
 export default class LitForm extends LitAnyBase {
     constructor() {
@@ -40,50 +41,34 @@ export default class LitForm extends LitAnyBase {
     }
 
     __fieldsetTemplate() {
-        return html`<fieldset><legend>${this.contract.title}</legend></fieldset>`;
+        let fieldsArray = [];
+        if (contract.fieldsAreIterable(this.contract)) {
+            fieldsArray = this.contract.fields;
+        }
+
+        return html`
+            <fieldset>
+                ${this.__fieldsetHeading(this.contract)}
+                
+                ${fieldsArray.map(f => this.__fieldWrapperTemplate(f))}
+            </fieldset>`;
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    __fieldWrapperTemplate(field) {
+        return html`<div class="field">${render.field(field)}</div>`;
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    __fieldsetHeading(currentContract) {
+        if (!currentContract.title) {
+            return html``;
+        }
+
+        return html`<legend>${currentContract.title}</legend>`;
     }
 }
 
 LitForm.createPropertiesForAttributes();
 
 window.customElements.define('lit-form', LitForm);
-
-/**
- * Uber element `<ags-form>`
- *
- * @demo ../demo/fp-category-page-demo.html
- *
-
-@template(`<fieldset>
-    <legend hidden$="[[!contract.title]]">[[contract.title]]</legend>
-    <template is="dom-repeat" items="[[contract.body]]">
-        <label>
-            [[item.title]]
-            <ags-field property="[[item.property]]"
-                       range="[[item.range]]"
-                       required="[[item.required]]"
-                       on-value-changed="_fieldValueChanged"></ags-field>
-        </label>
-    </template>
-</fieldset>`)
-
-export class AgsForm {
-
-    @notify
-    value: Object = null;
-
-    contract: IContract;
-
-    _fieldValueChanged(e) {
-        if(!e.detail.value) return;
-
-        const value = this.value || {};
-
-        value[e.model.item.property] = [{
-            '@value': e.detail.value
-        }];
-
-        this.set('value', value);
-    }
-}
-*/

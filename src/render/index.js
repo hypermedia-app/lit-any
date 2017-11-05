@@ -25,8 +25,17 @@ function recurseTemplates(ignoreMissing, inheritedScope) {
     };
 }
 
-export default function render(what, where) {
+function view(what, where) {
     const templateFunc = recurseTemplates(false, null);
 
     litRender(templateFunc(what.value, what.scope), where);
 }
+
+function field() {
+
+}
+
+export default {
+    view,
+    field,
+};

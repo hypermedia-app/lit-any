@@ -24,7 +24,7 @@ export default class LitView extends LitAnyBase {
                 this.attachShadow({ mode: 'open' });
             }
 
-            render({ value: this.value, scope: this.templateScope }, this.shadowRoot);
+            render.view({ value: this.value, scope: this.templateScope }, this.shadowRoot);
 
             this.dispatchEvent(new CustomEvent('ly-render'));
         }

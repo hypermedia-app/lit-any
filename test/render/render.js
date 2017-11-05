@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 import render from '../../src/render';
 import { ViewTemplates } from '../../src/template-registry';
 
-describe('render', () => {
+describe('render view', () => {
     let getTemplate;
 
     beforeEach(() => {
@@ -24,7 +24,7 @@ describe('render', () => {
         };
 
         // when
-        render({ value }, container);
+        render.view({ value }, container);
 
         // then
         const span = container.querySelector('span');
@@ -42,7 +42,7 @@ describe('render', () => {
         };
 
         // when
-        render({ value, scope: 'some scope' }, container);
+        render.view({ value, scope: 'some scope' }, container);
 
         // then
         expect(container.textContent).to.equal('some scope');
