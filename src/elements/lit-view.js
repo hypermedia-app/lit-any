@@ -1,15 +1,13 @@
-import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessors';
 import render from '../render';
+import LitAnyBase from './lit-any-base';
 
-export default class LitView extends PropertyAccessors(HTMLElement) {
+export default class LitView extends LitAnyBase {
     constructor() {
         super();
 
         this.templateScope = null;
         this.value = null;
         this.ignoreMissing = false;
-
-        this.__connected = false;
     }
 
     static get observedAttributes() {
@@ -18,20 +16,6 @@ export default class LitView extends PropertyAccessors(HTMLElement) {
             'template-scope',
             'ignore-missing',
         ];
-    }
-
-    connectedCallback() {
-        this._enableProperties();
-        this.__connected = true;
-        this._render();
-    }
-
-    disconnectedCallback() {
-        this.__connected = false;
-    }
-
-    _propertiesChanged() {
-        this._render();
     }
 
     _render() {

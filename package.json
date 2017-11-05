@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "npm run lint && webpack && wct --plugin sauce",
-    "test-local": "npm run lint && webpack && npm run wct",
+    "test-local": "npm run lint && webpack -w & npm run wct",
     "build-tests": "webpack",
     "lint": "eslint src/**/*.js test/**/*.js",
     "wct": "wct -l chrome -p --skip-selenium-install"
@@ -23,6 +23,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jasmine": "^2.8.4",
     "eslint-plugin-sinon": "^0.2.0",
+    "p-event": "^1.3.0",
     "wct-sauce": "^1.8.6",
     "web-component-tester": "^6.1.5",
     "webpack": "^3.5.6",
