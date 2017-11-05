@@ -77,4 +77,30 @@ describe('lit-form', () => {
         // then
         expect(litForm.form.querySelector('legend')).to.be.null;
     });
+
+    async(it, 'should set form[action] to contract\'s target', async () => {
+        // given
+        litForm.contract = {
+            target: 'http://exmple.com/resource',
+        };
+
+        // when
+        await forRender(litForm);
+
+        // then
+        expect(litForm.form.getAttribute('action')).to.equal('http://exmple.com/resource');
+    });
+
+    async(it, 'should set form[method] to contract\'s method', async () => {
+        // given
+        litForm.contract = {
+            method: 'POST',
+        };
+
+        // when
+        await forRender(litForm);
+
+        // then
+        expect(litForm.form.getAttribute('method')).to.equal('POST');
+    });
 });

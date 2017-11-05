@@ -35,7 +35,7 @@ export default class LitForm extends LitAnyBase {
 
     __formTemplate() {
         return html`
-            <form>
+            <form action$="${this.contract.target}" method$="${this.contract.method}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
             </form>`;
     }
