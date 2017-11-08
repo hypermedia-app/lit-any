@@ -9,6 +9,7 @@ export default class LitForm extends LitAnyBase {
         super();
 
         this.contract = null;
+        this.value = {};
     }
 
     get form() {
@@ -54,9 +55,18 @@ export default class LitForm extends LitAnyBase {
             </fieldset>`;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     __fieldWrapperTemplate(field) {
-        return html`<div class="field">${render.field(field)}</div>`;
+        return html`<div class="field">${this.__fieldTemplate(field)}</div>`;
+    }
+
+    __fieldTemplate(field) {
+        return render.field(field, this.value[field.property], (e) => {
+            if (e.constructor === 'CustomEvent') {
+                this.value[field.property] = e.detail.value;
+            }
+
+            this.value[field.property] = e.target.value;
+        });
     }
 
     // eslint-disable-next-line class-methods-use-this
