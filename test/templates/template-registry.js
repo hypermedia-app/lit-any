@@ -1,5 +1,8 @@
 import { html, render } from 'lit-html';
 import TemplateRegistry from '../../src/template-registry/template-registry';
+import { TemplateSelectorBuilder } from '../../src/template-registry/TemplateSelectorBuilder';
+
+class TestBuilder extends TemplateSelectorBuilder { }
 
 describe('Template Registry', () => {
     let registry;
@@ -9,7 +12,7 @@ describe('Template Registry', () => {
     };
 
     beforeEach(() => {
-        registry = new TemplateRegistry();
+        registry = new TemplateRegistry(TestBuilder);
     });
 
     describe('initially', () => {
@@ -21,9 +24,9 @@ describe('Template Registry', () => {
     describe('when adding selectors', () => {
         it('should count them', () => {
             // given
-            registry.when.value(() => true).renders(html``);
-            registry.when.value(() => true).renders(html``);
-            registry.when.scope(() => true).renders(html``);
+            registry.when.renders(html``);
+            registry.when.renders(html``);
+            registry.when.renders(html``);
 
             // then
             expect(registry.count).to.be.equal(3);

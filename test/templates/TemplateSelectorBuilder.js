@@ -1,10 +1,10 @@
-import TemplateSelectorBuilder from '../../src/template-registry/TemplateSelectorBuilder';
+import { ViewTemplateSelectorBuilder, FieldTemplateSelectorBuilder } from '../../src/template-registry/TemplateSelectorBuilder';
 
-describe('TemplateSelectorBuilder', () => {
+describe('ViewTemplateSelectorBuilder', () => {
     let builder;
 
     beforeEach(() => {
-        builder = new TemplateSelectorBuilder({});
+        builder = new ViewTemplateSelectorBuilder({});
     });
 
     describe('adding value matcher function', () => {
@@ -13,7 +13,7 @@ describe('TemplateSelectorBuilder', () => {
             const valueToMatch = 'test val';
 
             // when
-            builder.value(v => v === 'test val');
+            builder.valueMatches(v => v === 'test val');
 
             // then
             const matcher = builder._selector._matchers[0];
@@ -29,7 +29,7 @@ describe('TemplateSelectorBuilder', () => {
             const valueToMatch = 'the scope';
 
             // when
-            builder.scope(s => s === 'the scope');
+            builder.scopeMatches(s => s === 'the scope');
 
             // then
             const matcher = builder._selector._matchers[0];
@@ -45,13 +45,37 @@ describe('TemplateSelectorBuilder', () => {
             const valueToMatch = 'the scope';
 
             // when
-            builder.scope('the scope');
+            builder.scopeMatches('the scope');
 
             // then
             const matcher = builder._selector._matchers[0];
             expect(matcher({
                 scope: valueToMatch,
             })).to.be.true;
+        });
+    });
+});
+
+describe('FieldTemplateSelectorBuilder', () => {
+    let builder;
+
+    beforeEach(() => {
+        builder = new FieldTemplateSelectorBuilder({});
+    });
+
+    describe('adding field matcher function', () => {
+        it('creates a matcher', () => {
+            // given
+            const field = {};
+            const matchFunc = sinon.stub().returns(true);
+
+            // when
+            builder.fieldMatches(matchFunc);
+
+            // then
+            const matcher = builder._selector._matchers[0];
+            expect(matcher({ field })).to.be.true;
+            expect(matchFunc.firstCall.args[0]).to.be.equal(field);
         });
     });
 });

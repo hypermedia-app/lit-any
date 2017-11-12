@@ -1,10 +1,9 @@
 import 'core-js/modules/es6.array.find';
 
-import TemplateSelectorBuilder from './TemplateSelectorBuilder';
-
 export default class TemplateRegistry {
-    constructor() {
+    constructor(Builder) {
         this._templates = [];
+        this._builder = Builder;
     }
 
     get count() {
@@ -16,7 +15,7 @@ export default class TemplateRegistry {
      * @returns {TemplateSelectorBuilder}
      */
     get when() {
-        return new TemplateSelectorBuilder(this);
+        return new this._builder(this);
     }
 
     getTemplate(criteria) {
