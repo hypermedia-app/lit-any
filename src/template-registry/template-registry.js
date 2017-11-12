@@ -20,7 +20,7 @@ export default class TemplateRegistry {
 
     getTemplate(criteria) {
         let selectedTemplate;
-        if (criteria.value !== null && typeof criteria.value !== 'undefined') {
+        if (criteria !== null && typeof criteria !== 'undefined') {
             selectedTemplate = this._templates.find(template =>
                 template.selector.matches(criteria));
         }

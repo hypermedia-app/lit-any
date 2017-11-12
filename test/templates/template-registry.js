@@ -106,7 +106,7 @@ describe('Template Registry', () => {
             expect(result).to.be.null;
         });
 
-        it('should not call matchers if value is null', () => {
+        it('should not call matchers if argument is null', () => {
             // given
             const template = {
                 selector: {
@@ -116,15 +116,13 @@ describe('Template Registry', () => {
             registry._templates.push(template);
 
             // when
-            registry.getTemplate({
-                value: null,
-            });
+            registry.getTemplate(null);
 
             // then
             expect(template.selector.matches.called).to.be.false;
         });
 
-        it('should not call matchers if value is undefined', () => {
+        it('should not call matchers if argument is undefined', () => {
             // given
             const template = {
                 selector: {
@@ -134,48 +132,10 @@ describe('Template Registry', () => {
             registry._templates.push(template);
 
             // when
-            registry.getTemplate({
-                value: undefined,
-            });
+            registry.getTemplate(undefined);
 
             // then
             expect(template.selector.matches.called).to.be.false;
-        });
-
-        it('should not call matchers if value is empty string', () => {
-            // given
-            const template = {
-                selector: {
-                    matches: sinon.spy(),
-                },
-            };
-            registry._templates.push(template);
-
-            // when
-            registry.getTemplate({
-                value: '',
-            });
-
-            // then
-            expect(template.selector.matches.called).to.be.true;
-        });
-
-        it('should not call matchers if value is empty zero', () => {
-            // given
-            const template = {
-                selector: {
-                    matches: sinon.spy(),
-                },
-            };
-            registry._templates.push(template);
-
-            // when
-            registry.getTemplate({
-                value: 0,
-            });
-
-            // then
-            expect(template.selector.matches.called).to.be.true;
         });
     });
 

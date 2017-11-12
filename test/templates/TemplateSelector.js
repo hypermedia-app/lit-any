@@ -1,4 +1,4 @@
-import TemplateSelector from '../../src/template-registry/TemplateSelector';
+import { TemplateSelector, ViewTemplateSelector, FieldTemplateSelector } from '../../src/template-registry/TemplateSelector';
 
 describe('TemplateSelector', () => {
     let selector;
@@ -41,6 +41,118 @@ describe('TemplateSelector', () => {
 
             // then
             expect(spy.calledWith({ value, property, scope })).to.be.true;
+        });
+    });
+});
+
+describe('ViewTemplateSelector', () => {
+    let selector;
+
+    beforeEach(() => {
+        selector = new ViewTemplateSelector();
+    });
+
+    describe('shouldMatch', () => {
+        it('returns false if value is null', () => {
+            // given
+            const criteria = { value: null };
+
+            // when
+            const shouldMatch = selector.shouldMatch(criteria);
+
+            // then
+            expect(shouldMatch).to.be.false;
+        });
+
+        it('returns false if value is undefined', () => {
+            // given
+            const criteria = { };
+
+            // when
+            const shouldMatch = selector.shouldMatch(criteria);
+
+            // then
+            expect(shouldMatch).to.be.false;
+        });
+    });
+
+    describe('matches', () => {
+        it('should not match when value is null', () => {
+            // given
+            const criteria = { value: null };
+
+            // when
+            const matches = selector.matches(criteria);
+
+            // then
+            expect(matches).to.be.false;
+        });
+
+        it('should not match when value is undefined', () => {
+            // given
+            const criteria = { };
+
+            // when
+            const matches = selector.matches(criteria);
+
+            // then
+            expect(matches).to.be.false;
+        });
+    });
+});
+
+describe('FieldTemplateSelector', () => {
+    let selector;
+
+    beforeEach(() => {
+        selector = new FieldTemplateSelector();
+    });
+
+    describe('shouldMatch', () => {
+        it('returns false if field is null', () => {
+            // given
+            const criteria = { field: null };
+
+            // when
+            const shouldMatch = selector.shouldMatch(criteria);
+
+            // then
+            expect(shouldMatch).to.be.false;
+        });
+
+        it('returns false if field is undefined', () => {
+            // given
+            const criteria = { };
+
+            // when
+            const shouldMatch = selector.shouldMatch(criteria);
+
+            // then
+            expect(shouldMatch).to.be.false;
+        });
+    });
+
+    describe('matches', () => {
+        it('should not match when field is null', () => {
+            // given
+            const criteria = { field: null };
+
+            // when
+            const matches = selector.matches(criteria);
+
+            // then
+            expect(matches).to.be.false;
+        });
+
+        it('should not match when field is undefined', () => {
+            // given
+            const criteria = { };
+
+            // when
+            const matches = selector.matches(criteria);
+
+            // then
+            expect(matches).to.be.false;
         });
     });
 });

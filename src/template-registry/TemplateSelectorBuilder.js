@@ -1,14 +1,19 @@
-import TemplateSelector from './TemplateSelector';
+import { ViewTemplateSelector, FieldTemplateSelector } from './TemplateSelector';
 
 export class TemplateSelectorBuilder {
     constructor(registry) {
         this._registry = registry;
-        this._selector = new TemplateSelector();
+        this._selector = this._createSelector();
     }
 
     renders(fn) {
         this._registry.push(this._selector, fn);
         return this._registry;
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    _createSelector() {
+        return null;
     }
 }
 
@@ -28,6 +33,11 @@ export class ViewTemplateSelectorBuilder extends TemplateSelectorBuilder {
 
         return this;
     }
+
+    // eslint-disable-next-line class-methods-use-this
+    _createSelector() {
+        return new ViewTemplateSelector();
+    }
 }
 
 export class FieldTemplateSelectorBuilder extends TemplateSelectorBuilder {
@@ -35,5 +45,10 @@ export class FieldTemplateSelectorBuilder extends TemplateSelectorBuilder {
         this._selector._matchers.push(constraint => fieldMatchFunc(constraint.field));
 
         return this;
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    _createSelector() {
+        return new FieldTemplateSelector();
     }
 }
