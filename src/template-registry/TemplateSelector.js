@@ -6,6 +6,7 @@ export class TemplateSelector {
 
     matches(criteria) {
         if (this.shouldMatch(criteria) === false) {
+            console.warn('Cannot render view for', criteria);
             return false;
         }
 

@@ -72,6 +72,7 @@ export default class LitForm extends LitAnyBase {
         const fieldValue = this.value[field.property] || null;
 
         if (fieldTemplate === null) {
+            console.warn('Could not find template for field. Rendering fallback input. Field was:', field);
             return html`<input class="fallback" on-input="${callback}" value="${fieldValue || ''}">`;
         }
 
