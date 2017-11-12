@@ -1,20 +1,23 @@
 import { html } from 'lit-html/lib/lit-extended';
 import '../../src/elements/lit-form';
 import { async, forRender } from '../async-tests';
-import render from '../../src/render';
+import { FieldTemplates } from '../../src/template-registry';
 
 describe('lit-form', () => {
     let litForm;
-    let renderFunc;
+    let getTemplate;
+    const template = {};
 
     beforeEach(() => {
         litForm = fixture('lit-form');
-        renderFunc = sinon.spy(render, 'field');
+        getTemplate = sinon.stub(FieldTemplates, 'getTemplate');
+        getTemplate.returns(template);
+        template.render = sinon.spy();
     });
 
     afterEach(() => {
-        if (renderFunc) {
-            renderFunc.restore();
+        if (getTemplate) {
+            getTemplate.restore();
         }
     });
 
@@ -65,7 +68,7 @@ describe('lit-form', () => {
         await forRender(litForm);
 
         // then
-        expect(renderFunc.getCalls().length).to.equal(4);
+        expect(getTemplate.getCalls().length).to.equal(4);
     });
 
     async(it, 'should pass pre-existing value when rendering field', async () => {
@@ -83,14 +86,13 @@ describe('lit-form', () => {
         await forRender(litForm);
 
         // then
-        const renderCall = renderFunc.firstCall;
+        const renderCall = template.render.firstCall;
         expect(renderCall.args[1]).to.equal('10');
     });
 
     async(it, 'should pass a change callback which sets value', async () => {
         // given
-        renderFunc.restore();
-        sinon.stub(render, 'field', (f, o, callback) => html`<input type="text" on-input="${callback}" />`);
+        template.render = (f, v, callback) => html`<input type="text" on-input="${callback}" />`;
         litForm.contract = {
             fields: [{
                 property: 'test',

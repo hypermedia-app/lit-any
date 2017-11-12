@@ -2,7 +2,7 @@ import { render as litRender } from 'lit-html/lib/lit-extended';
 import { html } from 'lit-html';
 import LitAnyBase from './lit-any-base';
 import contract from './contract-helpers';
-import render from '../render';
+import { FieldTemplates } from '../template-registry';
 
 export default class LitForm extends LitAnyBase {
     constructor() {
@@ -60,13 +60,16 @@ export default class LitForm extends LitAnyBase {
     }
 
     __fieldTemplate(field) {
-        return render.field(field, this.value[field.property], (e) => {
+        const callback = (e) => {
             if (e.constructor === 'CustomEvent') {
                 this.value[field.property] = e.detail.value;
             }
 
             this.value[field.property] = e.target.value;
-        });
+        };
+
+        const fieldTemplate = FieldTemplates.getTemplate(field);
+        return fieldTemplate.render(field, this.value[field.property], callback);
     }
 
     // eslint-disable-next-line class-methods-use-this

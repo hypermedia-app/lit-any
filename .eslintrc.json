@@ -17,6 +17,7 @@
     },
     "globals": {
         "testHandler": true,
-        "sinon": true
+        "sinon": true,
+        "fixture": true
     }
 }

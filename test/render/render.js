@@ -24,7 +24,7 @@ describe('render view', () => {
         };
 
         // when
-        render.view({ value }, container);
+        render({ value }, container);
 
         // then
         const span = container.querySelector('span');
@@ -42,7 +42,7 @@ describe('render view', () => {
         };
 
         // when
-        render.view({ value, scope: 'some scope' }, container);
+        render({ value, scope: 'some scope' }, container);
 
         // then
         expect(container.textContent).to.equal('some scope');
