@@ -151,4 +151,19 @@ describe('lit-form', () => {
         // then
         expect(litForm.form.getAttribute('method')).to.equal('POST');
     });
+
+    async(it, 'should pass field to FieldTemplates.getTemplate', async () => {
+        // given
+        const field = {};
+        litForm.contract = {
+            fields: [field],
+        };
+
+        // when
+        await forRender(litForm);
+
+        // then
+        const getTemplateCall = getTemplate.firstCall;
+        expect(getTemplateCall.args[0].field).to.equal(field);
+    });
 });

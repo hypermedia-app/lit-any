@@ -68,7 +68,7 @@ export default class LitForm extends LitAnyBase {
             this.value[field.property] = e.target.value;
         };
 
-        const fieldTemplate = FieldTemplates.getTemplate(field);
+        const fieldTemplate = FieldTemplates.getTemplate({ field );
         return fieldTemplate.render(field, this.value[field.property], callback);
     }
 
