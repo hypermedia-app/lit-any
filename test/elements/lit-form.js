@@ -90,6 +90,23 @@ describe('lit-form', () => {
         expect(renderCall.args[1]).to.equal('10');
     });
 
+    async(it, 'should pass null if pre-existing value is undefined when rendering field', async () => {
+        // given
+        litForm.contract = {
+            fields: [{
+                property: 'prop',
+            }],
+        };
+        litForm.value = {};
+
+        // when
+        await forRender(litForm);
+
+        // then
+        const renderCall = template.render.firstCall;
+        expect(renderCall.args[1]).to.be.null;
+    });
+
     async(it, 'should pass a change callback which sets value', async () => {
         // given
         template.render = (f, v, callback) => html`<input type="text" on-input="${callback}" />`;
@@ -165,5 +182,40 @@ describe('lit-form', () => {
         // then
         const getTemplateCall = getTemplate.firstCall;
         expect(getTemplateCall.args[0].field).to.equal(field);
+    });
+
+    describe('when template was not found', () => {
+        async(it, 'should return a plain input', async () => {
+            // given
+            getTemplate.returns(null);
+            litForm.contract = {
+                fields: [{}],
+            };
+
+            // when
+            await forRender(litForm);
+
+            // then
+            expect(litForm.form.querySelector('.field input.fallback')).to.be.not.undefined;
+        });
+
+        async(it, 'should set fallback input value', async () => {
+            // given
+            getTemplate.returns(null);
+            litForm.contract = {
+                fields: [{
+                    property: 'test',
+                }],
+            };
+            litForm.value = {
+                test: 'qwerty',
+            };
+
+            // when
+            await forRender(litForm);
+
+            // then
+            expect(litForm.form.querySelector('.field input.fallback').value).to.be.equal('qwerty');
+        });
     });
 });
