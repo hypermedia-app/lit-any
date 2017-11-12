@@ -72,9 +72,7 @@ export default class LitForm extends LitAnyBase {
         const fieldValue = this.value[field.property] || null;
 
         if (fieldTemplate === null) {
-            // eslint-disable-next-line no-debugger
-            debugger;
-            return html`<input class="fallback" on-input="${callback}" value="${fieldValue}">`;
+            return html`<input class="fallback" on-input="${callback}" value="${fieldValue || ''}">`;
         }
 
         return fieldTemplate.render(field, fieldValue, callback);

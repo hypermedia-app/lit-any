@@ -130,6 +130,28 @@ describe('FieldTemplateSelector', () => {
             // then
             expect(shouldMatch).to.be.false;
         });
+
+        it('returns false if field.property is null', () => {
+            // given
+            const criteria = { field: { property: null } };
+
+            // when
+            const shouldMatch = selector.shouldMatch(criteria);
+
+            // then
+            expect(shouldMatch).to.be.false;
+        });
+
+        it('returns false if field.property is undefined', () => {
+            // given
+            const criteria = { field: {} };
+
+            // when
+            const shouldMatch = selector.shouldMatch(criteria);
+
+            // then
+            expect(shouldMatch).to.be.false;
+        });
     });
 
     describe('matches', () => {
