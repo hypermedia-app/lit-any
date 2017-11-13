@@ -57,7 +57,10 @@ export default class LitForm extends LitAnyBase {
 
     __fieldWrapperTemplate(field) {
         const fieldId = field.property;
-        return html`<div class="field"><label for$="${fieldId}">${field.title}</label> ${this.__fieldTemplate(field, fieldId)}</div>`;
+        return html`<div class="field">
+                        <label for$="${fieldId}">${field.title || field.property}</label>
+                        ${this.__fieldTemplate(field, fieldId)}
+                    </div>`;
     }
 
     __fieldTemplate(field, fieldId) {

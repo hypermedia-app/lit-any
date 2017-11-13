@@ -84,6 +84,32 @@ describe('lit-form', () => {
         expect(litForm.form.querySelector('label').getAttribute('for')).to.be.equal('field_one');
     });
 
+    async(it, 'should set label\'s text to title', async () => {
+        // given
+        litForm.contract = {
+            fields: [{ property: 'field_one', title: 'some important input' }],
+        };
+
+        // when
+        await forRender(litForm);
+
+        // then
+        expect(litForm.form.querySelector('label').textContent).to.be.equal('some important input');
+    });
+
+    async(it, 'should set label\'s text to property name is title is not given', async () => {
+        // given
+        litForm.contract = {
+            fields: [{ property: 'field_one' }],
+        };
+
+        // when
+        await forRender(litForm);
+
+        // then
+        expect(litForm.form.querySelector('label').textContent).to.be.equal('field_one');
+    });
+
     async(it, 'should pass field id to render call', async () => {
         // given
         litForm.contract = {
