@@ -71,6 +71,33 @@ describe('lit-form', () => {
         expect(getTemplate.getCalls().length).to.equal(4);
     });
 
+    async(it, 'should render label and assign input\'s id', async () => {
+        // given
+        litForm.contract = {
+            fields: [{ property: 'field_one' }],
+        };
+
+        // when
+        await forRender(litForm);
+
+        // then
+        expect(litForm.form.querySelector('label').getAttribute('for')).to.be.equal('field_one');
+    });
+
+    async(it, 'should pass field id to render call', async () => {
+        // given
+        litForm.contract = {
+            fields: [{ property: 'field_one' }],
+        };
+
+        // when
+        await forRender(litForm);
+
+        // then
+        const renderCall = template.render.firstCall;
+        expect(renderCall.args[1]).to.equal('field_one');
+    });
+
     async(it, 'should pass pre-existing value when rendering field', async () => {
         // given
         litForm.contract = {
@@ -87,7 +114,7 @@ describe('lit-form', () => {
 
         // then
         const renderCall = template.render.firstCall;
-        expect(renderCall.args[1]).to.equal('10');
+        expect(renderCall.args[2]).to.equal('10');
     });
 
     async(it, 'should pass null if pre-existing value is undefined when rendering field', async () => {
@@ -104,12 +131,12 @@ describe('lit-form', () => {
 
         // then
         const renderCall = template.render.firstCall;
-        expect(renderCall.args[1]).to.be.null;
+        expect(renderCall.args[2]).to.be.null;
     });
 
     async(it, 'should pass a change callback which sets value', async () => {
         // given
-        template.render = (f, v, callback) => html`<input type="text" on-input="${callback}" />`;
+        template.render = (f, id, v, callback) => html`<input type="text" on-input="${callback}" />`;
         litForm.contract = {
             fields: [{
                 property: 'test',
