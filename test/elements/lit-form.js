@@ -160,9 +160,9 @@ describe('lit-form', () => {
         expect(renderCall.args[2]).to.be.null;
     });
 
-    async(it, 'should pass a change callback which sets value', async () => {
+    async(it, 'should pass a change setter which sets value', async () => {
         // given
-        template.render = (f, id, v, callback) => html`<input type="text" on-input="${callback}" />`;
+        template.render = (f, id, v, setter) => html`<input type="text" on-input="${e => setter(e.target.value)}" />`;
         litForm.contract = {
             fields: [{
                 property: 'test',

@@ -64,12 +64,8 @@ export default class LitForm extends LitAnyBase {
     }
 
     __fieldTemplate(field, fieldId) {
-        const callback = (e) => {
-            if (e.constructor === 'CustomEvent') {
-                this.value[field.property] = e.detail.value;
-            }
-
-            this.value[field.property] = e.target.value;
+        const setter = (newValue) => {
+            this.value[field.property] = newValue;
         };
 
         const fieldTemplate = FieldTemplates.getTemplate({ field });
@@ -77,10 +73,10 @@ export default class LitForm extends LitAnyBase {
 
         if (fieldTemplate === null) {
             console.warn('Could not find template for field. Rendering fallback input. Field was:', field);
-            return html`<input id$="${fieldId}" class="fallback" on-input="${callback}" value="${fieldValue || ''}">`;
+            return html`<input id$="${fieldId}" class="fallback" on-input="${e => setter(e.target.value)}" value="${fieldValue || ''}">`;
         }
 
-        return fieldTemplate.render(field, fieldId, fieldValue, callback);
+        return fieldTemplate.render(field, fieldId, fieldValue, setter);
     }
 
     // eslint-disable-next-line class-methods-use-this
