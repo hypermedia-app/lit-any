@@ -69,8 +69,6 @@ export default class LitForm extends LitAnyBase {
         const fieldId = field.property;
 
         let fieldLabel = html``;
-        // eslint-disable-next-line no-debugger
-        debugger;
         if (this.noLabels === false) {
             fieldLabel = html`<label for$="${fieldId}">${field.title || field.property}</label>`;
         }
