@@ -9,6 +9,7 @@ export default class LitForm extends LitAnyBase {
         super();
 
         this.contract = null;
+        this.noLabels = false;
         this.value = {};
     }
 
@@ -19,7 +20,16 @@ export default class LitForm extends LitAnyBase {
     static get observedAttributes() {
         return [
             'contract',
+            'no-labels',
         ];
+    }
+
+    static get properties() {
+        return {
+            noLabels: {
+                type: Boolean,
+            },
+        };
     }
 
     _render() {
@@ -57,8 +67,16 @@ export default class LitForm extends LitAnyBase {
 
     __fieldWrapperTemplate(field) {
         const fieldId = field.property;
+
+        let fieldLabel = html``;
+        // eslint-disable-next-line no-debugger
+        debugger;
+        if (this.noLabels === false) {
+            fieldLabel = html`<label for$="${fieldId}">${field.title || field.property}</label>`;
+        }
+
         return html`<div class="field">
-                        <label for$="${fieldId}">${field.title || field.property}</label>
+                        ${fieldLabel}
                         ${this.__fieldTemplate(field, fieldId)}
                     </div>`;
     }
