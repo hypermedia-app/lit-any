@@ -1,5 +1,4 @@
-import { render as litRender } from 'lit-html/lib/lit-extended';
-import { html } from 'lit-html';
+import { html, render as litRender } from 'lit-html/lib/lit-extended';
 import LitAnyBase from './lit-any-base';
 import contract from './contract-helpers';
 import { FieldTemplates } from '../template-registry';

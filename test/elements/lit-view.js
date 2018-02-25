@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit-html/lib/lit-extended';
 import '../../src/elements/lit-view';
 import { ViewTemplates } from '../../src/template-registry';
 import { async, forRender } from '../async-tests';
