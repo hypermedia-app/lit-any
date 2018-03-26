@@ -104,6 +104,4 @@ export default class LitForm extends LitAnyBase {
     }
 }
 
-LitForm.createPropertiesForAttributes();
-
 window.customElements.define('lit-form', LitForm);

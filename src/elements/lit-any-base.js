@@ -1,6 +1,6 @@
-import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessors';
+import { PropertiesChanged } from '@polymer/polymer/lib/mixins/properties-changed';
 
-export default class LitAnyBase extends PropertyAccessors(HTMLElement) {
+export default class LitAnyBase extends PropertiesChanged(HTMLElement) {
     constructor() {
         super();
 

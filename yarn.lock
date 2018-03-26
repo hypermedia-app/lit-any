@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@polymer/polymer@^3.0.0-pre.1":
-  version "3.0.0-pre.10"
-  resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.0.0-pre.10.tgz#ffecc8cfac05546467b8913c73b7a9caf2a990c2"
+"@polymer/polymer@^3.0.0-pre.11":
+  version "3.0.0-pre.11"
+  resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.0.0-pre.11.tgz#614564493a05586ecd27c23cbdb79703d6374eed"
   dependencies:
     "@webcomponents/shadycss" "^1.0.0"
     "@webcomponents/webcomponentsjs" "^1.0.0"

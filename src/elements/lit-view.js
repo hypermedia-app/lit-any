@@ -39,6 +39,4 @@ export default class LitView extends LitAnyBase {
     }
 }
 
-LitView.createPropertiesForAttributes();
-
 window.customElements.define('lit-view', LitView);

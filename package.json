@@ -30,7 +30,7 @@
     "webpack-glob-entries": "^1.0.1"
   },
   "dependencies": {
-    "@polymer/polymer": "^3.0.0-pre.1",
+    "@polymer/polymer": "^3.0.0-pre.11",
     "core-js": "^2.5.1",
     "lit-html": "^0.9.0"
   }
