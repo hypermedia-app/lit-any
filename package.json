@@ -11,9 +11,11 @@
     "test-local": "npm run lint && webpack -w & npm run wct",
     "build-tests": "webpack",
     "lint": "eslint src/**/*.js test/**/*.js",
-    "wct": "wct -l chrome -p --skip-selenium-install"
+    "wct": "wct -l chrome -p --skip-selenium-install",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "devDependencies": {
+    "@storybook/polymer": "^3.3.0-alpha.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
