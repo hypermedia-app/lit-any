@@ -18,8 +18,10 @@ export default class LitForm extends LitAnyBase {
 
     static get observedAttributes() {
         return [
+            'value',
             'contract',
             'no-labels',
+            'template-registry',
         ];
     }
 
