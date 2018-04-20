@@ -1,22 +1,44 @@
 import { storiesOf } from '@storybook/polymer';
-import { html, render } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html/lib/lit-extended';
 import '../src/elements/lit-view';
 import { ViewTemplates } from '../src/template-registry';
-
-const viewTemplates = ViewTemplates.byName('simple-stories');
-viewTemplates.when
-    .valueMatches(v => v === 's')
-    .renders(() => html`xyz`);
+import LitWrap from './decorators/litWrap';
 
 storiesOf('lit-view', module)
-    .addDecorator((story) => {
-        const container = document.createElement('div');
-        render(story(), container);
+    .addDecorator(LitWrap)
+    .add('basic', () => {
+        ViewTemplates.byName('basic')
+            .when
+            .valueMatches(v => v.type === 'Person')
+            .renders((r, v) => html`Hello, my name is ${v.fullName}`);
 
-        return container;
+        const value = {
+            type: 'Person',
+            fullName: 'Louis Litt',
+        };
+
+        return html`<lit-view value="${value}" 
+                          template-registry="basic"></lit-view>`;
     })
-    .add('simple', () => {
-        const value = 's';
+    .add('recursive', () => {
+        ViewTemplates.byName('recursive')
+            .when
+            .valueMatches(v => v.type === 'Person')
+            .renders((render, v) => html`Hello, my name is ${v.fullName}. I was born on ${render(v.birthDate)}`);
 
-        return html`<lit-view value="${value}" template-registry="simple-stories" ignore-missing></lit-view>`;
+        ViewTemplates.byName('recursive').when
+            .valueMatches(v => v instanceof Date)
+            .renders((_, v) => {
+                const dateFormatted = v.toISOString().split('T')[0];
+                return html`<input readonly type="date" value="${dateFormatted}">`;
+            });
+
+        const value = {
+            type: 'Person',
+            fullName: 'Louis Litt',
+            birthDate: new Date(1976, 8, 12),
+        };
+
+        return html`<lit-view value="${value}" 
+                          template-registry="recursive"></lit-view>`;
     });
