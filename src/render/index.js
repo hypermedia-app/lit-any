@@ -1,32 +1,31 @@
 import { html } from 'lit-html';
 import { render as litRender } from 'lit-html/lib/lit-extended';
-import { ViewTemplates } from '../template-registry';
 
-function recurseTemplates(ignoreMissing, inheritedScope) {
+function recurseTemplates(registry, ignoreMissing, inheritedScope) {
     return (value, currentScope) => {
         let templateResult;
         const scope = currentScope || inheritedScope;
-        const template = ViewTemplates.getTemplate({
+        const template = registry.getTemplate({
             value,
             scope,
         });
 
         if (template) {
-            const nextLevel = recurseTemplates(ignoreMissing, scope);
+            const nextLevel = recurseTemplates(registry, ignoreMissing, scope);
             templateResult = template.render(nextLevel, value, scope);
         } else if (ignoreMissing) {
             templateResult = '';
         } else {
             templateResult = html`Template not found`;
-            console.warn('Template not found for', value);
+            console.warn(`Template not found in registry '${registry.name}' for value`, value);
         }
 
         return templateResult;
     };
 }
 
-export default function view(what, where) {
-    const templateFunc = recurseTemplates(false, null);
+export default function view(registry, what, where, ignoreMissing) {
+    const templateFunc = recurseTemplates(registry, ignoreMissing, null);
 
     litRender(templateFunc(what.value, what.scope), where);
 }

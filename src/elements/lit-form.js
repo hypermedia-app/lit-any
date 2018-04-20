@@ -83,7 +83,7 @@ export default class LitForm extends LitAnyBase {
             this.value[field.property] = newValue;
         };
 
-        const fieldTemplate = FieldTemplates.getTemplate({ field });
+        const fieldTemplate = FieldTemplates.byName(this.templateRegistry).getTemplate({ field });
         const fieldValue = this.value[field.property] || null;
 
         if (fieldTemplate === null) {
@@ -103,5 +103,7 @@ export default class LitForm extends LitAnyBase {
         return html`<legend>${currentContract.title}</legend>`;
     }
 }
+
+LitForm.createPropertiesForAttributes();
 
 window.customElements.define('lit-form', LitForm);

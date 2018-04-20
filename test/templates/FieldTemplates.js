@@ -5,7 +5,7 @@ describe('FieldTemplates', () => {
         let builder;
 
         beforeEach(() => {
-            builder = FieldTemplates.when;
+            builder = FieldTemplates.default.when;
         });
 
         it('should create builder for matching field', () => {

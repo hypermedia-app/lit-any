@@ -11,7 +11,12 @@ const createConfig = (glob, targetPath) => ({
         rules: [
             {
                 test: /\.js$/,
-                use: 'babel-loader',
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        babelrc: false
+                    }
+                },
                 exclude: /node_modules/
             }
         ]

@@ -17,6 +17,22 @@
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@polymer/test-fixture/-/test-fixture-0.0.3.tgz#4443752697d4d9293bbc412ea0b5e4d341f149d9"
 
+"@storybook/addon-storysource@^3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-3.4.2.tgz#ca57fa1fa579c0de5334e608f43932db41fe5e45"
+  dependencies:
+    "@storybook/components" "3.4.2"
+    acorn "^5.5.3"
+    acorn-es7 "^0.1.0"
+    acorn-jsx "^4.1.1"
+    acorn-stage3 "^0.6.0"
+    babel-runtime "^6.26.0"
+    estraverse "^4.2.0"
+    loader-utils "^1.1.0"
+    prettier "^1.11.1"
+    prop-types "^15.6.1"
+    react-syntax-highlighter "^7.0.2"
+
 "@storybook/addons@^3.3.0-alpha.2":
   version "3.3.15"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.3.15.tgz#564c5c7a8759b56fc566c4d1e983856bf8994a85"
@@ -32,6 +48,14 @@
 "@storybook/channels@^3.3.15":
   version "3.3.15"
   resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-3.3.15.tgz#42179cf0a1f19cd28bbd5e3796e6833fd2e40642"
+
+"@storybook/components@3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-3.4.2.tgz#1124cf22a54e36aa07c291608c652746919cf375"
+  dependencies:
+    glamor "^2.20.40"
+    glamorous "^4.12.1"
+    prop-types "^15.6.1"
 
 "@storybook/components@^3.3.15":
   version "3.3.15"
@@ -450,17 +474,95 @@ accessibility-developer-tools@^2.12.0:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/accessibility-developer-tools/-/accessibility-developer-tools-2.12.0.tgz#3da0cce9d6ec6373964b84f35db7cfc3df7ab514"
 
+acorn-bigint@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/acorn-bigint/-/acorn-bigint-0.2.0.tgz#0f45a5290537799a3b07085689a186881cb53784"
+  dependencies:
+    acorn "^5.2.1"
+
+acorn-class-fields@^0.1.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/acorn-class-fields/-/acorn-class-fields-0.1.2.tgz#20782f304af42257feff5bd4a5c335291473bf58"
+  dependencies:
+    acorn "^5.3.0"
+
 acorn-dynamic-import@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-2.0.2.tgz#c752bd210bef679501b6c6cb7fc84f8f47158cc4"
   dependencies:
     acorn "^4.0.3"
 
+acorn-dynamic-import@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-3.0.0.tgz#901ceee4c7faaef7e07ad2a47e890675da50a278"
+  dependencies:
+    acorn "^5.0.0"
+
+acorn-es7@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/acorn-es7/-/acorn-es7-0.1.0.tgz#4a6de4522faacb4c31209e1b73b5f301ed2bb30a"
+  dependencies:
+    acorn "^2.6.4"
+
+acorn-import-meta@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/acorn-import-meta/-/acorn-import-meta-0.2.1.tgz#ac91e06e00facece7e96ff76a0fe9ec7b1cb5b5c"
+  dependencies:
+    acorn "^5.4.1"
+
+acorn-json-superset@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/acorn-json-superset/-/acorn-json-superset-0.1.0.tgz#b5b911a1777ea63a48fcfc64353e787305e8a945"
+  dependencies:
+    acorn "^5.4.1"
+
 acorn-jsx@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"
   dependencies:
     acorn "^3.0.4"
+
+acorn-jsx@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-4.1.1.tgz#e8e41e48ea2fe0c896740610ab6a4ffd8add225e"
+  dependencies:
+    acorn "^5.0.3"
+
+acorn-numeric-separator@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/acorn-numeric-separator/-/acorn-numeric-separator-0.1.1.tgz#aa455a1d95ae887231de97e0681abbe28b065e8d"
+  dependencies:
+    acorn "^5.2.1"
+
+acorn-optional-catch-binding@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/acorn-optional-catch-binding/-/acorn-optional-catch-binding-0.1.0.tgz#d9a1874dbffce1eb3495836e5e75b2ad9c300868"
+  dependencies:
+    acorn "^5.2.1"
+
+acorn-private-methods@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/acorn-private-methods/-/acorn-private-methods-0.1.1.tgz#32c13cf24d05bf1c9be04914b41491c59d75a195"
+  dependencies:
+    acorn "^5.4.0"
+
+acorn-stage3@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/acorn-stage3/-/acorn-stage3-0.6.0.tgz#d2814cec8e2f8bcb0407ba657fbe0cfb118f9bc2"
+  dependencies:
+    acorn "^5.5.0"
+    acorn-bigint "^0.2.0"
+    acorn-class-fields "^0.1.1"
+    acorn-dynamic-import "^3.0.0"
+    acorn-import-meta "^0.2.1"
+    acorn-json-superset "^0.1.0"
+    acorn-numeric-separator "^0.1.1"
+    acorn-optional-catch-binding "^0.1.0"
+    acorn-private-methods "^0.1.1"
+
+acorn@^2.6.4:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-2.7.0.tgz#ab6e7d9d886aaca8b085bc3312b79a198433f0e7"
 
 acorn@^3.0.4:
   version "3.3.0"
@@ -474,7 +576,7 @@ acorn@^5.0.0, acorn@^5.4.0:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.4.1.tgz#fdc58d9d17f4a4e98d102ded826a9b9759125102"
 
-acorn@^5.5.0:
+acorn@^5.0.3, acorn@^5.2.1, acorn@^5.3.0, acorn@^5.4.1, acorn@^5.5.0, acorn@^5.5.3:
   version "5.5.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.5.3.tgz#f473dd47e0277a08e28e9bec5aeeb04751f0b8c9"
 
@@ -2111,6 +2213,10 @@ camelcase@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-2.1.1.tgz#7c1d16d679a1bbe59ca02cacecfb011e201f5a1f"
 
+camelcase@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
+
 camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
@@ -2280,6 +2386,22 @@ cli-width@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
 
+clipboard@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-1.7.1.tgz#360d6d6946e99a7a1fef395e42ba92b5e9b5a16b"
+  dependencies:
+    good-listener "^1.2.2"
+    select "^1.1.2"
+    tiny-emitter "^2.0.0"
+
+clipboard@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.0.tgz#4661dc972fb72a4c4770b8db78aa9b1caef52b50"
+  dependencies:
+    good-listener "^1.2.2"
+    select "^1.1.2"
+    tiny-emitter "^2.0.0"
+
 cliui@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-2.1.0.tgz#4b475760ff80264c762c3a1719032e91c7fea0d1"
@@ -2371,6 +2493,12 @@ combined-stream@1.0.6, combined-stream@^1.0.5, combined-stream@~1.0.5:
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
   dependencies:
     delayed-stream "~1.0.0"
+
+comma-separated-tokens@^1.0.0:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/comma-separated-tokens/-/comma-separated-tokens-1.0.5.tgz#b13793131d9ea2d2431cf5b507ddec258f0ce0db"
+  dependencies:
+    trim "0.0.1"
 
 command-line-args@^3.0.1:
   version "3.0.5"
@@ -2776,6 +2904,10 @@ csso@~2.3.1:
     clap "^1.0.9"
     source-map "^0.5.3"
 
+csstype@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.3.0.tgz#062e141c78345cf814da0e0b716ad777931b08af"
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
@@ -2884,6 +3016,10 @@ del@^2.0.2:
 delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
+
+delegate@^3.1.2:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/delegate/-/delegate-3.2.0.tgz#b66b71c3158522e8ab5744f720d8ca0c2af59166"
 
 delegates@^1.0.0:
   version "1.0.0"
@@ -4006,6 +4142,19 @@ glamorous@^4.11.2:
     react-html-attributes "^1.3.0"
     svg-tag-names "^1.1.0"
 
+glamorous@^4.12.1:
+  version "4.12.4"
+  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.12.4.tgz#95a6ef0b9ceae7d64082fbbae5b0b5109dbe901b"
+  dependencies:
+    brcast "^3.0.0"
+    csstype "^2.2.0"
+    fast-memoize "^2.2.7"
+    html-tag-names "^1.1.1"
+    is-function "^1.0.1"
+    is-plain-object "^2.0.4"
+    react-html-attributes "^1.4.2"
+    svg-tag-names "^1.1.0"
+
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -4129,6 +4278,12 @@ globby@^7.1.1:
     ignore "^3.3.5"
     pify "^3.0.0"
     slash "^1.0.0"
+
+good-listener@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/good-listener/-/good-listener-1.2.2.tgz#d53b30cdf9313dffb7dc9a0d477096aa6d145c50"
+  dependencies:
+    delegate "^3.1.2"
 
 got@^6.7.1:
   version "6.7.1"
@@ -4265,6 +4420,20 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.0"
 
+hast-util-parse-selector@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/hast-util-parse-selector/-/hast-util-parse-selector-2.1.0.tgz#b55c0f4bb7bb2040c889c325ef87ab29c38102b4"
+
+hastscript@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/hastscript/-/hastscript-3.1.0.tgz#66628ba6d7f1ad07d9277dd09028aba7f4934599"
+  dependencies:
+    camelcase "^3.0.0"
+    comma-separated-tokens "^1.0.0"
+    hast-util-parse-selector "^2.0.0"
+    property-information "^3.0.0"
+    space-separated-tokens "^1.0.0"
+
 hawk@3.1.3, hawk@~3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/hawk/-/hawk-3.1.3.tgz#078444bd7c1640b0fe540d2c9b73d59678e8e1c4"
@@ -4286,6 +4455,10 @@ hawk@~6.0.2:
 he@1.1.1, he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
+
+highlight.js@~9.12.0:
+  version "9.12.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -5202,6 +5375,12 @@ lower-case@^1.1.1:
 lowercase-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.0.tgz#4e3366b39e7f5457e35f1324bdf6f88d0bfc7306"
+
+lowlight@~1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/lowlight/-/lowlight-1.9.1.tgz#ed7c3dffc36f8c1f263735c0fe0c907847c11250"
+  dependencies:
+    highlight.js "~9.12.0"
 
 lru-cache@^4.0.1, lru-cache@^4.0.2:
   version "4.1.1"
@@ -6492,6 +6671,10 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
+prettier@^1.11.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.12.1.tgz#c1ad20e803e7749faf905a409d2367e06bbe7325"
+
 pretty-bytes@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-4.0.2.tgz#b2bf82e7350d65c6c33aa95aaa5a4f6327f61cd9"
@@ -6502,6 +6685,18 @@ pretty-error@^2.0.2:
   dependencies:
     renderkid "^2.0.1"
     utila "~0.4"
+
+prismjs@^1.8.4:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.14.0.tgz#bbccfdb8be5d850d26453933cb50122ca0362ae0"
+  optionalDependencies:
+    clipboard "^2.0.0"
+
+prismjs@~1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.10.0.tgz#77e5187c2ae6b3253fcc313029cf25fe53778721"
+  optionalDependencies:
+    clipboard "^1.7.1"
 
 private@^0.1.6, private@^0.1.7, private@~0.1.5:
   version "0.1.8"
@@ -6548,13 +6743,17 @@ promisify-node@^0.4.0:
     nodegit-promise "~4.0.0"
     object-assign "^4.0.1"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
+
+property-information@^3.0.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/property-information/-/property-information-3.2.0.tgz#fd1483c8fbac61808f5fe359e7693a1f48a58331"
 
 proxy-addr@~2.0.2, proxy-addr@~2.0.3:
   version "2.0.3"
@@ -6730,6 +6929,12 @@ react-html-attributes@^1.3.0:
   dependencies:
     html-element-attributes "^1.0.0"
 
+react-html-attributes@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/react-html-attributes/-/react-html-attributes-1.4.2.tgz#0d2ccf134fc79b2d3543837dc1591d32b7b903f9"
+  dependencies:
+    html-element-attributes "^1.0.0"
+
 react-icon-base@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.1.0.tgz#a196e33fdf1e7aaa1fda3aefbb68bdad9e82a79d"
@@ -6775,6 +6980,16 @@ react-style-proptype@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.2.1.tgz#7cfeb9b87ec7ab9dcbde9715170ed10c11fb86aa"
   dependencies:
     prop-types "^15.5.4"
+
+react-syntax-highlighter@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-7.0.2.tgz#674036d4803183f3a33202defc35e5ba83d992f5"
+  dependencies:
+    babel-runtime "^6.18.0"
+    highlight.js "~9.12.0"
+    lowlight "~1.9.1"
+    prismjs "^1.8.4"
+    refractor "^2.0.0"
 
 react-transition-group@^1.1.2:
   version "1.2.1"
@@ -6945,6 +7160,13 @@ redux@^3.7.2:
     lodash-es "^4.2.1"
     loose-envify "^1.1.0"
     symbol-observable "^1.0.3"
+
+refractor@^2.0.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/refractor/-/refractor-2.3.0.tgz#b8cade8f88020f8836ca3622c6ef87fd2444d76a"
+  dependencies:
+    hastscript "^3.1.0"
+    prismjs "~1.10.0"
 
 regenerate@^1.2.1:
   version "1.3.3"
@@ -7294,6 +7516,10 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
+select@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/select/-/select-1.1.2.tgz#0e7350acdec80b1108528786ec1d4418d11b396d"
+
 selenium-standalone@^6.7.0:
   version "6.12.0"
   resolved "https://registry.yarnpkg.com/selenium-standalone/-/selenium-standalone-6.12.0.tgz#789730db09a105f1cce12c6424d795d11c543bd4"
@@ -7601,6 +7827,12 @@ source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, sourc
 source-map@^0.6.1, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+
+space-separated-tokens@^1.0.0:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/space-separated-tokens/-/space-separated-tokens-1.1.2.tgz#e95ab9d19ae841e200808cd96bc7bd0adbbb3412"
+  dependencies:
+    trim "0.0.1"
 
 spdx-correct@~1.0.0:
   version "1.0.2"
@@ -8049,6 +8281,10 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
+tiny-emitter@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.0.2.tgz#82d27468aca5ade8e5fd1e6d22b57dd43ebdfb7c"
+
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
@@ -8090,6 +8326,10 @@ trim-newlines@^1.0.0:
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
+
+trim@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
 
 tty-browserify@0.0.0:
   version "0.0.0"

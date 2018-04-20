@@ -1,11 +1,6 @@
 import pEvent from 'p-event';
 
-export function async(it, expectation, test) {
-    it(expectation, (done) => {
-        test.call(this).then(done).catch(done);
-    });
-}
-
+// eslint-disable-next-line import/prefer-default-export
 export function forRender(litAnyBase) {
     return pEvent(litAnyBase, 'ly-render');
 }

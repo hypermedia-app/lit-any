@@ -1,21 +1,18 @@
 import { html } from 'lit-html';
 import render from '../../src/render';
-import { ViewTemplates } from '../../src/template-registry';
 
 describe('render view', () => {
-    let getTemplate;
+    let registry;
 
     beforeEach(() => {
-        getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
-    });
-
-    afterEach(() => {
-        getTemplate.restore();
+        registry = {
+            getTemplate: sinon.stub(),
+        };
     });
 
     it('should write found template to given node', () => {
         // given
-        getTemplate.returns({
+        registry.getTemplate.returns({
             render: (_, object) => html`<span>${object.value}</span>`,
         });
         const container = document.createElement('div');
@@ -24,7 +21,7 @@ describe('render view', () => {
         };
 
         // when
-        render({ value }, container);
+        render(registry, { value }, container, false);
 
         // then
         const span = container.querySelector('span');
@@ -33,7 +30,7 @@ describe('render view', () => {
 
     it('should pass down scope parameter', () => {
         // given
-        getTemplate.returns({
+        registry.getTemplate.returns({
             render: (_, object, scope) => html`<span>${scope}</span>`,
         });
         const container = document.createElement('div');
@@ -42,7 +39,7 @@ describe('render view', () => {
         };
 
         // when
-        render({ value, scope: 'some scope' }, container);
+        render(registry, { value, scope: 'some scope' }, container, false);
 
         // then
         expect(container.textContent).to.equal('some scope');

@@ -1,11 +1,13 @@
 import { html } from 'lit-html/lib/lit-extended';
 import '../../src/elements/lit-view';
 import { ViewTemplates } from '../../src/template-registry';
-import { async, forRender } from '../async-tests';
+import { forRender } from '../async-tests';
 
 describe('lit-view', () => {
     let litView;
     let getTemplate;
+
+    ViewTemplates.byName = () => ({ getTemplate });
 
     describe('with attributes', () => {
         beforeEach(() => {
@@ -16,22 +18,22 @@ describe('lit-view', () => {
             expect(litView.templateScope).to.equal('some scope');
         });
 
-        it('sets ignore', () => {
+        it('sets ignoreMissing', () => {
             expect(litView.ignoreMissing).to.be.true;
+        });
+
+        it('sets templateRegistry', () => {
+            expect(litView.templateRegistry).to.equal('my registry');
         });
     });
 
     describe('rendering template', () => {
         beforeEach(() => {
-            getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+            getTemplate = sinon.stub();
         });
 
         beforeEach(() => {
             litView = fixture('lit-view');
-        });
-
-        afterEach(() => {
-            getTemplate.restore();
         });
 
         it('should render nothing when object is undefined', () => {
@@ -50,7 +52,7 @@ describe('lit-view', () => {
             litView.value = {};
         });
 
-        async(it, 'should render found template', async () => {
+        it('should render found template', async () => {
             // given
             getTemplate.returns({
                 render: (_, object) => html`<span>${object.value}</span>`,
@@ -69,7 +71,7 @@ describe('lit-view', () => {
             expect(span.textContent).to.equal('test');
         });
 
-        async(it, 'should select template for given value', async () => {
+        it('should select template for given value', async () => {
             // given
             litView.value = 'a string';
 
@@ -83,7 +85,7 @@ describe('lit-view', () => {
             })).to.be.true;
         });
 
-        async(it, 'should render pass scope to template', async () => {
+        it('should render pass scope to template', async () => {
             // given
             getTemplate.returns({
                 render: (_1, _2, scope) => html`<span>${scope}</span>`,
@@ -103,18 +105,14 @@ describe('lit-view', () => {
 
     describe('rendering nested templates', () => {
         beforeEach(() => {
-            getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+            getTemplate = sinon.stub();
         });
 
         beforeEach(() => {
             litView = fixture('lit-view');
         });
 
-        afterEach(() => {
-            getTemplate.restore();
-        });
-
-        async(it, 'should use render parameter', async () => {
+        it('should use render parameter', async () => {
             // given
             getTemplate.returns({
                 render: (render, object) => html`<p class$="${object.clazz}">${render(object.child)}</p>`,
@@ -143,7 +141,7 @@ describe('lit-view', () => {
             expect(span.textContent).to.equal("I'm deep");
         });
 
-        async(it, 'should select template for selected value', async () => {
+        it('should select template for selected value', async () => {
             // given
             getTemplate.returns({
                 render: (render, v) => {
@@ -166,7 +164,7 @@ describe('lit-view', () => {
             expect(getTemplate.secondCall.args[0].value).to.equal(10);
         });
 
-        async(it, 'should allow changing scope', async () => {
+        it('should allow changing scope', async () => {
             // given
             getTemplate.returns({
                 render: (render, v) => {
@@ -200,15 +198,11 @@ describe('lit-view', () => {
 
     describe('when template is not found', () => {
         beforeEach(() => {
-            getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+            getTemplate = sinon.stub();
         });
 
         beforeEach(() => {
             litView = fixture('lit-view');
-        });
-
-        afterEach(() => {
-            getTemplate.restore();
         });
 
         xit('should render fallback template', () => {
@@ -220,7 +214,7 @@ describe('lit-view', () => {
         let manualView;
 
         beforeEach(() => {
-            getTemplate = sinon.stub(ViewTemplates, 'getTemplate');
+            getTemplate = sinon.stub();
             manualView = document.createElement('lit-view');
             manualView.value = {
                 inserted: 'manually',

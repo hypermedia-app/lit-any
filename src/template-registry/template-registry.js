@@ -1,9 +1,10 @@
 import 'core-js/modules/es6.array.find';
 
 export default class TemplateRegistry {
-    constructor(Builder) {
+    constructor(Builder, name) {
         this._templates = [];
         this._builder = Builder;
+        this.name = name;
     }
 
     get count() {

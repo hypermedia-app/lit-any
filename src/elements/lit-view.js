@@ -1,5 +1,6 @@
 import render from '../render';
 import LitAnyBase from './lit-any-base';
+import { ViewTemplates } from '../template-registry';
 
 export default class LitView extends LitAnyBase {
     constructor() {
@@ -15,6 +16,7 @@ export default class LitView extends LitAnyBase {
             'value',
             'template-scope',
             'ignore-missing',
+            'template-registry',
         ];
     }
 
@@ -24,7 +26,12 @@ export default class LitView extends LitAnyBase {
                 this.attachShadow({ mode: 'open' });
             }
 
-            render({ value: this.value, scope: this.templateScope }, this.shadowRoot);
+            render(
+                ViewTemplates.byName(this.templateRegistry),
+                { value: this.value, scope: this.templateScope },
+                this.shadowRoot,
+                this.ignoreMissing,
+            );
 
             this.dispatchEvent(new CustomEvent('ly-render'));
         }
@@ -38,5 +45,7 @@ export default class LitView extends LitAnyBase {
         }
     }
 }
+
+LitView.createPropertiesForAttributes();
 
 window.customElements.define('lit-view', LitView);

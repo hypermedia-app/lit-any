@@ -1,6 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
 import '../../src/elements/lit-form';
-import { async, forRender } from '../async-tests';
+import { forRender } from '../async-tests';
 import { FieldTemplates } from '../../src/template-registry';
 
 describe('lit-form', () => {
@@ -8,21 +8,17 @@ describe('lit-form', () => {
     let getTemplate;
     const template = {};
 
+    FieldTemplates.byName = () => ({ getTemplate });
+
     describe('by default', () => {
         beforeEach(() => {
             litForm = fixture('lit-form');
-            getTemplate = sinon.stub(FieldTemplates, 'getTemplate');
+            getTemplate = sinon.stub();
             getTemplate.returns(template);
             template.render = sinon.spy();
         });
 
-        afterEach(() => {
-            if (getTemplate) {
-                getTemplate.restore();
-            }
-        });
-
-        async(it, 'should render empty form for empty contract', async () => {
+        it('should render empty form for empty contract', async () => {
             // given
             litForm.contract = {};
 
@@ -33,7 +29,7 @@ describe('lit-form', () => {
             expect(litForm.form.children.length).to.equal(0);
         });
 
-        async(it, 'should render legend for contract title', async () => {
+        it('should render legend for contract title', async () => {
             // given
             litForm.contract = {
                 title: 'My first form',
@@ -46,7 +42,7 @@ describe('lit-form', () => {
             expect(litForm.form.querySelector('legend').textContent).to.equal('My first form');
         });
 
-        async(it, 'should render wrapper for every field', async () => {
+        it('should render wrapper for every field', async () => {
             // given
             litForm.contract = {
                 fields: [{}, {}, {}, {}],
@@ -59,7 +55,7 @@ describe('lit-form', () => {
             expect(litForm.form.querySelectorAll('.field').length).to.equal(4);
         });
 
-        async(it, 'should render every field', async () => {
+        it('should render every field', async () => {
             // given
             litForm.contract = {
                 fields: [{}, {}, {}, {}],
@@ -72,7 +68,7 @@ describe('lit-form', () => {
             expect(getTemplate.getCalls().length).to.equal(4);
         });
 
-        async(it, 'should render label and assign input\'s id', async () => {
+        it('should render label and assign input\'s id', async () => {
             // given
             litForm.contract = {
                 fields: [{ property: 'field_one' }],
@@ -85,7 +81,7 @@ describe('lit-form', () => {
             expect(litForm.form.querySelector('label').getAttribute('for')).to.be.equal('field_one');
         });
 
-        async(it, 'should set label\'s text to title', async () => {
+        it('should set label\'s text to title', async () => {
             // given
             litForm.contract = {
                 fields: [{ property: 'field_one', title: 'some important input' }],
@@ -98,7 +94,7 @@ describe('lit-form', () => {
             expect(litForm.form.querySelector('label').textContent).to.be.equal('some important input');
         });
 
-        async(it, 'should set label\'s text to property name is title is not given', async () => {
+        it('should set label\'s text to property name is title is not given', async () => {
             // given
             litForm.contract = {
                 fields: [{ property: 'field_one' }],
@@ -111,7 +107,7 @@ describe('lit-form', () => {
             expect(litForm.form.querySelector('label').textContent).to.be.equal('field_one');
         });
 
-        async(it, 'should pass field id to render call', async () => {
+        it('should pass field id to render call', async () => {
             // given
             litForm.contract = {
                 fields: [{ property: 'field_one' }],
@@ -125,7 +121,7 @@ describe('lit-form', () => {
             expect(renderCall.args[1]).to.equal('field_one');
         });
 
-        async(it, 'should pass pre-existing value when rendering field', async () => {
+        it('should pass pre-existing value when rendering field', async () => {
             // given
             litForm.contract = {
                 fields: [{
@@ -144,7 +140,7 @@ describe('lit-form', () => {
             expect(renderCall.args[2]).to.equal('10');
         });
 
-        async(it, 'should pass null if pre-existing value is undefined when rendering field', async () => {
+        it('should pass null if pre-existing value is undefined when rendering field', async () => {
             // given
             litForm.contract = {
                 fields: [{
@@ -161,7 +157,7 @@ describe('lit-form', () => {
             expect(renderCall.args[2]).to.be.null;
         });
 
-        async(it, 'should pass a change setter which sets value', async () => {
+        it('should pass a change setter which sets value', async () => {
             // given
             template.render = (f, id, v, setter) => html`<input type="text" on-input="${e => setter(e.target.value)}" />`;
             litForm.contract = {
@@ -184,7 +180,7 @@ describe('lit-form', () => {
             expect(litForm.value.test).to.equal('abc');
         });
 
-        async(it, 'should not render legend when title is empty', async () => {
+        it('should not render legend when title is empty', async () => {
             // given
             litForm.contract = {
                 fields: [{}],
@@ -197,7 +193,7 @@ describe('lit-form', () => {
             expect(litForm.form.querySelector('legend')).to.be.null;
         });
 
-        async(it, 'should set form[action] to contract\'s target', async () => {
+        it('should set form[action] to contract\'s target', async () => {
             // given
             litForm.contract = {
                 target: 'http://exmple.com/resource',
@@ -210,7 +206,7 @@ describe('lit-form', () => {
             expect(litForm.form.getAttribute('action')).to.equal('http://exmple.com/resource');
         });
 
-        async(it, 'should set form[method] to contract\'s method', async () => {
+        it('should set form[method] to contract\'s method', async () => {
             // given
             litForm.contract = {
                 method: 'POST',
@@ -223,7 +219,7 @@ describe('lit-form', () => {
             expect(litForm.form.getAttribute('method')).to.equal('POST');
         });
 
-        async(it, 'should pass field to FieldTemplates.getTemplate', async () => {
+        it('should pass field to FieldTemplates.getTemplate', async () => {
             // given
             const field = {};
             litForm.contract = {
@@ -239,7 +235,7 @@ describe('lit-form', () => {
         });
 
         describe('when template was not found', () => {
-            async(it, 'should return a plain input', async () => {
+            it('should return a plain input', async () => {
                 // given
                 getTemplate.returns(null);
                 litForm.contract = {
@@ -253,7 +249,7 @@ describe('lit-form', () => {
                 expect(litForm.form.querySelector('.field input.fallback')).to.be.not.undefined;
             });
 
-            async(it, 'should set fallback input value', async () => {
+            it('should set fallback input value', async () => {
                 // given
                 getTemplate.returns(null);
                 litForm.contract = {
@@ -277,18 +273,12 @@ describe('lit-form', () => {
     describe('when no-labels is set', () => {
         beforeEach(() => {
             litForm = fixture('lit-form-no-labels');
-            getTemplate = sinon.stub(FieldTemplates, 'getTemplate');
+            getTemplate = sinon.stub();
             getTemplate.returns(template);
             template.render = sinon.spy();
         });
 
-        afterEach(() => {
-            if (getTemplate) {
-                getTemplate.restore();
-            }
-        });
-
-        async(it, 'should not render a label', async () => {
+        it('should not render a label', async () => {
             // given
             litForm.contract = {
                 fields: [{ property: 'field_one' }],

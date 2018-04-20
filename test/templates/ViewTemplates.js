@@ -5,7 +5,7 @@ describe('ViewTemplates', () => {
         let builder;
 
         beforeEach(() => {
-            builder = ViewTemplates.when;
+            builder = ViewTemplates.default.when;
         });
 
         it('should create builder for matching values', () => {
