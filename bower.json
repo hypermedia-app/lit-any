@@ -1,0 +1,7 @@
+{
+  "name": "lit-any",
+  "private": true,
+  "devDependencies": {
+    "paper-input": "polymerelements/paper-input#^2.2.2"
+  }
+}

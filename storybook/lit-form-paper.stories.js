@@ -2,21 +2,23 @@ import { html } from 'lit-html/lib/lit-extended';
 import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
 import LitWrap from './decorators/litWrap';
-import '../src/elements/lit-form';
 import { FieldTemplates } from '../src';
 
-FieldTemplates.default
+import '../bower_components/paper-input/paper-input.html';
+
+FieldTemplates.byName('material design')
     .when
     .fieldMatches(f => f.type === 'integer')
     .renders((f, id, v, set) =>
-        html`<input id=${id} 
-                type=number 
+        html`<paper-input id=${id} 
+                type=number
+                placeholder=${f.title}
                 value=${v} 
-                on-change=${e => set(Number.parseInt(e.target.value, 0))}>`);
+                on-change=${e => set(Number.parseInt(e.target.value, 0))}></paper-input>`);
 
 storiesOf('lit-form', module)
     .addDecorator(LitWrap)
-    .add('basic', () => {
+    .add('paper elements', () => {
         const contract = {
             fields: [
                 {
@@ -37,7 +39,9 @@ storiesOf('lit-form', module)
         };
 
         return html`<lit-form ref="${directive(getForm)}"
-                          contract="${contract}" 
+                          no-labels
+                          contract="${contract}"
+                          template-registry="material design"
                           value="${value}"></lit-form>
                 <button on-click="${() => alert(JSON.stringify(form.value))}">
                     Submit!

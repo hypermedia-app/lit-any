@@ -104,6 +104,15 @@ export default class LitForm extends LitAnyBase {
 
         return html`<legend>${currentContract.title}</legend>`;
     }
+
+    static typeForProperty(property) {
+        switch (property) {
+            case 'noLabels':
+                return Boolean;
+            default:
+                return undefined;
+        }
+    }
 }
 
 LitForm.createPropertiesForAttributes();

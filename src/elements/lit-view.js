@@ -37,11 +37,12 @@ export default class LitView extends LitAnyBase {
         }
     }
 
-    _attributeToProperty(attribute, value, type) {
-        if (attribute === 'ignore-missing') {
-            super._attributeToProperty(attribute, value, Boolean);
-        } else {
-            super._attributeToProperty(attribute, value, type);
+    static typeForProperty(property) {
+        switch (property) {
+            case 'ignoreMissing':
+                return Boolean;
+            default:
+                return undefined;
         }
     }
 }

@@ -13,7 +13,7 @@
     "lint": "eslint src/**/*.js test/**/*.js",
     "wct": "wct -l chrome -p --skip-selenium-install",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "export-storybook": "build-storybook -c .storybook -o gh-pages"
+    "build-storybook": "build-storybook -c .storybook -o docs"
   },
   "devDependencies": {
     "@storybook/addon-storysource": "^3.4.2",

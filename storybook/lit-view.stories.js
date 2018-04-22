@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/polymer';
 import { html } from 'lit-html/lib/lit-extended';
 import '../src/elements/lit-view';
-import { ViewTemplates } from '../src/template-registry';
+import { ViewTemplates } from '../src';
 import LitWrap from './decorators/litWrap';
 
 storiesOf('lit-view', module)
