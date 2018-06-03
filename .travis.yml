@@ -4,7 +4,6 @@ node_js:
   - 8
 before_install:
   - npm i -g bower
-  - bower i
 before_script:
   - yarn lint
 addons:
