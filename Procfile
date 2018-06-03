@@ -1,1 +1,1 @@
-web: ./node_modules/.bin/start-storybook --host 0.0.0.0 --port $PORT
+web: yarn start-storybook --host 0.0.0.0 --port $PORT -c .storybook
