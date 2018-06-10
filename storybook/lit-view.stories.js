@@ -2,10 +2,9 @@ import { storiesOf } from '@storybook/polymer';
 import { html } from 'lit-html/lib/lit-extended';
 import '../src/elements/lit-view';
 import { ViewTemplates } from '../src';
-import LitWrap from './decorators/litWrap';
+import { defaultValue } from './knobs';
 
 storiesOf('lit-view', module)
-    .addDecorator(LitWrap)
     .add('basic', () => {
         ViewTemplates.byName('basic')
             .when
@@ -17,7 +16,7 @@ storiesOf('lit-view', module)
             fullName: 'Louis Litt',
         };
 
-        return html`<lit-view value="${value}" 
+        return html`<lit-view value="${defaultValue(value)}" 
                           template-registry="basic"></lit-view>`;
     })
     .add('recursive', () => {
@@ -39,6 +38,6 @@ storiesOf('lit-view', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return html`<lit-view value="${value}" 
+        return html`<lit-view value="${defaultValue(value)}" 
                           template-registry="recursive"></lit-view>`;
     });
