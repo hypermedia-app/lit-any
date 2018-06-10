@@ -1,7 +1,7 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { storiesOf } from '@storybook/polymer/dist/client';
 import { FieldTemplates } from '../src';
-import { contract, showLabels } from './knobs';
+import {contract, showLabels, submitButton} from './knobs';
 import notes from './notes/lit-form/custom-elements.md';
 import onSubmit from './helpers/submit-handler';
 
@@ -33,6 +33,7 @@ storiesOf('lit-form', module)
             return html`<lit-form
                           noLabels="${!showLabels(false)}"
                           contract="${contract(c)}"
+                          submitButtonLabel=${submitButton('Register')}
                           template-registry="custom-fields"
                           on-submit="${onSubmit}"></lit-form>`;
         },
