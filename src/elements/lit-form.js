@@ -10,6 +10,7 @@ export default class LitForm extends LitAnyBase {
         this.contract = null;
         this.noLabels = false;
         this.value = {};
+        this.submitButtonLabel = 'Submit';
     }
 
     get form() {
@@ -22,15 +23,8 @@ export default class LitForm extends LitAnyBase {
             'contract',
             'no-labels',
             'template-registry',
+            'submit-button-label',
         ];
-    }
-
-    static get properties() {
-        return {
-            noLabels: {
-                type: Boolean,
-            },
-        };
     }
 
     _render() {
@@ -49,7 +43,13 @@ export default class LitForm extends LitAnyBase {
         return html`
             <form action$="${this.contract.target}" method$="${this.contract.method}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
+                
+                ${this.__submitButtonTemplate()}
             </form>`;
+    }
+
+    __submitButtonTemplate() {
+        return html`<button type="submit">${this.submitButtonLabel}</button>`;
     }
 
     __fieldsetTemplate() {
