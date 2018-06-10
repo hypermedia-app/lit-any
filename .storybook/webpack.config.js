@@ -10,14 +10,6 @@ module.exports = {
                 loaders: [require.resolve('@storybook/addon-storysource/loader')],
                 enforce: 'pre',
             },
-            {
-                test: /\.md$/,
-                use: [
-                    {
-                        loader: 'raw-loader',
-                    },
-                ],
-            }
         ],
     }
 };
