@@ -1,11 +1,11 @@
 import { configure, addDecorator } from '@storybook/polymer';
 import { setOptions } from '@storybook/addon-options';
 import { withKnobs } from '@storybook/addon-knobs/polymer';
-import litWrap from '../storybook/decorators/litWrap';
+import { withNotes } from '@storybook/addon-notes';
 import litAny from '../package';
 
-//addDecorator(litWrap);
 addDecorator(withKnobs);
+addDecorator(withNotes);
 
 function loadStories() {
     const req = require.context('../storybook', true, /\.stories\.js$/);
