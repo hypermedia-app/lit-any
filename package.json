@@ -10,7 +10,7 @@
     "test": "webpack && wct --plugin sauce",
     "build-tests": "webpack",
     "lint": "eslint src/**/*.js test/**/*.js",
-    "wct": "wct -l chrome -p",
+    "wct": "webpack -w & wct -l chrome -p",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "postinstall": "bower i"

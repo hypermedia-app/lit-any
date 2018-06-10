@@ -26,7 +26,7 @@ describe('lit-form', () => {
             await forRender(litForm);
 
             // then
-            expect(litForm.form.children.length).to.equal(0);
+            expect(litForm.form.querySelector('fieldset')).to.be.null;
         });
 
         it('should render legend for contract title', async () => {
