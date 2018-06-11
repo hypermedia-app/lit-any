@@ -1,7 +1,7 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { storiesOf } from '@storybook/polymer/dist/client';
 import { FieldTemplates } from '../src';
-import {contract, showLabels, submitButton} from './knobs';
+import { contract, showLabels, submitButton } from './knobs';
 import notes from './notes/lit-form/custom-elements.md';
 import onSubmit from './helpers/submit-handler';
 
