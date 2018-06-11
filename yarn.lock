@@ -104,6 +104,17 @@
     react-textarea-autosize "^6.1.0"
     util-deprecate "^1.0.2"
 
+"@storybook/addon-links@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://www.myget.org/F/dnn-software-public/npm/@storybook/addon-links/-/@storybook/addon-links-4.0.0-alpha.9.tgz#629eccd2c67786713fc4d80b7f548416f6320b3c"
+  dependencies:
+    "@storybook/addons" "4.0.0-alpha.9"
+    "@storybook/components" "4.0.0-alpha.9"
+    "@storybook/core-events" "4.0.0-alpha.9"
+    babel-runtime "^6.26.0"
+    global "^4.3.2"
+    prop-types "^15.6.1"
+
 "@storybook/addon-notes@^4.0.0-alpha.9":
   version "4.0.0-alpha.9"
   resolved "https://www.myget.org/F/dnn-software-public/npm/@storybook/addon-notes/-/@storybook/addon-notes-4.0.0-alpha.9.tgz#734ba7eb8b744b86f1c1b85f078fc827f326e942"
