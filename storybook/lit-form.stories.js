@@ -1,4 +1,5 @@
-import { html } from 'lit-html/lib/lit-extended';
+import { html, render } from 'lit-html/lib/lit-extended';
+import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
 import '../src/elements/lit-form';
 import { FieldTemplates } from '../src';
@@ -34,4 +35,41 @@ storiesOf('lit-form', module)
                           noLabels="${!showLabels()}"
                           submitButtonLabel=${submitButton('Register')}
                           value="${defaultValue(value)}"></lit-form>`;
+    });
+
+storiesOf('lit-form', module)
+    .add('submitting', () => {
+        const c = {
+            fields: [
+                {
+                    property: 'age',
+                    title: 'Your age',
+                    type: 'integer',
+                },
+            ],
+        };
+
+        let pre;
+        let form;
+        const getPre = (part) => {
+            pre = part.element;
+        };
+
+        const getForm = (part) => {
+            form = part.element;
+        };
+
+        const showValue = (e) => {
+            render(html`You submitted <pre>${JSON.stringify(e.detail.value, null, 2)}</pre>`, pre);
+        };
+
+        return html`
+<lit-form ref="${directive(getForm)}"
+          contract="${contract(c)}" 
+          submitButtonLabel=${submitButton('Submit')}
+          on-submit="${showValue}"></lit-form>
+
+<button on-click="${() => form.submit()}">Submit from the outside</button>
+
+<div ref="${directive(getPre)}"></div>`;
     });

@@ -27,6 +27,14 @@ export default class LitForm extends LitAnyBase {
         ];
     }
 
+    submit() {
+        this.dispatchEvent(new CustomEvent('submit', {
+            detail: {
+                value: this.value,
+            },
+        }));
+    }
+
     _render() {
         if (this.contract) {
             if (!this.shadowRoot) {
@@ -41,7 +49,9 @@ export default class LitForm extends LitAnyBase {
 
     __formTemplate() {
         return html`
-            <form action$="${this.contract.target}" method$="${this.contract.method}">
+            <form action$="${this.contract.target}" 
+                 method$="${this.contract.method}" 
+                 on-submit="${this._onSubmit.bind(this)}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
                 
                 ${this.__submitButtonTemplate()}
@@ -103,6 +113,12 @@ export default class LitForm extends LitAnyBase {
         }
 
         return html`<legend>${currentContract.title}</legend>`;
+    }
+
+    _onSubmit(e) {
+        this.submit();
+        e.preventDefault();
+        return false;
     }
 
     static typeForProperty(property) {
