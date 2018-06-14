@@ -3,6 +3,12 @@ import LitAnyBase from './lit-any-base';
 import contract from './contract-helpers';
 import { FieldTemplates } from '../template-registry';
 
+function onSubmit(e) {
+    this.submit();
+    e.preventDefault();
+    return false;
+}
+
 export default class LitForm extends LitAnyBase {
     constructor() {
         super();
@@ -51,7 +57,7 @@ export default class LitForm extends LitAnyBase {
         return html`
             <form action$="${this.contract.target}" 
                  method$="${this.contract.method}" 
-                 on-submit="${this._onSubmit.bind(this)}">
+                 on-submit="${onSubmit.bind(this)}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
                 
                 ${this.__submitButtonTemplate()}
@@ -113,12 +119,6 @@ export default class LitForm extends LitAnyBase {
         }
 
         return html`<legend>${currentContract.title}</legend>`;
-    }
-
-    _onSubmit(e) {
-        this.submit();
-        e.preventDefault();
-        return false;
     }
 
     static typeForProperty(property) {
