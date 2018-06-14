@@ -5,6 +5,7 @@ import '../src/elements/lit-form';
 import { FieldTemplates } from '../src';
 import { showLabels, defaultValue, submitButton, contract, noSubmitButton } from './knobs';
 import onSubmit from './helpers/submit-handler';
+import submitNotes from './notes/lit-form/submitting.md';
 
 FieldTemplates.default
     .when
@@ -64,4 +65,6 @@ storiesOf('lit-form', module)
           on-submit="${onSubmit}"></lit-form>
 
 <button on-click="${() => form.submit()}">Submit from the outside</button>`;
+    }, {
+        notes: { markdown: submitNotes },
     });
