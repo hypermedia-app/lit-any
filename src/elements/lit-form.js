@@ -17,6 +17,7 @@ export default class LitForm extends LitAnyBase {
         this.noLabels = false;
         this.value = {};
         this.submitButtonLabel = 'Submit';
+        this.noSubmitButton = false;
     }
 
     get form() {
@@ -30,6 +31,7 @@ export default class LitForm extends LitAnyBase {
             'no-labels',
             'template-registry',
             'submit-button-label',
+            'no-submit-button',
         ];
     }
 
@@ -60,7 +62,7 @@ export default class LitForm extends LitAnyBase {
                  on-submit="${onSubmit.bind(this)}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
                 
-                ${this.__submitButtonTemplate()}
+                ${this.noSubmitButton ? '' : this.__submitButtonTemplate()}
             </form>`;
     }
 
@@ -123,6 +125,7 @@ export default class LitForm extends LitAnyBase {
 
     static typeForProperty(property) {
         switch (property) {
+            case 'noSubmitButton':
             case 'noLabels':
                 return Boolean;
             default:

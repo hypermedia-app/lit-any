@@ -3,7 +3,7 @@ import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
 import '../src/elements/lit-form';
 import { FieldTemplates } from '../src';
-import { showLabels, defaultValue, submitButton, contract } from './knobs';
+import { showLabels, defaultValue, submitButton, contract, noSubmitButton } from './knobs';
 import onSubmit from './helpers/submit-handler';
 
 FieldTemplates.default
@@ -59,6 +59,7 @@ storiesOf('lit-form', module)
         return html`
 <lit-form ref="${directive(getForm)}"
           contract="${contract(c)}" 
+          noSubmitButton="${noSubmitButton()}"
           submitButtonLabel=${submitButton('Submit')}
           on-submit="${onSubmit}"></lit-form>
 

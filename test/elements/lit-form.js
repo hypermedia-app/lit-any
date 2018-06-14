@@ -292,6 +292,28 @@ describe('lit-form', () => {
         });
     });
 
+    describe('when no-submit-button is set', () => {
+        beforeEach(() => {
+            litForm = fixture('lit-form-no-submit');
+            getTemplate = sinon.stub();
+            getTemplate.returns(template);
+            template.render = sinon.spy();
+        });
+
+        it('should not render a submit button', async () => {
+            // given
+            litForm.contract = {
+                fields: [{ property: 'field_one' }],
+            };
+
+            // when
+            await forRender(litForm);
+
+            // then
+            expect(litForm.form.querySelector('button')).to.be.null;
+        });
+    });
+
     describe('submit', () => {
         beforeEach(() => {
             litForm = fixture('lit-form');
