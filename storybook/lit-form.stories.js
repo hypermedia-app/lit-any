@@ -1,11 +1,15 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
+import { select } from '@storybook/addon-knobs';
 import '../src/elements/lit-form';
 import { FieldTemplates } from '../src';
-import { showLabels, defaultValue, submitButton, contract, noSubmitButton } from './knobs';
+import { defaultValue, submitButton, contract, noSubmitButton } from './knobs';
 import onSubmit from './helpers/submit-handler';
 import submitNotes from './notes/lit-form/submitting.md';
+import fallbackNotes from './notes/lit-form/fallback-input.md';
+
+import '../bower_components/paper-input/paper-input.html';
 
 FieldTemplates.default
     .when
@@ -17,13 +21,13 @@ FieldTemplates.default
                 on-change=${e => set(Number.parseInt(e.target.value, 0))}>`);
 
 storiesOf('lit-form', module)
-    .add('basic', () => {
+    .add('Fallback input', () => {
         const c = {
             fields: [
                 {
                     property: 'age',
                     title: 'Your age',
-                    type: 'integer',
+                    type: 'custom',
                 },
             ],
         };
@@ -32,22 +36,34 @@ storiesOf('lit-form', module)
             age: 30,
         };
 
+        FieldTemplates.byName('catch-all').when
+            .fieldMatches(() => true)
+            .renders((f, id, v, set) =>
+                html`<paper-input id=${id} 
+                 label=${f.title}
+                 value=${v} 
+                 on-change=${e => set(e.target.value)}></paper-input>`);
+
+        const registry = select('Fallback behavior', ['default', 'catch-all'], 'default', 'Behavior');
+
         return html`<lit-form
                           contract="${contract(c)}" 
-                          noLabels="${!showLabels()}"
+                          noLabels="${registry === 'catch-all'}"
                           submitButtonLabel=${submitButton('Register')}
                           value="${defaultValue(value)}"
+                          template-registry$="${registry}"
                           on-submit="${onSubmit}"></lit-form>`;
+    }, {
+        notes: { markdown: fallbackNotes },
     });
 
 storiesOf('lit-form', module)
-    .add('submitting', () => {
+    .add('Submitting form', () => {
         const c = {
             fields: [
                 {
                     property: 'age',
                     title: 'Your age',
-                    type: 'integer',
                 },
             ],
         };
