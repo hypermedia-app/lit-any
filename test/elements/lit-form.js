@@ -1,6 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
 import '../../src/elements/lit-form';
-import { forRender } from '../async-tests';
+import { forRender, forSubmit } from '../async-tests';
 import { FieldTemplates } from '../../src/template-registry';
 
 describe('lit-form', () => {
@@ -289,6 +289,62 @@ describe('lit-form', () => {
 
             // then
             expect(litForm.form.querySelector('label')).to.be.null;
+        });
+    });
+
+    describe('when no-submit-button is set', () => {
+        beforeEach(() => {
+            litForm = fixture('lit-form-no-submit');
+            getTemplate = sinon.stub();
+            getTemplate.returns(template);
+            template.render = sinon.spy();
+        });
+
+        it('should not render a submit button', async () => {
+            // given
+            litForm.contract = {
+                fields: [{ property: 'field_one' }],
+            };
+
+            // when
+            await forRender(litForm);
+
+            // then
+            expect(litForm.form.querySelector('button')).to.be.null;
+        });
+    });
+
+    describe('submit', () => {
+        beforeEach(() => {
+            litForm = fixture('lit-form');
+            getTemplate = sinon.stub();
+            getTemplate.returns(null);
+        });
+
+        it('triggers event', async () => {
+            // given
+            litForm.contract = {
+                fields: [
+                    { property: 'name' },
+                    { property: 'age' },
+                    { property: 'nick' },
+                ],
+            };
+            await forRender(litForm);
+            Array.prototype.forEach.call(litForm.form.querySelectorAll('input'), (input) => {
+                input.value = 'a';
+            });
+
+            // when
+            const whenSubmitted = forSubmit(litForm);
+            litForm.submit();
+
+            // then
+            await whenSubmitted.then((e) => {
+                Object.keys(e.detail.value).forEach((key) => {
+                    expect(e.detail.value[key]).to.equal('a');
+                });
+            });
         });
     });
 });

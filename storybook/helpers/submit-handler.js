@@ -1,4 +1,3 @@
 export default function (e) {
-    alert(e);
-    e.stopPropagation();
+    alert(JSON.stringify(e.detail.value, null, 2));
 }

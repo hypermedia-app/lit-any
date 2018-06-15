@@ -9,7 +9,7 @@ import '../bower_components/paper-input/paper-input.html';
 
 storiesOf('lit-form', module)
     .add(
-        'custom fields', () => {
+        'Field templates', () => {
             FieldTemplates.byName('custom-fields')
                 .when
                 .fieldMatches(f => f.type === 'integer')

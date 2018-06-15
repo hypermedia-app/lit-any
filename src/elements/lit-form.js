@@ -3,6 +3,12 @@ import LitAnyBase from './lit-any-base';
 import contract from './contract-helpers';
 import { FieldTemplates } from '../template-registry';
 
+function onSubmit(e) {
+    this.submit();
+    e.preventDefault();
+    return false;
+}
+
 export default class LitForm extends LitAnyBase {
     constructor() {
         super();
@@ -11,6 +17,7 @@ export default class LitForm extends LitAnyBase {
         this.noLabels = false;
         this.value = {};
         this.submitButtonLabel = 'Submit';
+        this.noSubmitButton = false;
     }
 
     get form() {
@@ -24,7 +31,16 @@ export default class LitForm extends LitAnyBase {
             'no-labels',
             'template-registry',
             'submit-button-label',
+            'no-submit-button',
         ];
+    }
+
+    submit() {
+        this.dispatchEvent(new CustomEvent('submit', {
+            detail: {
+                value: this.value,
+            },
+        }));
     }
 
     _render() {
@@ -41,10 +57,12 @@ export default class LitForm extends LitAnyBase {
 
     __formTemplate() {
         return html`
-            <form action$="${this.contract.target}" method$="${this.contract.method}">
+            <form action$="${this.contract.target}" 
+                 method$="${this.contract.method}" 
+                 on-submit="${onSubmit.bind(this)}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
                 
-                ${this.__submitButtonTemplate()}
+                ${this.noSubmitButton ? '' : this.__submitButtonTemplate()}
             </form>`;
     }
 
@@ -107,6 +125,7 @@ export default class LitForm extends LitAnyBase {
 
     static typeForProperty(property) {
         switch (property) {
+            case 'noSubmitButton':
             case 'noLabels':
                 return Boolean;
             default:
