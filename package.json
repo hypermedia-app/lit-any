@@ -11,9 +11,8 @@
     "build-tests": "webpack",
     "lint": "eslint src/**/*.js test/**/*.js",
     "wct": "webpack -w & wct -l chrome -p",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "build-storybook": "build-storybook -c .storybook -o docs",
-    "postinstall": "bower i"
+    "storybook": "bower i; start-storybook -p 9001 -c .storybook",
+    "build-storybook": "bower i; build-storybook -c .storybook -o docs"
   },
   "devDependencies": {
     "@storybook/addon-knobs": "^4.0.0-alpha.9",
