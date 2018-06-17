@@ -2,7 +2,7 @@
   "name": "lit-any",
   "main": "src/index.js",
   "module": "src/index.js",
-  "version": "0.5.0-a1",
+  "version": "0.5.0",
   "directories": {
     "test": "tests"
   },
