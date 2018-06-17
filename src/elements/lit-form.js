@@ -40,7 +40,7 @@ export default class LitForm extends LitAnyBase {
             detail: {
                 value: this.value,
                 target: this.form.action,
-                method: this.contract.method,
+                method: this.form.getAttribute('method') || this.form.method.toUpperCase(),
             },
         }));
     }

@@ -1,3 +1,7 @@
 export default function (e) {
-    alert(JSON.stringify(e.detail.value, null, 2));
+    const text = `URL: '${e.detail.target}'
+METHOD: '${e.detail.method}'
+BODY: ${JSON.stringify(e.detail.value, null, 2)}`;
+
+    alert(text);
 }
