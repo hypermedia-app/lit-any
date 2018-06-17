@@ -22,7 +22,7 @@ they are really needed.
 import { ViewTemplates } from 'lit-any';
 import { html } from 'lit-html';
 
-ViewTemplates.when
+ViewTemplates.default.when
     .value(isPerson)
     .renders((renderFunc, person) => html`
         <person-element name="${person.name}">
@@ -32,14 +32,14 @@ ViewTemplates.when
         </person-element>
     `);
 
-ViewTemplates.when
+ViewTemplates.default.when
     .scope('person-element-avatar')
     .value(v => v.url)
     .renders((_, image) => html`
         <img src="${image.url}" alt="avatar" />
     `);
 
-ViewTemplates.when
+ViewTemplates.default.when
     .scope('person-element-avatar')
     .value(v => v.large)
     .renders((_, image) => html`
@@ -114,12 +114,12 @@ import { html } from 'lit-html';
 import * as moment from 'moment';
 
 // show nicely formatted date by default
-ViewTemplates.when
+ViewTemplates.default.when
     .value(v => (v instanceOf Date))
     .renders((_, date) => html`<span>${moment(date).format('LL')}</span>`);
 
 // but display calendar in 'event-large' scope
-ViewTemplates.when
+ViewTemplates.default.when
     .value(v => (v instanceOf Date))
     .scope('event-large')
     .renders((_, date) => html`<datetime-picker disabled datetime="${date}"></datetime-picker>`);
@@ -134,11 +134,11 @@ Then set the scope on `lit-view` element:
 Or pass to the `render` function:
 
 ```javascript
-import { render } from 'lit-any';
+import { ViewTemplates, render } from 'lit-any';
 
 const eventDateElement = document.querySelector('#eventDate').
 
-render({
+render(ViewTemplates.default, {
     value: new Date(),
     scope: 'event-large',
 }, eventDateElement);
@@ -147,7 +147,7 @@ render({
 Or override from parent template:
 
 ```javascript
-ViewTemplates.when
+ViewTemplates.default.when
     .value(v => v.type === 'Event')
     .renders((renderChild, event) => html`
         <my-event-element>
@@ -158,6 +158,51 @@ ViewTemplates.when
     `);
 ```
 
-## To Do
+## 3. Rendering forms
 
-1. `lit-form` element to build forms with individual input controls
+Set up how you will render input controls. The `set` parameter is a function used to set tha value 
+back to the form's model and has to be bound to the input control.
+
+```js
+import { FieldTemplates } from 'lit-any';
+
+FieldTemplates.default.when
+  .fieldMatches(field => field.type === 'http://www.w3.org/2001/XMLSchema#integer')
+  .renders((field, id, value, set) => {
+    return html`<input type=number value=${value} 
+                       on-change=${e => set(Number.parseInt(e.target.value, 0))}>`;
+  });
+```
+
+Create a form definition:
+
+```js
+const contract = {
+  fields: [{
+    title: 'Age',
+    property: 'age',
+    type: 'http://www.w3.org/2001/XMLSchema#integer'
+  }]
+};
+```
+
+Create a form on your page
+
+```html
+<lit-form contract=${contract}
+          submit-button-label="Register"
+          on-submit=${submitModel}></lit-form>
+```
+
+When the `Register` button is clicked `submitModel` will be called where the code will retrieve the form's
+value from `event.detail.value`.
+
+```js
+function submitModel(e) {
+  // submit lit-form's value
+  fetch(e.detail.target, {
+    method: e.detail.method,
+    body: e.detail.value
+  });
+}
+```

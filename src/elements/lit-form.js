@@ -39,6 +39,8 @@ export default class LitForm extends LitAnyBase {
         this.dispatchEvent(new CustomEvent('submit', {
             detail: {
                 value: this.value,
+                target: this.form.action,
+                method: this.form.getAttribute('method') || this.form.method.toUpperCase(),
             },
         }));
     }
@@ -51,13 +53,13 @@ export default class LitForm extends LitAnyBase {
 
             litRender(this.__formTemplate(), this.shadowRoot);
 
-            this.dispatchEvent(new CustomEvent('render'));
+            this.dispatchEvent(new CustomEvent('ly-render'));
         }
     }
 
     __formTemplate() {
         return html`
-            <form action$="${this.contract.target}" 
+            <form action$="${this.contract.target}"
                  method$="${this.contract.method}" 
                  on-submit="${onSubmit.bind(this)}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}

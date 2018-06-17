@@ -1,7 +1,7 @@
 import pEvent from 'p-event';
 
 export function forRender(litAnyBase) {
-    return pEvent(litAnyBase, 'render');
+    return pEvent(litAnyBase, 'ly-render');
 }
 
 export function forSubmit(litForm) {

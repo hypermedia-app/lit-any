@@ -33,7 +33,7 @@ export default class LitView extends LitAnyBase {
                 this.ignoreMissing,
             );
 
-            this.dispatchEvent(new CustomEvent('render'));
+            this.dispatchEvent(new CustomEvent('ly-render'));
         }
     }
 
