@@ -39,6 +39,8 @@ export default class LitForm extends LitAnyBase {
         this.dispatchEvent(new CustomEvent('submit', {
             detail: {
                 value: this.value,
+                target: this.form.action,
+                method: this.contract.method,
             },
         }));
     }
@@ -57,7 +59,7 @@ export default class LitForm extends LitAnyBase {
 
     __formTemplate() {
         return html`
-            <form action$="${this.contract.target}" 
+            <form action$="${this.contract.target}"
                  method$="${this.contract.method}" 
                  on-submit="${onSubmit.bind(this)}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
