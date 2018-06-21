@@ -2,12 +2,12 @@ import { html } from 'lit-html/lib/lit-extended';
 import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
 import { select } from '@storybook/addon-knobs';
-import '../src/elements/lit-form';
 import { FieldTemplates } from '../src';
 import { defaultValue, submitButton, contract, noSubmitButton } from './knobs';
 import onSubmit from './helpers/submit-handler';
 import submitNotes from './notes/lit-form/submitting.md';
 import fallbackNotes from './notes/lit-form/fallback-input.md';
+import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator.md';
 
 import '../bower_components/paper-input/paper-input.html';
 
@@ -83,4 +83,73 @@ storiesOf('lit-form', module)
 <button on-click="${() => form.submit()}">Submit from the outside</button>`;
     }, {
         notes: { markdown: submitNotes },
+    });
+
+storiesOf('lit-form', module)
+    .add('Customizing model get/set', () => {
+        const rdfLiteralDecorator = {
+            get: (field, model) => {
+                if (model && model[field.property]) {
+                    return model[field.property]['@value'] || '';
+                }
+
+                return '';
+            },
+            set: (model, property, newValue) => {
+                model[property] = model[property] || {};
+
+                model[property]['@value'] = newValue;
+            },
+        };
+
+        const schemaImageDecorator = {
+            get: (field, model) => {
+                if (model && model[field.property]) {
+                    return model[field.property]['https://schema.org/contentUrl'] || '';
+                }
+
+                return '';
+            },
+            set: (model, property, newValue) => {
+                model[property] = model[property] || {};
+
+                model[property]['https://schema.org/contentUrl'] = newValue;
+                model[property]['@type'] = 'https://schema.org/ImageObject';
+            },
+        };
+
+        const jsonldContract = {
+            fields: [
+                {
+                    property: 'https://schema.org/name',
+                    title: 'Your name',
+                    valueDecorator: rdfLiteralDecorator,
+                },
+                {
+                    property: 'https://schema.org/age',
+                    title: 'Your age',
+                    valueDecorator: rdfLiteralDecorator,
+                },
+                {
+                    property: 'https://schema.org/image',
+                    title: 'Avatar URL',
+                    valueDecorator: schemaImageDecorator,
+                },
+            ],
+        };
+
+        const jsonLd = {
+            'https://schema.org/name': {
+                '@value': 'John Doe',
+            },
+        };
+
+        return html`
+<lit-form
+          contract="${jsonldContract}" 
+          value="${defaultValue(jsonLd)}"
+          submit-button-label="Register"
+          on-submit="${onSubmit}"></lit-form>`;
+    }, {
+        notes: { markdown: fieldValueDecoratorNotes },
     });

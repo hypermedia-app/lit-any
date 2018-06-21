@@ -99,12 +99,10 @@ export default class LitForm extends LitAnyBase {
     }
 
     __fieldTemplate(field, fieldId) {
-        const setter = (newValue) => {
-            this.value[field.property] = newValue;
-        };
+        const setter = this.__createModelValueSetter(field).bind(this.value);
 
         const fieldTemplate = FieldTemplates.byName(this.templateRegistry).getTemplate({ field });
-        const fieldValue = this.value[field.property] || null;
+        const fieldValue = this.__getPropertyValue(field, this.value);
 
         if (fieldTemplate === null) {
             console.warn('Could not find template for field. Rendering fallback input. Field was:', field);
@@ -112,6 +110,26 @@ export default class LitForm extends LitAnyBase {
         }
 
         return fieldTemplate.render(field, fieldId, fieldValue, setter);
+    }
+
+    __createModelValueSetter(field) {
+        if (field.valueDecorator && typeof field.valueDecorator.set === 'function') {
+            return newValue => field.valueDecorator.set(this.value, field.property, newValue);
+        }
+
+        return (newValue) => {
+            // eslint-disable-next-line no-param-reassign
+            this.value[field.property] = newValue;
+        };
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    __getPropertyValue(field, model) {
+        if (field.valueDecorator && typeof field.valueDecorator.get === 'function') {
+            return field.valueDecorator.get(field, model);
+        }
+
+        return model[field.property] || null;
     }
 
     // eslint-disable-next-line class-methods-use-this
