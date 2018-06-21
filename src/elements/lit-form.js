@@ -53,7 +53,7 @@ export default class LitForm extends LitAnyBase {
 
             litRender(this.__formTemplate(), this.shadowRoot);
 
-            this.dispatchEvent(new CustomEvent('ly-render'));
+            this.dispatchEvent(new CustomEvent('render'));
         }
     }
 

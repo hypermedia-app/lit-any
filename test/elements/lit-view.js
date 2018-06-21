@@ -44,7 +44,7 @@ describe('lit-view', () => {
 
         it('should raise event when value changes', (done) => {
             // then
-            testHandler(litView, 'ly-render', () => {
+            testHandler(litView, 'render', () => {
                 done();
             });
 
@@ -228,7 +228,7 @@ describe('lit-view', () => {
             });
 
             // then
-            testHandler(manualView, 'ly-render', () => {
+            testHandler(manualView, 'render', () => {
                 const span = manualView.shadowRoot.querySelector('span');
                 expect(span.textContent).to.equal('manually');
                 done();
