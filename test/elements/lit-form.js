@@ -314,14 +314,14 @@ describe('lit-form', () => {
         });
     });
 
-    describe('submit', () => {
+    describe('submit event', () => {
         beforeEach(() => {
             litForm = fixture('lit-form');
             getTemplate = sinon.stub();
             getTemplate.returns(null);
         });
 
-        it('triggers event', async () => {
+        it('triggers when form is submitted', async () => {
             // given
             litForm.contract = {
                 fields: [
@@ -344,6 +344,45 @@ describe('lit-form', () => {
                 Object.keys(e.detail.value).forEach((key) => {
                     expect(e.detail.value[key]).to.equal('a');
                 });
+            });
+        });
+
+        it('details contain form\'s action and method', async () => {
+            // given
+            litForm.contract = {
+                target: 'http://example.com/',
+                method: 'PATCH',
+                fields: [
+                ],
+            };
+            await forRender(litForm);
+
+            // when
+            const whenSubmitted = forSubmit(litForm);
+            litForm.submit();
+
+            // then
+            await whenSubmitted.then((e) => {
+                expect(e.detail.target).to.equal('http://example.com/');
+                expect(e.detail.method).to.equal('PATCH');
+            });
+        });
+
+        it('details fires with \'GET\' method if unspecified in contract', async () => {
+            // given
+            litForm.contract = {
+                fields: [
+                ],
+            };
+            await forRender(litForm);
+
+            // when
+            const whenSubmitted = forSubmit(litForm);
+            litForm.submit();
+
+            // then
+            await whenSubmitted.then((e) => {
+                expect(e.detail.method).to.equal('GET');
             });
         });
     });

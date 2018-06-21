@@ -60,6 +60,8 @@ storiesOf('lit-form', module)
 storiesOf('lit-form', module)
     .add('Form buttons', () => {
         const c = {
+            target: 'http://example.com',
+            method: 'POST',
             fields: [
                 {
                     property: 'age',
