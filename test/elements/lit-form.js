@@ -347,4 +347,32 @@ describe('lit-form', () => {
             });
         });
     });
+
+    describe('clicking clear button', () => {
+        beforeEach(() => {
+            litForm = fixture('lit-form');
+            getTemplate = sinon.stub();
+            getTemplate.returns(null);
+        });
+
+        it('sets an empty object as value', async () => {
+            // given
+            litForm.contract = {
+                fields: [
+                    { property: 'name' },
+                ],
+            };
+            await forRender(litForm);
+            litForm.form.querySelector('input').value = 'a';
+
+            // when
+            debugger;
+            litForm.reset();
+            await forRender(litForm);
+
+            // then
+            expect(litForm.value).to.deep.equal({});
+            expect(litForm.form.querySelector('input').value).to.equal('');
+        });
+    });
 });

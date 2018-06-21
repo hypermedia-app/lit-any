@@ -18,6 +18,8 @@ export default class LitForm extends LitAnyBase {
         this.value = {};
         this.submitButtonLabel = 'Submit';
         this.noSubmitButton = false;
+        this.resetButtonLabel = 'Reset';
+        this.noResetButton = false;
     }
 
     get form() {
@@ -32,6 +34,8 @@ export default class LitForm extends LitAnyBase {
             'template-registry',
             'submit-button-label',
             'no-submit-button',
+            'reset-button-label',
+            'no-reset-button',
         ];
     }
 
@@ -41,6 +45,12 @@ export default class LitForm extends LitAnyBase {
                 value: this.value,
             },
         }));
+    }
+
+    reset() {
+        this._render();
+        this.value = {};
+        this._render();
     }
 
     _render() {
@@ -63,11 +73,16 @@ export default class LitForm extends LitAnyBase {
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
                 
                 ${this.noSubmitButton ? '' : this.__submitButtonTemplate()}
+                ${this.noResetButton ? '' : this.__resetButtonTemplate()}
             </form>`;
     }
 
     __submitButtonTemplate() {
         return html`<button type="submit">${this.submitButtonLabel}</button>`;
+    }
+
+    __resetButtonTemplate() {
+        return html`<input type="button" value="${this.resetButtonLabel}" on-click="${this.reset.bind(this)}">`;
     }
 
     __fieldsetTemplate() {
