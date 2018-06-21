@@ -362,11 +362,10 @@ describe('lit-form', () => {
                     { property: 'name' },
                 ],
             };
+            litForm.value = { name: 'a' };
             await forRender(litForm);
-            litForm.form.querySelector('input').value = 'a';
 
             // when
-            debugger;
             litForm.reset();
             await forRender(litForm);
 

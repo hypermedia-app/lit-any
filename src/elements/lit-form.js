@@ -48,12 +48,12 @@ export default class LitForm extends LitAnyBase {
     }
 
     reset() {
-        this._render();
+        this._render(false);
         this.value = {};
         this._render();
     }
 
-    _render() {
+    _render(dispatchEvent) {
         if (this.contract) {
             if (!this.shadowRoot) {
                 this.attachShadow({ mode: 'open' });
@@ -61,7 +61,9 @@ export default class LitForm extends LitAnyBase {
 
             litRender(this.__formTemplate(), this.shadowRoot);
 
-            this.dispatchEvent(new CustomEvent('render'));
+            if (dispatchEvent !== false) {
+                this.dispatchEvent(new CustomEvent('render'));
+            }
         }
     }
 
