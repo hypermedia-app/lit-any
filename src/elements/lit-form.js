@@ -118,7 +118,7 @@ export default class LitForm extends LitAnyBase {
     }
 
     __fieldTemplate(field, fieldId) {
-        const setter = this.__createModelValueSetter(field).bind(this.value);
+        const setter = this.__createModelValueSetter(field);
 
         const fieldTemplate = FieldTemplates.byName(this.templateRegistry).getTemplate({ field });
         const fieldValue = this.__getPropertyValue(field, this.value);
@@ -132,23 +132,26 @@ export default class LitForm extends LitAnyBase {
     }
 
     __createModelValueSetter(field) {
-        if (field.valueDecorator && typeof field.valueDecorator.set === 'function') {
-            return newValue => field.valueDecorator.set(this.value, field.property, newValue);
-        }
+        return (fieldInput) => {
+            let newValue = fieldInput;
 
-        return (newValue) => {
-            // eslint-disable-next-line no-param-reassign
+            if (field.valueDecorator && typeof field.valueDecorator.wrap === 'function') {
+                newValue = field.valueDecorator.wrap(newValue);
+            }
+
             this.value[field.property] = newValue;
         };
     }
 
     // eslint-disable-next-line class-methods-use-this
     __getPropertyValue(field, model) {
-        if (field.valueDecorator && typeof field.valueDecorator.get === 'function') {
-            return field.valueDecorator.get(field, model);
+        let value = model[field.property] || null;
+
+        if (value && field.valueDecorator && typeof field.valueDecorator.unwrap === 'function') {
+            value = field.valueDecorator.unwrap(value);
         }
 
-        return model[field.property] || null;
+        return value;
     }
 
     // eslint-disable-next-line class-methods-use-this

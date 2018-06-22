@@ -92,34 +92,18 @@ storiesOf('lit-form', module)
 storiesOf('lit-form', module)
     .add('Decorating properties', () => {
         const rdfLiteralDecorator = {
-            get: (field, model) => {
-                if (model && model[field.property]) {
-                    return model[field.property]['@value'] || '';
-                }
-
-                return '';
-            },
-            set: (model, property, newValue) => {
-                model[property] = model[property] || {};
-
-                model[property]['@value'] = newValue;
-            },
+            unwrap: value => value['@value'] || value,
+            wrap: newValue => ({
+                '@value': newValue,
+            }),
         };
 
         const schemaImageDecorator = {
-            get: (field, model) => {
-                if (model && model[field.property]) {
-                    return model[field.property]['https://schema.org/contentUrl'] || '';
-                }
-
-                return '';
-            },
-            set: (model, property, newValue) => {
-                model[property] = model[property] || {};
-
-                model[property]['https://schema.org/contentUrl'] = newValue;
-                model[property]['@type'] = 'https://schema.org/ImageObject';
-            },
+            unwrap: value => value['https://schema.org/contentUrl'],
+            wrap: newValue => ({
+                '@type': 'https://schema.org/ImageObject',
+                'https://schema.org/contentUrl': newValue,
+            }),
         };
 
         const jsonldContract = {
