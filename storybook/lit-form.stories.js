@@ -90,7 +90,7 @@ storiesOf('lit-form', module)
     });
 
 storiesOf('lit-form', module)
-    .add('Customizing model get/set', () => {
+    .add('Decorating properties', () => {
         const rdfLiteralDecorator = {
             get: (field, model) => {
                 if (model && model[field.property]) {
