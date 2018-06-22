@@ -4,9 +4,9 @@ import { storiesOf } from '@storybook/polymer/dist/client/index';
 import { select } from '@storybook/addon-knobs';
 import '../src/elements/lit-form';
 import { FieldTemplates } from '../src';
-import { defaultValue, submitButton, contract, noSubmitButton } from './knobs';
+import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noResetButton } from './knobs';
 import onSubmit from './helpers/submit-handler';
-import submitNotes from './notes/lit-form/submitting.md';
+import buttonsNotes from './notes/lit-form/buttons.md';
 import fallbackNotes from './notes/lit-form/fallback-input.md';
 
 import '../bower_components/paper-input/paper-input.html';
@@ -58,7 +58,7 @@ storiesOf('lit-form', module)
     });
 
 storiesOf('lit-form', module)
-    .add('Submitting form', () => {
+    .add('Form buttons', () => {
         const c = {
             target: 'http://example.com',
             method: 'POST',
@@ -80,9 +80,11 @@ storiesOf('lit-form', module)
           contract="${contract(c)}" 
           noSubmitButton="${noSubmitButton()}"
           submitButtonLabel=${submitButton('Submit')}
+          noResetButton="${noResetButton()}"
+          resetButtonLabel=${resetButton('Reset')}
           on-submit="${onSubmit}"></lit-form>
 
 <button on-click="${() => form.submit()}">Submit from the outside</button>`;
     }, {
-        notes: { markdown: submitNotes },
+        notes: { markdown: buttonsNotes },
     });
