@@ -4,9 +4,18 @@ By default the object model is intended to be plain JSON. That is, each field va
 child of it's defining field. There may be cases when a model is represented by a more complex structure
 which requires some additional processing before the direct user input can be applied to the form's value.
 
-## JSON-LD (eg. schema.org)
+## Example 1: converting types
 
-JSON-LD is one such case where, in expanded representation, additional keywords are used to add additional
+Some input fields could only return string values, even if they actually are expected to collect a number.
+Such is the case with `<paper-input type=number>` whose value will always be a string even though it
+restricts user input to digits only.
+
+Thus, when the actual model expects a property to always be a JS `Number` object one could implement a 
+decorator to convert the string coming from the input element to a numeric value.
+
+## Example 2: JSON-LD (eg. schema.org)
+
+JSON-LD is another case where, in expanded representation, additional keywords are used to add additional
 meaning to plain JSON objects. For example, where in plain JSON one could have
 
 ```json
@@ -51,18 +60,14 @@ adding a `valueDecorator` to the field's definition.
 
 ```js
 const schemaImageDecorator = {
-     get: (field, model) => {
-        if (model && model[field.property]) {
-            return model[field.property]['https://schema.org/contentUrl'] || '';
-        }
-
-        return '';
+    unwrap: (value) => {
+        return value['https://schema.org/contentUrl'] || '';
     },
-    set: (model, property, newValue) => {
-        model[property] = model[property] || {};
-
-        model[property]['https://schema.org/contentUrl'] = newValue;
-        model[property]['@type'] = 'https://schema.org/ImageObject';
+    wrap: (newValue) => {
+        return {
+            '@type': 'https://schema.org/ImageObject',
+            'https://schema.org/contentUrl': newValue,
+        };
     },
 };
 
@@ -77,3 +82,11 @@ const jsonldContract = {
     ],
 };
 ```
+
+A decorator can implement a `wrap` and `unwrap` functions. Both are optional. 
+
+`unwrap` takes the original property value coming from the initial form value and returns the value to
+bind to the input element.
+
+`wrap` does the opposite. It takes the user input as parameter and returns the value to apply to the
+form's model.
