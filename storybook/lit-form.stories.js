@@ -1,7 +1,7 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
-import { select } from '@storybook/addon-knobs';
+import { select, button } from '@storybook/addon-knobs';
 import { FieldTemplates } from '../src';
 import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noResetButton } from './knobs';
 import onSubmit from './helpers/submit-handler';
@@ -75,6 +75,9 @@ storiesOf('lit-form', module)
             form = part.element;
         };
 
+        button('Submit programmatically', () => form.submit(), 'Behavior');
+        button('Reset programmatically', () => form.reset(), 'Behavior');
+
         return html`
 <lit-form ref="${directive(getForm)}"
           contract="${contract(c)}" 
@@ -82,9 +85,7 @@ storiesOf('lit-form', module)
           submitButtonLabel=${submitButton('Submit')}
           noResetButton="${noResetButton()}"
           resetButtonLabel=${resetButton('Reset')}
-          on-submit="${onSubmit}"></lit-form>
-
-<button on-click="${() => form.submit()}">Submit from the outside</button>`;
+          on-submit="${onSubmit}"></lit-form>`;
     }, {
         notes: { markdown: buttonsNotes },
     });
