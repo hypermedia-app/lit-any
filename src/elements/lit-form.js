@@ -178,7 +178,7 @@ export default class LitForm extends LitElement {
                 newValue = field.valueDecorator.wrap(newValue);
             }
 
-            props.value[field.property] = newValue;
+            this.value[field.property] = newValue;
         };
     }
 
