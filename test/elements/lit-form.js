@@ -405,8 +405,7 @@ describe('lit-form', () => {
             await litForm.renderComplete;
 
             // when
-            litForm.reset();
-            await litForm.renderComplete;
+            await litForm.reset();
 
             // then
             expect(litForm.value).to.deep.equal({});
