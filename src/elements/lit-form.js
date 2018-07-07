@@ -97,8 +97,8 @@ export default class LitForm extends LitElement {
                  on-submit="${onSubmit.bind(this)}">
                 ${contract.hasAnythingToRender(props.contract) ? this.__fieldsetTemplate(props) : ''}
                 
-                ${this.noSubmitButton ? '' : this.__submitButtonTemplate(props)}
-                ${this.noResetButton ? '' : this.__resetButtonTemplate(props)}
+                ${props.noSubmitButton ? '' : this.__submitButtonTemplate(props)}
+                ${props.noResetButton ? '' : this.__resetButtonTemplate(props)}
             </form>`;
     }
 
