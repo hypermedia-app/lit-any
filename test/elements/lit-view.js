@@ -1,7 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
 import '../../src/elements/lit-view';
 import { ViewTemplates } from '../../src/template-registry';
-import { forRender } from '../async-tests';
 
 describe('lit-view', () => {
     let litView;
@@ -11,6 +10,7 @@ describe('lit-view', () => {
 
     describe('with attributes', () => {
         beforeEach(() => {
+            getTemplate = sinon.stub();
             litView = fixture('lit-view-attrs');
         });
 
@@ -37,19 +37,7 @@ describe('lit-view', () => {
         });
 
         it('should render nothing when object is undefined', () => {
-            litView._render();
-
-            expect(litView.shadowRoot).to.be.null;
-        });
-
-        it('should raise event when value changes', (done) => {
-            // then
-            testHandler(litView, 'render', () => {
-                done();
-            });
-
-            // when
-            litView.value = {};
+            expect(litView.shadowRoot.querySelectorAll('*').length).to.equal(0);
         });
 
         it('should render found template', async () => {
@@ -64,7 +52,7 @@ describe('lit-view', () => {
             };
 
             // when
-            await forRender(litView);
+            await litView.renderComplete;
 
             // then
             const span = litView.shadowRoot.querySelector('span');
@@ -76,7 +64,7 @@ describe('lit-view', () => {
             litView.value = 'a string';
 
             // when
-            await forRender(litView);
+            await litView.renderComplete;
 
             // then
             expect(getTemplate.calledWith({
@@ -95,7 +83,7 @@ describe('lit-view', () => {
             litView.templateScope = 'scope test';
 
             // when
-            await forRender(litView);
+            await litView.renderComplete;
 
             // then
             const span = litView.shadowRoot.querySelector('span');
@@ -115,10 +103,13 @@ describe('lit-view', () => {
         it('should use render parameter', async () => {
             // given
             getTemplate.returns({
-                render: (render, object) => html`<p class$="${object.clazz}">${render(object.child)}</p>`,
-            });
-            getTemplate.onCall(3).returns({
-                render: (render, object) => html`<span>${object.value}</span>`,
+                render: (render, object) => {
+                    if (object.child) {
+                        return html`<p class$="${object.clazz}">${render(object.child)}</p>`;
+                    }
+
+                    return html`<span>${object.value}</span>`;
+                },
             });
             litView.value = {
                 clazz: 'l1',
@@ -134,7 +125,7 @@ describe('lit-view', () => {
             };
 
             // when
-            await forRender(litView);
+            await litView.renderComplete;
 
             // then
             const span = litView.shadowRoot.querySelector('p.l1 p.l2 p.l3 span');
@@ -157,7 +148,7 @@ describe('lit-view', () => {
             };
 
             // when
-            await forRender(litView);
+            await litView.renderComplete;
 
             // then
             expect(getTemplate.firstCall.args[0].value).to.deep.equal({ child: 10 });
@@ -187,7 +178,7 @@ describe('lit-view', () => {
             };
 
             // when
-            await forRender(litView);
+            await litView.renderComplete;
 
             // then
             expect(getTemplate.firstCall.args[0].scope).to.be.null;
@@ -221,21 +212,19 @@ describe('lit-view', () => {
             };
         });
 
-        it('should render correctly', (done) => {
+        it('should render correctly', async () => {
             // given
             getTemplate.returns({
                 render: (_, object) => html`<span>${object.inserted}</span>`,
             });
 
-            // then
-            testHandler(manualView, 'render', () => {
-                const span = manualView.shadowRoot.querySelector('span');
-                expect(span.textContent).to.equal('manually');
-                done();
-            });
-
             // when
             document.body.appendChild(manualView);
+            await litView.renderComplete;
+
+            // then
+            const span = manualView.shadowRoot.querySelector('span');
+            expect(span.textContent).to.equal('manually');
         });
     });
 });

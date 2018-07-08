@@ -1,5 +1,4 @@
 import { html } from 'lit-html';
-import { render as litRender } from 'lit-html/lib/lit-extended';
 
 function recurseTemplates(registry, ignoreMissing, inheritedScope) {
     return (value, currentScope) => {
@@ -24,8 +23,8 @@ function recurseTemplates(registry, ignoreMissing, inheritedScope) {
     };
 }
 
-export default function view(registry, what, where, ignoreMissing) {
+export default function view(registry, what, ignoreMissing) {
     const templateFunc = recurseTemplates(registry, ignoreMissing, null);
 
-    litRender(templateFunc(what.value, what.scope), where);
+    return templateFunc(what.value, what.scope);
 }

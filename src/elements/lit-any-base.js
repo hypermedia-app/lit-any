@@ -1,24 +1,21 @@
-import { PropertyAccessors } from '@polymer/polymer/lib/mixins/property-accessors';
+import { LitElement } from '@polymer/lit-element/lit-element';
+import { dashToCamelCase } from '@polymer/polymer/lib/utils/case-map';
 
-export default class LitAnyBase extends PropertyAccessors(HTMLElement) {
+export default class LitAnyBase extends LitElement {
     constructor() {
         super();
 
-        this.__connected = false;
         this.templateRegistry = '';
     }
 
-    connectedCallback() {
-        this._enableProperties();
-        this.__connected = true;
-        this._render();
-    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        let value = newValue;
+        const propName = dashToCamelCase(name);
 
-    disconnectedCallback() {
-        this.__connected = false;
-    }
+        if (this.constructor.properties[propName] === Boolean) {
+            value = newValue !== null;
+        }
 
-    _propertiesChanged() {
-        this._render();
+        this[propName] = value;
     }
 }
