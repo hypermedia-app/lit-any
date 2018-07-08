@@ -1,9 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { html } from 'lit-html/lib/lit-extended';
-import { LitElement } from '@polymer/lit-element';
-import { dashToCamelCase } from '@polymer/polymer/lib/utils/case-map';
 import contract from './contract-helpers';
 import { FieldTemplates } from '../template-registry';
+import LitAnyBase from './lit-any-base';
 
 function onSubmit(e) {
     this.submit();
@@ -11,7 +10,7 @@ function onSubmit(e) {
     return false;
 }
 
-export default class LitForm extends LitElement {
+export default class LitForm extends LitAnyBase {
     constructor() {
         super();
 
@@ -50,17 +49,6 @@ export default class LitForm extends LitElement {
             'reset-button-label',
             'no-reset-button',
         ];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        let value = newValue;
-        const propName = dashToCamelCase(name);
-
-        if (LitForm.properties[propName] === Boolean) {
-            value = newValue !== null;
-        }
-
-        this[propName] = value;
     }
 
     submit() {

@@ -1,3 +1,4 @@
+import { html } from 'lit-html';
 import render from '../render';
 import LitAnyBase from './lit-any-base';
 import { ViewTemplates } from '../template-registry';
@@ -11,42 +12,37 @@ export default class LitView extends LitAnyBase {
         this.ignoreMissing = false;
     }
 
+    static get properties() {
+        return {
+            templateScope: String,
+            templateRegistry: String,
+            value: Object,
+            ignoreMissing: Boolean,
+        };
+    }
+
     static get observedAttributes() {
         return [
-            'value',
             'template-scope',
             'ignore-missing',
             'template-registry',
         ];
     }
 
-    _render() {
-        if (this.value && this.__connected) {
-            if (!this.shadowRoot) {
-                this.attachShadow({ mode: 'open' });
-            }
-
-            render(
-                ViewTemplates.byName(this.templateRegistry),
-                { value: this.value, scope: this.templateScope },
-                this.shadowRoot,
-                this.ignoreMissing,
+    // eslint-disable-next-line class-methods-use-this
+    _render({
+        value, templateScope, templateRegistry, ignoreMissing,
+    }) {
+        if (value) {
+            return render(
+                ViewTemplates.byName(templateRegistry),
+                { value, scope: templateScope },
+                ignoreMissing,
             );
-
-            this.dispatchEvent(new CustomEvent('render'));
         }
-    }
 
-    static typeForProperty(property) {
-        switch (property) {
-            case 'ignoreMissing':
-                return Boolean;
-            default:
-                return undefined;
-        }
+        return html``;
     }
 }
-
-LitView.createPropertiesForAttributes();
 
 window.customElements.define('lit-view', LitView);
