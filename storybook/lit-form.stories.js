@@ -158,12 +158,6 @@ storiesOf('lit-form', module)
             ],
         };
 
-        const jsonLd = {
-            'https://schema.org/name': {
-                '@value': 'John Doe',
-            },
-        };
-
         return html`
     <custom-style>
     <style>
@@ -183,7 +177,6 @@ storiesOf('lit-form', module)
 
 <lit-form id="styling"
           contract="${jsonldContract}" 
-          value="${defaultValue(jsonLd)}"
           submit-button-label="Register"
           on-submit="${onSubmit}"></lit-form>`;
     });
