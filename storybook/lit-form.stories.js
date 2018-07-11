@@ -142,3 +142,41 @@ storiesOf('lit-form', module)
     }, {
         notes: { markdown: fieldValueDecoratorNotes },
     });
+
+storiesOf('lit-form', module)
+    .add('Styling', () => {
+        const jsonldContract = {
+            fields: [
+                {
+                    property: 'name',
+                    title: 'Your name',
+                },
+                {
+                    property: 'age',
+                    title: 'Your age',
+                },
+            ],
+        };
+
+        return html`
+    <custom-style>
+    <style>
+        lit-form#styling {
+            --lit-form-fieldset: {
+                display: flex;
+            };
+            
+            --lit-form-field: {
+                flex: 1;
+                padding-left: 10px;
+                padding-right: 10px;    
+            };
+        }
+    </style>
+    </custom-style>
+
+<lit-form id="styling"
+          contract="${jsonldContract}" 
+          submit-button-label="Register"
+          on-submit="${onSubmit}"></lit-form>`;
+    });

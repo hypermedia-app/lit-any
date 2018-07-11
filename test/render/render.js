@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html, render as litRender } from 'lit-html';
 import render from '../../src/render';
 
 describe('render view', () => {
@@ -10,7 +10,7 @@ describe('render view', () => {
         };
     });
 
-    it('should write found template to given node', () => {
+    it('should create TemplateResult for found template', () => {
         // given
         registry.getTemplate.returns({
             render: (_, object) => html`<span>${object.value}</span>`,
@@ -21,7 +21,7 @@ describe('render view', () => {
         };
 
         // when
-        render(registry, { value }, container, false);
+        litRender(render(registry, { value }, false), container);
 
         // then
         const span = container.querySelector('span');
@@ -39,7 +39,7 @@ describe('render view', () => {
         };
 
         // when
-        render(registry, { value, scope: 'some scope' }, container, false);
+        litRender(render(registry, { value, scope: 'some scope' }, false), container);
 
         // then
         expect(container.textContent).to.equal('some scope');
