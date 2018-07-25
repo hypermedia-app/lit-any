@@ -1,6 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
-import '../../src/elements/lit-form';
-import forSubmit from '../async-tests';
+import '../../lit-any/src/elements/lit-form';
+import forSubmit from '../async-tests/index';
 import { FieldTemplates } from '../../src/template-registry';
 
 describe('lit-form', () => {

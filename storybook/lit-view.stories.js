@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/polymer';
 import { html } from 'lit-html/lib/lit-extended';
 import moment from 'moment';
-import '../src/elements/lit-view';
-import { ViewTemplates } from '../src';
+import '../lit-any/src/elements/lit-view';
+import { ViewTemplates } from '../lit-any/src';
 import { defaultValue } from './knobs';
 import basic from './notes/lit-view/basic.md';
 import recursive from './notes/lit-view/recursive.md';

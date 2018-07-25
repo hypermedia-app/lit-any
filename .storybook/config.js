@@ -1,6 +1,7 @@
 import { configure, addDecorator } from '@storybook/polymer';
 import { setOptions } from '@storybook/addon-options';
 import { withKnobs } from '@storybook/addon-knobs';
+import '@storybook/addon-console';
 import { withNotes } from '@storybook/addon-notes';
 import litAny from '../package';
 

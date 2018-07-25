@@ -4,6 +4,7 @@
   "devDependencies": {
     "paper-input": "polymerelements/paper-input#^2.2.2",
     "web-component-tester": "^6.5.0",
-    "paper-button": "polymerelements/paper-button#^2.1.1"
+    "paper-button": "polymerelements/paper-button#^2.1.1",
+    "zero-md": "^1.1.0"
   }
 }
