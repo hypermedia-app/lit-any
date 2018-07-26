@@ -1,20 +1,13 @@
-import { directive } from 'lit-html';
 import { html } from 'lit-html/lib/lit-extended';
-import '../../../../bower_components/zero-md/build/zero-md.html';
-
-function md(markdown) {
-    return directive((part) => {
-        const zeroMd = document.createElement('zero-md');
-        zeroMd.innerHTML = `<template><xmp>${markdown}</xmp></template>`;
-        part.setValue(zeroMd);
-    });
-}
+import { md, codeblock } from '../..';
 
 export default function notes(field) {
     return html`${md(`
-# Polymer elements
+# Paper elements
 
 ## Text field
+
+The basic input which presents a \`<paper-input>\` or \`<paper-textarea>\`
 
 ### How it renders`)}
 
@@ -22,19 +15,21 @@ export default function notes(field) {
 
 ${md(`### Usage
 
-${'```js'}
-import { textbox } from '@lit-any/components/polymer-elements';
+${codeblock('js')}
+import { textbox } from '@lit-any/components-paper-elements';
 import { FieldTemplates } from 'lit-any;
 
 FieldTemplates.default
     .when(f => f.type === 'string')
     .renders(textbox(options));
-${'```'}
+${codeblock()}
     
 ### Options
 
-| a | b |
+| Name | expected values | default value |
 |--|--|
-|x|y|
+| **type** | \`'single line'\`, \`'multi line'\` | \`'single line'\` |
+| **required** | boolean | \`false\` |
+
 `)}`;
 }

@@ -4,7 +4,10 @@ module.exports = {
             {
                 test: /\.js$/,
                 use: 'babel-loader',
-                exclude: /node_modules\/@webcomponents/
+                exclude: [
+                    /@webcomponents/,
+                    /react-split-pane/
+                ]
             },
             {
                 test: /\.stories\.jsx?$/,
