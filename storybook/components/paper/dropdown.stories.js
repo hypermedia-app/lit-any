@@ -6,6 +6,7 @@ import '@bower_components/paper-item/paper-item.html';
 
 import { dropdown } from '../../../components/paper-elements';
 import docs from '../../notes/components/polymer-elements/dropdown';
+import set from '../set-logger';
 
 storiesOf('lit-form/component sets/Paper elements', module)
     .add('dropdown', () => {
@@ -31,7 +32,7 @@ storiesOf('lit-form/component sets/Paper elements', module)
         };
 
         return docs(
-            staticItems(field, 'id', '', v => console.log(v)),
-            dynamicItems(field, 'id', '', v => console.log(v)),
+            staticItems(field, 'id', '', set),
+            dynamicItems(field, 'id', '', set),
         );
     });
