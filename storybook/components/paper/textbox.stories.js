@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/polymer/dist/client/index';
-import { boolean, select } from '@storybook/addon-knobs/src/index';
+import { boolean, select } from '@storybook/addon-knobs';
 import '@bower_components/paper-input/paper-input.html';
 import '@bower_components/paper-input/paper-textarea.html';
 
