@@ -1,10 +1,10 @@
-import { storiesOf } from '@storybook/polymer/dist/client';
-import { textbox } from '@lit-any/components-paper-elements';
-import { select, boolean } from '@storybook/addon-knobs';
-import docs from './notes/components/polymer-elements/textbox';
+import { storiesOf } from '@storybook/polymer/dist/client/index';
+import { boolean, select } from '@storybook/addon-knobs/src/index';
+import '@bower_components/paper-input/paper-input.html';
+import '@bower_components/paper-input/paper-textarea.html';
 
-import '../bower_components/paper-input/paper-input.html';
-import '../bower_components/paper-input/paper-textarea.html';
+import { textbox } from '../../../components/paper-elements';
+import docs from '../../notes/components/polymer-elements/textbox';
 
 storiesOf('lit-form/component sets/Paper elements', module)
     .add('textbox', () => {
