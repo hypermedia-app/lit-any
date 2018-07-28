@@ -7,13 +7,42 @@ export default function notes(staticSelection, funcItems) {
 
 ## Dropdown menu
 
-Uses Polymer \`<paper-dropdown-menu>\`
+Uses Polymer \`<paper-dropdown-menu>\` to display a list of key-value pairs
 
-### How it renders`)}
+### Static items`)}
 
-<br>${staticSelection}<br>
+${staticSelection}<br>
 
-${md(`### Usage
+${md(`Items can be a static list of elements with \`label\` and \`value\` keys
+
+${codeblock('js')}
+dropdown({
+    items: [
+        { label: 'Polish', value: 'pl' },
+        { label: 'English', value: 'en' },
+    ]
+});
+${codeblock()}
+
+### Dynamic items`)}
+
+${funcItems}<br>
+
+${md(`Items can be a provided as function which takes the field as parameter and returns such array as above. For example it would be
+possible to translate ISO language codes to use their localized names as labels
+
+${codeblock('js')}
+import ISO6391 from 'iso-639-1';
+
+dropdown({
+    items: field => field.languages.map(lang => ({
+        value: lang,
+        label: ISO6391.getNativeName(lang),
+    }))
+});
+${codeblock()}
+
+## Usage
 
 ${codeblock('js')}
 import { dropdown } from '@lit-any/components-paper-elements';
@@ -30,32 +59,5 @@ ${codeblock()}
 |--|--|
 | **items** | Array or function | \`[]\` |
 
-#### Providing items
-
-Items can be a static list of elements with \`label\` and \`value\` keys
-
-${codeblock('js')}
-dropdown({
-    items: [
-        { label: 'Polish', value: 'pl' },
-        { label: 'English', value: 'en' },
-    ]
-});
-${codeblock()}
-
-Or it can be a function which takes the field as parameter and returns such array as above. For example it would be
-possible to translate ISO language codes to use their localized names as labels
-
-${codeblock('js')}
-import ISO6391 from 'iso-639-1';
-
-dropdown({
-    items: field => field.languages.map(lang => ({
-        value: lang,
-        label: ISO6391.getNativeName(lang),
-    }))
-});
-${codeblock()}`)}
-
-<br>${funcItems}<br>`;
+`)}`;
 }
