@@ -1,15 +1,14 @@
 import iso from 'iso-639-1';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
-import '../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html';
-import '../../../bower_components/paper-listbox/paper-listbox.html';
-import '../../../bower_components/paper-item/paper-item.html';
 import { boolean, text } from '@storybook/addon-knobs';
 
-import { dropdown } from '@lit-any/components-paper-elements';
-import docs from '../../notes/components/polymer-elements/dropdown';
+import { dropdown } from '@lit-any/components-vaadin';
+import '../../../bower_components/vaadin-lumo-styles/style.html';
+import '../../../bower_components/vaadin-dropdown-menu/vaadin-dropdown-menu.html';
+import docs from '../../notes/components/vaadin/dropdown';
 import set from '../set-logger';
 
-storiesOf('lit-form/component sets/Paper elements', module)
+storiesOf('lit-form/component sets/Vaadin', module)
     .add('dropdown', () => {
         const staticItems = dropdown({
             items: [

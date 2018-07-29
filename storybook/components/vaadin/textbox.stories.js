@@ -1,13 +1,14 @@
 import { storiesOf } from '@storybook/polymer/dist/client/index';
 import { boolean, select } from '@storybook/addon-knobs';
-import '../../../bower_components/paper-input/paper-input.html';
-import '../../../bower_components/paper-input/paper-textarea.html';
+import '../../../bower_components/vaadin-text-field/vaadin-text-field.html';
+import '../../../bower_components/vaadin-text-field/vaadin-text-area.html';
+import '../../../bower_components/vaadin-lumo-styles/style.html';
 
-import { textbox } from '@lit-any/components-paper-elements';
-import docs from '../../notes/components/polymer-elements/textbox';
+import { textbox } from '@lit-any/components-vaadin';
+import docs from '../../notes/components/vaadin/textbox';
 import set from '../set-logger';
 
-storiesOf('lit-form/component sets/Paper elements', module)
+storiesOf('lit-form/component sets/Vaadin', module)
     .add('textbox', () => {
         const render = textbox({
             type: select('type', ['single line', 'multi line'], 'single line'),

@@ -1,3 +1,4 @@
+import { directive } from 'lit-html';
 import { html } from 'lit-html/lib/lit-extended';
 import { repeat } from 'lit-html/lib/repeat';
 
@@ -7,22 +8,22 @@ export function textbox({
 } = { }) {
     return (f, id, v, set) => {
         if (type === 'multi line') {
-            return html`<paper-textarea 
+            return html`<vaadin-text-area 
                             label="${f.title}"
                             type="${type}"
                             value="${v}"
                             required?="${required}"
                             auto-validate
-                            on-value-changed="${e => set(e.target.value)}" ></paper-textarea>`;
+                            on-value-changed="${e => set(e.target.value)}" ></vaadin-text-area>`;
         }
 
-        return html`<paper-input 
+        return html`<vaadin-text-field 
                         label="${f.title}"
                         type="${type}"
                         value="${v}"
                         required?="${required}"
                         auto-validate
-                        on-value-changed="${e => set(e.target.value)}" ></paper-input>`;
+                        on-value-changed="${e => set(e.target.value)}"></vaadin-text-field>`;
     };
 }
 
@@ -31,24 +32,20 @@ export function dropdown({
     required = false,
 } = {}) {
     return async (f, id, v, set) => {
-        function setValue(e) {
-            e.target.validate();
-            return set(e.target.querySelector('paper-listbox').selected);
-        }
-
         let options = items;
         if (typeof items === 'function') {
             options = await items(f);
         }
 
-        return html`<paper-dropdown-menu label="${f.title}" 
-                                         no-animations?="${!window.KeyframeEffect}"
-                                         on-value-changed="${setValue}"
-                                         required?="${required}">
-  <paper-listbox slot="dropdown-content" attr-for-selected="value" selected="${v}">
-    ${repeat(options, option =>
-        html`<paper-item value="${option.value}">${option.label}</paper-item>`)}
-  </paper-listbox>
-</paper-dropdown-menu>`;
+        return html`<vaadin-dropdown-menu label="${f.title}" 
+                                         on-value-changed="${e => set(e.target.value)}"
+                                         required?="${required}"
+                                         value="${v}">
+  <template>
+    <vaadin-list-box>
+      ${repeat(options, option => `<vaadin-item value$="${option.value}" label$="${option.label}"></vaadin-item>`)}
+    </vaadin-list-box>
+  </template>
+</vaadin-dropdown-menu>`;
     };
 }
