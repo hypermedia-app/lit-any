@@ -1,6 +1,6 @@
 import iso from 'iso-639-1';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
-import { boolean, text } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 
 import { dropdown } from '@lit-any/components-vaadin';
 import '../../../bower_components/vaadin-lumo-styles/style.html';
@@ -32,7 +32,7 @@ storiesOf('lit-form/component sets/Vaadin', module)
             languages: ['en', 'de', 'fr', 'pl'],
         };
 
-        const initialValue = text('initial value', 'de');
+        const initialValue = select('initial value', field.languages, 'de');
 
         return docs(
             staticItems(field, 'id', initialValue, set),

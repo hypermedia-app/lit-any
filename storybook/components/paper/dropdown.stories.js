@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/polymer/dist/client/index';
 import '../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html';
 import '../../../bower_components/paper-listbox/paper-listbox.html';
 import '../../../bower_components/paper-item/paper-item.html';
-import { boolean, text } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 
 import { dropdown } from '@lit-any/components-paper-elements';
 import docs from '../../notes/components/polymer-elements/dropdown';
@@ -33,7 +33,7 @@ storiesOf('lit-form/component sets/Paper elements', module)
             languages: ['en', 'de', 'fr', 'pl'],
         };
 
-        const initialValue = text('initial value', 'de');
+        const initialValue = select('initial value', field.languages, 'de');
 
         return docs(
             staticItems(field, 'id', initialValue, set),
