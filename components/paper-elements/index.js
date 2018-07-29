@@ -28,10 +28,12 @@ export function textbox({
 
 export function dropdown({
     items = [],
+    required = false,
 } = {}) {
     return async (f, id, v, set) => {
-        function getValue(el) {
-            return el.querySelector('paper-listbox').selected;
+        function setValue(e) {
+            e.target.validate();
+            return set(e.target.querySelector('paper-listbox').selected);
         }
 
         let options = items;
@@ -41,9 +43,11 @@ export function dropdown({
 
         return html`<paper-dropdown-menu label="${f.title}" 
                                          no-animations?="${!window.KeyframeEffect}"
-                                         on-value-changed="${e => set(getValue(e.target))}">
-  <paper-listbox slot="dropdown-content" attr-for-selected="value">
-    ${repeat(options, option => html`<paper-item value="${option.value}">${option.label}</paper-item>`)}
+                                         on-value-changed="${setValue}"
+                                         required?="${required}">
+  <paper-listbox slot="dropdown-content" attr-for-selected="value" selected="${v}">
+    ${repeat(options, option =>
+        html`<paper-item value="${option.value}">${option.label}</paper-item>`)}
   </paper-listbox>
 </paper-dropdown-menu>`;
     };

@@ -58,6 +58,7 @@ ${codeblock()}
 | Name | expected values | default value |
 |--|--|
 | **items** | Array or function | \`[]\` |
+| **required** | boolean | \`false\` |
 
 `)}`;
 }
