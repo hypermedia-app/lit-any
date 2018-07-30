@@ -12,11 +12,11 @@ storiesOf('lit-form/component sets/Vaadin', module)
     .add('textbox', () => {
         const render = textbox({
             type: select('type', ['single line', 'multi line'], 'single line'),
-            required: boolean('required', false),
         });
 
         const field = {
             title: 'Text field',
+            required: boolean('required', false),
         };
 
         const input = render(field, 'id', '', set);

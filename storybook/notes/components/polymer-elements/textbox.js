@@ -29,7 +29,6 @@ ${codeblock()}
 | Name | expected values | default value |
 |--|--|
 | **type** | \`'single line'\`, \`'multi line'\` | \`'single line'\` |
-| **required** | boolean | \`false\` |
 
 `)}`;
 }

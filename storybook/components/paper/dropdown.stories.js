@@ -18,7 +18,6 @@ storiesOf('lit-form/component sets/Paper elements', module)
                 { label: 'French', value: 'fr' },
                 { label: 'Polish', value: 'pl' },
             ],
-            required: boolean('required', false),
         });
 
         const dynamicItems = dropdown({
@@ -31,6 +30,7 @@ storiesOf('lit-form/component sets/Paper elements', module)
         const field = {
             title: 'Select language',
             languages: ['en', 'de', 'fr', 'pl'],
+            required: boolean('required', false),
         };
 
         const initialValue = select('initial value', field.languages, 'de');

@@ -3,7 +3,6 @@ import { repeat } from 'lit-html/lib/repeat';
 
 export function textbox({
     type = 'single line',
-    required = false,
 } = { }) {
     return (f, id, v, set) => {
         if (type === 'multi line') {
@@ -11,7 +10,7 @@ export function textbox({
                             label="${f.title}"
                             type="${type}"
                             value="${v}"
-                            required?="${required}"
+                            required?="${f.required}"
                             auto-validate
                             on-value-changed="${e => set(e.target.value)}" ></paper-textarea>`;
         }
@@ -20,7 +19,7 @@ export function textbox({
                         label="${f.title}"
                         type="${type}"
                         value="${v}"
-                        required?="${required}"
+                        required?="${f.required}"
                         auto-validate
                         on-value-changed="${e => set(e.target.value)}" ></paper-input>`;
     };
@@ -28,7 +27,6 @@ export function textbox({
 
 export function dropdown({
     items = [],
-    required = false,
 } = {}) {
     return async (f, id, v, set) => {
         function setValue(e) {
@@ -44,7 +42,7 @@ export function dropdown({
         return html`<paper-dropdown-menu label="${f.title}" 
                                          no-animations?="${!window.KeyframeEffect}"
                                          on-value-changed="${setValue}"
-                                         required?="${required}">
+                                         required?="${f.required}">
   <paper-listbox slot="dropdown-content" attr-for-selected="value" selected="${v}">
     ${repeat(options, option =>
         html`<paper-item value="${option.value}">${option.label}</paper-item>`)}

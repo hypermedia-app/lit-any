@@ -3,11 +3,11 @@ import { md, codeblock } from '../..';
 
 export default function notes(staticSelection, funcItems) {
     return html`${md(`
-# Paper elements
+# Vaadin components
 
 ## Dropdown menu
 
-Uses Polymer \`<paper-dropdown-menu>\` to display a list of key-value pairs
+Uses Polymer \`<vaadin-dropdown-menu>\` to display a list of key-value pairs
 
 ### Static items`)}
 
@@ -45,7 +45,7 @@ ${codeblock()}
 ## Usage
 
 ${codeblock('js')}
-import { dropdown } from '@lit-any/components-paper-elements';
+import { dropdown } from '@lit-any/components-vaadin';
 import { FieldTemplates } from 'lit-any;
 
 FieldTemplates.default
@@ -58,7 +58,6 @@ ${codeblock()}
 | Name | expected values | default value |
 |--|--|
 | **items** | Array or function | \`[]\` |
-| **required** | boolean | \`false\` |
 
 `)}`;
 }
