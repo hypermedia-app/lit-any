@@ -16,7 +16,7 @@ function loadStories() {
 setOptions({
     name: `lit-any ${litAny.version}`,
     addonPanelInRight: true,
-    selectedAddonPanel: 'storybook/knobs/panel',
+    selectedAddonPanel: 'storybooks/storybook-addon-knobs',
     url: 'https://github.com/wikibus/lit-any',
     sortStoriesByKind: true,
 });
