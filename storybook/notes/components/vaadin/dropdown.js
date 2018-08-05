@@ -13,7 +13,7 @@ Uses Polymer \`<vaadin-dropdown-menu>\` to display a list of key-value pairs
 
 ${staticSelection}<br>
 
-${md(`Items can be a static list of elements with \`label\` and \`value\` keys
+${md`Items can be a static list of elements with \`label\` and \`value\` keys
 
 ${codeblock('js')}
 dropdown({
@@ -24,11 +24,11 @@ dropdown({
 });
 ${codeblock()}
 
-### Dynamic items`)}
+### Dynamic items`}
 
 ${funcItems}<br>
 
-${md(`Items can be a provided as function which takes the field as parameter and returns such array as above. For example it would be
+${md`Items can be a provided as function which takes the field as parameter and returns such array as above. For example it would be
 possible to translate ISO language codes to use their localized names as labels
 
 ${codeblock('js')}
@@ -59,5 +59,5 @@ ${codeblock()}
 |--|--|
 | **items** | Array or function | \`[]\` |
 
-`)}`;
+`}`;
 }

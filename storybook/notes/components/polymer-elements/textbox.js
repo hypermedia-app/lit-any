@@ -2,18 +2,18 @@ import { html } from 'lit-html/lib/lit-extended';
 import { md, codeblock } from '../..';
 
 export default function notes(field) {
-    return html`${md(`
+    return html`${md`
 # Paper elements
 
 ## Text field
 
 The basic input which presents a \`<paper-input>\` or \`<paper-textarea>\`
 
-### How it renders`)}
+### How it renders`}
 
 <br>${field}<br>
 
-${md(`### Usage
+${md`### Usage
 
 ${codeblock('js')}
 import { textbox } from '@lit-any/components-paper-elements';
@@ -30,5 +30,5 @@ ${codeblock()}
 |--|--|
 | **type** | \`'single line'\`, \`'multi line'\` | \`'single line'\` |
 
-`)}`;
+`}`;
 }

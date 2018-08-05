@@ -17,6 +17,7 @@ import '../../bower_components/vaadin-text-field/vaadin-text-field.html';
 import '../../bower_components/vaadin-text-field/vaadin-text-area.html';
 
 import onSubmit from '../helpers/submit-handler';
+import notes from '../notes/components/getting-started';
 
 const componentSets = { paper, vaadin };
 
@@ -67,9 +68,9 @@ line-breaks`,
             language: 'de',
         };
 
-        return html`<lit-form template-registry="components-complete"
+        return notes(html`<lit-form template-registry="components-complete"
                               contract="${c}"
                               on-submit="${onSubmit}"
                               no-labels?="${!boolean('Show labels', false)}"
-                              value="${initialValue}"></lit-form>`;
+                              value="${initialValue}"></lit-form>`);
     });
