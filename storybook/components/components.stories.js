@@ -1,9 +1,10 @@
 import { storiesOf } from '@storybook/polymer';
 import * as vaadin from '@lit-any/components-vaadin';
 import * as paper from '@lit-any/components-paper-elements';
-import { FieldTemplates, components } from 'lit-any';
+import { FieldTemplates } from 'lit-any';
+import * as components from 'lit-any/components';
 import { html } from 'lit-html/lib/lit-extended';
-import { select, object, boolean } from '@storybook/addon-knobs/polymer';
+import { select, boolean } from '@storybook/addon-knobs';
 
 import '../../bower_components/vaadin-lumo-styles/style.html';
 import '../../bower_components/vaadin-dropdown-menu/vaadin-dropdown-menu.html';
@@ -21,7 +22,7 @@ const componentSets = { paper, vaadin };
 
 storiesOf('lit-form/component sets', module)
     .add('getting started', () => {
-        const selectedSet = select('component set', Object.keys(components), 'paper');
+        const selectedSet = select('component set', Object.keys(componentSets), 'paper');
         const templates = FieldTemplates.byName('components-complete')
             .useComponents(componentSets[selectedSet]);
 
@@ -67,7 +68,7 @@ line-breaks`,
         };
 
         return html`<lit-form template-registry="components-complete"
-                              contract="${object('contract', c)}"
+                              contract="${c}"
                               on-submit="${onSubmit}"
                               no-labels?="${!boolean('Show labels', false)}"
                               value="${initialValue}"></lit-form>`;

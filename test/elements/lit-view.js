@@ -1,5 +1,5 @@
 import { html } from 'lit-html/lib/lit-extended';
-import '../../lit-any/src/elements/lit-view';
+import '../../lit-any/elements/lit-view';
 import { ViewTemplates } from '../../src/template-registry';
 
 describe('lit-view', () => {

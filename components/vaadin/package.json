@@ -5,6 +5,6 @@
   "license": "MIT",
   "peerDependencies": {
     "lit-any": "^0.6.0-a3.0",
-    "lit-html": "^0.10.2"
+    "lit-html": "^0.11.0"
   }
 }
