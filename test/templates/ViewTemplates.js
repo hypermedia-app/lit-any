@@ -1,4 +1,4 @@
-import { ViewTemplates } from '../../src/template-registry/index';
+import { ViewTemplates } from '../../lit-any/template-registry/index';
 
 describe('ViewTemplates', () => {
     describe('when builder is created', () => {

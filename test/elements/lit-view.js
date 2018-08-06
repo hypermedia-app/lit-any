@@ -1,6 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
 import '../../lit-any/elements/lit-view';
-import { ViewTemplates } from '../../src/template-registry';
+import { ViewTemplates } from '../../lit-any/template-registry';
 
 describe('lit-view', () => {
     let litView;

@@ -1,4 +1,4 @@
-import { FieldTemplates } from '../../src/template-registry/index';
+import { FieldTemplates } from '../../lit-any/template-registry/index';
 
 describe('FieldTemplates', () => {
     describe('when builder is created', () => {
