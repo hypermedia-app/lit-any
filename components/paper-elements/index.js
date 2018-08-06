@@ -8,7 +8,6 @@ export function textbox({
         if (type === 'multi line') {
             return html`<paper-textarea 
                             label="${f.title}"
-                            type="${type}"
                             value="${v}"
                             required?="${f.required}"
                             auto-validate
@@ -17,7 +16,7 @@ export function textbox({
 
         return html`<paper-input 
                         label="${f.title}"
-                        type="${type}"
+                        type="text"
                         value="${v}"
                         required?="${f.required}"
                         auto-validate

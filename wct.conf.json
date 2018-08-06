@@ -2,6 +2,7 @@
   "suites": [
     "test/transpiled/render/*.js",
     "test/transpiled/templates/*.js",
+    "test/transpiled/components/*.js",
     "test/elements/lit-form.html",
     "test/elements/lit-view.html"
   ],
