@@ -1,7 +1,7 @@
 import { render } from 'lit-html/lib/lit-extended';
 
 export default function (templateResult, root) {
-    const container = document.createElement('div');
+    const container = document.querySelector('#container');
 
     render(templateResult, container);
 

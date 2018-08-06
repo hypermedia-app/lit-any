@@ -4852,6 +4852,12 @@ eslint-plugin-jasmine@^2.8.4:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jasmine/-/eslint-plugin-jasmine-2.10.1.tgz#5733b709e751f4bc40e31e1c16989bd2cdfbec97"
 
+eslint-plugin-mocha@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mocha/-/eslint-plugin-mocha-5.1.0.tgz#3637cdde93155e650591d7ab14e7a66485f0f7c1"
+  dependencies:
+    ramda "^0.25.0"
+
 eslint-plugin-sinon@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-sinon/-/eslint-plugin-sinon-0.2.0.tgz#32febfdb4e39ea3f6d6c5d3c089c459d9a418ea1"
@@ -8737,6 +8743,10 @@ querystringify@^2.0.0:
 quick-lru@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
+
+ramda@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
 
 randomatic@^3.0.0:
   version "3.0.0"

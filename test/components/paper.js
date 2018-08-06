@@ -1,11 +1,16 @@
 import * as components from '../../components/paper-elements';
 import render from './helper/render';
+import element from './helper/import';
 
-describe('paper-elements component', () => {
+describe('paper-elements', () => {
     let opts;
 
     describe('textbox', () => {
         describe('single line', () => {
+            before(async () => {
+                await element('paper-input');
+            });
+
             beforeEach(() => {
                 opts = {
                     type: 'single line',
@@ -38,6 +43,20 @@ describe('paper-elements component', () => {
                 // then
                 expect(el.tagName).to.match(/paper-input/i);
                 expect(el.getAttribute('type')).to.equal('text');
+            });
+
+            it('should set field title as label', () => {
+                // given
+                const field = {
+                    title: 'user name',
+                };
+
+                // when
+                const textbox = components.textbox(opts);
+                const el = render(textbox(field));
+
+                // then
+                expect(el.label).to.equal('user name');
             });
         });
 
