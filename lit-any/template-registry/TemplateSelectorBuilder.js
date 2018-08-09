@@ -51,4 +51,17 @@ export class FieldTemplateSelectorBuilder extends TemplateSelectorBuilder {
     _createSelector() {
         return new FieldTemplateSelector();
     }
+
+    rendersComponent(component) {
+        if (!this._registry.components) {
+            throw new Error('No component set configured');
+        }
+
+        return this.renders((...args) => {
+            const componentFunc = this._registry.components[component.name]
+                || this._registry.components.textbox;
+
+            return componentFunc(component.options).call(null, ...args);
+        });
+    }
 }

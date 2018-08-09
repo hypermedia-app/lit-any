@@ -49,4 +49,9 @@ export default class TemplateRegistry {
             name,
         });
     }
+
+    useComponents(components) {
+        this.components = components;
+        return this;
+    }
 }

@@ -1,8 +1,9 @@
 import { configure, addDecorator } from '@storybook/polymer';
 import { setOptions } from '@storybook/addon-options';
 import { withKnobs } from '@storybook/addon-knobs';
+import '@storybook/addon-console';
 import { withNotes } from '@storybook/addon-notes';
-import litAny from '../package';
+import litAny from '../lit-any/package';
 
 addDecorator(withKnobs);
 addDecorator(withNotes);
@@ -15,7 +16,7 @@ function loadStories() {
 setOptions({
     name: `lit-any ${litAny.version}`,
     addonPanelInRight: true,
-    selectedAddonPanel: 'storybook/notes/panel',
+    selectedAddonPanel: 'storybooks/storybook-addon-knobs',
     url: 'https://github.com/wikibus/lit-any',
     sortStoriesByKind: true,
 });

@@ -1,5 +1,5 @@
 import { html, render as litRender } from 'lit-html';
-import render from '../../src/render';
+import render from '../../lit-any/render/index';
 
 describe('render view', () => {
     let registry;

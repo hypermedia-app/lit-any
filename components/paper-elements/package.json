@@ -1,0 +1,10 @@
+{
+  "name": "@lit-any/components-paper-elements",
+  "version": "0.6.0-a3.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "lit-any": "^0.6.0-a3.0",
+    "lit-html": "^0.10.2"
+  }
+}

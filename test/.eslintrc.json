@@ -1,8 +1,9 @@
 {
-    "rules": {
-        "no-unused-expressions": "off",
-        "no-debugger": "off",
-        "guard-for-in": "off",
-        "no-param-reassign": "off"
-    }
+  "rules": {
+    "no-unused-expressions": "off",
+    "no-debugger": "off",
+    "guard-for-in": "off",
+    "no-param-reassign": "off",
+    "import/no-extraneous-dependencies": "off"
+  }
 }

@@ -4,6 +4,13 @@
   "devDependencies": {
     "paper-input": "polymerelements/paper-input#^2.2.2",
     "web-component-tester": "^6.5.0",
-    "paper-button": "polymerelements/paper-button#^2.1.1"
+    "paper-button": "polymerelements/paper-button#^2.1.1",
+    "zero-md": "^1.1.0",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^2.1.0",
+    "paper-listbox": "PolymerElements/paper-listbox#^2.1.1",
+    "paper-item": "PolymerElements/paper-item#^2.1.1",
+    "vaadin-text-field": "vaadin/vaadin-text-field#^2.0.1",
+    "vaadin-dropdown-menu": "vaadin/vaadin-dropdown-menu#^1.0.0",
+    "vaadin-list-box": "vaadin/vaadin-list-box#^1.0.2"
   }
 }

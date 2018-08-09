@@ -14,11 +14,13 @@
     ],
     "env": {
         "jasmine": true,
-        "browser": true
+        "browser": true,
+        "mocha": true
     },
     "globals": {
         "testHandler": true,
         "sinon": true,
-        "fixture": true
+        "fixture": true,
+        "Polymer": true
     }
 }

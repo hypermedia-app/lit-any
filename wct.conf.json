@@ -2,34 +2,40 @@
   "suites": [
     "test/transpiled/render/*.js",
     "test/transpiled/templates/*.js",
+    "test/components/index.html",
     "test/elements/lit-form.html",
     "test/elements/lit-view.html"
   ],
   "plugins": {
-    "sauce": {
+    "sauce": { "disabled": true },
+    "browserstack": {
       "disabled": true,
       "browsers": [
         {
-          "browserName": "microsoftedge",
-          "platform": "Windows 10",
-          "version": ""
+          "browser": "Edge",
+          "os": "Windows",
+          "os_version": "10"
         },
         {
-          "browserName": "Chrome",
-          "platform": "Windows 8.1",
-          "version": ""
+          "browser": "Chrome",
+          "os": "Windows",
+          "os_version": "8.1"
         },
         {
-          "browserName": "Firefox",
-          "platform": "OS X 10.11",
-          "version": ""
+          "browser": "Firefox",
+          "os": "Windows",
+          "os_version": "8.1"
         },
         {
-          "browserName": "safari",
-          "platform": "OS X 10.12",
-          "version": "11"
+          "browser": "safari",
+          "os": "OS X",
+          "os_version": "High Sierra"
         }
-      ]
+      ],
+      "defaults": {
+        "project": "lit-any",
+        "video": false
+      }
     }
   }
 }

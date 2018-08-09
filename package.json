@@ -1,13 +1,14 @@
 {
-  "name": "lit-any",
-  "main": "src/index.js",
-  "module": "src/index.js",
-  "version": "0.6.0-a2",
+  "private": true,
+  "workspaces": [
+    "lit-any",
+    "components/*"
+  ],
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "webpack && wct --plugin sauce",
+    "test": "webpack && wct --plugin browserstack",
     "build-tests": "webpack",
     "lint": "eslint src/**/*.js test/**/*.js",
     "wct": "webpack -w & wct -l chrome -p",
@@ -15,6 +16,8 @@
     "build-storybook": "bower i; build-storybook -c .storybook -o docs"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-console": "^1.0.4",
     "@storybook/addon-knobs": "^4.0.0-alpha.9",
     "@storybook/addon-links": "^4.0.0-alpha.9",
     "@storybook/addon-notes": "^4.0.0-alpha.9",
@@ -37,21 +40,19 @@
     "eslint-plugin-chai": "0.0.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jasmine": "^2.8.4",
+    "eslint-plugin-mocha": "^5.1.0",
     "eslint-plugin-sinon": "^0.2.0",
+    "iso-639-1": "^2.0.3",
+    "lerna": "^2.11.0",
     "markdown-loader": "^3.0.0",
     "moment": "^2.22.2",
     "p-event": "^1.3.0",
     "polymer-webpack-loader": "^2.0.2",
     "raw-loader": "^0.5.1",
-    "wct-sauce": "^2.0.0",
+    "wct-browserstack": "^0.3.0",
     "web-component-tester": "^6.5.0",
+    "web-component-tester-custom-runner": "^6.5.0",
     "webpack": "^3.5.6",
     "webpack-glob-entries": "^1.0.1"
-  },
-  "dependencies": {
-    "@polymer/polymer": "^3.0.0-pre.11",
-    "@polymer/lit-element": "^0.5.2",
-    "core-js": "^2.5.1",
-    "lit-html": "^0.10.2"
   }
 }

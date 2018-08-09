@@ -1,4 +1,4 @@
-import { object, boolean, text } from '@storybook/addon-knobs/polymer';
+import { object, boolean, text } from '@storybook/addon-knobs';
 
 export const showLabels = v => boolean('Show labels', typeof v === 'boolean' ? v : true, 'Appearance');
 

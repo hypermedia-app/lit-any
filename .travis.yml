@@ -5,5 +5,3 @@ node_js:
 before_script:
   - yarn bower i
   - yarn lint
-addons:
-  sauce_connect: true

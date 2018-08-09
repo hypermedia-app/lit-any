@@ -1,10 +1,6 @@
 const path = require('path');
 const glob_entries = require('webpack-glob-entries');
 
-const entries = Object.assign({},
-    glob_entries('./test/elements/*.js'),
-    glob_entries('./test/templates/*.js'));
-
 const createConfig = (glob, targetPath) => ({
     entry: glob_entries(glob),
     module: {
@@ -36,5 +32,6 @@ const createConfig = (glob, targetPath) => ({
 module.exports = [
     createConfig('./test/elements/*.js', 'elements'),
     createConfig('./test/templates/*.js', 'templates'),
+    createConfig('./test/components/*.js', 'components'),
     createConfig('./test/render/*.js', 'render'),
 ];

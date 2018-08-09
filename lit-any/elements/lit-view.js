@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
-import render from '../render';
+import render from '../render/index';
 import LitAnyBase from './lit-any-base';
-import { ViewTemplates } from '../template-registry';
+import { ViewTemplates } from '../template-registry/index';
 
 export default class LitView extends LitAnyBase {
     constructor() {
