@@ -45,7 +45,7 @@ storiesOf('lit-form', module)
                  value=${v} 
                  on-change=${e => set(e.target.value)}></paper-input>`);
 
-        const registry = select('Fallback behavior', ['default', 'catch-all'], 'default', 'Behavior');
+        const registry = select('Fallback behavior', ['default', 'catch-all'], 'default');
 
         return fallbackNotes(html`<lit-form
                           contract="${contract(object, c)}" 
@@ -74,8 +74,8 @@ storiesOf('lit-form', module)
             form = part.element;
         };
 
-        button('Submit programmatically', () => form.submit(), 'Behavior');
-        button('Reset programmatically', () => form.reset(), 'Behavior');
+        button('Submit programmatically', () => form.submit());
+        button('Reset programmatically', () => form.reset());
 
         return buttonsNotes(html`
 <lit-form ref="${directive(getForm)}"
