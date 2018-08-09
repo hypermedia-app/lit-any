@@ -1,6 +1,7 @@
 import { storiesOf } from '@storybook/polymer';
 import { html } from 'lit-html/lib/lit-extended';
 import moment from 'moment';
+import { object } from '@storybook/addon-knobs';
 import { ViewTemplates } from 'lit-any';
 import { defaultValue } from './knobs';
 import basic from './notes/lit-view/basic.md';
@@ -19,7 +20,7 @@ storiesOf('lit-view', module)
             fullName: 'Louis Litt',
         };
 
-        return html`<lit-view value="${defaultValue(value)}" 
+        return html`<lit-view value="${defaultValue(object, value)}" 
                               template-registry="basic"></lit-view>`;
     }, {
         notes: {
@@ -46,7 +47,7 @@ storiesOf('lit-view/nesting', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return html`<lit-view value="${defaultValue(value)}" 
+        return html`<lit-view value="${defaultValue(object, value)}" 
                               template-registry="recursive"></lit-view>`;
     }, {
         notes: {
@@ -75,7 +76,7 @@ storiesOf('lit-view/nesting', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return html`<lit-view value="${defaultValue(value)}" 
+        return html`<lit-view value="${defaultValue(object, value)}" 
                               template-registry="nested"></lit-view>`;
     }, {
         notes: {

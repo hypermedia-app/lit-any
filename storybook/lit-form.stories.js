@@ -1,7 +1,7 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
-import { select, button } from '@storybook/addon-knobs';
+import { select, button, object, text, boolean } from '@storybook/addon-knobs';
 import { FieldTemplates } from 'lit-any';
 import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noResetButton, showLabels } from './knobs';
 import onSubmit from './helpers/submit-handler';
@@ -48,10 +48,10 @@ storiesOf('lit-form', module)
         const registry = select('Fallback behavior', ['default', 'catch-all'], 'default', 'Behavior');
 
         return fallbackNotes(html`<lit-form
-                          contract="${contract(c)}" 
+                          contract="${contract(object, c)}" 
                           noLabels="${registry === 'catch-all'}"
-                          submitButtonLabel=${submitButton('Register')}
-                          value="${defaultValue(value)}"
+                          submitButtonLabel=${submitButton(text, 'Register')}
+                          value="${defaultValue(object, value)}"
                           template-registry$="${registry}"
                           on-submit="${onSubmit}"></lit-form>`);
     });
@@ -79,11 +79,11 @@ storiesOf('lit-form', module)
 
         return html`
 <lit-form ref="${directive(getForm)}"
-          contract="${contract(c)}" 
-          noSubmitButton="${noSubmitButton()}"
-          submitButtonLabel=${submitButton('Submit')}
-          noResetButton="${noResetButton()}"
-          resetButtonLabel=${resetButton('Reset')}
+          contract="${contract(object, c)}" 
+          noSubmitButton="${noSubmitButton(boolean)}"
+          submitButtonLabel=${submitButton(text, 'Submit')}
+          noResetButton="${noResetButton(boolean)}"
+          resetButtonLabel=${resetButton(text, 'Reset')}
           on-submit="${onSubmit}"></lit-form>`;
     }, {
         notes: { markdown: buttonsNotes },
@@ -135,7 +135,7 @@ storiesOf('lit-form', module)
         return html`
 <lit-form
           contract="${jsonldContract}" 
-          value="${defaultValue(jsonLd)}"
+          value="${defaultValue(object, jsonLd)}"
           submit-button-label="Register"
           on-submit="${onSubmit}"></lit-form>`;
     }, {
@@ -204,9 +204,9 @@ storiesOf('lit-form', module)
             };
 
             return html`<lit-form
-                          noLabels="${!showLabels(false)}"
-                          contract="${contract(c)}"
-                          submitButtonLabel=${submitButton('Register')}
+                          noLabels="${!showLabels(boolean, false)}"
+                          contract="${contract(object, c)}"
+                          submitButtonLabel=${submitButton(text, 'Register')}
                           template-registry="custom-fields"
                           on-submit="${onSubmit}"></lit-form>`;
         },
