@@ -5,7 +5,7 @@ import { object } from '@storybook/addon-knobs';
 import { ViewTemplates } from 'lit-any';
 import { defaultValue } from './knobs';
 import basic from './notes/lit-view/basic';
-import recursive from './notes/lit-view/recursive.md';
+import recursive from './notes/lit-view/recursive';
 import recursiveElements from './notes/lit-view/recursive-elements.md';
 
 storiesOf('lit-view', module)
@@ -43,12 +43,8 @@ storiesOf('lit-view/nesting', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return html`<lit-view value="${defaultValue(object, value)}" 
-                              template-registry="recursive"></lit-view>`;
-    }, {
-        notes: {
-            markdown: recursive,
-        },
+        return recursive(html`<lit-view value="${defaultValue(object, value)}" 
+                              template-registry="recursive"></lit-view>`);
     });
 
 storiesOf('lit-view/nesting', module)

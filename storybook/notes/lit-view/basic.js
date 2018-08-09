@@ -1,7 +1,7 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { md, codeblock } from '../index';
 
-export default function notes(form) {
+export default function notes(view) {
     const heading = md`# Basic usage`;
 
     const explanation = md`## How it works
@@ -43,7 +43,7 @@ template string.
     return html`
 ${heading} 
 
-<br> ${form} <br>
+<br> ${view} <br>
 
 <hr>
 
