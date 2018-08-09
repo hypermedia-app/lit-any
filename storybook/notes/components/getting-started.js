@@ -21,7 +21,7 @@ do not "know" if the will be with a paper element of with a vaadin component.`;
 
     const individualFields = md`## Individual fields
     
-Individual field templates are configured slightly different, using a \`renderComponent\` method instead of the \`render\`.
+Individual field templates are configured slightly different, using a \`renderComponent\` method instead of \`render\`.
 It accepts an \`{ type, options }\` object where the \`type\` is a string which must match the component name from the set
 and the \`options\` will be passed to the actual builder of the chosen component. 
 
