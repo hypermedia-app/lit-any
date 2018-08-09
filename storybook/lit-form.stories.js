@@ -7,7 +7,7 @@ import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noRe
 import onSubmit from './helpers/submit-handler';
 import buttonsNotes from './notes/lit-form/buttons';
 import fallbackNotes from './notes/lit-form/fallback-input';
-import notes from './notes/lit-form/custom-elements.md';
+import templatesNotes from './notes/lit-form/custom-elements';
 import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator';
 
 import '../bower_components/paper-input/paper-input.html';
@@ -180,36 +180,31 @@ storiesOf('lit-form', module)
     });
 
 storiesOf('lit-form', module)
-    .add(
-        'Field templates', () => {
-            FieldTemplates.byName('custom-fields')
-                .when
-                .fieldMatches(f => f.type === 'integer')
-                .renders((f, id, v, set) =>
-                    html`<paper-input id=${id} 
+    .add('Field templates', () => {
+        FieldTemplates.byName('custom-fields')
+            .when
+            .fieldMatches(f => f.type === 'integer')
+            .renders((f, id, v, set) =>
+                html`<paper-input id=${id} 
                         type=number
                         label=${f.title}
                         value=${v} 
                         on-change=${e => set(Number.parseInt(e.target.value, 0))}></paper-input>`);
 
-            const c = {
-                fields: [
-                    {
-                        property: 'age',
-                        title: 'Your age',
-                        type: 'integer',
-                    },
-                ],
-            };
+        const c = {
+            fields: [
+                {
+                    property: 'age',
+                    title: 'Your age',
+                    type: 'integer',
+                },
+            ],
+        };
 
-            return html`<lit-form
+        return templatesNotes(html`<lit-form
                           noLabels="${!showLabels(boolean, false)}"
                           contract="${contract(object, c)}"
                           submitButtonLabel=${submitButton(text, 'Register')}
                           template-registry="custom-fields"
-                          on-submit="${onSubmit}"></lit-form>`;
-        },
-        {
-            notes: { markdown: notes },
-        },
-    );
+                          on-submit="${onSubmit}"></lit-form>`);
+    });
