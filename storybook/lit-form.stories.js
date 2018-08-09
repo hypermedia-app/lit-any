@@ -8,7 +8,7 @@ import onSubmit from './helpers/submit-handler';
 import buttonsNotes from './notes/lit-form/buttons';
 import fallbackNotes from './notes/lit-form/fallback-input';
 import notes from './notes/lit-form/custom-elements.md';
-import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator.md';
+import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator';
 
 import '../bower_components/paper-input/paper-input.html';
 
@@ -130,14 +130,15 @@ storiesOf('lit-form', module)
             },
         };
 
-        return html`
-<lit-form
-          contract="${jsonldContract}" 
-          value="${defaultValue(object, jsonLd)}"
-          submit-button-label="Register"
-          on-submit="${onSubmit}"></lit-form>`;
-    }, {
-        notes: { markdown: fieldValueDecoratorNotes },
+        return fieldValueDecoratorNotes(
+            html`<lit-form
+              contract="${jsonldContract}" 
+              value="${defaultValue(object, jsonLd)}"
+              submit-button-label="Register"
+              on-submit="${onSubmit}"></lit-form>`,
+            jsonldContract,
+            schemaImageDecorator,
+        );
     });
 
 storiesOf('lit-form', module)
