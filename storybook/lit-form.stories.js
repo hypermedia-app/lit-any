@@ -5,7 +5,7 @@ import { select, button, object, text, boolean } from '@storybook/addon-knobs';
 import { FieldTemplates } from 'lit-any';
 import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noResetButton, showLabels } from './knobs';
 import onSubmit from './helpers/submit-handler';
-import buttonsNotes from './notes/lit-form/buttons.md';
+import buttonsNotes from './notes/lit-form/buttons';
 import fallbackNotes from './notes/lit-form/fallback-input';
 import notes from './notes/lit-form/custom-elements.md';
 import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator.md';
@@ -77,16 +77,14 @@ storiesOf('lit-form', module)
         button('Submit programmatically', () => form.submit(), 'Behavior');
         button('Reset programmatically', () => form.reset(), 'Behavior');
 
-        return html`
+        return buttonsNotes(html`
 <lit-form ref="${directive(getForm)}"
           contract="${contract(object, c)}" 
           noSubmitButton="${noSubmitButton(boolean)}"
           submitButtonLabel=${submitButton(text, 'Submit')}
           noResetButton="${noResetButton(boolean)}"
           resetButtonLabel=${resetButton(text, 'Reset')}
-          on-submit="${onSubmit}"></lit-form>`;
-    }, {
-        notes: { markdown: buttonsNotes },
+          on-submit="${onSubmit}"></lit-form>`);
     });
 
 storiesOf('lit-form', module)
