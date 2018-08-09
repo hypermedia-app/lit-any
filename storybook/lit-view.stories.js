@@ -4,7 +4,7 @@ import moment from 'moment';
 import { object } from '@storybook/addon-knobs';
 import { ViewTemplates } from 'lit-any';
 import { defaultValue } from './knobs';
-import basic from './notes/lit-view/basic.md';
+import basic from './notes/lit-view/basic';
 import recursive from './notes/lit-view/recursive.md';
 import recursiveElements from './notes/lit-view/recursive-elements.md';
 
@@ -20,12 +20,8 @@ storiesOf('lit-view', module)
             fullName: 'Louis Litt',
         };
 
-        return html`<lit-view value="${defaultValue(object, value)}" 
-                              template-registry="basic"></lit-view>`;
-    }, {
-        notes: {
-            markdown: basic,
-        },
+        return basic(html`<lit-view value="${defaultValue(object, value)}" 
+                              template-registry="basic"></lit-view>`);
     });
 
 storiesOf('lit-view/nesting', module)
