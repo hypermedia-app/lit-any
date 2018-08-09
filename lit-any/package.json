@@ -2,7 +2,7 @@
   "name": "lit-any",
   "main": "src/index.js",
   "module": "src/index.js",
-  "version": "0.6.0-a3.0",
+  "version": "0.6.0",
   "dependencies": {
     "@polymer/lit-element": "^0.5.2",
     "@polymer/polymer": "^3.0.0-pre.11",
