@@ -6,7 +6,7 @@ import { FieldTemplates } from 'lit-any';
 import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noResetButton, showLabels } from './knobs';
 import onSubmit from './helpers/submit-handler';
 import buttonsNotes from './notes/lit-form/buttons.md';
-import fallbackNotes from './notes/lit-form/fallback-input.md';
+import fallbackNotes from './notes/lit-form/fallback-input';
 import notes from './notes/lit-form/custom-elements.md';
 import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator.md';
 
@@ -47,15 +47,13 @@ storiesOf('lit-form', module)
 
         const registry = select('Fallback behavior', ['default', 'catch-all'], 'default', 'Behavior');
 
-        return html`<lit-form
+        return fallbackNotes(html`<lit-form
                           contract="${contract(c)}" 
                           noLabels="${registry === 'catch-all'}"
                           submitButtonLabel=${submitButton('Register')}
                           value="${defaultValue(value)}"
                           template-registry$="${registry}"
-                          on-submit="${onSubmit}"></lit-form>`;
-    }, {
-        notes: { markdown: fallbackNotes },
+                          on-submit="${onSubmit}"></lit-form>`);
     });
 
 storiesOf('lit-form', module)
