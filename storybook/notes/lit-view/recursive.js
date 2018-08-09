@@ -47,5 +47,5 @@ to produce an equivalent result.
 [sroot]: https://www.webcomponents.org/specs#the-shadow-dom-specification
 [nest-view]: ?selectedKind=lit-view/nesting&selectedStory=using%20view%20element`;
 
-    return html`${docs} <br> ${view} <br> <hr> ${details}`;
+    return html`${docs} <br> ${view} <br> <hr> <br> ${details}`;
 }

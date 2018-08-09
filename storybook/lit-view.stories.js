@@ -6,7 +6,7 @@ import { ViewTemplates } from 'lit-any';
 import { defaultValue } from './knobs';
 import basic from './notes/lit-view/basic';
 import recursive from './notes/lit-view/recursive';
-import recursiveElements from './notes/lit-view/recursive-elements.md';
+import recursiveElements from './notes/lit-view/recursive-elements';
 
 storiesOf('lit-view', module)
     .add('basic', () => {
@@ -68,10 +68,6 @@ storiesOf('lit-view/nesting', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return html`<lit-view value="${defaultValue(object, value)}" 
-                              template-registry="nested"></lit-view>`;
-    }, {
-        notes: {
-            markdown: recursiveElements,
-        },
+        return recursiveElements(html`<lit-view value="${defaultValue(object, value)}" 
+                              template-registry="nested"></lit-view>`);
     });
