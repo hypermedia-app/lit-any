@@ -1,14 +1,14 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
-import { select, button } from '@storybook/addon-knobs';
+import { select, button, object, text, boolean } from '@storybook/addon-knobs';
 import { FieldTemplates } from 'lit-any';
 import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noResetButton, showLabels } from './knobs';
 import onSubmit from './helpers/submit-handler';
-import buttonsNotes from './notes/lit-form/buttons.md';
-import fallbackNotes from './notes/lit-form/fallback-input.md';
-import notes from './notes/lit-form/custom-elements.md';
-import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator.md';
+import buttonsNotes from './notes/lit-form/buttons';
+import fallbackNotes from './notes/lit-form/fallback-input';
+import templatesNotes from './notes/lit-form/custom-elements';
+import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator';
 
 import '../bower_components/paper-input/paper-input.html';
 
@@ -45,17 +45,15 @@ storiesOf('lit-form', module)
                  value=${v} 
                  on-change=${e => set(e.target.value)}></paper-input>`);
 
-        const registry = select('Fallback behavior', ['default', 'catch-all'], 'default', 'Behavior');
+        const registry = select('Fallback behavior', ['default', 'catch-all'], 'default');
 
-        return html`<lit-form
-                          contract="${contract(c)}" 
+        return fallbackNotes(html`<lit-form
+                          contract="${contract(object, c)}" 
                           noLabels="${registry === 'catch-all'}"
-                          submitButtonLabel=${submitButton('Register')}
-                          value="${defaultValue(value)}"
+                          submitButtonLabel=${submitButton(text, 'Register')}
+                          value="${defaultValue(object, value)}"
                           template-registry$="${registry}"
-                          on-submit="${onSubmit}"></lit-form>`;
-    }, {
-        notes: { markdown: fallbackNotes },
+                          on-submit="${onSubmit}"></lit-form>`);
     });
 
 storiesOf('lit-form', module)
@@ -76,19 +74,17 @@ storiesOf('lit-form', module)
             form = part.element;
         };
 
-        button('Submit programmatically', () => form.submit(), 'Behavior');
-        button('Reset programmatically', () => form.reset(), 'Behavior');
+        button('Submit programmatically', () => form.submit());
+        button('Reset programmatically', () => form.reset());
 
-        return html`
+        return buttonsNotes(html`
 <lit-form ref="${directive(getForm)}"
-          contract="${contract(c)}" 
-          noSubmitButton="${noSubmitButton()}"
-          submitButtonLabel=${submitButton('Submit')}
-          noResetButton="${noResetButton()}"
-          resetButtonLabel=${resetButton('Reset')}
-          on-submit="${onSubmit}"></lit-form>`;
-    }, {
-        notes: { markdown: buttonsNotes },
+          contract="${contract(object, c)}" 
+          noSubmitButton="${noSubmitButton(boolean)}"
+          submitButtonLabel=${submitButton(text, 'Submit')}
+          noResetButton="${noResetButton(boolean)}"
+          resetButtonLabel=${resetButton(text, 'Reset')}
+          on-submit="${onSubmit}"></lit-form>`);
     });
 
 storiesOf('lit-form', module)
@@ -134,14 +130,15 @@ storiesOf('lit-form', module)
             },
         };
 
-        return html`
-<lit-form
-          contract="${jsonldContract}" 
-          value="${defaultValue(jsonLd)}"
-          submit-button-label="Register"
-          on-submit="${onSubmit}"></lit-form>`;
-    }, {
-        notes: { markdown: fieldValueDecoratorNotes },
+        return fieldValueDecoratorNotes(
+            html`<lit-form
+              contract="${jsonldContract}" 
+              value="${defaultValue(object, jsonLd)}"
+              submit-button-label="Register"
+              on-submit="${onSubmit}"></lit-form>`,
+            jsonldContract,
+            schemaImageDecorator,
+        );
     });
 
 storiesOf('lit-form', module)
@@ -183,36 +180,31 @@ storiesOf('lit-form', module)
     });
 
 storiesOf('lit-form', module)
-    .add(
-        'Field templates', () => {
-            FieldTemplates.byName('custom-fields')
-                .when
-                .fieldMatches(f => f.type === 'integer')
-                .renders((f, id, v, set) =>
-                    html`<paper-input id=${id} 
+    .add('Field templates', () => {
+        FieldTemplates.byName('custom-fields')
+            .when
+            .fieldMatches(f => f.type === 'integer')
+            .renders((f, id, v, set) =>
+                html`<paper-input id=${id} 
                         type=number
                         label=${f.title}
                         value=${v} 
                         on-change=${e => set(Number.parseInt(e.target.value, 0))}></paper-input>`);
 
-            const c = {
-                fields: [
-                    {
-                        property: 'age',
-                        title: 'Your age',
-                        type: 'integer',
-                    },
-                ],
-            };
+        const c = {
+            fields: [
+                {
+                    property: 'age',
+                    title: 'Your age',
+                    type: 'integer',
+                },
+            ],
+        };
 
-            return html`<lit-form
-                          noLabels="${!showLabels(false)}"
-                          contract="${contract(c)}"
-                          submitButtonLabel=${submitButton('Register')}
+        return templatesNotes(html`<lit-form
+                          noLabels="${!showLabels(boolean, false)}"
+                          contract="${contract(object, c)}"
+                          submitButtonLabel=${submitButton(text, 'Register')}
                           template-registry="custom-fields"
-                          on-submit="${onSubmit}"></lit-form>`;
-        },
-        {
-            notes: { markdown: notes },
-        },
-    );
+                          on-submit="${onSubmit}"></lit-form>`);
+    });

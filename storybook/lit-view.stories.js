@@ -1,11 +1,12 @@
 import { storiesOf } from '@storybook/polymer';
 import { html } from 'lit-html/lib/lit-extended';
 import moment from 'moment';
+import { object } from '@storybook/addon-knobs';
 import { ViewTemplates } from 'lit-any';
 import { defaultValue } from './knobs';
-import basic from './notes/lit-view/basic.md';
-import recursive from './notes/lit-view/recursive.md';
-import recursiveElements from './notes/lit-view/recursive-elements.md';
+import basic from './notes/lit-view/basic';
+import recursive from './notes/lit-view/recursive';
+import recursiveElements from './notes/lit-view/recursive-elements';
 
 storiesOf('lit-view', module)
     .add('basic', () => {
@@ -19,12 +20,8 @@ storiesOf('lit-view', module)
             fullName: 'Louis Litt',
         };
 
-        return html`<lit-view value="${defaultValue(value)}" 
-                              template-registry="basic"></lit-view>`;
-    }, {
-        notes: {
-            markdown: basic,
-        },
+        return basic(html`<lit-view value="${defaultValue(object, value)}" 
+                              template-registry="basic"></lit-view>`);
     });
 
 storiesOf('lit-view/nesting', module)
@@ -46,12 +43,8 @@ storiesOf('lit-view/nesting', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return html`<lit-view value="${defaultValue(value)}" 
-                              template-registry="recursive"></lit-view>`;
-    }, {
-        notes: {
-            markdown: recursive,
-        },
+        return recursive(html`<lit-view value="${defaultValue(object, value)}" 
+                              template-registry="recursive"></lit-view>`);
     });
 
 storiesOf('lit-view/nesting', module)
@@ -75,10 +68,6 @@ storiesOf('lit-view/nesting', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return html`<lit-view value="${defaultValue(value)}" 
-                              template-registry="nested"></lit-view>`;
-    }, {
-        notes: {
-            markdown: recursiveElements,
-        },
+        return recursiveElements(html`<lit-view value="${defaultValue(object, value)}" 
+                              template-registry="nested"></lit-view>`);
     });
