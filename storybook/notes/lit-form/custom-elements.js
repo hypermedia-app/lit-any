@@ -1,5 +1,5 @@
 import { html } from 'lit-html/lib/lit-extended';
-import { codeblock, md } from '../index';
+import md from '../markdown';
 
 export default function notes(form) {
     const docs = md`# Customizing individual fields
@@ -12,7 +12,7 @@ which will return true if a field can be rendered and another which returns the 
 
     const details = md`In above form, an integer type field will be rendered using a \`paper-input\` element with appropriate \`type\`.
 
-${codeblock('js')}
+--- js
 import { FieldTemplates } from 'lit-any';
 
 FieldTemplates.default
@@ -24,7 +24,7 @@ FieldTemplates.default
                 label=$\{field.title}
                 value=$\{value} 
                 on-change=$\{e => set(Number.parseInt(e.target.value, 0))}></paper-input>\`);
-${codeblock()}
+--- 
 
 ## \`fieldMatches\`
 

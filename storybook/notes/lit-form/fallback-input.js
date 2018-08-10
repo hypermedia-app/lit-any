@@ -1,4 +1,4 @@
-import { codeblock, md } from '../index';
+import md from '../markdown';
 import { html } from 'lit-html/lib/lit-extended';
 
 export default function notes(example) {
@@ -12,7 +12,7 @@ when a field type is not something that the form knows how to present, a plain H
 Alternatively, it is possible declare a template without any restrictions, which means it will match any
 field given. 
 
-${codeblock('js')}
+--- js
 import { html } from 'lit-html'
 import { FieldTemplates } from 'lit-any';
 
@@ -24,7 +24,7 @@ FieldTemplates.default.when
                  value=$\{value} 
                  on-change=$\{e => set(e.target.value)}></paper-input>\`;
     });
-${codeblock()}
+--- 
 
 Note that field templates are selected in the same order they were registered, which means that a catch-all
 template must be added last. Otherwise \`<lit-form>\` will use it for the entire form.`;

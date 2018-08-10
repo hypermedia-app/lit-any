@@ -1,5 +1,5 @@
 import { html } from 'lit-html/lib/lit-extended';
-import { md, codeblock } from '../index';
+import md from '../markdown';
 
 export default function notes(view) {
     const docs = md`# Nesting views
@@ -17,7 +17,7 @@ a partial and inject it in the desired location within the template.
 Consider these templates, where the first one delegates the decision how to render the person's \`birthDate\`
 property. It will effectively be rendered by the second partial. 
 
-${codeblock('js')}
+--- js
 import { html } from 'lit-html'; 
 import moment from 'moment'; 
 import { ViewTemplates } from 'lit-any';
@@ -33,7 +33,7 @@ ViewTemplates.default
     .when
     .valueMatches(v => v instanceof Date || Date.parse(value))
     .renders((_, date) => html\`$\{moment(date).fromNow()}\`);
-${codeblock()}
+--- 
 
 This feature lets nested partial depend on the actual value of the \`birthDate\` property without the need
 for explicit logic within the calling template.

@@ -1,5 +1,5 @@
 import { html } from 'lit-html/lib/lit-extended';
-import { md, codeblock } from '../..';
+import md from '../../markdown';
 
 export default function notes(field) {
     return html`${md`
@@ -15,14 +15,14 @@ The basic input which presents a \`<paper-input>\` or \`<paper-textarea>\`
 
 ${md`### Usage
 
-${codeblock('js')}
+--- js
 import { textbox } from '@lit-any/components-paper-elements';
 import { FieldTemplates } from 'lit-any;
 
 FieldTemplates.default
     .when(f => f.type === 'string')
     .renders(textbox(options));
-${codeblock()}
+--- 
     
 ### Options
 

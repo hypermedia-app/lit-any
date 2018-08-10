@@ -1,6 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
 import stringifyObject from 'stringify-object';
-import { codeblock, md } from '../index';
+import md from '../markdown';
 
 export default function notes(form, contract, decorator) {
     const docs = md`# Decorating field getter and setter
@@ -25,21 +25,21 @@ decorator to convert the string coming from the input element to a numeric value
 JSON-LD is another case where, in expanded representation, additional keywords are used to add additional
 meaning to plain JSON objects. For example, where in plain JSON one could have
 
-${codeblock('json')}
+--- json
 {
   "age": 45
 }
-${codeblock()} 
+---  
 
 in JSON-LD such object could be represented more verbosely as 
 
-${codeblock('json')}
+--- json
 {
   "http://schema.org/age": {
     "@value": 45
   }
 }
-${codeblock()}
+--- 
 
 Without going into the details, this is to distinguish literal values (indicated by the \`@value\` keyword)
 from URLs which would represent links not unlike those found in web pages.
@@ -48,14 +48,14 @@ Having also mentioned schema.org, the presented scenario also shows a text field
 avatar URL. Such can be represented by a [\`http://schema.org/ImageObject\`][io] object. Thus, it is necessary
 to wrap the user's input in the appropriate structure.
 
-${codeblock('json')}
+--- json
 {
   "http://schema.org/image": {
     "@type": "http://schema.org/ImageObject",
     "http://schema.org/contentUrl": "http://gravatar.com/image"
   }
 }
-${codeblock()}
+--- 
 
 [io]: http://schema.org/ImageObject
 
@@ -70,7 +70,7 @@ To facilitate the above, one can define decorators which allow customizing how v
 form's value and set back to that object. Here's how this story defines the decorator for \`ImageObject\` by
 adding a \`valueDecorator\` to a field's definition.
 
-${codeblock('js')}
+--- js
 const schemaImageDecorator = ${stringifyObject(decorator)}
 
 const jsonldContract = {
@@ -83,7 +83,7 @@ const jsonldContract = {
         /* other fields */
     ],
 };
-${codeblock()}
+--- 
 
 A decorator can implement a \`wrap\` and \`unwrap\` functions. Both are optional. 
 

@@ -1,5 +1,5 @@
 import { html } from 'lit-html/lib/lit-extended';
-import { md, codeblock } from '../..';
+import md from '../../markdown';
 
 export default function notes(staticSelection, funcItems) {
     return html`${md(`
@@ -15,14 +15,14 @@ ${staticSelection}<br>
 
 ${md`Items can be a static list of elements with \`label\` and \`value\` keys
 
-${codeblock('js')}
+--- js
 dropdown({
     items: [
         { label: 'Polish', value: 'pl' },
         { label: 'English', value: 'en' },
     ]
 });
-${codeblock()}
+--- 
 
 ### Dynamic items`}
 
@@ -31,7 +31,7 @@ ${funcItems}<br>
 ${md`Items can be a provided as function which takes the field as parameter and returns such array as above. For example it would be
 possible to translate ISO language codes to use their localized names as labels
 
-${codeblock('js')}
+--- js
 import ISO6391 from 'iso-639-1';
 
 dropdown({
@@ -40,18 +40,18 @@ dropdown({
         label: ISO6391.getNativeName(lang),
     }))
 });
-${codeblock()}
+--- 
 
 ## Usage
 
-${codeblock('js')}
+--- js
 import { dropdown } from '@lit-any/components-vaadin';
 import { FieldTemplates } from 'lit-any;
 
 FieldTemplates.default
     .when(f => f.type === 'string')
     .renders(dropdown(options));
-${codeblock()}
+--- 
     
 ### Options
 

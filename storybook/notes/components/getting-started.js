@@ -1,5 +1,5 @@
 import { html } from 'lit-html/lib/lit-extended';
-import { md, codeblock } from '..';
+import md from '../markdown';
 
 export default function notes(exampleForm) {
     const preface = md`# Component sets
@@ -9,12 +9,12 @@ the component kind (textbox, dropdown, etc) and the actual element being rendere
 
 ## Setting up template registry
 
-${codeblock('js')}
+--- js
 import { FieldTemplates } from 'lit-any';
 import * as paperElements from '@lit-any/components-paper-elements';
 
 FieldTemplates.default.useComponents(paperElements);
-${codeblock()}
+--- 
 
 Switching the **component set** knob let's you quickly change the appearance of the entire form below. Individual fields
 do not "know" if the will be with a paper element of with a vaadin component.`;
@@ -30,7 +30,7 @@ For common component those objects do not have to be constructed manually. Inste
 
 Here's how the form above is configured to render a dropdown menu for a \`languages\` property.
 
-${codeblock('js')}
+--- js
 import { dropdown } from 'lit-any/components';
 
 FieldTemplates.when
@@ -42,7 +42,7 @@ FieldTemplates.when
             { value: 'pl', label: 'Polish' },
         ],
     }));
-${codeblock()}`;
+--- `;
 
     return html`${preface} <br>${exampleForm}<br> ${individualFields}`;
 }

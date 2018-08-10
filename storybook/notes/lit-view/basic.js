@@ -1,5 +1,5 @@
 import { html } from 'lit-html/lib/lit-extended';
-import { md, codeblock } from '../index';
+import md from '../markdown';
 
 export default function notes(view) {
     const heading = md`# Basic usage`;
@@ -9,7 +9,7 @@ export default function notes(view) {
 The \`<lit-view>\` element is used as a placeholder for displaying parts of a user interfaces. It is used simply
 by setting the \`value\` property with the object to be displayed on the page.
 
-${codeblock('html')}
+--- html
 <lit-view id="view"></lit-view>
 
 <script>
@@ -18,19 +18,19 @@ ${codeblock('html')}
     fullName: 'Louis Litt'  
   };
 </script>
-${codeblock()} 
+---  
 
 How the value is displayed will be determined by matching the value with templates defined in the view
 registry. Here's an example setup of a template which renders objects where \`object.type == 'Person'\`.
 
-${codeblock('js')}
+--- js
 import { html } from 'lit-html/lib/extended';
 import { ViewTemplates } from 'lit-any';
 
 ViewTemplates.default.when
     .valueMatches(v => v.type === 'Person')
     .renders((_, person) =>  html\`Hello, my name is $\{person.fullName}\`);
-${codeblock()}
+--- 
 
 The \`valueMatches\` function accepts a callback which should return \`true\` if the value is something to be
 rendered.
