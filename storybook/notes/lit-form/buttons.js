@@ -1,8 +1,7 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../markdown';
 
 export default function notes(form) {
-    const preface = md`# Controlling \`<lit-form>\`
+    return md`# Controlling \`<lit-form>\`
 
 By default the form element will be rendered complete with a plain HTML submit and reset buttons. 
 Something like
@@ -20,9 +19,11 @@ Something like
 </lit-form>
 --- 
 
-## Example`;
+## Example
 
-    const details = md`## Button labels
+${form}
+
+## Button labels
 
 The text displayed on the submit button is controlled by a \`submitButtonLabel\` property and defaults to
 **Submit**.
@@ -59,6 +60,4 @@ Whenever submitted (manually or otherwise), the element will emit a \`submit\` e
 <lit-form on-submit="handleSubmit"></lit-form>
 --- 
 `;
-
-    return html`${preface} <br>${form}<br> ${details}`;
 }

@@ -1,19 +1,18 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../../markdown';
 
 export default function notes(field) {
-    return html`${md`
+    return md`
 # Vaadin components
 
 ## Text field
 
 The basic input which presents a \`<vaadin-text-field>\` or \`<vaadin-text-area>\`
 
-### How it renders`}
+### How it renders
 
-<br>${field}<br>
+${field}
 
-${md`### Usage
+### Usage
 
 --- js
 import { textbox } from '@lit-any/components-vaadin';
@@ -28,7 +27,5 @@ FieldTemplates.default
 
 | Name | expected values | default value |
 |--|--|
-| **type** | \`'single line'\`, \`'multi line'\` | \`'single line'\` |
-
-`}`;
+| **type** | \`'single line'\`, \`'multi line'\` | \`'single line'\` |`;
 }

@@ -1,10 +1,11 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../markdown';
 
 export default function notes(view) {
-    const heading = md`# Basic usage`;
+    return md`# Basic usage
 
-    const explanation = md`## How it works
+${view}
+
+## How it works
 
 The \`<lit-view>\` element is used as a placeholder for displaying parts of a user interfaces. It is used simply
 by setting the \`value\` property with the object to be displayed on the page.
@@ -39,13 +40,4 @@ The function passed to \`renders\` takes the rendered object as parameter and mu
 template string.
 
 [html]: https://polymer.github.io/lit-html/guide/#lit-html-templates`;
-
-    return html`
-${heading} 
-
-<br> ${view} <br>
-
-<hr>
-
-${explanation}`;
 }

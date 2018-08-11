@@ -1,16 +1,17 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../markdown';
 
 export default function notes(form) {
-    const docs = md`# Customizing individual fields
+    return md`# Customizing individual fields
 
 It is possible to customize the appearance of individual fields by providing a partial template for given
 type of property. This is done using the \`FieldTemplates\` registry where it is necessary to provide a function
 which will return true if a field can be rendered and another which returns the appropriate template.
 
-## Example`;
+## Example
 
-    const details = md`In above form, an integer type field will be rendered using a \`paper-input\` element with appropriate \`type\`.
+${form}
+
+In above form, an integer type field will be rendered using a \`paper-input\` element with appropriate \`type\`.
 
 --- js
 import { FieldTemplates } from 'lit-any';
@@ -59,6 +60,4 @@ This method is more interesting as it takes four parameters
     though its type is set to number). For this reason it's the developer's responsibility to bind to the
     element's change event, convert the value to the correct type and call the setter function to propagate
     the change.`;
-
-    return html`${docs} <br>${form}<br> ${details}`;
 }

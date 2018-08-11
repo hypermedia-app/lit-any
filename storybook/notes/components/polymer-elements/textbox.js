@@ -1,19 +1,18 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../../markdown';
 
 export default function notes(field) {
-    return html`${md`
+    return md`
 # Paper elements
 
 ## Text field
 
 The basic input which presents a \`<paper-input>\` or \`<paper-textarea>\`
 
-### How it renders`}
+### How it renders
 
-<br>${field}<br>
+${field}
 
-${md`### Usage
+### Usage
 
 --- js
 import { textbox } from '@lit-any/components-paper-elements';
@@ -28,7 +27,5 @@ FieldTemplates.default
 
 | Name | expected values | default value |
 |--|--|
-| **type** | \`'single line'\`, \`'multi line'\` | \`'single line'\` |
-
-`}`;
+| **type** | \`'single line'\`, \`'multi line'\` | \`'single line'\` |`;
 }

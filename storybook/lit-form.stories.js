@@ -1,6 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { directive } from 'lit-html';
-import { storiesOf } from '@storybook/polymer/dist/client/index';
+import { storiesOf } from '@storybook/polymer';
 import { select, button, object, text, boolean } from '@storybook/addon-knobs';
 import { FieldTemplates } from 'lit-any';
 import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noResetButton, showLabels } from './knobs';

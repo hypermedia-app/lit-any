@@ -1,12 +1,13 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../markdown';
 
 export default function notes(view) {
-    const docs = md`# Nesting views
+    return md`# Nesting views
     
-## Example`;
+## Example
 
-    const details = md`## Nesting \`<lit-view>\` elements
+${view}
+
+## Nesting \`<lit-view>\` elements
 
 As an alternative to using the recursive \`render\` function it is possible to simply nest the \`<lit-view>\`
 elements in the partial templates.
@@ -33,6 +34,4 @@ The difference this is that each \`<lit-view>\` element creates a [Shadow Root][
 may be useful when there is desired to isolate portions of the generated HTML.
 
 [sroot]: https://www.webcomponents.org/specs#the-shadow-dom-specification`;
-
-    return html`${docs} <br> ${view} <br> <hr> <br> ${details}`;
 }

@@ -1,12 +1,13 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../markdown';
 
 export default function notes(view) {
-    const docs = md`# Nesting views
+    return md`# Nesting views
     
-## Example`;
+## Example
 
-    const details = md`## Using \`render\` function
+${view}
+
+## Using \`render\` function
     
 The whole point of defining partial view is to decompose the rendered markup into smaller chunks which can
 be independently declared and eventually combined at run time to build UI for entire graphs of objects.
@@ -46,6 +47,4 @@ to produce an equivalent result.
 
 [sroot]: https://www.webcomponents.org/specs#the-shadow-dom-specification
 [nest-view]: ?selectedKind=lit-view/nesting&selectedStory=using%20view%20element`;
-
-    return html`${docs} <br> ${view} <br> <hr> <br> ${details}`;
 }

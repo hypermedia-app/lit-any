@@ -1,8 +1,7 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../markdown';
 
 export default function notes(exampleForm) {
-    const preface = md`# Component sets
+    return md`# Component sets
 
 The easiest way to create cohesive forms is to globally set a set of components to use. Individual elements only choose
 the component kind (textbox, dropdown, etc) and the actual element being rendered will come from the configured set.
@@ -17,9 +16,11 @@ FieldTemplates.default.useComponents(paperElements);
 --- 
 
 Switching the **component set** knob let's you quickly change the appearance of the entire form below. Individual fields
-do not "know" if the will be with a paper element of with a vaadin component.`;
+do not "know" if the will be with a paper element of with a vaadin component.
 
-    const individualFields = md`## Individual fields
+${exampleForm}
+
+## Individual fields
     
 Individual field templates are configured slightly different, using a \`renderComponent\` method instead of \`render\`.
 It accepts an \`{ type, options }\` object where the \`type\` is a string which must match the component name from the set
@@ -43,6 +44,4 @@ FieldTemplates.when
         ],
     }));
 --- `;
-
-    return html`${preface} <br>${exampleForm}<br> ${individualFields}`;
 }

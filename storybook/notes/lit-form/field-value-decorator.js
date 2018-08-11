@@ -1,9 +1,8 @@
-import { html } from 'lit-html/lib/lit-extended';
 import stringifyObject from 'stringify-object';
 import md from '../markdown';
 
 export default function notes(form, contract, decorator) {
-    const docs = md`# Decorating field getter and setter
+    return md`# Decorating field getter and setter
 
 By default the object model is intended to be plain JSON. That is, each field value would be a direct
 child of it's defining field. There may be cases when a model is represented by a more complex structure
@@ -62,9 +61,11 @@ to wrap the user's input in the appropriate structure.
 ## Running example
 
 The form below shows how the raw input values are converted when initial model is applied and when the input values
-change.`;
+change.
 
-    const explained = md`## Using field decorators
+${form}
+
+## Using field decorators
 
 To facilitate the above, one can define decorators which allow customizing how values are retrieved from the
 form's value and set back to that object. Here's how this story defines the decorator for \`ImageObject\` by
@@ -92,6 +93,4 @@ bind to the input element.
 
 \`wrap\` does the opposite. It takes the user input as parameter and returns the value to apply to the
 form's model.`;
-
-    return html`${docs} <br>${form}<br> ${explained}`;
 }

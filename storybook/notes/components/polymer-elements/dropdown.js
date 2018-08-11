@@ -1,19 +1,17 @@
-import { html } from 'lit-html/lib/lit-extended';
 import md from '../../markdown';
 
 export default function notes(staticSelection, funcItems) {
-    return html`${md`
-# Paper elements
+    return md`# Paper elements
 
 ## Dropdown menu
 
 Uses Polymer \`<paper-dropdown-menu>\` to display a list of key-value pairs
 
-### Static items`}
+### Static items
 
-${staticSelection}<br>
+${staticSelection}
 
-${md`Items can be a static list of elements with \`label\` and \`value\` keys
+Items can be a static list of elements with \`label\` and \`value\` keys
 
 --- js
 dropdown({
@@ -24,11 +22,11 @@ dropdown({
 });
 --- 
 
-### Dynamic items`}
+### Dynamic items
 
-${funcItems}<br>
+${funcItems}
 
-${md`Items can be a provided as function which takes the field as parameter and returns such array as above. For example it would be
+Items can be a provided as function which takes the field as parameter and returns such array as above. For example it would be
 possible to translate ISO language codes to use their localized names as labels
 
 --- js
@@ -57,7 +55,5 @@ FieldTemplates.default
 
 | Name | expected values | default value |
 |--|--|
-| **items** | Array or function | \`[]\` |
-
-`}`;
+| **items** | Array or function | \`[]\` |`;
 }
