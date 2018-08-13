@@ -1,3 +1,4 @@
+import '../elements/lit-form';
 import FormTemplateRegistry from './TemplateRegistry';
 import FieldTemplateSelectorBuilder from './TemplateSelectorBuilder';
 

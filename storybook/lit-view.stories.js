@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/polymer';
 import { html } from 'lit-html/lib/lit-extended';
 import moment from 'moment';
 import { object } from '@storybook/addon-knobs';
-import { ViewTemplates } from 'lit-any';
+import ViewTemplates from 'lit-any/views';
 import { defaultValue } from './knobs';
 import basic from './notes/lit-view/basic';
 import recursive from './notes/lit-view/recursive';
