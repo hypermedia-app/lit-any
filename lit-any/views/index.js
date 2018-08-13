@@ -1,4 +1,3 @@
-import '../elements/lit-view';
 import TemplateRegistry from '../template-registry';
 import ViewTemplateSelectorBuilder from './TemplateSelectorBuilder';
 

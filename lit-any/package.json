@@ -1,7 +1,5 @@
 {
   "name": "lit-any",
-  "main": "src/index.js",
-  "module": "src/index.js",
   "version": "0.6.0",
   "dependencies": {
     "@polymer/lit-element": "^0.5.2",

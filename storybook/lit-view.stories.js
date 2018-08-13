@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/polymer';
 import { html } from 'lit-html/lib/lit-extended';
 import moment from 'moment';
 import { object } from '@storybook/addon-knobs';
+import 'lit-any/elements/lit-view';
 import ViewTemplates from 'lit-any/views';
 import { defaultValue } from './knobs';
 import basic from './notes/lit-view/basic';
