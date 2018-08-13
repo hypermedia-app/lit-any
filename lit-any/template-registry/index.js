@@ -1,23 +1,52 @@
-import TemplateRegistry from './template-registry';
-import { FieldTemplateSelectorBuilder, ViewTemplateSelectorBuilder } from './TemplateSelectorBuilder';
+import 'core-js/modules/es6.array.find';
 
-const viewTemplates = {};
-const fieldTemplates = {};
-
-const getTemplate = (map, builder, name) => {
-    if (!map[name]) {
-        // eslint-disable-next-line no-param-reassign
-        map[name] = new TemplateRegistry(builder, name || 'default');
+export default class TemplateRegistry {
+    constructor(Builder, name) {
+        this._templates = [];
+        this._builder = Builder;
+        this.name = name;
     }
 
-    return map[name];
-};
+    get count() {
+        return this._templates.length;
+    }
 
-export const ViewTemplates = {
-    default: getTemplate(viewTemplates, ViewTemplateSelectorBuilder, ''),
-    byName: name => getTemplate(viewTemplates, ViewTemplateSelectorBuilder, name),
-};
-export const FieldTemplates = {
-    default: getTemplate(fieldTemplates, FieldTemplateSelectorBuilder, ''),
-    byName: name => getTemplate(fieldTemplates, FieldTemplateSelectorBuilder, name),
-};
+    /**
+     *
+     * @returns {TemplateSelectorBuilder}
+     */
+    get when() {
+        return new this._builder(this);
+    }
+
+    getTemplate(criteria) {
+        let selectedTemplate;
+        if (criteria !== null && typeof criteria !== 'undefined') {
+            selectedTemplate = this._templates.find(template =>
+                template.selector.matches(criteria));
+        }
+
+        if (!selectedTemplate) {
+            return null;
+        }
+
+        return {
+            render: selectedTemplate.templateFunc,
+            name: selectedTemplate.name || null,
+        };
+    }
+
+    push(selector, templateFuncOrResult, name) {
+        let templateFunc = templateFuncOrResult;
+
+        if (typeof templateFunc !== 'function') {
+            templateFunc = () => templateFuncOrResult;
+        }
+
+        this._templates.push({
+            selector,
+            templateFunc,
+            name,
+        });
+    }
+}

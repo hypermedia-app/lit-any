@@ -1,6 +1,6 @@
 import { html, render } from 'lit-html';
-import TemplateRegistry from '../../lit-any/template-registry/template-registry';
-import { TemplateSelectorBuilder } from '../../lit-any/template-registry/TemplateSelectorBuilder';
+import TemplateRegistry from '../../lit-any/template-registry';
+import TemplateSelectorBuilder from '../../lit-any/template-registry/TemplateSelectorBuilder';
 
 class TestBuilder extends TemplateSelectorBuilder { }
 

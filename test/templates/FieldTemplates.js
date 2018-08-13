@@ -1,4 +1,4 @@
-import { FieldTemplates } from '../../lit-any/template-registry/index';
+import FieldTemplates from '../../lit-any/forms';
 
 describe('FieldTemplates', () => {
     describe('when builder is created', () => {

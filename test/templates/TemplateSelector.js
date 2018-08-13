@@ -1,4 +1,6 @@
-import { TemplateSelector, ViewTemplateSelector, FieldTemplateSelector } from '../../lit-any/template-registry/TemplateSelector';
+import TemplateSelector from '../../lit-any/template-registry/TemplateSelector';
+import ViewTemplateSelector from '../../lit-any/views/TemplateSelector';
+import FieldTemplateSelector from '../../lit-any/forms/TemplateSelector';
 
 describe('TemplateSelector', () => {
     let selector;

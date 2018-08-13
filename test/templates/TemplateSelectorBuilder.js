@@ -1,4 +1,5 @@
-import { ViewTemplateSelectorBuilder, FieldTemplateSelectorBuilder } from '../../lit-any/template-registry/TemplateSelectorBuilder';
+import ViewTemplateSelectorBuilder from '../../lit-any/views/TemplateSelectorBuilder';
+import FieldTemplateSelectorBuilder from '../../lit-any/forms/TemplateSelectorBuilder';
 
 describe('ViewTemplateSelectorBuilder', () => {
     let builder;

@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { html } from 'lit-html/lib/lit-extended';
 import contract from './contract-helpers';
-import { FieldTemplates } from '../template-registry/index';
 import LitAnyBase from './lit-any-base';
+import FieldTemplates from '../forms';
 
 function onSubmit(e) {
     this.submit();
