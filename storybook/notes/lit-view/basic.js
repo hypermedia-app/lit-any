@@ -26,9 +26,9 @@ registry. Here's an example setup of a template which renders objects where \`ob
 
 --- js
 import { html } from 'lit-html/lib/extended';
-import { ViewTemplates } from 'lit-any';
+import Registry from 'lit-any/views';
 
-ViewTemplates.default.when
+Registry.default.when
     .valueMatches(v => v.type === 'Person')
     .renders((_, person) =>  html\`Hello, my name is $\{person.fullName}\`);
 --- 

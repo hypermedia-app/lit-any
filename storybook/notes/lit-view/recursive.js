@@ -21,16 +21,16 @@ property. It will effectively be rendered by the second partial.
 --- js
 import { html } from 'lit-html'; 
 import moment from 'moment'; 
-import { ViewTemplates } from 'lit-any';
+import Registry from 'lit-any/views';
 
-ViewTemplates.default
+Registry.default
     .when
     .valueMatches(v => v.type === 'Person')
     .renders((render, person) => 
         html\`Hello, my name is $\{person.fullName}. 
              I was born $\{render(person.birthDate)}\`);
 
-ViewTemplates.default
+Registry.default
     .when
     .valueMatches(v => v instanceof Date || Date.parse(value))
     .renders((_, date) => html\`$\{moment(date).fromNow()}\`);

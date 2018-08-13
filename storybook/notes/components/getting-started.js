@@ -9,10 +9,10 @@ the component kind (textbox, dropdown, etc) and the actual element being rendere
 ## Setting up template registry
 
 --- js
-import { FieldTemplates } from 'lit-any';
+import Registry from 'lit-any/forms;
 import * as paperElements from '@lit-any/components-paper-elements';
 
-FieldTemplates.default.useComponents(paperElements);
+Registry.default.useComponents(paperElements);
 --- 
 
 Switching the **component set** knob let's you quickly change the appearance of the entire form below. Individual fields
@@ -33,8 +33,9 @@ Here's how the form above is configured to render a dropdown menu for a \`langua
 
 --- js
 import { dropdown } from 'lit-any/components';
+import Registry from 'lit-any/forms;
 
-FieldTemplates.when
+Registry.when
     .fieldMatches(f => f.type === 'language')
     .rendersComponent(dropdown({
         items: [

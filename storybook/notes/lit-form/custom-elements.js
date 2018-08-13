@@ -14,9 +14,9 @@ ${form}
 In above form, an integer type field will be rendered using a \`paper-input\` element with appropriate \`type\`.
 
 --- js
-import { FieldTemplates } from 'lit-any';
+import Registry from 'lit-any/forms';
 
-FieldTemplates.default
+Registry.default
     .when
     .fieldMatches(field => field.type === 'integer')
     .renders((field, id, value, set) =>

@@ -16,9 +16,9 @@ ${field}
 
 --- js
 import { textbox } from '@lit-any/components-paper-elements';
-import { FieldTemplates } from 'lit-any;
+import Registry from 'lit-any/forms;
 
-FieldTemplates.default
+Registry.default
     .when(f => f.type === 'string')
     .renders(textbox(options));
 --- 

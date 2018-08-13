@@ -45,9 +45,9 @@ dropdown({
 
 --- js
 import { dropdown } from '@lit-any/components-vaadin';
-import { FieldTemplates } from 'lit-any;
+import Registry from 'lit-any/forms;
 
-FieldTemplates.default
+Registry.default
     .when(f => f.type === 'string')
     .renders(dropdown(options));
 --- 
