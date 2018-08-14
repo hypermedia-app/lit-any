@@ -2,7 +2,7 @@ import { html } from 'lit-html/lib/lit-extended';
 import { directive } from 'lit-html';
 import { storiesOf } from '@storybook/polymer';
 import { select, button, object, text, boolean } from '@storybook/addon-knobs';
-import 'lit-any/elements/lit-form';
+import 'lit-any/lit-form';
 import FieldTemplates from 'lit-any/forms';
 import { defaultValue, submitButton, resetButton, contract, noSubmitButton, noResetButton, showLabels } from './knobs';
 import onSubmit from './helpers/submit-handler';

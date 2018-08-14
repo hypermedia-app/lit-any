@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/polymer';
 import * as vaadin from '@lit-any/components-vaadin';
 import * as paper from '@lit-any/components-paper-elements';
-import 'lit-any/elements/lit-form';
+import 'lit-any/lit-form';
 import FieldTemplates from 'lit-any/forms';
 import * as components from 'lit-any/components';
 import { html } from 'lit-html/lib/lit-extended';

@@ -1,6 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
-import '../../lit-any/elements/lit-view';
-import ViewTemplates from '../../lit-any/views';
+import 'lit-any/lit-view';
+import ViewTemplates from 'lit-any/views';
 
 describe('lit-view', () => {
     let litView;
