@@ -19,8 +19,8 @@ With `lit-any` you can deconstruct your HTML by defining partial templates which
 they are really needed.
 
 ```javascript
-import { ViewTemplates } from 'lit-any';
-import { html } from 'lit-html';
+import ViewTemplates from 'lit-any/views';
+import { html } from 'lit-html/lib/lit-extended';
 
 ViewTemplates.default.when
     .value(isPerson)
@@ -65,7 +65,7 @@ To do actual rendering you don't really need a dedicated custom element. Any con
 ```
 
 ```javascript
-import { render } from 'lit-any';
+import render from 'lit-any/render';
 
 const person = {
     type: 'Person',
@@ -109,8 +109,8 @@ personContainer.value = person;
 When you want to display same data differently in different context.
 
 ```javascript
-import { ViewTemplates } from 'lit-any';
-import { html } from 'lit-html';
+import ViewTemplates from 'lit-any/views';
+import { html } from 'lit-html/lib/lit-extended';
 import * as moment from 'moment';
 
 // show nicely formatted date by default
@@ -134,7 +134,8 @@ Then set the scope on `lit-view` element:
 Or pass to the `render` function:
 
 ```javascript
-import { ViewTemplates, render } from 'lit-any';
+import render from 'lit-any/render';
+import ViewTemplates from 'lit-any/views';
 
 const eventDateElement = document.querySelector('#eventDate').
 
@@ -164,7 +165,7 @@ Set up how you will render input controls. The `set` parameter is a function use
 back to the form's model and has to be bound to the input control.
 
 ```js
-import { FieldTemplates } from 'lit-any';
+import FieldTemplates from 'lit-any/forms';
 
 FieldTemplates.default.when
   .fieldMatches(field => field.type === 'http://www.w3.org/2001/XMLSchema#integer')

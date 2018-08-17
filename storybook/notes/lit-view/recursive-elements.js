@@ -15,16 +15,16 @@ elements in the partial templates.
 ---js
 import { html } from 'lit-html'; 
 import moment from 'moment'; 
-import { ViewTemplates } from 'lit-any';
+import Registry from 'lit-any/views';
 
-ViewTemplates.default
+Registry.default
     .when
     .valueMatches(v => v.type === 'Person')
     .renders((render, person) => 
         html\`Hello, my name is $\{person.fullName}. 
              I was born <lit-view value=$\{person.birthDate}></lit-view>\`);
 
-ViewTemplates.default
+Registry.default
     .when
     .valueMatches(v => v instanceof Date || Date.parse(value))
     .renders((_, date) => html\`$\{moment(date).fromNow()}\`);

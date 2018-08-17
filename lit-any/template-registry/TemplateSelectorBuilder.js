@@ -1,6 +1,4 @@
-import { ViewTemplateSelector, FieldTemplateSelector } from './TemplateSelector';
-
-export class TemplateSelectorBuilder {
+export default class TemplateSelectorBuilder {
     constructor(registry) {
         this._registry = registry;
         this._selector = this._createSelector();
@@ -17,51 +15,3 @@ export class TemplateSelectorBuilder {
     }
 }
 
-export class ViewTemplateSelectorBuilder extends TemplateSelectorBuilder {
-    valueMatches(valueMatcher) {
-        this._selector._matchers.push(constraint => valueMatcher(constraint.value));
-
-        return this;
-    }
-
-    scopeMatches(scopeMatcher) {
-        if (typeof scopeMatcher === 'string') {
-            return this.scopeMatches(s => s === scopeMatcher);
-        }
-
-        this._selector._matchers.push(constraint => scopeMatcher(constraint.scope));
-
-        return this;
-    }
-
-    // eslint-disable-next-line class-methods-use-this
-    _createSelector() {
-        return new ViewTemplateSelector();
-    }
-}
-
-export class FieldTemplateSelectorBuilder extends TemplateSelectorBuilder {
-    fieldMatches(fieldMatchFunc) {
-        this._selector._matchers.push(constraint => fieldMatchFunc(constraint.field));
-
-        return this;
-    }
-
-    // eslint-disable-next-line class-methods-use-this
-    _createSelector() {
-        return new FieldTemplateSelector();
-    }
-
-    rendersComponent(component) {
-        if (!this._registry.components) {
-            throw new Error('No component set configured');
-        }
-
-        return this.renders((...args) => {
-            const componentFunc = this._registry.components[component.name]
-                || this._registry.components.textbox;
-
-            return componentFunc(component.options).call(null, ...args);
-        });
-    }
-}
