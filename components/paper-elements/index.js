@@ -37,7 +37,9 @@ export function dropdown({
         let options = items;
         if (typeof items === 'function') {
             options = items(f);
-        } else {
+        }
+
+        if (!options.then) {
             options = Promise.resolve(options);
         }
 
@@ -46,7 +48,7 @@ export function dropdown({
                                          on-value-changed="${setValue}"
                                          required?="${f.required}">
   <paper-listbox slot="dropdown-content" attr-for-selected="value" selected="${v}">
-    ${until(options.then(resolved => html`${repeat(resolved, option => html`<paper-item value="${option.value}">${option.label}</paper-item>`)}`), '')}
+    ${options.then(resolved => html`${repeat(resolved, option => html`<paper-item value="${option.value}">${option.label}</paper-item>`)}`)}
   </paper-listbox>
 </paper-dropdown-menu>`;
     };

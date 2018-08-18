@@ -6,10 +6,17 @@ export function textbox({
 } = { }) {
     return (f, id, v, set) => {
         if (type === 'multi line') {
-            return html`<textarea id$="${id}" class="fallback" on-input="${e => set(e.target.value)}" value="${v || ''}"></textarea>`;
+            return html`<textarea id$="${id}"
+                                  on-input="${e => set(e.target.value)}"
+                                  required?="${f.required}"
+                                  value="${v || ''}"></textarea>`;
         }
 
-        return html`<input id$="${id}" class="fallback" on-input="${e => set(e.target.value)}" value="${v || ''}">`;
+        return html`<input id$="${id}"
+                           type="text"
+                           required?="${f.required}"
+                           on-input="${e => set(e.target.value)}"
+                           value="${v || ''}">`;
     };
 }
 
@@ -19,11 +26,15 @@ export function dropdown({
     return async (f, id, v, set) => {
         let options = items;
         if (typeof items === 'function') {
-            options = await items(f);
+            options = items(f);
         }
 
-        return html`<select id$="${id}" on-change="${e => set(e.target.value)}">
-${repeat(options, option => html`<option value$="${option.value}" selected?="${option.value === v}" label$="${option.label}"></option>`)}
+        if (!options.then) {
+            options = Promise.resolve(options);
+        }
+
+        return html`<select id$="${id}" on-change="${e => set(e.target.value)}" required?="${f.required}">
+      ${options.then(resolved => html`${repeat(resolved, option => html`<option value$="${option.value}" selected?="${option.value === v}" label$="${option.label}"></option>`)}`)}
 </select>`;
     };
 }
