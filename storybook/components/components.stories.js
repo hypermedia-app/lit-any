@@ -14,8 +14,10 @@ import '../../bower_components/paper-input/paper-textarea.html';
 import '../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html';
 import '../../bower_components/paper-listbox/paper-listbox.html';
 import '../../bower_components/paper-item/paper-item.html';
+import '../../bower_components/paper-button/paper-button.html';
 import '../../bower_components/vaadin-text-field/vaadin-text-field.html';
 import '../../bower_components/vaadin-text-field/vaadin-text-area.html';
+import '../../bower_components/vaadin-button/vaadin-button.html';
 
 import onSubmit from '../helpers/submit-handler';
 import notes from '../notes/components/getting-started';
@@ -24,7 +26,7 @@ const componentSets = { paper, vaadin };
 
 storiesOf('lit-form/component sets', module)
     .add('getting started', () => {
-        const selectedSet = select('component set', Object.keys(componentSets), 'paper');
+        const selectedSet = select('component set', ['Native', ...Object.keys(componentSets)], 'paper');
         const templates = FieldTemplates.byName('components-complete')
             .useComponents(componentSets[selectedSet]);
 
@@ -72,6 +74,6 @@ line-breaks`,
         return notes(html`<lit-form template-registry="components-complete"
                               contract="${c}"
                               on-submit="${onSubmit}"
-                              no-labels?="${!boolean('Show labels', false)}"
+                              no-labels?="${!boolean('Show labels', selectedSet === 'Native')}"
                               value="${initialValue}"></lit-form>`);
     });
