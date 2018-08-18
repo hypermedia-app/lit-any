@@ -27,3 +27,9 @@ ${repeat(options, option => html`<option value$="${option.value}" selected?="${o
 </select>`;
     };
 }
+
+export function button({
+    label,
+}) {
+    return html`<button type="submit">${label}</button>`;
+}
