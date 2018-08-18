@@ -14,8 +14,10 @@ import '../../bower_components/paper-input/paper-textarea.html';
 import '../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html';
 import '../../bower_components/paper-listbox/paper-listbox.html';
 import '../../bower_components/paper-item/paper-item.html';
+import '../../bower_components/paper-button/paper-button.html';
 import '../../bower_components/vaadin-text-field/vaadin-text-field.html';
 import '../../bower_components/vaadin-text-field/vaadin-text-area.html';
+import '../../bower_components/vaadin-button/vaadin-button.html';
 
 import onSubmit from '../helpers/submit-handler';
 import notes from '../notes/components/getting-started';

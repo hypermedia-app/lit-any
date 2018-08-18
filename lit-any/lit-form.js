@@ -109,11 +109,17 @@ export default class LitForm extends LitAnyBase {
     }
 
     __submitButtonTemplate(props) {
-        return html`<button type="submit">${props.submitButtonLabel}</button>`;
+        return FieldTemplates.byName(props.templateRegistry).components.button({
+            label: props.submitButtonLabel,
+            onClick: this.submit.bind(this),
+        });
     }
 
     __resetButtonTemplate(props) {
-        return html`<input type="button" value="${props.resetButtonLabel}" on-click="${this.reset.bind(this)}">`;
+        return FieldTemplates.byName(props.templateRegistry).components.button({
+            label: props.resetButtonLabel,
+            onClick: this.reset.bind(this),
+        });
     }
 
     __fieldsetTemplate(props) {
