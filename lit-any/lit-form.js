@@ -109,14 +109,15 @@ export default class LitForm extends LitAnyBase {
     }
 
     __submitButtonTemplate(props) {
-        return props.templateRegistry.components.button({
-            label: 'props.submitButtonLabel',
+        return FieldTemplates.byName(props.templateRegistry).components.button({
+            label: props.submitButtonLabel,
+            onClick: this.submit.bind(this),
         });
     }
 
     __resetButtonTemplate(props) {
-        return props.templateRegistry.components.button({
-            label: 'props.submitButtonLabel',
+        return FieldTemplates.byName(props.templateRegistry).components.button({
+            label: props.resetButtonLabel,
             onClick: this.reset.bind(this),
         });
     }
@@ -156,7 +157,7 @@ export default class LitForm extends LitAnyBase {
         const fieldValue = this.__getPropertyValue(field, props.value);
 
         if (fieldTemplate === null) {
-            fieldTemplate = props.templateRegistry.components.textbox();
+            fieldTemplate = FieldTemplates.byName(props.templateRegistry).components.textbox();
         }
 
         return fieldTemplate.render(field, fieldId, fieldValue, setter);
