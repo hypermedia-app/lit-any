@@ -24,7 +24,7 @@ const componentSets = { paper, vaadin };
 
 storiesOf('lit-form/component sets', module)
     .add('getting started', () => {
-        const selectedSet = select('component set', Object.keys(componentSets), 'paper');
+        const selectedSet = select('component set', ['Native', ...Object.keys(componentSets)], 'paper');
         const templates = FieldTemplates.byName('components-complete')
             .useComponents(componentSets[selectedSet]);
 
@@ -72,6 +72,6 @@ line-breaks`,
         return notes(html`<lit-form template-registry="components-complete"
                               contract="${c}"
                               on-submit="${onSubmit}"
-                              no-labels?="${!boolean('Show labels', false)}"
+                              no-labels?="${!boolean('Show labels', selectedSet === 'Native')}"
                               value="${initialValue}"></lit-form>`);
     });

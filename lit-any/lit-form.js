@@ -147,12 +147,11 @@ export default class LitForm extends LitAnyBase {
     __fieldTemplate(props, field, fieldId) {
         const setter = this.__createModelValueSetter(props, field);
 
-        const fieldTemplate = FieldTemplates.byName(props.templateRegistry).getTemplate({ field });
+        let fieldTemplate = FieldTemplates.byName(props.templateRegistry).getTemplate({ field });
         const fieldValue = this.__getPropertyValue(field, props.value);
 
         if (fieldTemplate === null) {
-            console.warn('Could not find template for field. Rendering fallback input. Field was:', field);
-            return html`<input id$="${fieldId}" class="fallback" on-input="${e => setter(e.target.value)}" value="${fieldValue || ''}">`;
+            fieldTemplate = props.templateRegistry.components.textbox();
         }
 
         return fieldTemplate.render(field, fieldId, fieldValue, setter);
