@@ -46,3 +46,9 @@ export function dropdown({
 </vaadin-dropdown-menu>`;
     };
 }
+
+export function button({
+    label, onClick,
+}) {
+    return html`<vaadin-button on-click="${onClick}">${label}</vaadin-button>`;
+}

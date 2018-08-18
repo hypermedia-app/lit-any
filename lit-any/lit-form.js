@@ -109,11 +109,17 @@ export default class LitForm extends LitAnyBase {
     }
 
     __submitButtonTemplate(props) {
-        return html`<button type="submit">${props.submitButtonLabel}</button>`;
+        return FieldTemplates.byName(props.templateRegistry).components.button({
+            label: props.submitButtonLabel,
+            onClick: this.submit.bind(this),
+        });
     }
 
     __resetButtonTemplate(props) {
-        return html`<input type="button" value="${props.resetButtonLabel}" on-click="${this.reset.bind(this)}">`;
+        return FieldTemplates.byName(props.templateRegistry).components.button({
+            label: props.resetButtonLabel,
+            onClick: this.reset.bind(this),
+        });
     }
 
     __fieldsetTemplate(props) {
@@ -151,8 +157,8 @@ export default class LitForm extends LitAnyBase {
         const fieldValue = this.__getPropertyValue(field, props.value);
 
         if (fieldTemplate === null) {
-            console.warn('Could not find template for field. Rendering fallback input. Field was:', field);
-            return html`<input id$="${fieldId}" class="fallback" on-input="${e => setter(e.target.value)}" value="${fieldValue || ''}">`;
+            const renderFunc = FieldTemplates.byName(props.templateRegistry).components.textbox();
+            return renderFunc(field, fieldId, fieldValue, setter);
         }
 
         return fieldTemplate.render(field, fieldId, fieldValue, setter);

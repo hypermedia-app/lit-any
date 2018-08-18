@@ -49,3 +49,9 @@ export function dropdown({
 </paper-dropdown-menu>`;
     };
 }
+
+export function button({
+    label, onClick,
+}) {
+    return html`<paper-button on-tap="${onClick}">${label}</paper-button>`;
+}
