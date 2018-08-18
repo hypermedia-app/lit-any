@@ -14,11 +14,11 @@ export default class FieldTemplateSelectorBuilder extends TemplateSelectorBuilde
     }
 
     rendersComponent(component) {
-        if (!this._registry.components) {
-            throw new Error('No component set configured');
-        }
-
         return this.renders((...args) => {
+            if (!this._registry.components) {
+                throw new Error('No component set configured');
+            }
+
             const componentFunc = this._registry.components[component.name]
                 || this._registry.components.textbox;
 
