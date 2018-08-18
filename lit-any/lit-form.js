@@ -147,11 +147,12 @@ export default class LitForm extends LitAnyBase {
     __fieldTemplate(props, field, fieldId) {
         const setter = this.__createModelValueSetter(props, field);
 
-        let fieldTemplate = FieldTemplates.byName(props.templateRegistry).getTemplate({ field });
+        const fieldTemplate = FieldTemplates.byName(props.templateRegistry).getTemplate({ field });
         const fieldValue = this.__getPropertyValue(field, props.value);
 
         if (fieldTemplate === null) {
-            fieldTemplate = props.templateRegistry.components.textbox();
+            const renderFunc = FieldTemplates.byName(props.templateRegistry).components.textbox();
+            return renderFunc(field, fieldId, fieldValue, setter);
         }
 
         return fieldTemplate.render(field, fieldId, fieldValue, setter);

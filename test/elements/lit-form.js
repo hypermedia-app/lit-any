@@ -8,7 +8,12 @@ describe('lit-form', () => {
     let getTemplate;
     const template = {};
 
-    FieldTemplates.byName = () => ({ getTemplate });
+    const { byName } = FieldTemplates;
+    FieldTemplates.byName = (name) => {
+        const registry = byName(name);
+        registry.getTemplate = getTemplate;
+        return registry;
+    };
 
     describe('by default', () => {
         beforeEach(() => {
@@ -246,7 +251,7 @@ describe('lit-form', () => {
                 await litForm.renderComplete;
 
                 // then
-                expect(litForm.form.querySelector('.field input.fallback')).to.be.not.undefined;
+                expect(litForm.form.querySelector('.field input')).to.be.not.undefined;
             });
 
             it('should set fallback input value', async () => {
@@ -265,7 +270,7 @@ describe('lit-form', () => {
                 await litForm.renderComplete;
 
                 // then
-                expect(litForm.form.querySelector('.field input.fallback').value).to.be.equal('qwerty');
+                expect(litForm.form.querySelector('.field input').value).to.be.equal('qwerty');
             });
         });
     });
