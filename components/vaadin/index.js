@@ -30,7 +30,6 @@ export function dropdown({
     items = [],
 } = {}) {
     return (f, id, v, set) => {
-
         let options = items;
         if (typeof items === 'function') {
             options = items(f);

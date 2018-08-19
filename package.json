@@ -10,7 +10,7 @@
   "scripts": {
     "test": "webpack && wct --plugin browserstack",
     "build-tests": "webpack",
-    "lint": "eslint src/**/*.js test/**/*.js",
+    "lint": "eslint components/** lit-any/**/*.js storybook/**/*.js test/**/*.js",
     "wct": "webpack -w & wct -l chrome -p",
     "storybook": "bower i; start-storybook -p 9001 -c .storybook",
     "build-storybook": "bower i; build-storybook -c .storybook -o docs"

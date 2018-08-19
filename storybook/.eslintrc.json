@@ -1,7 +1,8 @@
 {
     "root": false,
     "rules": {
-        "import/no-extraneous-dependencies": false,
-        "import/first": false
+        "import/no-extraneous-dependencies": "off",
+        "import/first": "off",
+        "no-alert": "off"
     }
 }
