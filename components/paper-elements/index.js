@@ -1,5 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { repeat } from 'lit-html/lib/repeat';
+import { until } from 'lit-html/lib/until';
 
 export function textbox({
     type = 'single line',
@@ -27,7 +28,7 @@ export function textbox({
 export function dropdown({
     items = [],
 } = {}) {
-    return async (f, id, v, set) => {
+    return (f, id, v, set) => {
         function setValue(e) {
             e.target.validate();
             return set(e.target.querySelector('paper-listbox').selected);
@@ -35,7 +36,11 @@ export function dropdown({
 
         let options = items;
         if (typeof items === 'function') {
-            options = await items(f);
+            options = items(f);
+        }
+
+        if (!options.then) {
+            options = Promise.resolve(options);
         }
 
         return html`<paper-dropdown-menu label="${f.title}" 
@@ -43,8 +48,7 @@ export function dropdown({
                                          on-value-changed="${setValue}"
                                          required?="${f.required}">
   <paper-listbox slot="dropdown-content" attr-for-selected="value" selected="${v}">
-    ${repeat(options, option =>
-        html`<paper-item value="${option.value}">${option.label}</paper-item>`)}
+    ${options.then(resolved => html`${repeat(resolved, option => html`<paper-item value="${option.value}">${option.label}</paper-item>`)}`)}
   </paper-listbox>
 </paper-dropdown-menu>`;
     };

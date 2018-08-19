@@ -1,17 +1,11 @@
-import pEvent from 'p-event';
-import * as components from '../../components/paper-elements';
+import * as components from '../../lit-any/forms/FallbackComponents';
 import render from './helper/render';
-import element from './helper/import';
 
-describe('paper-elements', () => {
+describe('native', () => {
     let opts;
 
     describe('textbox', () => {
         describe('single line', () => {
-            before(async () => {
-                await element('paper-input');
-            });
-
             beforeEach(() => {
                 opts = {
                     type: 'single line',
@@ -42,36 +36,8 @@ describe('paper-elements', () => {
                 const el = await render(textbox, field);
 
                 // then
-                expect(el.tagName).to.match(/paper-input/i);
+                expect(el.tagName).to.match(/input/i);
                 expect(el.getAttribute('type')).to.equal('text');
-            });
-
-            it('should set field title as label', async () => {
-                // given
-                const field = {
-                    title: 'user name',
-                };
-
-                // when
-                const textbox = components.textbox(opts);
-                const el = await render(textbox, field);
-
-                // then
-                expect(el.label).to.equal('user name');
-            });
-
-            it('should be [auto-validate]', async () => {
-                // given
-                const field = {
-                    title: 'user name',
-                };
-
-                // when
-                const textbox = components.textbox(opts);
-                const el = await render(textbox, field);
-
-                // then
-                expect(el.autoValidate).to.be.true;
             });
 
             it('should be required if field is required', async () => {
@@ -91,10 +57,6 @@ describe('paper-elements', () => {
         });
 
         describe('multi line', () => {
-            before(async () => {
-                await element('paper-textarea', 'paper-input/paper-textarea');
-            });
-
             beforeEach(() => {
                 opts = {
                     type: 'multi line',
@@ -111,21 +73,7 @@ describe('paper-elements', () => {
                 const el = await render(textbox, field);
 
                 // then
-                expect(el.tagName).to.match(/paper-textarea/i);
-            });
-
-            it('should be [auto-validate]', async () => {
-                // given
-                const field = {
-                    title: 'user name',
-                };
-
-                // when
-                const textbox = components.textbox(opts);
-                const el = await render(textbox, field);
-
-                // then
-                expect(el.autoValidate).to.be.true;
+                expect(el.tagName).to.match(/textarea/i);
             });
 
             it('should be required if field is required', async () => {
@@ -146,12 +94,6 @@ describe('paper-elements', () => {
     });
 
     describe('dropdown', () => {
-        before(async () => {
-            await element('paper-dropdown-menu');
-            await element('paper-listbox');
-            await element('paper-item');
-        });
-
         beforeEach(() => {
             opts = {
             };
@@ -172,24 +114,6 @@ describe('paper-elements', () => {
             expect(el.required).to.be.true;
         });
 
-        it('should fire validation when value is set', async () => {
-            // given
-            const field = {
-                title: 'user name',
-            };
-            const dropdown = components.dropdown(opts);
-            const el = await render(dropdown, field);
-            el.validate = sinon.spy();
-            const valueChangedToHappen = pEvent(el, 'value-changed');
-
-            // when
-            el.value = 'hello';
-
-            // then
-            await valueChangedToHappen;
-            expect(el.validate.called).to.be.true;
-        });
-
         it('should accept items array', async () => {
             // given
             const field = {
@@ -202,7 +126,7 @@ describe('paper-elements', () => {
             const el = await render(dropdown, field);
 
             // then
-            expect(el.querySelectorAll('paper-item').length).to.be.equal(3);
+            expect(el.querySelectorAll('select option').length).to.be.equal(3);
         });
 
         it('should accept items as function returning array', async () => {
@@ -217,7 +141,7 @@ describe('paper-elements', () => {
             const el = await render(dropdown, field);
 
             // then
-            const itemElements = el.querySelectorAll('paper-item');
+            const itemElements = el.querySelectorAll('option');
             expect(itemElements[0].value).to.be.equal('a');
             expect(itemElements[1].value).to.be.equal('b');
             expect(itemElements[2].value).to.be.equal('c');
@@ -235,7 +159,7 @@ describe('paper-elements', () => {
             const el = await render(dropdown, field);
 
             // then
-            const itemElements = el.querySelectorAll('paper-item');
+            const itemElements = el.querySelectorAll('option');
             expect(itemElements[0].value).to.be.equal('a');
             expect(itemElements[1].value).to.be.equal('b');
             expect(itemElements[2].value).to.be.equal('c');

@@ -1,5 +1,6 @@
 import { html } from 'lit-html/lib/lit-extended';
 import { repeat } from 'lit-html/lib/repeat';
+import { until } from 'lit-html/lib/until';
 
 export function textbox({
     type = 'single line',
@@ -28,10 +29,15 @@ export function textbox({
 export function dropdown({
     items = [],
 } = {}) {
-    return async (f, id, v, set) => {
+    return (f, id, v, set) => {
+
         let options = items;
         if (typeof items === 'function') {
-            options = await items(f);
+            options = items(f);
+        }
+
+        if (!options.then) {
+            options = Promise.resolve(options);
         }
 
         return html`<vaadin-dropdown-menu label="${f.title}" 
@@ -40,7 +46,7 @@ export function dropdown({
                                          value="${v}">
   <template>
     <vaadin-list-box>
-      ${repeat(options, option => `<vaadin-item value$="${option.value}" label$="${option.label}"></vaadin-item>`)}
+      ${until(options.then(resolved => html`${repeat(resolved, option => html`<vaadin-item value$="${option.value}" label$="${option.label}"></vaadin-item>`)}`), '')}
     </vaadin-list-box>
   </template>
 </vaadin-dropdown-menu>`;

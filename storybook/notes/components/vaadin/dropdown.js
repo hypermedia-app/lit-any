@@ -41,6 +41,8 @@ dropdown({
 });
 --- 
 
+It can also return a promise.
+
 ## Usage
 
 --- js

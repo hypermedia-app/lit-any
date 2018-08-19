@@ -21,10 +21,10 @@ storiesOf('lit-form/component sets/Paper elements', module)
         });
 
         const dynamicItems = dropdown({
-            items: f => f.languages.map(l => ({
+            items: f => Promise.resolve(f.languages.map(l => ({
                 value: l,
                 label: iso.getNativeName(l),
-            })),
+            }))),
         });
 
         const field = {
