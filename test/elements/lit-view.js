@@ -1,4 +1,4 @@
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import 'lit-any/lit-view';
 import ViewTemplates from 'lit-any/views';
 
@@ -105,7 +105,7 @@ describe('lit-view', () => {
             getTemplate.returns({
                 render: (render, object) => {
                     if (object.child) {
-                        return html`<p class$="${object.clazz}">${render(object.child)}</p>`;
+                        return html`<p class="${object.clazz}">${render(object.child)}</p>`;
                     }
 
                     return html`<span>${object.value}</span>`;

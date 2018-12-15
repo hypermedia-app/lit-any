@@ -1,4 +1,4 @@
-import { render } from 'lit-html/lib/lit-extended';
+import { render } from 'lit-html';
 
 export default async function (componentFactory, field, id = 'id', value = '', setter = () => {}) {
     const container = document.querySelector('#container');

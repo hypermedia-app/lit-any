@@ -1,4 +1,4 @@
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import { repeat } from 'lit-html/lib/repeat';
 import { until } from 'lit-html/lib/until';
 
@@ -11,18 +11,18 @@ export function textbox({
                             label="${f.title}"
                             type="${type}"
                             value="${v}"
-                            required?="${f.required}"
+                            ?required="${f.required}"
                             auto-validate
-                            on-value-changed="${e => set(e.target.value)}" ></vaadin-text-area>`;
+                            @value-changed="${e => set(e.target.value)}" ></vaadin-text-area>`;
         }
 
         return html`<vaadin-text-field 
                         label="${f.title}"
                         type="${type}"
                         value="${v}"
-                        required?="${f.required}"
+                        ?required="${f.required}"
                         auto-validate
-                        on-value-changed="${e => set(e.target.value)}"></vaadin-text-field>`;
+                        @value-changed="${e => set(e.target.value)}"></vaadin-text-field>`;
     };
 }
 
@@ -40,12 +40,12 @@ export function dropdown({
         }
 
         return html`<vaadin-dropdown-menu label="${f.title}" 
-                                         on-value-changed="${e => set(e.target.value)}"
-                                         required?="${f.required}"
+                                         @value-changed="${e => set(e.target.value)}"
+                                         ?required="${f.required}"
                                          value="${v}">
   <template>
     <vaadin-list-box>
-      ${until(options.then(resolved => html`${repeat(resolved, option => html`<vaadin-item value$="${option.value}" label$="${option.label}"></vaadin-item>`)}`), '')}
+      ${until(options.then(resolved => html`${repeat(resolved, option => html`<vaadin-item value="${option.value}" label="${option.label}"></vaadin-item>`)}`), '')}
     </vaadin-list-box>
   </template>
 </vaadin-dropdown-menu>`;

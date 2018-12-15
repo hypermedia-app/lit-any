@@ -4,7 +4,7 @@ import * as paper from '@lit-any/components-paper-elements';
 import 'lit-any/lit-form';
 import FieldTemplates from 'lit-any/forms';
 import * as components from 'lit-any/components';
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import { select, boolean } from '@storybook/addon-knobs';
 
 import '../../bower_components/vaadin-lumo-styles/style.html';
@@ -21,6 +21,7 @@ import '../../bower_components/vaadin-button/vaadin-button.html';
 
 import onSubmit from '../helpers/submit-handler';
 import notes from '../notes/components/getting-started';
+import {repeat} from 'lit-html/lib/repeat';
 
 const componentSets = { paper, vaadin };
 
@@ -71,9 +72,9 @@ line-breaks`,
             language: 'de',
         };
 
-        return notes(html`<lit-form template-registry="components-complete"
-                              contract="${c}"
-                              on-submit="${onSubmit}"
-                              no-labels?="${!boolean('Show labels', selectedSet === 'Native')}"
-                              value="${initialValue}"></lit-form>`);
+        return notes(html`${repeat(['a', 'b', 'c'], i => html`${i}`)}<lit-form template-registry="components-complete"
+                              .contract="${c}"
+                              @submit="${onSubmit}"
+                              ?no-labels="${!boolean('Show labels', selectedSet === 'Native')}"
+                              .value="${initialValue}"></lit-form>`);
     });

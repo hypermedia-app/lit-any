@@ -14,30 +14,19 @@ export default class LitView extends LitAnyBase {
 
     static get properties() {
         return {
-            templateScope: String,
-            templateRegistry: String,
-            value: Object,
-            ignoreMissing: Boolean,
+            templateScope: { type: String, attribute: 'template-scope' },
+            templateRegistry: { type: String, attribute: 'template-registry' },
+            value: { type: Object, attribute: false },
+            ignoreMissing: { type: Boolean, attribute: 'ignore-missing' },
         };
     }
 
-    static get observedAttributes() {
-        return [
-            'template-scope',
-            'ignore-missing',
-            'template-registry',
-        ];
-    }
-
-    // eslint-disable-next-line class-methods-use-this
-    _render({
-        value, templateScope, templateRegistry, ignoreMissing,
-    }) {
-        if (value) {
+    render() {
+        if (this.value) {
             return render(
-                ViewTemplates.byName(templateRegistry),
-                { value, scope: templateScope },
-                ignoreMissing,
+                ViewTemplates.byName(this.templateRegistry),
+                { value: this.value, scope: this.templateScope },
+                this.ignoreMissing,
             );
         }
 

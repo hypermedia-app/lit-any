@@ -1,4 +1,4 @@
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import { TemplateResult } from 'lit-html';
 import '../../bower_components/zero-md/build/zero-md.html';
 

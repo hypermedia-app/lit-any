@@ -1,4 +1,4 @@
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import 'lit-any/lit-form';
 import FieldTemplates from 'lit-any/forms';
 import forSubmit from '../async-tests/index';

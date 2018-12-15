@@ -1,4 +1,4 @@
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import { repeat } from 'lit-html/lib/repeat';
 
 export function textbox({
@@ -6,16 +6,16 @@ export function textbox({
 } = { }) {
     return (f, id, v, set) => {
         if (type === 'multi line') {
-            return html`<textarea id$="${id}"
-                                  on-input="${e => set(e.target.value)}"
-                                  required?="${f.required}"
+            return html`<textarea id="${id}"
+                                  @input="${e => set(e.target.value)}"
+                                  ?required="${f.required}"
                                   value="${v || ''}"></textarea>`;
         }
 
-        return html`<input id$="${id}"
+        return html`<input id="${id}"
                            type="text"
-                           required?="${f.required}"
-                           on-input="${e => set(e.target.value)}"
+                           ?required="${f.required}"
+                           @input="${e => set(e.target.value)}"
                            value="${v || ''}">`;
     };
 }
@@ -33,8 +33,8 @@ export function dropdown({
             options = Promise.resolve(options);
         }
 
-        return html`<select id$="${id}" on-change="${e => set(e.target.value)}" required?="${f.required}">
-      ${options.then(resolved => html`${repeat(resolved, option => html`<option value$="${option.value}" selected?="${option.value === v}" label$="${option.label}"></option>`)}`)}
+        return html`<select id="${id}" @change="${e => set(e.target.value)}" ?required="${f.required}">
+      ${options.then(resolved => html`${repeat(resolved, option => html`<option value="${option.value}" ?selected="${option.value === v}" label="${option.label}"></option>`)}`)}
 </select>`;
     };
 }
@@ -42,5 +42,5 @@ export function dropdown({
 export function button({
     label, onClick,
 }) {
-    return html`<input type="button" value="${label}" on-click="${onClick}">`;
+    return html`<input type="button" value="${label}" @click="${onClick}">`;
 }

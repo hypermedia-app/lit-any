@@ -1,5 +1,7 @@
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import { repeat } from 'lit-html/lib/repeat';
+import { until } from 'lit-html/lib/until';
+import { asyncReplace } from 'lit-html/lib/async-replace';
 
 export function textbox({
     type = 'single line',
@@ -9,18 +11,18 @@ export function textbox({
             return html`<paper-textarea 
                             label="${f.title}"
                             value="${v}"
-                            required?="${f.required}"
+                            ?required="${f.required}"
                             auto-validate
-                            on-value-changed="${e => set(e.target.value)}" ></paper-textarea>`;
+                            @value-changed="${e => set(e.target.value)}" ></paper-textarea>`;
         }
 
         return html`<paper-input 
                         label="${f.title}"
                         type="text"
                         value="${v}"
-                        required?="${f.required}"
+                        ?required="${f.required}"
                         auto-validate
-                        on-value-changed="${e => set(e.target.value)}" ></paper-input>`;
+                        @value-changed="${e => set(e.target.value)}" ></paper-input>`;
     };
 }
 
@@ -39,15 +41,21 @@ export function dropdown({
         }
 
         if (!options.then) {
-            options = Promise.resolve(options);
+
+            //options = Promise.resolve(options);
         }
 
-        return html`<paper-dropdown-menu label="${f.title}" 
-                                         no-animations?="${!window.KeyframeEffect}"
-                                         on-value-changed="${setValue}"
-                                         required?="${f.required}">
-  <paper-listbox slot="dropdown-content" attr-for-selected="value" selected="${v}">
-    ${options.then(resolved => html`${repeat(resolved, option => html`<paper-item value="${option.value}">${option.label}</paper-item>`)}`)}
+        //const paperItems = options.then(() => 'elo');
+
+        return html`
+
+
+<paper-dropdown-menu label="${f.title}" 
+                                         ?no-animations="${!window.KeyframeEffect}"
+                                         @value-changed="${setValue}"
+                                         ?required="${f.required}">
+  <paper-listbox slot="dropdown-content" attr-for-selected="value" .selected="${v}">
+    ${repeat(options, option => html`<paper-item>${option}</paper-item>`)}
   </paper-listbox>
 </paper-dropdown-menu>`;
     };
@@ -56,5 +64,5 @@ export function dropdown({
 export function button({
     label, onClick,
 }) {
-    return html`<paper-button on-tap="${onClick}">${label}</paper-button>`;
+    return html`<paper-button @tap="${onClick}">${label}</paper-button>`;
 }
