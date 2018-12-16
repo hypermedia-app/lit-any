@@ -1,7 +1,6 @@
 import { html } from 'lit-html';
-import { repeat } from 'lit-html/lib/repeat';
-import { until } from 'lit-html/lib/until';
-import { asyncReplace } from 'lit-html/lib/async-replace';
+import { until } from 'lit-html/directives/until';
+import { repeat } from 'lit-html/directives/repeat';
 
 export function textbox({
     type = 'single line',
@@ -41,21 +40,21 @@ export function dropdown({
         }
 
         if (!options.then) {
-
-            //options = Promise.resolve(options);
+            options = Promise.resolve(options);
         }
 
-        //const paperItems = options.then(() => 'elo');
+        function renderItem(option) {
+            return html`<paper-item .value="${option.value}">${option.label}</paper-item>`;
+        }
 
-        return html`
+        const paperItems = options.then(resolved => html`${repeat(resolved, renderItem)}`);
 
-
-<paper-dropdown-menu label="${f.title}" 
+        return html`<paper-dropdown-menu label="${f.title}" 
                                          ?no-animations="${!window.KeyframeEffect}"
                                          @value-changed="${setValue}"
                                          ?required="${f.required}">
   <paper-listbox slot="dropdown-content" attr-for-selected="value" .selected="${v}">
-    ${repeat(options, option => html`<paper-item>${option}</paper-item>`)}
+    ${until(paperItems, '')}
   </paper-listbox>
 </paper-dropdown-menu>`;
     };
