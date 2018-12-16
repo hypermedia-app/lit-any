@@ -8,12 +8,16 @@ function createZeroMd(markdown) {
 }
 
 export function sample(templateResult) {
-    return html`
+    const template = html`
 <paper-card style="margin-top: 10px; margin-bottom: 20px; min-width: 200px; max-width: 500px">
     <div class="card-content">
         ${until(templateResult, 'Sample loading...')}
     </div>
 </paper-card>`;
+
+    template.isSample = true;
+
+    return template;
 }
 
 export function md(strings, ...keys) {
@@ -22,14 +26,19 @@ export function md(strings, ...keys) {
     }
 
     return keys.reduce((result, key, i) => {
-        let next = html`${result}
-                        ${createZeroMd(strings[i])}
-                        ${key}`;
+        const next = result;
+        if (key.isSample) {
+            next.template = html`${result.template} ${createZeroMd(result.md)} ${key}`;
+            next.md = '';
+        } else if (i > 0) {
+            next.md = `${result.md} ${strings[i]} ${key}`;
+        }
 
         if (i === keys.length - 1) {
-            next = html`${next} ${createZeroMd(strings[i + 1])}`;
+            const md2 = `${next.md} ${strings[i + 1]}`;
+            next.template = html`${result.template} ${createZeroMd(md2)}`;
         }
 
         return next;
-    }, html``);
+    }, { md: strings[0], template: html`` }).template;
 }
