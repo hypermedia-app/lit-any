@@ -10,7 +10,7 @@ export function textbox({
             return html`<vaadin-text-area 
                             label="${f.title}"
                             type="${type}"
-                            value="${v}"
+                            .value="${v}"
                             ?required="${f.required}"
                             auto-validate
                             @value-changed="${e => set(e.target.value)}" ></vaadin-text-area>`;
@@ -19,7 +19,7 @@ export function textbox({
         return html`<vaadin-text-field 
                         label="${f.title}"
                         type="${type}"
-                        value="${v}"
+                        .value="${v}"
                         ?required="${f.required}"
                         auto-validate
                         @value-changed="${e => set(e.target.value)}"></vaadin-text-field>`;

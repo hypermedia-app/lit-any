@@ -52,7 +52,7 @@ describe('lit-view', () => {
             };
 
             // when
-            await litView.renderComplete;
+            await litView.updateComplete;
 
             // then
             const span = litView.shadowRoot.querySelector('span');
@@ -64,7 +64,7 @@ describe('lit-view', () => {
             litView.value = 'a string';
 
             // when
-            await litView.renderComplete;
+            await litView.updateComplete;
 
             // then
             expect(getTemplate.calledWith({
@@ -83,7 +83,7 @@ describe('lit-view', () => {
             litView.templateScope = 'scope test';
 
             // when
-            await litView.renderComplete;
+            await litView.updateComplete;
 
             // then
             const span = litView.shadowRoot.querySelector('span');
@@ -125,7 +125,7 @@ describe('lit-view', () => {
             };
 
             // when
-            await litView.renderComplete;
+            await litView.updateComplete;
 
             // then
             const span = litView.shadowRoot.querySelector('p.l1 p.l2 p.l3 span');
@@ -148,7 +148,7 @@ describe('lit-view', () => {
             };
 
             // when
-            await litView.renderComplete;
+            await litView.updateComplete;
 
             // then
             expect(getTemplate.firstCall.args[0].value).to.deep.equal({ child: 10 });
@@ -178,7 +178,7 @@ describe('lit-view', () => {
             };
 
             // when
-            await litView.renderComplete;
+            await litView.updateComplete;
 
             // then
             expect(getTemplate.firstCall.args[0].scope).to.be.null;
@@ -220,7 +220,7 @@ describe('lit-view', () => {
 
             // when
             document.body.appendChild(manualView);
-            await litView.renderComplete;
+            await litView.updateComplete;
 
             // then
             const span = manualView.shadowRoot.querySelector('span');

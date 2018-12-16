@@ -9,7 +9,7 @@ export function textbox({
         if (type === 'multi line') {
             return html`<paper-textarea 
                             label="${f.title}"
-                            value="${v}"
+                            .value="${v}"
                             ?required="${f.required}"
                             auto-validate
                             @value-changed="${e => set(e.target.value)}" ></paper-textarea>`;
@@ -18,7 +18,7 @@ export function textbox({
         return html`<paper-input 
                         label="${f.title}"
                         type="text"
-                        value="${v}"
+                        .value="${v}"
                         ?required="${f.required}"
                         auto-validate
                         @value-changed="${e => set(e.target.value)}" ></paper-input>`;

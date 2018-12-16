@@ -28,7 +28,7 @@ describe('lit-form', () => {
             litForm.contract = {};
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelector('fieldset')).to.be.null;
@@ -41,7 +41,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelector('legend').textContent).to.equal('My first form');
@@ -54,7 +54,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelectorAll('.field').length).to.equal(4);
@@ -67,7 +67,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(getTemplate.getCalls().length).to.equal(4);
@@ -80,7 +80,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelector('label').getAttribute('for')).to.be.equal('field_one');
@@ -93,7 +93,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelector('label').textContent).to.be.equal('some important input');
@@ -106,7 +106,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelector('label').textContent).to.be.equal('field_one');
@@ -119,7 +119,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             const renderCall = template.render.firstCall;
@@ -138,7 +138,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             const renderCall = template.render.firstCall;
@@ -155,7 +155,7 @@ describe('lit-form', () => {
             litForm.value = {};
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             const renderCall = template.render.firstCall;
@@ -164,13 +164,13 @@ describe('lit-form', () => {
 
         it('should pass a change setter which sets value', async () => {
             // given
-            template.render = (f, id, v, setter) => html`<input type="text" on-input="${e => setter(e.target.value)}" />`;
+            template.render = (f, id, v, setter) => html`<input type="text" @input="${e => setter(e.target.value)}" />`;
             litForm.contract = {
                 fields: [{
                     property: 'test',
                 }],
             };
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // when
             const element = litForm.form.querySelector('input');
@@ -192,7 +192,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelector('legend')).to.be.null;
@@ -205,7 +205,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.getAttribute('action')).to.equal('http://exmple.com/resource');
@@ -218,7 +218,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.getAttribute('method')).to.equal('POST');
@@ -232,7 +232,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             const getTemplateCall = getTemplate.firstCall;
@@ -248,7 +248,7 @@ describe('lit-form', () => {
                 };
 
                 // when
-                await litForm.renderComplete;
+                await litForm.updateComplete;
 
                 // then
                 expect(litForm.form.querySelector('.field input')).to.be.not.undefined;
@@ -267,7 +267,7 @@ describe('lit-form', () => {
                 };
 
                 // when
-                await litForm.renderComplete;
+                await litForm.updateComplete;
 
                 // then
                 expect(litForm.form.querySelector('.field input').value).to.be.equal('qwerty');
@@ -290,7 +290,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelector('label')).to.be.null;
@@ -312,7 +312,7 @@ describe('lit-form', () => {
             };
 
             // when
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // then
             expect(litForm.form.querySelector('button')).to.be.null;
@@ -335,7 +335,7 @@ describe('lit-form', () => {
                     { property: 'nick' },
                 ],
             };
-            await litForm.renderComplete;
+            await litForm.updateComplete;
             Array.prototype.forEach.call(litForm.form.querySelectorAll('input'), (input) => {
                 input.value = 'a';
             });
@@ -360,7 +360,7 @@ describe('lit-form', () => {
                 fields: [
                 ],
             };
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // when
             const whenSubmitted = forSubmit(litForm);
@@ -379,7 +379,7 @@ describe('lit-form', () => {
                 fields: [
                 ],
             };
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // when
             const whenSubmitted = forSubmit(litForm);
@@ -407,7 +407,7 @@ describe('lit-form', () => {
                 ],
             };
             litForm.value = { name: 'a' };
-            await litForm.renderComplete;
+            await litForm.updateComplete;
 
             // when
             await litForm.reset();

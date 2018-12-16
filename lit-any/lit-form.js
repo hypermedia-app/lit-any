@@ -53,8 +53,8 @@ export default class LitForm extends LitElement {
     }
 
     async reset() {
-        await this.requestUpdate();
         this.value = {};
+        await this.requestUpdate();
     }
 
     render() {
@@ -80,6 +80,7 @@ export default class LitForm extends LitElement {
             </form>`;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     __stylesheet() {
         return `:host {
                         display: block;
@@ -166,6 +167,7 @@ export default class LitForm extends LitElement {
         };
     }
 
+    // eslint-disable-next-line class-methods-use-this
     __getPropertyValue(field, model) {
         let value = model[field.property] || null;
 
@@ -176,6 +178,7 @@ export default class LitForm extends LitElement {
         return value;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     __fieldsetHeading(currentContract) {
         if (!currentContract.title) {
             return html``;
