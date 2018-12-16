@@ -11,7 +11,9 @@ local.start({
         'test',
         '--config-file',
         'browserstack.wct.conf.js',
-        '--npm'
+        '--npm',
+        '--skip-plugin',
+        'sauce'
     ], { stdio: 'inherit' });
     child.on('close', code => {
         local.stop(() => {
