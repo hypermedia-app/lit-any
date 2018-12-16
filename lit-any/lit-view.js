@@ -1,15 +1,16 @@
+import { LitElement } from '@polymer/lit-element';
 import { html } from 'lit-html';
 import render from './render/index';
-import LitAnyBase from './elements/lit-any-base';
 import ViewTemplates from './views/index';
 
-export default class LitView extends LitAnyBase {
+export default class LitView extends LitElement {
     constructor() {
         super();
 
         this.templateScope = null;
         this.value = null;
         this.ignoreMissing = false;
+        this.templateRegistry = '';
     }
 
     static get properties() {

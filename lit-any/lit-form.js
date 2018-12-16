@@ -1,7 +1,7 @@
+import { LitElement } from '@polymer/lit-element';
 import { html } from 'lit-html';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import contract from './elements/contract-helpers';
-import LitAnyBase from './elements/lit-any-base';
 import FieldTemplates from './forms';
 
 function onSubmit(e) {
@@ -10,7 +10,7 @@ function onSubmit(e) {
     return false;
 }
 
-export default class LitForm extends LitAnyBase {
+export default class LitForm extends LitElement {
     constructor() {
         super();
 
@@ -21,6 +21,7 @@ export default class LitForm extends LitAnyBase {
         this.noSubmitButton = false;
         this.resetButtonLabel = 'Reset';
         this.noResetButton = false;
+        this.templateRegistry = '';
     }
 
     get form() {
@@ -29,6 +30,7 @@ export default class LitForm extends LitAnyBase {
 
     static get properties() {
         return {
+            x: { type: Number, reflect: true },
             contract: { type: Object, attribute: false },
             noLabels: { type: Boolean, attribute: 'no-labels' },
             value: { type: Object, attribute: false },
