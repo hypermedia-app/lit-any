@@ -1,5 +1,4 @@
-import { html } from 'lit-html';
-import { TemplateResult } from 'lit-html';
+import { html, TemplateResult } from 'lit-html';
 import '../../bower_components/zero-md/build/zero-md.html';
 
 function createZeroMd(markdown) {
