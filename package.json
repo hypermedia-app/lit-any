@@ -54,6 +54,7 @@
     "stringify-object": "^3.2.2",
     "wct-browser-legacy": "^1.0.2",
     "wct-browserstack": "^0.3.0",
+    "web-component-tester-custom-runner": "^6.5.0",
     "zero-md": "https://github.com/zerodevx/zero-md"
   }
 }
