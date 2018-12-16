@@ -1,10 +1,9 @@
 {
   "suites": [
-    "test/render/index.html",
-    "test/templates/index.html",
-    "test/components/index.html",
-    "test/elements/lit-form.html",
-    "test/elements/lit-view.html"
+    "test/render/*.html",
+    "test/templates/*.html",
+    "test/components/*.html",
+    "test/elements/*.html"
   ],
   "plugins": {
     "sauce": { "disabled": true },

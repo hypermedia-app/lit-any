@@ -9,10 +9,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "yarn lint && webpack && wct --plugin browserstack",
-    "build-tests": "webpack",
+    "test": "yarn lint && polymer test --npm --plugin browserstack",
     "lint": "eslint components/** lit-any/**/*.js storybook/**/*.js test/**/*.js",
-    "wct": "wct -l chrome -p",
+    "wct": "polymer test -l chrome -p --npm",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o docs"
   },
@@ -48,18 +47,9 @@
     "iso-639-1": "^2.0.3",
     "lerna": "^2.11.0",
     "moment": "^2.22.2",
-    "p-event": "^1.3.0",
     "polymer-cli": "^1.9.2",
-    "polymer-webpack-loader": "^2.0.2",
-    "raw-loader": "^0.5.1",
-    "stringify-object": "^3.2.2",
     "wct-browser-legacy": "^1.0.2",
     "wct-browserstack": "^0.3.0",
-    "web-component-tester": "^6.9.0",
-    "web-component-tester-custom-runner": "^6.5.0",
-    "webpack": "^3.5.6",
-    "webpack-cli": "^3.1.2",
-    "webpack-glob-entries": "^1.0.1",
     "zero-md": "https://github.com/zerodevx/zero-md"
   }
 }
