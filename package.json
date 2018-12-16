@@ -16,6 +16,7 @@
     "build-storybook": "build-storybook -c .storybook -o docs"
   },
   "devDependencies": {
+    "@polymer/paper-card": "^3.0.1",
     "@polymer/paper-input": "^3.0.1",
     "@polymer/test-fixture": "^4.0.2",
     "@storybook/addon-actions": "^3.4.8",
@@ -48,6 +49,9 @@
     "lerna": "^2.11.0",
     "moment": "^2.22.2",
     "polymer-cli": "^1.9.2",
+    "polymer-webpack-loader": "^2.0.2",
+    "raw-loader": "^0.5.1",
+    "stringify-object": "^3.2.2",
     "wct-browser-legacy": "^1.0.2",
     "wct-browserstack": "^0.3.0",
     "zero-md": "https://github.com/zerodevx/zero-md"

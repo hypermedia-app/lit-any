@@ -1,4 +1,5 @@
 import { html } from 'lit-html';
+import { until } from 'lit-html/directives/until';
 
 function recurseTemplates(registry, ignoreMissing, inheritedScope) {
     return (value, currentScope) => {
@@ -11,7 +12,8 @@ function recurseTemplates(registry, ignoreMissing, inheritedScope) {
 
         if (template) {
             const nextLevel = recurseTemplates(registry, ignoreMissing, scope);
-            templateResult = template.render(nextLevel, value, scope);
+
+            templateResult = html`${until(template.render(nextLevel, value, scope), '')}`;
         } else if (ignoreMissing) {
             templateResult = '';
         } else {

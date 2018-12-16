@@ -1,4 +1,4 @@
-import md from '../../markdown';
+import { md, sample } from '../../markdown';
 
 export default function notes(staticSelection, funcItems) {
     return md`
@@ -10,7 +10,7 @@ Uses Polymer \`<vaadin-dropdown-menu>\` to display a list of key-value pairs
 
 ### Static items
 
-${staticSelection}
+${sample(staticSelection)}
 
 Items can be a static list of elements with \`label\` and \`value\` keys
 
@@ -25,7 +25,7 @@ dropdown({
 
 ### Dynamic items
 
-${funcItems}
+${sample(funcItems)}
 
 Items can be a provided as function which takes the field as parameter and returns such array as above. For example it would be
 possible to translate ISO language codes to use their localized names as labels

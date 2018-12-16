@@ -1,4 +1,4 @@
-import md from '../../markdown';
+import { md, sample } from '../../markdown';
 
 export default function notes(field) {
     return md`
@@ -10,7 +10,7 @@ The basic input which presents a \`<vaadin-text-field>\` or \`<vaadin-text-area>
 
 ### How it renders
 
-${field}
+${sample(field)}
 
 ### Usage
 

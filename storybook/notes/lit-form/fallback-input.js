@@ -1,4 +1,4 @@
-import md from '../markdown';
+import { md, sample } from '../markdown';
 
 export default function notes(example) {
     return md`# Fallback field
@@ -6,7 +6,7 @@ export default function notes(example) {
 Bare \`lit-any\` library does not come with any field templates for the \`<lit-form>\` element. And so, in case
 when a field type is not something that the form knows how to present, a plain HTML \`<input>\` will be shown.
 
-${example}
+${sample(example)}
 
 ## Catch all field template
 

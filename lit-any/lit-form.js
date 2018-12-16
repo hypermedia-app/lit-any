@@ -1,6 +1,7 @@
 import { LitElement } from '@polymer/lit-element';
 import { html } from 'lit-html';
 import { ifDefined } from 'lit-html/directives/if-defined';
+import { until } from 'lit-html/directives/until';
 import contract from './elements/contract-helpers';
 import FieldTemplates from './forms';
 
@@ -74,8 +75,8 @@ export default class LitForm extends LitElement {
                  @submit="${onSubmit.bind(this)}">
                 ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
                 
-                ${this.noSubmitButton ? '' : this.__submitButtonTemplate()}
-                ${this.noResetButton ? '' : this.__resetButtonTemplate()}
+                ${this.noSubmitButton ? '' : until(this.__submitButtonTemplate(), '')}
+                ${this.noResetButton ? '' : until(this.__resetButtonTemplate(), '')}
             </form>`;
     }
 
@@ -151,7 +152,7 @@ export default class LitForm extends LitElement {
             return renderFunc(field, fieldId, fieldValue, setter);
         }
 
-        return fieldTemplate.render(field, fieldId, fieldValue, setter);
+        return html`${until(fieldTemplate.render(field, fieldId, fieldValue, setter), '')}`;
     }
 
     __createModelValueSetter(field) {

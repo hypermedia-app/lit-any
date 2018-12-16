@@ -1,33 +1,35 @@
-import { html, TemplateResult } from 'lit-html';
+import { html } from 'lit-html';
+import { until } from 'lit-html/directives/until';
 import 'zero-md/src/zero-md';
+import '@polymer/paper-card/paper-card';
 
 function createZeroMd(markdown) {
-    const zeroMd = document.createElement('zero-md');
-    zeroMd.innerHTML = `<template><xmp>${markdown.replace(/---/g, '```')}</xmp></template>`;
-
-    return zeroMd;
+    return html`<zero-md><template><xmp>${markdown.replace(/---/g, '```')}</xmp></template></zero-md>`;
 }
 
-export default function (strings, ...keys) {
+export function sample(templateResult) {
+    return html`
+<paper-card style="margin-top: 10px; margin-bottom: 20px; min-width: 200px; max-width: 500px">
+    <div class="card-content">
+        ${until(templateResult, 'Sample loading...')}
+    </div>
+</paper-card>`;
+}
+
+export function md(strings, ...keys) {
     if (keys.length === 0) {
         return html`${strings[0]}`;
     }
 
-    let result = '';
-    let currentMarkdown = strings[0];
-    keys.forEach((key, i) => {
-        if (key.constructor === TemplateResult) {
-            result = html`${result} ${createZeroMd(currentMarkdown)} <br> ${key} <br <hr> <br> `;
-            currentMarkdown = '';
-        } else {
-            currentMarkdown = `${currentMarkdown} ${strings[i]} ${key}`;
-        }
+    return keys.reduce((result, key, i) => {
+        let next = html`${result}
+                        ${createZeroMd(strings[i])}
+                        ${key}`;
 
         if (i === keys.length - 1) {
-            currentMarkdown = `${currentMarkdown} ${strings[i + 1]}`;
-            result = html`${result} ${createZeroMd(currentMarkdown)}`;
+            next = html`${next} ${createZeroMd(strings[i + 1])}`;
         }
-    });
 
-    return result;
+        return next;
+    }, html``);
 }

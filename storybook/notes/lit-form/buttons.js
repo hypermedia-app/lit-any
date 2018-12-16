@@ -1,4 +1,4 @@
-import md from '../markdown';
+import { md, sample } from '../markdown';
 
 export default function notes(form) {
     return md`# Controlling \`<lit-form>\`
@@ -21,7 +21,7 @@ Something like
 
 ## Example
 
-${form}
+${sample(form)}
 
 ## Button labels
 

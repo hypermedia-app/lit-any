@@ -1,11 +1,11 @@
-import md from '../markdown';
+import { md, sample } from '../markdown';
 
 export default function notes(view) {
     return md`# Nesting views
     
 ## Example
 
-${view}
+${sample(view)}
 
 ## Nesting \`<lit-view>\` elements
 
