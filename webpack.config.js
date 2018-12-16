@@ -10,7 +10,10 @@ const createConfig = (glob, targetPath) => ({
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        babelrc: false
+                        babelrc: false,
+                        plugins: [
+                            'babel-plugin-syntax-dynamic-import'
+                        ]
                     }
                 },
                 exclude: /node_modules/
@@ -22,7 +25,7 @@ const createConfig = (glob, targetPath) => ({
         mainFields: ['jsnext:main', 'browser', 'main']
     },
     output: {
-        path: path.resolve(__dirname, `test/transpiled/${targetPath}`),
+        path: path.resolve(__dirname, `test/${targetPath}`),
         filename: '[name].es5.js',
         libraryTarget: 'umd'
     },

@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
 import 'lit-any/lit-form';
 import FieldTemplates from 'lit-any/forms';
-import forSubmit from '../async-tests/index';
+import { forSubmit } from '../async-tests';
 
 describe('lit-form', () => {
     let litForm;
