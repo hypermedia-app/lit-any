@@ -1,5 +1,5 @@
 import { html, TemplateResult } from 'lit-html';
-import '../../bower_components/zero-md/build/zero-md.html';
+import 'zero-md/src/zero-md';
 
 function createZeroMd(markdown) {
     const zeroMd = document.createElement('zero-md');
