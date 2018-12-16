@@ -1,7 +1,7 @@
-/* eslint-disable class-methods-use-this */
-import { html } from 'lit-html/lib/lit-extended';
+import { LitElement } from '@polymer/lit-element';
+import { html } from 'lit-html';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import contract from './elements/contract-helpers';
-import LitAnyBase from './elements/lit-any-base';
 import FieldTemplates from './forms';
 
 function onSubmit(e) {
@@ -10,7 +10,7 @@ function onSubmit(e) {
     return false;
 }
 
-export default class LitForm extends LitAnyBase {
+export default class LitForm extends LitElement {
     constructor() {
         super();
 
@@ -21,6 +21,7 @@ export default class LitForm extends LitAnyBase {
         this.noSubmitButton = false;
         this.resetButtonLabel = 'Reset';
         this.noResetButton = false;
+        this.templateRegistry = '';
     }
 
     get form() {
@@ -29,26 +30,15 @@ export default class LitForm extends LitAnyBase {
 
     static get properties() {
         return {
-            contract: Object,
-            noLabels: Boolean,
-            value: Object,
-            submitButtonLabel: String,
-            noSubmitButton: Boolean,
-            resetButtonLabel: String,
-            noResetButton: Boolean,
-            templateRegistry: String,
+            contract: { type: Object, attribute: false },
+            noLabels: { type: Boolean, attribute: 'no-labels', reflect: true },
+            value: { type: Object, attribute: false },
+            submitButtonLabel: { type: String, attribute: 'submit-button-label' },
+            noSubmitButton: { type: Boolean, attribute: 'no-submit-button', reflect: true },
+            resetButtonLabel: { type: String, attribute: 'reset-button-label' },
+            noResetButton: { type: Boolean, attribute: 'no-reset-button', reflect: true },
+            templateRegistry: { type: String, attribute: 'template-registry' },
         };
-    }
-
-    static get observedAttributes() {
-        return [
-            'no-labels',
-            'template-registry',
-            'submit-button-label',
-            'no-submit-button',
-            'reset-button-label',
-            'no-reset-button',
-        ];
     }
 
     submit() {
@@ -62,34 +52,34 @@ export default class LitForm extends LitAnyBase {
     }
 
     async reset() {
-        this.requestRender();
-        await this.renderComplete;
         this.value = {};
+        await this.requestUpdate();
     }
 
-    _render(props) {
-        if (props.contract) {
-            return this.__formTemplate(props);
+    render() {
+        if (this.contract) {
+            return this.__formTemplate();
         }
 
         return html``;
     }
 
-    __formTemplate(props) {
+    __formTemplate() {
         return html`<style>
                     ${this.__stylesheet()}
                 </style>
 
-            <form action$="${props.contract.target}"
-                 method$="${props.contract.method}" 
-                 on-submit="${onSubmit.bind(this)}">
-                ${contract.hasAnythingToRender(props.contract) ? this.__fieldsetTemplate(props) : ''}
+            <form action="${ifDefined(this.contract.target)}"
+                 method="${ifDefined(this.contract.method)}" 
+                 @submit="${onSubmit.bind(this)}">
+                ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
                 
-                ${props.noSubmitButton ? '' : this.__submitButtonTemplate(props)}
-                ${props.noResetButton ? '' : this.__resetButtonTemplate(props)}
+                ${this.noSubmitButton ? '' : this.__submitButtonTemplate()}
+                ${this.noResetButton ? '' : this.__resetButtonTemplate()}
             </form>`;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     __stylesheet() {
         return `:host {
                         display: block;
@@ -108,63 +98,63 @@ export default class LitForm extends LitAnyBase {
                     }`;
     }
 
-    __submitButtonTemplate(props) {
-        return FieldTemplates.byName(props.templateRegistry).components.button({
-            label: props.submitButtonLabel,
+    __submitButtonTemplate() {
+        return FieldTemplates.byName(this.templateRegistry).components.button({
+            label: this.submitButtonLabel,
             onClick: this.submit.bind(this),
         });
     }
 
-    __resetButtonTemplate(props) {
-        return FieldTemplates.byName(props.templateRegistry).components.button({
-            label: props.resetButtonLabel,
+    __resetButtonTemplate() {
+        return FieldTemplates.byName(this.templateRegistry).components.button({
+            label: this.resetButtonLabel,
             onClick: this.reset.bind(this),
         });
     }
 
-    __fieldsetTemplate(props) {
+    __fieldsetTemplate() {
         let fieldsArray = [];
-        if (contract.fieldsAreIterable(props.contract)) {
-            fieldsArray = props.contract.fields;
+        if (contract.fieldsAreIterable(this.contract)) {
+            fieldsArray = this.contract.fields;
         }
 
         return html`
             <fieldset>
-                ${this.__fieldsetHeading(props.contract)}
+                ${this.__fieldsetHeading(this.contract)}
                 
-                ${fieldsArray.map(f => this.__fieldWrapperTemplate(props, f))}
+                ${fieldsArray.map(f => this.__fieldWrapperTemplate(f))}
             </fieldset>`;
     }
 
-    __fieldWrapperTemplate(props, field) {
+    __fieldWrapperTemplate(field) {
         const fieldId = field.property;
 
         let fieldLabel = html``;
-        if (props.noLabels === false) {
-            fieldLabel = html`<label for$="${fieldId}">${field.title || field.property}</label>`;
+        if (this.noLabels === false) {
+            fieldLabel = html`<label for="${fieldId}">${field.title || field.property}</label>`;
         }
 
         return html`<div class="field">
                         ${fieldLabel}
-                        ${this.__fieldTemplate(props, field, fieldId)}
+                        ${this.__fieldTemplate(field, fieldId)}
                     </div>`;
     }
 
-    __fieldTemplate(props, field, fieldId) {
-        const setter = this.__createModelValueSetter(props, field);
+    __fieldTemplate(field, fieldId) {
+        const setter = this.__createModelValueSetter(field);
 
-        const fieldTemplate = FieldTemplates.byName(props.templateRegistry).getTemplate({ field });
-        const fieldValue = this.__getPropertyValue(field, props.value);
+        const fieldTemplate = FieldTemplates.byName(this.templateRegistry).getTemplate({ field });
+        const fieldValue = this.__getPropertyValue(field, this.value);
 
         if (fieldTemplate === null) {
-            const renderFunc = FieldTemplates.byName(props.templateRegistry).components.textbox();
+            const renderFunc = FieldTemplates.byName(this.templateRegistry).components.textbox();
             return renderFunc(field, fieldId, fieldValue, setter);
         }
 
         return fieldTemplate.render(field, fieldId, fieldValue, setter);
     }
 
-    __createModelValueSetter(props, field) {
+    __createModelValueSetter(field) {
         return (fieldInput) => {
             let newValue = fieldInput;
 
@@ -176,6 +166,7 @@ export default class LitForm extends LitAnyBase {
         };
     }
 
+    // eslint-disable-next-line class-methods-use-this
     __getPropertyValue(field, model) {
         let value = model[field.property] || null;
 
@@ -186,6 +177,7 @@ export default class LitForm extends LitAnyBase {
         return value;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     __fieldsetHeading(currentContract) {
         if (!currentContract.title) {
             return html``;

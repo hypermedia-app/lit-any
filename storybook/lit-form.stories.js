@@ -1,5 +1,4 @@
-import { html } from 'lit-html/lib/lit-extended';
-import { directive } from 'lit-html';
+import { directive, html } from 'lit-html';
 import { storiesOf } from '@storybook/polymer';
 import { select, button, object, text, boolean } from '@storybook/addon-knobs';
 import 'lit-any/lit-form';
@@ -20,7 +19,7 @@ FieldTemplates.default
         html`<input id=${id} 
                 type=number 
                 value=${v} 
-                on-change=${e => set(Number.parseInt(e.target.value, 0))}>`);
+                @change=${e => set(Number.parseInt(e.target.value, 0))}>`);
 
 storiesOf('lit-form', module)
     .add('Fallback input', () => {
@@ -42,19 +41,19 @@ storiesOf('lit-form', module)
             .fieldMatches(() => true)
             .renders((f, id, v, set) =>
                 html`<paper-input id=${id} 
-                 label=${f.title}
-                 value=${v} 
-                 on-change=${e => set(e.target.value)}></paper-input>`);
+                 .label=${f.title}
+                 .value=${v} 
+                 @change=${e => set(e.target.value)}></paper-input>`);
 
         const registry = select('Fallback behavior', ['default', 'catch-all'], 'default');
 
         return fallbackNotes(html`<lit-form
-                          contract="${contract(object, c)}" 
-                          noLabels="${registry === 'catch-all'}"
-                          submitButtonLabel=${submitButton(text, 'Register')}
-                          value="${defaultValue(object, value)}"
-                          template-registry$="${registry}"
-                          on-submit="${onSubmit}"></lit-form>`);
+                          .contract="${contract(object, c)}" 
+                          .noLabels="${registry === 'catch-all'}"
+                          .submitButtonLabel=${submitButton(text, 'Register')}
+                          .value="${defaultValue(object, value)}"
+                          template-registry="${registry}"
+                          @submit="${onSubmit}"></lit-form>`);
     });
 
 storiesOf('lit-form', module)
@@ -79,13 +78,13 @@ storiesOf('lit-form', module)
         button('Reset programmatically', () => form.reset());
 
         return buttonsNotes(html`
-<lit-form ref="${directive(getForm)}"
-          contract="${contract(object, c)}" 
-          noSubmitButton="${noSubmitButton(boolean)}"
-          submitButtonLabel=${submitButton(text, 'Submit')}
-          noResetButton="${noResetButton(boolean)}"
-          resetButtonLabel=${resetButton(text, 'Reset')}
-          on-submit="${onSubmit}"></lit-form>`);
+<lit-form .ref="${directive(getForm)}"
+          .contract="${contract(object, c)}" 
+          .noSubmitButton="${noSubmitButton(boolean)}"
+          .submitButtonLabel=${submitButton(text, 'Submit')}
+          .noResetButton="${noResetButton(boolean)}"
+          .resetButtonLabel=${resetButton(text, 'Reset')}
+          @submit="${onSubmit}"></lit-form>`);
     });
 
 storiesOf('lit-form', module)
@@ -133,10 +132,10 @@ storiesOf('lit-form', module)
 
         return fieldValueDecoratorNotes(
             html`<lit-form
-              contract="${jsonldContract}" 
-              value="${defaultValue(object, jsonLd)}"
+              .contract="${jsonldContract}" 
+              .value="${defaultValue(object, jsonLd)}"
               submit-button-label="Register"
-              on-submit="${onSubmit}"></lit-form>`,
+              @submit="${onSubmit}"></lit-form>`,
             jsonldContract,
             schemaImageDecorator,
         );
@@ -175,9 +174,9 @@ storiesOf('lit-form', module)
     </custom-style>
 
 <lit-form id="styling"
-          contract="${jsonldContract}" 
+          .contract="${jsonldContract}" 
           submit-button-label="Register"
-          on-submit="${onSubmit}"></lit-form>`;
+          @submit="${onSubmit}"></lit-form>`;
     });
 
 storiesOf('lit-form', module)
@@ -187,10 +186,10 @@ storiesOf('lit-form', module)
             .fieldMatches(f => f.type === 'integer')
             .renders((f, id, v, set) =>
                 html`<paper-input id=${id} 
-                        type=number
-                        label=${f.title}
-                        value=${v} 
-                        on-change=${e => set(Number.parseInt(e.target.value, 0))}></paper-input>`);
+                        .type=number
+                        .label=${f.title}
+                        .value=${v} 
+                        @change=${e => set(Number.parseInt(e.target.value, 0))}></paper-input>`);
 
         const c = {
             fields: [
@@ -203,9 +202,9 @@ storiesOf('lit-form', module)
         };
 
         return templatesNotes(html`<lit-form
-                          noLabels="${!showLabels(boolean, false)}"
-                          contract="${contract(object, c)}"
-                          submitButtonLabel=${submitButton(text, 'Register')}
+                          .noLabels="${!showLabels(boolean, false)}"
+                          .contract="${contract(object, c)}"
+                          .submitButtonLabel=${submitButton(text, 'Register')}
                           template-registry="custom-fields"
-                          on-submit="${onSubmit}"></lit-form>`);
+                          @submit="${onSubmit}"></lit-form>`);
     });

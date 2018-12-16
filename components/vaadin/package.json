@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
-    "lit-any": "^0.6.0-a3.0",
-    "lit-html": "^0.11.0"
+    "lit-any": ">= 0.7.0",
+    "lit-html": ">= 1"
   }
 }

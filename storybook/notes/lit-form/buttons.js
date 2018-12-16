@@ -57,7 +57,7 @@ form.noResetButton = true;
 Whenever submitted (manually or otherwise), the element will emit a \`submit\` event.
 
 --- html
-<lit-form on-submit="handleSubmit"></lit-form>
+<lit-form @submit="handleSubmit"></lit-form>
 --- 
 `;
 }

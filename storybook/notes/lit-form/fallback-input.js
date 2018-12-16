@@ -23,7 +23,7 @@ Registry.default.when
         html\`<paper-input id=$\{id} 
                  label=$\{field.title}
                  value=$\{value} 
-                 on-change=$\{e => set(e.target.value)}></paper-input>\`;
+                 @change=$\{e => set(e.target.value)}></paper-input>\`;
     });
 --- 
 

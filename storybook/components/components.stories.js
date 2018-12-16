@@ -4,7 +4,7 @@ import * as paper from '@lit-any/components-paper-elements';
 import 'lit-any/lit-form';
 import FieldTemplates from 'lit-any/forms';
 import * as components from 'lit-any/components';
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import { select, boolean } from '@storybook/addon-knobs';
 
 import '../../bower_components/vaadin-lumo-styles/style.html';
@@ -72,8 +72,8 @@ line-breaks`,
         };
 
         return notes(html`<lit-form template-registry="components-complete"
-                              contract="${c}"
-                              on-submit="${onSubmit}"
-                              no-labels?="${!boolean('Show labels', selectedSet === 'Native')}"
-                              value="${initialValue}"></lit-form>`);
+                              .contract="${c}"
+                              @submit="${onSubmit}"
+                              ?no-labels="${!boolean('Show labels', selectedSet === 'Native')}"
+                              .value="${initialValue}"></lit-form>`);
     });

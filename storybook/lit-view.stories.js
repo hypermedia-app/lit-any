@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/polymer';
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import moment from 'moment';
 import { object } from '@storybook/addon-knobs';
 import 'lit-any/lit-view';
@@ -21,7 +21,7 @@ storiesOf('lit-view', module)
             fullName: 'Louis Litt',
         };
 
-        return basic(html`<lit-view value="${defaultValue(object, value)}" 
+        return basic(html`<lit-view .value="${defaultValue(object, value)}" 
                               template-registry="basic"></lit-view>`);
     });
 
@@ -44,7 +44,7 @@ storiesOf('lit-view/nesting', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return recursive(html`<lit-view value="${defaultValue(object, value)}" 
+        return recursive(html`<lit-view .value="${defaultValue(object, value)}" 
                               template-registry="recursive"></lit-view>`);
     });
 
@@ -56,7 +56,7 @@ storiesOf('lit-view/nesting', module)
             .renders((render, person) =>
                 html`Hello, my name is ${person.fullName}. 
                      I was born
-                     <lit-view value="${person.birthDate}"
+                     <lit-view .value="${person.birthDate}"
                                template-registry="nested"></lit-view>`);
 
         ViewTemplates.byName('nested').when
@@ -69,6 +69,6 @@ storiesOf('lit-view/nesting', module)
             birthDate: new Date(1976, 8, 12),
         };
 
-        return recursiveElements(html`<lit-view value="${defaultValue(object, value)}" 
+        return recursiveElements(html`<lit-view .value="${defaultValue(object, value)}" 
                               template-registry="nested"></lit-view>`);
     });

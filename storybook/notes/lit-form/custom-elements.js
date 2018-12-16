@@ -24,7 +24,7 @@ Registry.default
                 type=number
                 label=$\{field.title}
                 value=$\{value} 
-                on-change=$\{e => set(Number.parseInt(e.target.value, 0))}></paper-input>\`);
+                @change=$\{e => set(Number.parseInt(e.target.value, 0))}></paper-input>\`);
 --- 
 
 ## \`fieldMatches\`
