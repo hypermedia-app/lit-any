@@ -9,7 +9,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "yarn lint && polymer test --npm --plugin browserstack",
+    "test": "yarn lint && node browserstack.js",
     "lint": "eslint components/** lit-any/**/*.js storybook/**/*.js test/**/*.js",
     "wct": "polymer test -l chrome -p --npm",
     "storybook": "start-storybook -p 9001 -c .storybook",
@@ -38,6 +38,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "browserstack-local": "^1.3.7",
     "eslint": "^4.6.1",
     "eslint-config-airbnb-base": "^12.0.0",
     "eslint-plugin-chai": "0.0.1",
