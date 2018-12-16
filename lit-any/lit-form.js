@@ -30,14 +30,13 @@ export default class LitForm extends LitElement {
 
     static get properties() {
         return {
-            x: { type: Number, reflect: true },
             contract: { type: Object, attribute: false },
-            noLabels: { type: Boolean, attribute: 'no-labels' },
+            noLabels: { type: Boolean, attribute: 'no-labels', reflect: true },
             value: { type: Object, attribute: false },
             submitButtonLabel: { type: String, attribute: 'submit-button-label' },
             noSubmitButton: { type: Boolean, attribute: 'no-submit-button', reflect: true },
             resetButtonLabel: { type: String, attribute: 'reset-button-label' },
-            noResetButton: { type: Boolean, attribute: 'no-reset-button' },
+            noResetButton: { type: Boolean, attribute: 'no-reset-button', reflect: true },
             templateRegistry: { type: String, attribute: 'template-registry' },
         };
     }
@@ -73,10 +72,10 @@ export default class LitForm extends LitElement {
             <form action="${ifDefined(this.contract.target)}"
                  method="${ifDefined(this.contract.method)}" 
                  @submit="${onSubmit.bind(this)}">
-                ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate(this) : ''}
+                ${contract.hasAnythingToRender(this.contract) ? this.__fieldsetTemplate() : ''}
                 
-                ${this.noSubmitButton ? '' : this.__submitButtonTemplate(this)}
-                ${this.noResetButton ? '' : this.__resetButtonTemplate(this)}
+                ${this.noSubmitButton ? '' : this.__submitButtonTemplate()}
+                ${this.noResetButton ? '' : this.__resetButtonTemplate()}
             </form>`;
     }
 

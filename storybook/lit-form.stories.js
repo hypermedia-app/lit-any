@@ -80,7 +80,7 @@ storiesOf('lit-form', module)
         return buttonsNotes(html`
 <lit-form .ref="${directive(getForm)}"
           .contract="${contract(object, c)}" 
-          ?no-submit-button="${noSubmitButton(boolean)}"
+          .noSubmitButton="${noSubmitButton(boolean)}"
           .submitButtonLabel=${submitButton(text, 'Submit')}
           .noResetButton="${noResetButton(boolean)}"
           .resetButtonLabel=${resetButton(text, 'Reset')}

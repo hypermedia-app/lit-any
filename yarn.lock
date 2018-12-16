@@ -12687,7 +12687,7 @@ web-component-tester-custom-runner@^6.1.0, web-component-tester-custom-runner@^6
     wct-local "^2.1.0"
     wct-sauce "^2.0.0"
 
-web-component-tester@^6.5.0:
+web-component-tester@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/web-component-tester/-/web-component-tester-6.9.0.tgz#9666b9054d4ce76cc769195be9a0ff72b23ea47b"
   integrity sha512-l5KzzhlHJQ+I2qtVlo5cdUZdXenfb70mNJdHdOXc9YdgpUdkT1kQ9cRKWguaVpXQmphcpWjw8KOgkf5oUkafUw==
