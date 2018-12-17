@@ -1,44 +1,23 @@
 {
   "private": true,
-  "name": "augeas",
+  "name": "lit-any",
   "workspaces": [
     "lit-any",
-    "components/*"
+    "components/*",
+    "test",
+    "storybook"
   ],
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "yarn lint && node browserstack.js",
+    "test": "yarn lint && lerna run --scope tests test:es5:bs",
+    "test:local": "yarn lint && lerna run --scope tests test:local",
     "lint": "eslint components/** lit-any/**/*.js storybook/**/*.js test/**/*.js",
-    "wct": "polymer test -l chrome -p --npm",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "build-storybook": "build-storybook -c .storybook -o docs"
+    "storybook": "lerna run --scope storybook storybook",
+    "build-storybook": "lerna run --scope storybook build-storybook"
   },
   "devDependencies": {
-    "@polymer/paper-card": "^3.0.1",
-    "@polymer/paper-input": "^3.0.1",
-    "@polymer/test-fixture": "^4.0.2",
-    "@storybook/addon-actions": "^3.4.8",
-    "@storybook/addon-console": "^1.0.4",
-    "@storybook/addon-knobs": "^4.0.0-alpha.9",
-    "@storybook/addon-links": "^4.0.0-alpha.9",
-    "@storybook/addon-options": "^4.0.0-alpha.9",
-    "@storybook/addon-storysource": "^4.0.0-alpha.9",
-    "@storybook/polymer": "^4.0.0-alpha.9",
-    "@webcomponents/shadycss": "1.3.1",
-    "@webcomponents/webcomponentsjs": "2.0.2",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "browserstack-local": "^1.3.7",
     "eslint": "^4.6.1",
     "eslint-config-airbnb-base": "^12.0.0",
     "eslint-plugin-chai": "0.0.1",
@@ -46,16 +25,6 @@
     "eslint-plugin-jasmine": "^2.8.4",
     "eslint-plugin-mocha": "^5.1.0",
     "eslint-plugin-sinon": "^0.2.0",
-    "iso-639-1": "^2.0.3",
-    "lerna": "^2.11.0",
-    "moment": "^2.22.2",
-    "polymer-cli": "^1.9.2",
-    "polymer-webpack-loader": "^2.0.2",
-    "raw-loader": "^0.5.1",
-    "stringify-object": "^3.2.2",
-    "wct-browser-legacy": "^1.0.2",
-    "wct-browserstack": "^0.3.0",
-    "web-component-tester-custom-runner": "^6.5.0",
-    "zero-md": "https://github.com/zerodevx/zero-md"
+    "lerna": "^2.11.0"
   }
 }

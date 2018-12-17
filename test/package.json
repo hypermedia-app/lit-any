@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "version": "0.0.0",
+  "name": "tests",
+  "scripts": {
+    "test:local": "karma start karma.conf.js",
+    "test:debug": "yarn test:local --single-run=false --auto-watch=true",
+    "test:es5:bs": "karma start karma.es5.bs.config.js"
+  },
+  "dependencies": {
+    "@open-wc/testing": "^0.7.1",
+    "@open-wc/testing-karma": "^0.3.0",
+    "@open-wc/testing-karma-bs": "^0.1.4",
+    "karma-webpack": "^5.0.0-alpha.0"
+  }
+}
