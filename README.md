@@ -7,7 +7,7 @@ Building late-bound User Interface with `lit-html` without actually creating (to
 ### 1. Install
 
 ``` bash
-yarn add lit-any
+yarn add @lit-any/lit-any
 ```
 
 ### 2. Set up how to render your content
@@ -20,12 +20,12 @@ they are really needed.
 
 ```javascript
 import ViewTemplates from '@lit-any/lit-any/views';
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 
 ViewTemplates.default.when
     .value(isPerson)
     .renders((renderFunc, person) => html`
-        <person-element name="${person.name}">
+        <person-element .name="${person.name}">
             <span slot="avatar">
                 ${renderFunc(person.avatar, 'person-element-avatar')}
             </span>
@@ -110,7 +110,7 @@ When you want to display same data differently in different context.
 
 ```javascript
 import ViewTemplates from '@lit-any/lit-any/views';
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 import * as moment from 'moment';
 
 // show nicely formatted date by default
@@ -122,13 +122,13 @@ ViewTemplates.default.when
 ViewTemplates.default.when
     .value(v => (v instanceOf Date))
     .scope('event-large')
-    .renders((_, date) => html`<datetime-picker disabled datetime="${date}"></datetime-picker>`);
+    .renders((_, date) => html`<datetime-picker disabled .datetime="${date}"></datetime-picker>`);
 ```
 
 Then set the scope on `lit-view` element:
 
 ```html
-<lit-view value="{{someDate}}" template-scope="event-large"></lit-view>
+<lit-view .value="{{someDate}}" template-scope="event-large"></lit-view>
 ```
 
 Or pass to the `render` function:
@@ -171,7 +171,7 @@ FieldTemplates.default.when
   .fieldMatches(field => field.type === 'http://www.w3.org/2001/XMLSchema#integer')
   .renders((field, id, value, set) => {
     return html`<input type=number value=${value}
-                       on-change=${e => set(Number.parseInt(e.target.value, 0))}>`;
+                       @change=${e => set(Number.parseInt(e.target.value, 0))}>`;
   });
 ```
 
@@ -190,9 +190,9 @@ const contract = {
 Create a form on your page
 
 ```html
-<lit-form contract=${contract}
+<lit-form .contract=${contract}
           submit-button-label="Register"
-          on-submit=${submitModel}></lit-form>
+          @submit=${submitModel}></lit-form>
 ```
 
 When the `Register` button is clicked `submitModel` will be called where the code will retrieve the form's
