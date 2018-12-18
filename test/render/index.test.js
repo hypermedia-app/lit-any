@@ -1,7 +1,7 @@
 /* global describe, it, beforeEach */
 import { expect } from '@open-wc/testing';
 import { html, render as litRender } from 'lit-html';
-import render from 'lit-any/render/index';
+import render from '@lit-any/lit-any/render/index';
 import * as sinon from 'sinon';
 
 describe('render view', () => {

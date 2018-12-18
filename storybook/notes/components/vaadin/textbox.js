@@ -16,7 +16,7 @@ ${sample(field)}
 
 --- js
 import { textbox } from '@lit-any/components-vaadin';
-import Registry from 'lit-any/forms;
+import Registry from '@lit-any/lit-any/forms;
 
 Registry.default
     .when(f => f.type === 'string')

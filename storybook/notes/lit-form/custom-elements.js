@@ -14,7 +14,7 @@ ${sample(form)}
 In above form, an integer type field will be rendered using a \`paper-input\` element with appropriate \`type\`.
 
 --- js
-import Registry from 'lit-any/forms';
+import Registry from '@lit-any/lit-any/forms';
 
 Registry.default
     .when

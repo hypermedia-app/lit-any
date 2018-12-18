@@ -19,7 +19,7 @@ With `lit-any` you can deconstruct your HTML by defining partial templates which
 they are really needed.
 
 ```javascript
-import ViewTemplates from 'lit-any/views';
+import ViewTemplates from '@lit-any/lit-any/views';
 import { html } from 'lit-html/lib/lit-extended';
 
 ViewTemplates.default.when
@@ -45,7 +45,7 @@ ViewTemplates.default.when
     .renders((_, image) => html`
         <a href="${image.url}">
             <img src="${image.large}" alt="avatar" />
-        </a>        
+        </a>
     `);
 
 function isPerson(value) {
@@ -54,7 +54,7 @@ function isPerson(value) {
 ```
 
 This will set up the rendering so that `<person-element>` is displayed for a person but the avatar will
-be rendered based on the presence of the `large` property. 
+be rendered based on the presence of the `large` property.
 
 ### 3a. Render anywhere
 
@@ -65,7 +65,7 @@ To do actual rendering you don't really need a dedicated custom element. Any con
 ```
 
 ```javascript
-import render from 'lit-any/render';
+import render from '@lit-any/lit-any/render';
 
 const person = {
     type: 'Person',
@@ -109,7 +109,7 @@ personContainer.value = person;
 When you want to display same data differently in different context.
 
 ```javascript
-import ViewTemplates from 'lit-any/views';
+import ViewTemplates from '@lit-any/lit-any/views';
 import { html } from 'lit-html/lib/lit-extended';
 import * as moment from 'moment';
 
@@ -129,13 +129,13 @@ Then set the scope on `lit-view` element:
 
 ```html
 <lit-view value="{{someDate}}" template-scope="event-large"></lit-view>
-``` 
+```
 
 Or pass to the `render` function:
 
 ```javascript
-import render from 'lit-any/render';
-import ViewTemplates from 'lit-any/views';
+import render from '@lit-any/lit-any/render';
+import ViewTemplates from '@lit-any/lit-any/views';
 
 const eventDateElement = document.querySelector('#eventDate').
 
@@ -161,16 +161,16 @@ ViewTemplates.default.when
 
 ## 3. Rendering forms
 
-Set up how you will render input controls. The `set` parameter is a function used to set tha value 
+Set up how you will render input controls. The `set` parameter is a function used to set tha value
 back to the form's model and has to be bound to the input control.
 
 ```js
-import FieldTemplates from 'lit-any/forms';
+import FieldTemplates from '@lit-any/lit-any/forms';
 
 FieldTemplates.default.when
   .fieldMatches(field => field.type === 'http://www.w3.org/2001/XMLSchema#integer')
   .renders((field, id, value, set) => {
-    return html`<input type=number value=${value} 
+    return html`<input type=number value=${value}
                        on-change=${e => set(Number.parseInt(e.target.value, 0))}>`;
   });
 ```

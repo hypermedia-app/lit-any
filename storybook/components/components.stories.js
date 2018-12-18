@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/polymer';
 import * as vaadin from '@lit-any/components-vaadin';
 import * as paper from '@lit-any/components-paper-elements';
-import 'lit-any/lit-form';
-import FieldTemplates from 'lit-any/forms';
-import * as components from 'lit-any/components';
+import '@lit-any/lit-any/lit-form';
+import FieldTemplates from '@lit-any/lit-any/forms';
+import * as components from '@lit-any/lit-any/components';
 import { html } from 'lit-html';
 import { select, boolean } from '@storybook/addon-knobs';
 

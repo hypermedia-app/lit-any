@@ -1,8 +1,8 @@
 /* global describe, it, beforeEach */
 import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit-html';
-import 'lit-any/lit-form';
-import FieldTemplates from 'lit-any/forms';
+import '@lit-any/lit-any/lit-form';
+import FieldTemplates from '@lit-any/lit-any/forms';
 import * as sinon from 'sinon';
 import { forSubmit } from '../async-tests';
 

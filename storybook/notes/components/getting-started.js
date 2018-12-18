@@ -9,7 +9,7 @@ the component kind (textbox, dropdown, etc) and the actual element being rendere
 ## Setting up template registry
 
 --- js
-import Registry from 'lit-any/forms;
+import Registry from '@lit-any/lit-any/forms;
 import * as paperElements from '@lit-any/components-paper-elements';
 
 Registry.default.useComponents(paperElements);
@@ -32,8 +32,8 @@ For common component those objects do not have to be constructed manually. Inste
 Here's how the form above is configured to render a dropdown menu for a \`languages\` property.
 
 --- js
-import { dropdown } from 'lit-any/components';
-import Registry from 'lit-any/forms;
+import { dropdown } from '@lit-any/lit-any/components';
+import Registry from '@lit-any/lit-any/forms;
 
 Registry.when
     .fieldMatches(f => f.type === 'language')

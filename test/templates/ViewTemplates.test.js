@@ -1,6 +1,6 @@
 /* global describe, it, beforeEach */
 import { expect } from '@open-wc/testing';
-import ViewTemplates from 'lit-any/views';
+import ViewTemplates from '@lit-any/lit-any/views';
 
 describe('ViewTemplates', () => {
     describe('when builder is created', () => {

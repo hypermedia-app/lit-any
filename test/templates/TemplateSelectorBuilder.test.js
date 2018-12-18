@@ -1,7 +1,7 @@
 /* global describe, it, beforeEach */
 import { expect } from '@open-wc/testing';
-import ViewTemplateSelectorBuilder from 'lit-any/views/TemplateSelectorBuilder';
-import FieldTemplateSelectorBuilder from 'lit-any/forms/TemplateSelectorBuilder';
+import ViewTemplateSelectorBuilder from '@lit-any/lit-any/views/TemplateSelectorBuilder';
+import FieldTemplateSelectorBuilder from '@lit-any/lit-any/forms/TemplateSelectorBuilder';
 import * as sinon from 'sinon';
 
 describe('ViewTemplateSelectorBuilder', () => {

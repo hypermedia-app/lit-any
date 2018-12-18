@@ -1,8 +1,8 @@
 /* global describe, it, beforeEach */
 import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit-html';
-import 'lit-any/lit-view';
-import ViewTemplates from 'lit-any/views';
+import '@lit-any/lit-any/lit-view';
+import ViewTemplates from '@lit-any/lit-any/views';
 import * as sinon from 'sinon';
 
 describe('lit-view', () => {

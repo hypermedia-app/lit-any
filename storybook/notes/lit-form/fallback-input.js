@@ -15,7 +15,7 @@ field given.
 
 --- js
 import { html } from 'lit-html'
-import Registry from 'lit-any/forms';
+import Registry from '@lit-any/lit-any/forms';
 
 Registry.default.when
     .fieldMatches(() => true)

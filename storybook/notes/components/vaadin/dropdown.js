@@ -47,7 +47,7 @@ It can also return a promise.
 
 --- js
 import { dropdown } from '@lit-any/components-vaadin';
-import Registry from 'lit-any/forms;
+import Registry from '@lit-any/lit-any/forms;
 
 Registry.default
     .when(f => f.type === 'string')

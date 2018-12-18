@@ -21,7 +21,7 @@ property. It will effectively be rendered by the second partial.
 --- js
 import { html } from 'lit-html'; 
 import moment from 'moment'; 
-import Registry from 'lit-any/views';
+import Registry from '@lit-any/lit-any/views';
 
 Registry.default
     .when
