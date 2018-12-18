@@ -1,0 +1,1 @@
+{"version":3,"file":"0.5b94ee7d2d7b92055169.bundle.js","sources":["webpack:///../node_modules/@vaadin/vaadin-lumo-styles/version.js"],"sourcesContent":["class Lumo extends HTMLElement {\n  static get version() {\n    return '1.3.3';\n  }\n}\n\ncustomElements.define('vaadin-lumo-styles', Lumo);\n\nexport { Lumo };\n"],"mappings":"AAAA","sourceRoot":""}
