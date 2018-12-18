@@ -1,21 +1,16 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+const localConfig = require('./karma.conf');
 const createBaseConfig = require('@open-wc/testing-karma-bs/create-karma-es5-bs.config');
 
 module.exports = (config) => {
-    const baseConfig = createBaseConfig(config);
+    const baseConfig = localConfig(config);
+    const bsConfig = createBaseConfig(baseConfig);
 
     config.set({
-        ...baseConfig,
-
-        files: [
-            ...baseConfig.files,
-            // allows running single tests with the --grep flag
-            config.grep ? [config.grep] : 'test/**/*.test.js',
-        ],
+        ...bsConfig,
 
         browserStack: {
-            ...baseConfig.browserStack,
-            project: 'your-name',
+            ...bsConfig.browserStack,
+            project: 'lit-any',
         },
     });
 };
