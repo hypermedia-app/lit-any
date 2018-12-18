@@ -33,6 +33,7 @@ module.exports = (config) => {
 
     const istanbul = config.webpack.module.rules.find(rule => rule.loader === 'istanbul-instrumenter-loader');
     istanbul.include = require('path').resolve('../');
+    istanbul.exclude = /node_modules|bower_components|test/;
 
     delete config.coverageIstanbulReporter.thresholds;
 };
