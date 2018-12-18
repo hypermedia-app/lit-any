@@ -25,4 +25,7 @@ module.exports = (config) => {
             config.grep ? config.grep : '**/*.test.js',
         ],
     });
+
+    const istanbul = config.webpack.module.rules.find(rule => rule.loader === 'istanbul-instrumenter-loader');
+    istanbul.include = require('path').resolve('../');
 };

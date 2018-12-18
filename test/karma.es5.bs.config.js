@@ -38,5 +38,8 @@ module.exports = (config) => {
     babelLoader.options.plugins = babelLoader.options.plugins || [];
     babelLoader.options.plugins.push('@babel/plugin-syntax-dynamic-import');
 
+    const istanbul = config.webpack.module.rules.find(rule => rule.loader === 'istanbul-instrumenter-loader');
+    istanbul.include = require('path').resolve('../');
+
     delete config.coverageIstanbulReporter.thresholds;
 };
