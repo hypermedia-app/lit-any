@@ -30,4 +30,6 @@ module.exports = (config) => {
     const babelLoader = config.webpack.module.rules.find(rule => rule.loader === 'babel-loader');
     babelLoader.options.plugins = babelLoader.options.plugins || [];
     babelLoader.options.plugins.push('@babel/plugin-syntax-dynamic-import');
+
+    delete config.coverageIstanbulReporter.thresholds;
 };
