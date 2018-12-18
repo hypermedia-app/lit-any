@@ -1,3 +1,4 @@
+/* global describe, it, beforeEach */
 import { expect } from '@open-wc/testing';
 import * as components from 'lit-any/forms/FallbackComponents';
 import render from './helper/render';

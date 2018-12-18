@@ -1,3 +1,4 @@
+/* global describe, it, beforeEach */
 import { expect } from '@open-wc/testing';
 import * as components from '@lit-any/components-paper-elements';
 import * as sinon from 'sinon';

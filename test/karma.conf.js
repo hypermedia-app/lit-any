@@ -7,6 +7,8 @@ module.exports = (config) => {
         ...baseConfig,
 
         webpack: {
+            ...baseConfig.webpack,
+
             optimization: {
                 splitChunks: {
                     cacheGroups: {
