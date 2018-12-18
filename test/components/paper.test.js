@@ -1,4 +1,6 @@
+import { expect } from '@open-wc/testing';
 import * as components from '@lit-any/components-paper-elements';
+import * as sinon from 'sinon';
 import { pEvent } from '../async-tests';
 import render from './helper/render';
 
