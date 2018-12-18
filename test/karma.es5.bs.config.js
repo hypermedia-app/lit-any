@@ -25,7 +25,5 @@ module.exports = (config) => {
     const babelLoader = config.webpack.module.rules.find(rule => rule.loader === 'babel-loader');
     babelLoader.options.plugins = babelLoader.options.plugins || [];
     babelLoader.options.plugins.push('@babel/plugin-syntax-dynamic-import');
-    babelLoader.options.plugins.push([
-        '@babel/plugin-transform-regenerator',
-    ]);
+    babelLoader.options.plugins.push('@babel/plugin-transform-regenerator');
 };
