@@ -1,4 +1,6 @@
-import FieldTemplates from '../../lit-any/forms';
+/* global describe, it, beforeEach */
+import { expect } from '@open-wc/testing';
+import FieldTemplates from 'lit-any/forms';
 
 describe('FieldTemplates', () => {
     describe('when builder is created', () => {
@@ -9,7 +11,7 @@ describe('FieldTemplates', () => {
         });
 
         it('should create builder for matching field', () => {
-            expect(builder.fieldMatches).to.be.defined;
+            expect(builder.fieldMatches).to.be.ok;
         });
     });
 });

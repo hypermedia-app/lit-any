@@ -1,17 +1,15 @@
-import pEvent from 'p-event';
-import * as components from '../../components/paper-elements';
+/* global describe, it, beforeEach */
+import { expect } from '@open-wc/testing';
+import * as components from '@lit-any/components-paper-elements';
+import * as sinon from 'sinon';
+import { pEvent } from '../async-tests';
 import render from './helper/render';
-import element from './helper/import';
 
 describe('paper-elements', () => {
     let opts;
 
     describe('textbox', () => {
         describe('single line', () => {
-            before(async () => {
-                await element('paper-input');
-            });
-
             beforeEach(() => {
                 opts = {
                     type: 'single line',
@@ -91,10 +89,6 @@ describe('paper-elements', () => {
         });
 
         describe('multi line', () => {
-            before(async () => {
-                await element('paper-textarea', 'paper-input/paper-textarea');
-            });
-
             beforeEach(() => {
                 opts = {
                     type: 'multi line',
@@ -146,12 +140,6 @@ describe('paper-elements', () => {
     });
 
     describe('dropdown', () => {
-        before(async () => {
-            await element('paper-dropdown-menu');
-            await element('paper-listbox');
-            await element('paper-item');
-        });
-
         beforeEach(() => {
             opts = {
             };

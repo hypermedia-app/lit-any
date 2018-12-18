@@ -7,6 +7,7 @@ export function textbox({
 } = { }) {
     return (f, id, v, set) => {
         if (type === 'multi line') {
+            import('@polymer/paper-input/paper-textarea');
             return html`<paper-textarea 
                             label="${f.title}"
                             .value="${v}"
@@ -15,6 +16,7 @@ export function textbox({
                             @value-changed="${e => set(e.target.value)}" ></paper-textarea>`;
         }
 
+        import('@polymer/paper-input/paper-input');
         return html`<paper-input 
                         label="${f.title}"
                         type="text"
@@ -29,6 +31,10 @@ export function dropdown({
     items = [],
 } = {}) {
     return (f, id, v, set) => {
+        import('@polymer/paper-listbox/paper-listbox');
+        import('@polymer/paper-dropdown-menu/paper-dropdown-menu');
+        import('@polymer/paper-item/paper-item');
+
         function setValue(e) {
             e.target.validate();
             return set(e.target.querySelector('paper-listbox').selected);
@@ -63,5 +69,8 @@ export function dropdown({
 export function button({
     label, onClick,
 }) {
-    return html`<paper-button @tap="${onClick}">${label}</paper-button>`;
+    const buttonImport = import('@polymer/paper-button/paper-button')
+        .then(() => html`<paper-button @tap="${onClick}">${label}</paper-button>`);
+
+    return html`${until(buttonImport, '')}`;
 }

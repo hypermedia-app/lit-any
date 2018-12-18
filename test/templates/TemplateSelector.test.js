@@ -1,6 +1,9 @@
-import TemplateSelector from '../../lit-any/template-registry/TemplateSelector';
-import ViewTemplateSelector from '../../lit-any/views/TemplateSelector';
-import FieldTemplateSelector from '../../lit-any/forms/TemplateSelector';
+/* global describe, it, beforeEach */
+import { expect } from '@open-wc/testing';
+import TemplateSelector from 'lit-any/template-registry/TemplateSelector';
+import ViewTemplateSelector from 'lit-any/views/TemplateSelector';
+import FieldTemplateSelector from 'lit-any/forms/TemplateSelector';
+import * as sinon from 'sinon';
 
 describe('TemplateSelector', () => {
     let selector;

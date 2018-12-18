@@ -1,4 +1,6 @@
-import ViewTemplates from '../../lit-any/views';
+/* global describe, it, beforeEach */
+import { expect } from '@open-wc/testing';
+import ViewTemplates from 'lit-any/views';
 
 describe('ViewTemplates', () => {
     describe('when builder is created', () => {
@@ -9,11 +11,11 @@ describe('ViewTemplates', () => {
         });
 
         it('should create builder for matching values', () => {
-            expect(builder.valueMatches).to.be.defined;
+            expect(builder.valueMatches).to.be.ok;
         });
 
         it('should create builder for matching scope', () => {
-            expect(builder.scopeMatches).to.be.defined;
+            expect(builder.scopeMatches).to.be.ok;
         });
     });
 });

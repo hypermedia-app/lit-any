@@ -10,7 +10,7 @@ import fallbackNotes from './notes/lit-form/fallback-input';
 import templatesNotes from './notes/lit-form/custom-elements';
 import fieldValueDecoratorNotes from './notes/lit-form/field-value-decorator';
 
-import '../bower_components/paper-input/paper-input.html';
+import '@polymer/paper-input/paper-input';
 
 FieldTemplates.default
     .when

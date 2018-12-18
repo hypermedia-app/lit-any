@@ -1,9 +1,9 @@
-import md from '../markdown';
+import { md, sample } from '../markdown';
 
 export default function notes(view) {
     return md`# Basic usage
 
-${view}
+${sample(view)}
 
 ## How it works
 

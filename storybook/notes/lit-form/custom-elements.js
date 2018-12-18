@@ -1,4 +1,4 @@
-import md from '../markdown';
+import { md, sample } from '../markdown';
 
 export default function notes(form) {
     return md`# Customizing individual fields
@@ -9,7 +9,7 @@ which will return true if a field can be rendered and another which returns the 
 
 ## Example
 
-${form}
+${sample(form)}
 
 In above form, an integer type field will be rendered using a \`paper-input\` element with appropriate \`type\`.
 

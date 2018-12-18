@@ -3,8 +3,6 @@ import { storiesOf } from '@storybook/polymer/dist/client/index';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { dropdown } from '@lit-any/components-vaadin';
-import '../../../bower_components/vaadin-lumo-styles/style.html';
-import '../../../bower_components/vaadin-dropdown-menu/vaadin-dropdown-menu.html';
 import docs from '../../notes/components/vaadin/dropdown';
 import set from '../set-logger';
 

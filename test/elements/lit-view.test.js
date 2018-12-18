@@ -1,6 +1,9 @@
+/* global describe, it, beforeEach */
+import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit-html';
 import 'lit-any/lit-view';
 import ViewTemplates from 'lit-any/views';
+import * as sinon from 'sinon';
 
 describe('lit-view', () => {
     let litView;
@@ -9,9 +12,9 @@ describe('lit-view', () => {
     ViewTemplates.byName = () => ({ getTemplate });
 
     describe('with attributes', () => {
-        beforeEach(() => {
+        beforeEach(async () => {
             getTemplate = sinon.stub();
-            litView = fixture('lit-view-attrs');
+            litView = await fixture('<lit-view ignore-missing template-scope="some scope" template-registry="my registry"></lit-view>');
         });
 
         it('sets scope', () => {
@@ -32,8 +35,8 @@ describe('lit-view', () => {
             getTemplate = sinon.stub();
         });
 
-        beforeEach(() => {
-            litView = fixture('lit-view');
+        beforeEach(async () => {
+            litView = await fixture('<lit-view></lit-view>');
         });
 
         it('should render nothing when object is undefined', () => {
@@ -96,8 +99,8 @@ describe('lit-view', () => {
             getTemplate = sinon.stub();
         });
 
-        beforeEach(() => {
-            litView = fixture('lit-view');
+        beforeEach(async () => {
+            litView = await fixture('<lit-view></lit-view>');
         });
 
         it('should use render parameter', async () => {
@@ -192,8 +195,8 @@ describe('lit-view', () => {
             getTemplate = sinon.stub();
         });
 
-        beforeEach(() => {
-            litView = fixture('lit-view');
+        beforeEach(async () => {
+            litView = await fixture('<lit-view></lit-view>');
         });
 
         xit('should render fallback template', () => {

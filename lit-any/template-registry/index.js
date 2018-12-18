@@ -1,5 +1,3 @@
-import 'core-js/modules/es6.array.find';
-
 export default class TemplateRegistry {
     constructor(Builder, name) {
         this._templates = [];

@@ -1,7 +1,10 @@
+/* global describe, it, beforeEach */
+import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit-html';
 import 'lit-any/lit-form';
 import FieldTemplates from 'lit-any/forms';
-import forSubmit from '../async-tests/index';
+import * as sinon from 'sinon';
+import { forSubmit } from '../async-tests';
 
 describe('lit-form', () => {
     let litForm;
@@ -16,8 +19,8 @@ describe('lit-form', () => {
     };
 
     describe('by default', () => {
-        beforeEach(() => {
-            litForm = fixture('lit-form');
+        beforeEach(async () => {
+            litForm = await fixture('<lit-form></lit-form>');
             getTemplate = sinon.stub();
             getTemplate.returns(template);
             template.render = sinon.spy();
@@ -276,8 +279,8 @@ describe('lit-form', () => {
     });
 
     describe('when no-labels is set', () => {
-        beforeEach(() => {
-            litForm = fixture('lit-form-no-labels');
+        beforeEach(async () => {
+            litForm = await fixture('<lit-form no-labels></lit-form>');
             getTemplate = sinon.stub();
             getTemplate.returns(template);
             template.render = sinon.spy();
@@ -298,8 +301,8 @@ describe('lit-form', () => {
     });
 
     describe('when no-submit-button is set', () => {
-        beforeEach(() => {
-            litForm = fixture('lit-form-no-submit');
+        beforeEach(async () => {
+            litForm = await fixture('<lit-form no-submit-button></lit-form>');
             getTemplate = sinon.stub();
             getTemplate.returns(template);
             template.render = sinon.spy();
@@ -320,8 +323,8 @@ describe('lit-form', () => {
     });
 
     describe('submit event', () => {
-        beforeEach(() => {
-            litForm = fixture('lit-form');
+        beforeEach(async () => {
+            litForm = await fixture('<lit-form></lit-form>');
             getTemplate = sinon.stub();
             getTemplate.returns(null);
         });
@@ -393,8 +396,8 @@ describe('lit-form', () => {
     });
 
     describe('clicking clear button', () => {
-        beforeEach(() => {
-            litForm = fixture('lit-form');
+        beforeEach(async () => {
+            litForm = await fixture('<lit-form></lit-form>');
             getTemplate = sinon.stub();
             getTemplate.returns(null);
         });

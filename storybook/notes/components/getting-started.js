@@ -1,4 +1,4 @@
-import md from '../markdown';
+import { md, sample } from '../markdown';
 
 export default function notes(exampleForm) {
     return md`# Component sets
@@ -18,7 +18,7 @@ Registry.default.useComponents(paperElements);
 Switching the **component set** knob let's you quickly change the appearance of the entire form below. Individual fields
 do not "know" if the will be with a paper element of with a vaadin component.
 
-${exampleForm}
+${sample(exampleForm)}
 
 ## Individual fields
     

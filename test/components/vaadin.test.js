@@ -1,16 +1,12 @@
-import * as components from '../../components/vaadin';
+import { expect } from '@open-wc/testing';
+import * as components from '@lit-any/components-vaadin';
 import render from './helper/render';
-import element from './helper/import';
 
 describe('vaadin components', () => {
     let opts;
 
     describe('textbox', () => {
         describe('single line', () => {
-            before(async () => {
-                await element('vaadin-text-field');
-            });
-
             beforeEach(() => {
                 opts = {
                     type: 'single line',
@@ -62,10 +58,6 @@ describe('vaadin components', () => {
         });
 
         describe('multi line', () => {
-            before(async () => {
-                await element('vaadin-text-area', 'vaadin-text-field/vaadin-text-area');
-            });
-
             beforeEach(() => {
                 opts = {
                     type: 'multi line',

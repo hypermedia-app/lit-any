@@ -87,4 +87,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-test/transpiled/
+*.es5.js
+/browserstack.err

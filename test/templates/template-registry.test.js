@@ -1,6 +1,9 @@
+/* global describe, it, beforeEach */
+import { expect } from '@open-wc/testing';
 import { html, render } from 'lit-html';
-import TemplateRegistry from '../../lit-any/template-registry';
-import TemplateSelectorBuilder from '../../lit-any/template-registry/TemplateSelectorBuilder';
+import TemplateRegistry from 'lit-any/template-registry';
+import TemplateSelectorBuilder from 'lit-any/template-registry/TemplateSelectorBuilder';
+import * as sinon from 'sinon';
 
 class TestBuilder extends TemplateSelectorBuilder { }
 

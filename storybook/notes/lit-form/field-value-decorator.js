@@ -1,5 +1,5 @@
 import stringifyObject from 'stringify-object';
-import md from '../markdown';
+import { md, sample } from '../markdown';
 
 export default function notes(form, contract, decorator) {
     return md`# Decorating field getter and setter
@@ -63,7 +63,7 @@ to wrap the user's input in the appropriate structure.
 The form below shows how the raw input values are converted when initial model is applied and when the input values
 change.
 
-${form}
+${sample(form)}
 
 ## Using field decorators
 

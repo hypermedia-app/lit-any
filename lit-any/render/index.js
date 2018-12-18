@@ -11,7 +11,8 @@ function recurseTemplates(registry, ignoreMissing, inheritedScope) {
 
         if (template) {
             const nextLevel = recurseTemplates(registry, ignoreMissing, scope);
-            templateResult = template.render(nextLevel, value, scope);
+
+            templateResult = html`${template.render(nextLevel, value, scope)}`;
         } else if (ignoreMissing) {
             templateResult = '';
         } else {

@@ -1,8 +1,5 @@
 import { storiesOf } from '@storybook/polymer/dist/client/index';
 import { boolean, select } from '@storybook/addon-knobs';
-import '../../../bower_components/vaadin-text-field/vaadin-text-field.html';
-import '../../../bower_components/vaadin-text-field/vaadin-text-area.html';
-import '../../../bower_components/vaadin-lumo-styles/style.html';
 
 import { textbox } from '@lit-any/components-vaadin';
 import docs from '../../notes/components/vaadin/textbox';

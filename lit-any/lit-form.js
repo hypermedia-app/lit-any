@@ -151,7 +151,7 @@ export default class LitForm extends LitElement {
             return renderFunc(field, fieldId, fieldValue, setter);
         }
 
-        return fieldTemplate.render(field, fieldId, fieldValue, setter);
+        return html`${fieldTemplate.render(field, fieldId, fieldValue, setter)}`;
     }
 
     __createModelValueSetter(field) {

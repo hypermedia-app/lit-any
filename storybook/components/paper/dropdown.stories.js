@@ -1,8 +1,5 @@
 import iso from 'iso-639-1';
 import { storiesOf } from '@storybook/polymer/dist/client/index';
-import '../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html';
-import '../../../bower_components/paper-listbox/paper-listbox.html';
-import '../../../bower_components/paper-item/paper-item.html';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { dropdown } from '@lit-any/components-paper-elements';
