@@ -1,4 +1,4 @@
-const createBaseConfig = require('@open-wc/testing-karma-bs/create-karma-es5-bs.config');
+const createBaseConfig = require('@open-wc/testing-karma/create-karma-es5.config');
 
 module.exports = (config) => {
     const baseConfig = createBaseConfig(config);
@@ -24,11 +24,6 @@ module.exports = (config) => {
                     },
                 },
             },
-        },
-
-        browserStack: {
-            ...baseConfig.browserStack,
-            project: 'lit-any',
         },
     });
 

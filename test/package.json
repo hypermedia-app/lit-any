@@ -5,6 +5,7 @@
   "scripts": {
     "test:local": "karma start karma.conf.js",
     "test:debug": "yarn test:local --single-run=false --auto-watch=true",
+    "test:es5": "karma start karma.es5.config.js",
     "test:es5:bs": "karma start karma.es5.bs.config.js"
   },
   "dependencies": {
@@ -15,7 +16,6 @@
     "sinon": "^7.2.2"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-transform-regenerator": "^7.0.0"
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0"
   }
 }
