@@ -5,9 +5,9 @@ import { repeat } from 'lit-html/directives/repeat';
 export function textbox({
     type = 'single line',
 } = { }) {
-    return async (f, id, v, set) => {
+    return (f, id, v, set) => {
         if (type === 'multi line') {
-            await import('@polymer/paper-input/paper-textarea');
+            import('@polymer/paper-input/paper-textarea');
             return html`<paper-textarea 
                             label="${f.title}"
                             .value="${v}"
@@ -16,7 +16,7 @@ export function textbox({
                             @value-changed="${e => set(e.target.value)}" ></paper-textarea>`;
         }
 
-        await import('@polymer/paper-input/paper-input');
+        import('@polymer/paper-input/paper-input');
         return html`<paper-input 
                         label="${f.title}"
                         type="text"
@@ -30,10 +30,10 @@ export function textbox({
 export function dropdown({
     items = [],
 } = {}) {
-    return async (f, id, v, set) => {
-        await import('@polymer/paper-listbox/paper-listbox');
-        await import('@polymer/paper-dropdown-menu/paper-dropdown-menu');
-        await import('@polymer/paper-item/paper-item');
+    return (f, id, v, set) => {
+        import('@polymer/paper-listbox/paper-listbox');
+        import('@polymer/paper-dropdown-menu/paper-dropdown-menu');
+        import('@polymer/paper-item/paper-item');
 
         function setValue(e) {
             e.target.validate();
@@ -66,10 +66,11 @@ export function dropdown({
     };
 }
 
-export async function button({
+export function button({
     label, onClick,
 }) {
-    await import('@polymer/paper-button/paper-button');
+    const buttonImport = import('@polymer/paper-button/paper-button')
+        .then(() => html`<paper-button @tap="${onClick}">${label}</paper-button>`);
 
-    return html`<paper-button @tap="${onClick}">${label}</paper-button>`;
+    return html`${until(buttonImport, '')}`;
 }

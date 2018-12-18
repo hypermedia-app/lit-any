@@ -4,9 +4,9 @@ import { repeat } from 'lit-html/directives/repeat';
 export function textbox({
     type = 'single line',
 } = { }) {
-    return async (f, id, v, set) => {
+    return (f, id, v, set) => {
         if (type === 'multi line') {
-            await import('@vaadin/vaadin-text-field/vaadin-text-area');
+            import('@vaadin/vaadin-text-field/vaadin-text-area');
             return html`<vaadin-text-area 
                             label="${f.title}"
                             type="${type}"
@@ -16,7 +16,7 @@ export function textbox({
                             @value-changed="${e => set(e.target.value)}" ></vaadin-text-area>`;
         }
 
-        await import('@vaadin/vaadin-text-field/vaadin-text-field');
+        import('@vaadin/vaadin-text-field/vaadin-text-field');
         return html`<vaadin-text-field 
                         label="${f.title}"
                         type="${type}"
@@ -30,10 +30,10 @@ export function textbox({
 export function dropdown({
     items = [],
 } = {}) {
-    return async (f, id, v, set) => {
-        await import('@vaadin/vaadin-dropdown-menu/vaadin-dropdown-menu');
-        await import('@vaadin/vaadin-list-box/vaadin-list-box');
-        await import('@vaadin/vaadin-item/vaadin-item');
+    return (f, id, v, set) => {
+        import('@vaadin/vaadin-dropdown-menu/vaadin-dropdown-menu');
+        import('@vaadin/vaadin-list-box/vaadin-list-box');
+        import('@vaadin/vaadin-item/vaadin-item');
 
         let options = items;
         if (typeof items === 'function') {
@@ -59,9 +59,9 @@ export function dropdown({
     };
 }
 
-export async function button({
+export function button({
     label, onClick,
 }) {
-    await import('@vaadin/vaadin-button/vaadin-button');
+    import('@vaadin/vaadin-button/vaadin-button');
     return html`<vaadin-button @click="${onClick}">${label}</vaadin-button>`;
 }
