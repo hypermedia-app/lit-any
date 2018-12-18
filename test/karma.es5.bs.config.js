@@ -32,6 +32,8 @@ module.exports = (config) => {
         },
     });
 
+    config.browserStack.captureTimeout = 360;
+
     const babelLoader = config.webpack.module.rules.find(rule => rule.loader === 'babel-loader');
     babelLoader.options.plugins = babelLoader.options.plugins || [];
     babelLoader.options.plugins.push('@babel/plugin-syntax-dynamic-import');
