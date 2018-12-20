@@ -1,4 +1,4 @@
-# lit-any ![](https://img.shields.io/codecov/c/github/wikibus/lit-any.svg)
+# lit-any [![codecov](https://codecov.io/gh/wikibus/lit-any/branch/master/graph/badge.svg)](https://codecov.io/gh/wikibus/lit-any)
 
 Building late-bound User Interface with `lit-html` without actually creating (too many) custom elements
 
