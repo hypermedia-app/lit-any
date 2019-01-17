@@ -46,7 +46,7 @@ describe('lit-view', () => {
         it('should render found template', async () => {
             // given
             getTemplate.returns({
-                render: (_, object) => html`<span>${object.value}</span>`,
+                render: object => html`<span>${object.value}</span>`,
             });
 
             litView.value = {
@@ -106,7 +106,7 @@ describe('lit-view', () => {
         it('should use render parameter', async () => {
             // given
             getTemplate.returns({
-                render: (render, object) => {
+                render: (object, render) => {
                     if (object.child) {
                         return html`<p class="${object.clazz}">${render(object.child)}</p>`;
                     }
@@ -138,7 +138,7 @@ describe('lit-view', () => {
         it('should select template for selected value', async () => {
             // given
             getTemplate.returns({
-                render: (render, v) => {
+                render: (v, render) => {
                     if (v.child) {
                         return html`${render(v.child)}`;
                     }
@@ -161,7 +161,7 @@ describe('lit-view', () => {
         it('should allow changing scope', async () => {
             // given
             getTemplate.returns({
-                render: (render, v) => {
+                render: (v, render) => {
                     if (v.child) {
                         if (v.scope) {
                             return html`${render(v.child, v.scope)}`;
@@ -218,7 +218,7 @@ describe('lit-view', () => {
         it('should render correctly', async () => {
             // given
             getTemplate.returns({
-                render: (_, object) => html`<span>${object.inserted}</span>`,
+                render: object => html`<span>${object.inserted}</span>`,
             });
 
             // when
