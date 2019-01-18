@@ -26,14 +26,14 @@ import Registry from '@lit-any/lit-any/views';
 Registry.default
     .when
     .valueMatches(v => v.type === 'Person')
-    .renders((render, person) => 
+    .renders((person, render) => 
         html\`Hello, my name is $\{person.fullName}. 
              I was born $\{render(person.birthDate)}\`);
 
 Registry.default
     .when
     .valueMatches(v => v instanceof Date || Date.parse(value))
-    .renders((_, date) => html\`$\{moment(date).fromNow()}\`);
+    .renders(date => html\`$\{moment(date).fromNow()}\`);
 --- 
 
 This feature lets nested partial depend on the actual value of the \`birthDate\` property without the need
