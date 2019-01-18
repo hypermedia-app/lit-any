@@ -14,7 +14,7 @@ storiesOf('lit-view', module)
         ViewTemplates.byName('basic')
             .when
             .valueMatches(v => v.type === 'Person')
-            .renders((r, v) => html`Hello, my name is ${v.fullName}`);
+            .renders(v => html`Hello, my name is ${v.fullName}`);
 
         const value = {
             type: 'Person',
@@ -30,13 +30,13 @@ storiesOf('lit-view/nesting', module)
         ViewTemplates.byName('recursive')
             .when
             .valueMatches(value => value.type === 'Person')
-            .renders((render, person) =>
+            .renders((person, render) =>
                 html`Hello, my name is ${person.fullName}. 
                      I was born ${render(person.birthDate)}`);
 
         ViewTemplates.byName('recursive').when
             .valueMatches(value => value instanceof Date || Date.parse(value))
-            .renders((_, date) => html`${moment(date).fromNow()}`);
+            .renders(date => html`${moment(date).fromNow()}`);
 
         const value = {
             type: 'Person',
@@ -53,7 +53,7 @@ storiesOf('lit-view/nesting', module)
         ViewTemplates.byName('nested')
             .when
             .valueMatches(value => value.type === 'Person')
-            .renders((render, person) =>
+            .renders(person =>
                 html`Hello, my name is ${person.fullName}. 
                      I was born
                      <lit-view .value="${person.birthDate}"
@@ -61,7 +61,7 @@ storiesOf('lit-view/nesting', module)
 
         ViewTemplates.byName('nested').when
             .valueMatches(value => value instanceof Date || Date.parse(value))
-            .renders((_, date) => html`${moment(date).fromNow()}`);
+            .renders(date => html`${moment(date).fromNow()}`);
 
         const value = {
             type: 'Person',
