@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.7.0",
+  "version": "0.8.0",
   "name": "tests",
   "scripts": {
     "test:local": "karma start karma.conf.js",

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "storybook",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "rm -rf ../docs; build-storybook -c .storybook -o ../docs"
