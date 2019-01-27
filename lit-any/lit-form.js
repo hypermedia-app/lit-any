@@ -89,7 +89,7 @@ export default class LitForm extends LitElement {
                         @apply --lit-form-form;
                     }
                     
-                    fieldset {
+                    .fieldset {
                         @apply --lit-form-fieldset;
                     }
                     
@@ -119,11 +119,11 @@ export default class LitForm extends LitElement {
         }
 
         return html`
-            <fieldset>
+            <div class="fieldset">
                 ${this.__fieldsetHeading(this.contract)}
                 
                 ${fieldsArray.map(f => this.__fieldWrapperTemplate(f))}
-            </fieldset>`;
+            </div>`;
     }
 
     __fieldWrapperTemplate(field) {

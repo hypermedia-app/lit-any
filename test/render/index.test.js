@@ -16,7 +16,7 @@ describe('render view', () => {
     it('should create TemplateResult for found template', () => {
         // given
         registry.getTemplate.returns({
-            render: (_, object) => html`<span>${object.value}</span>`,
+            render: object => html`<span>${object.value}</span>`,
         });
         const container = document.createElement('div');
         const value = {
@@ -34,7 +34,7 @@ describe('render view', () => {
     it('should pass down scope parameter', () => {
         // given
         registry.getTemplate.returns({
-            render: (_, object, scope) => html`<span>${scope}</span>`,
+            render: (object, _, scope) => html`<span>${scope}</span>`,
         });
         const container = document.createElement('div');
         const value = {
