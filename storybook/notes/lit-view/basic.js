@@ -30,7 +30,7 @@ import Registry from '@lit-any/lit-any/views';
 
 Registry.default.when
     .valueMatches(v => v.type === 'Person')
-    .renders((_, person) =>  html\`Hello, my name is $\{person.fullName}\`);
+    .renders(person =>  html\`Hello, my name is $\{person.fullName}\`);
 --- 
 
 The \`valueMatches\` function accepts a callback which should return \`true\` if the value is something to be
