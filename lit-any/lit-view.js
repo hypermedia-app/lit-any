@@ -1,4 +1,4 @@
-import { LitElement } from '@polymer/lit-element';
+import { LitElement } from 'lit-element';
 import { html } from 'lit-html';
 import render from './render/index';
 import ViewTemplates from './views/index';
