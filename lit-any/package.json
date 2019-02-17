@@ -1,6 +1,6 @@
 {
   "name": "@lit-any/lit-any",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "dependencies": {
     "lit-element": "^2.0.0",
     "lit-html": "^1.0.0"
