@@ -1,7 +1,10 @@
 import { storiesOf } from '@storybook/polymer';
 import * as vaadin from '@lit-any/components-vaadin';
 import * as paper from '@lit-any/components-paper-elements';
+import * as aybolitBoostrap from '@lit-any/components-aybolit-bootstrap';
+import * as aybolitBulma from '@lit-any/components-aybolit-bulma';
 import * as aybolitMaterial from '@lit-any/components-aybolit-material';
+import * as aybolitWhiteLabel from '@lit-any/components-aybolit-white-label';
 import '@lit-any/lit-any/lit-form';
 import FieldTemplates from '@lit-any/lit-any/forms';
 import * as components from '@lit-any/lit-any/components';
@@ -11,7 +14,9 @@ import { select, boolean } from '@storybook/addon-knobs';
 import onSubmit from '../helpers/submit-handler';
 import notes from '../notes/components/getting-started';
 
-const componentSets = { paper, vaadin, aybolitMaterial };
+const componentSets = {
+    paper, vaadin, aybolitBoostrap, aybolitBulma, aybolitMaterial, aybolitWhiteLabel,
+};
 const hideLabelsFor = ['paper', 'vaadin'];
 
 storiesOf('lit-form/component sets', module)
