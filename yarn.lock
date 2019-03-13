@@ -2,6 +2,22 @@
 # yarn lockfile v1
 
 
+"@aybolit/core@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@aybolit/core/-/core-0.1.0.tgz#8645ecc32f6c4fe53015f868191f54c1649a3cf4"
+  integrity sha512-vubUODRgVEoMHGvkrXZBfhs+uv87rWktTNVRocQYwvXXz2A7ozQ07XknGAs2mvMMJ/qA74Q9ZqptE/KmJGrkRw==
+  dependencies:
+    lit-element "^2.0.1"
+    lit-html "^1.0.0"
+
+"@aybolit/material@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@aybolit/material/-/material-0.1.0.tgz#29cd0753ede9233dabe771f29ec9d717fa186823"
+  integrity sha512-D7ZxcujOxTk+bDWHMIAbblFm4kiQYjC7MOcF+Yy2SrI2NA0ILCB9v1NsNVlG52zC/fx5rZLqUYAD1vT6GELz/A==
+  dependencies:
+    "@aybolit/core" "^0.1.0"
+    lit-element "^2.0.1"
+
 "@babel/code-frame@7.0.0", "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -6174,7 +6190,7 @@ listenercount@~1.0.1:
   resolved "https://registry.yarnpkg.com/listenercount/-/listenercount-1.0.1.tgz#84c8a72ab59c4725321480c975e6508342e70937"
   integrity sha1-hMinKrWcRyUyFIDJdeZQg0LnCTc=
 
-lit-element@^2.0.0:
+lit-element@^2.0.0, lit-element@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-2.0.1.tgz#9ec5871d3b64487f432c7c071df80ef031d7091b"
   integrity sha512-2bu3B2ZYUZgntvOgu3i5mRK8geo45CLUwxwJEYK54hyednoJasjiTZPB13NBg1D+hNM2JfmWTWJnh1QEUQv7zw==
