@@ -72,7 +72,7 @@ describe('paper-elements', () => {
                 expect(el.autoValidate).to.be.true;
             });
 
-            it('should be required if field is required', async () => {
+            it('should not set invalid initially when setting null value', async () => {
                 // given
                 const field = {
                     title: 'user name',
@@ -81,10 +81,10 @@ describe('paper-elements', () => {
 
                 // when
                 const textbox = components.textbox(opts);
-                const el = await render(textbox, field);
+                const el = await render(textbox, field, 'id', null);
 
                 // then
-                expect(el.required).to.be.true;
+                expect(el.invalid).to.be.false;
             });
         });
 
@@ -135,6 +135,21 @@ describe('paper-elements', () => {
 
                 // then
                 expect(el.required).to.be.true;
+            });
+
+            it('should not set invalid initially when setting null value', async () => {
+                // given
+                const field = {
+                    title: 'user name',
+                    required: true,
+                };
+
+                // when
+                const textbox = components.textbox(opts);
+                const el = await render(textbox, field, 'id', null);
+
+                // then
+                expect(el.invalid).to.be.false;
             });
         });
     });
