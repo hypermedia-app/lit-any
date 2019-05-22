@@ -1,9 +1,16 @@
 import { html } from 'lit-html';
 
 function recurseTemplates(registry, ignoreMissing, inheritedScope) {
-    return (value, currentScope) => {
+    return (value, currentScope, requestedParams) => {
         let templateResult;
-        const scope = currentScope || inheritedScope;
+        let scope;
+        let params = requestedParams;
+        if (typeof currentScope !== 'string') {
+            scope = inheritedScope;
+            params = currentScope;
+        } else {
+            scope = currentScope || inheritedScope;
+        }
         const template = registry.getTemplate({
             value,
             scope,
@@ -12,7 +19,7 @@ function recurseTemplates(registry, ignoreMissing, inheritedScope) {
         if (template) {
             const nextLevel = recurseTemplates(registry, ignoreMissing, scope);
 
-            templateResult = html`${template.render(value, nextLevel, scope)}`;
+            templateResult = html`${template.render(value, nextLevel, scope, params || {})}`;
         } else if (ignoreMissing) {
             templateResult = '';
         } else {

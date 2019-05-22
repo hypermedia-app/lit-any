@@ -230,4 +230,56 @@ describe('lit-view', () => {
             expect(span.textContent).to.equal('manually');
         });
     });
+
+    describe('when passing context values', () => {
+        beforeEach(() => {
+            getTemplate = sinon.stub();
+        });
+
+        beforeEach(async () => {
+            litView = await fixture('<lit-view></lit-view>');
+        });
+
+        it('makes it accessible to child render when used together with scope', async () => {
+            // given
+            getTemplate.returns({
+                render: (object, render, scope, params) => {
+                    if (params.sameToUpper) {
+                        return html`'${scope}' ${object.text.toUpperCase()}`;
+                    }
+
+                    return html`${object.text} ${render(object, 'bar', { sameToUpper: true })}`;
+                },
+            });
+            litView.value = { text: 'a' };
+            litView.templateScope = 'foo';
+
+            // when
+            await litView.updateComplete;
+
+            // then
+            expect(litView.shadowRoot.textContent).to.equal("a 'bar' A");
+        });
+
+        it('makes it accessible to child render when used without scope', async () => {
+            // given
+            getTemplate.returns({
+                render: (object, render, scope, params) => {
+                    if (params.sameToUpper) {
+                        return html`'${scope}' ${object.text.toUpperCase()}`;
+                    }
+
+                    return html`${object.text} ${render(object, { sameToUpper: true })}`;
+                },
+            });
+            litView.value = { text: 'a' };
+            litView.templateScope = 'foo';
+
+            // when
+            await litView.updateComplete;
+
+            // then
+            expect(litView.shadowRoot.textContent).to.equal("a 'foo' A");
+        });
+    });
 });
