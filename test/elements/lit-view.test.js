@@ -231,7 +231,7 @@ describe('lit-view', () => {
         });
     });
 
-    describe('when passing context values', () => {
+    describe('when passing params values', () => {
         beforeEach(() => {
             getTemplate = sinon.stub();
         });
