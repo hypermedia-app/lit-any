@@ -1,6 +1,6 @@
 {
   "name": "@lit-any/components-paper-elements",
-  "version": "0.8.0",
+  "version": "0.8.2",
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
