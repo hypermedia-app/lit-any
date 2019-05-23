@@ -188,6 +188,30 @@ describe('lit-view', () => {
             expect(getTemplate.secondCall.args[0].scope).to.equal('nested');
             expect(getTemplate.thirdCall.args[0].scope).to.equal('nested');
         });
+
+        it('should provide an empty params object fallback', async () => {
+            // given
+            getTemplate.returns({
+                render: (object, render, scope, params) => {
+                    if (object.child) {
+                        return html`<p>${render(object.child)}</p>`;
+                    }
+
+                    return html`<span>${JSON.stringify(params)}</span>`;
+                },
+            });
+            litView.value = {
+                child: {
+                },
+            };
+
+            // when
+            await litView.updateComplete;
+
+            // then
+            const span = litView.shadowRoot.querySelector('span');
+            expect(span.textContent).to.equal('{}');
+        });
     });
 
     describe('when template is not found', () => {
