@@ -3,6 +3,10 @@
   "version": "0.8.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "prepare": "tsc",
+    "lint": "eslint eslint --ext .js,.ts ."
+  },
   "peerDependencies": {
     "@lit-any/lit-any": ">= 0.7.0",
     "lit-html": ">= 1"
@@ -13,5 +17,8 @@
     "@polymer/paper-input": "^3.0.1",
     "@polymer/paper-item": "^3.0.1",
     "@polymer/paper-listbox": "^3.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.5"
   }
 }
