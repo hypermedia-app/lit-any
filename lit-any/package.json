@@ -3,7 +3,7 @@
   "version": "0.8.1",
   "scripts": {
     "prepare": "tsc",
-    "lint": "eslint eslint --ext .js,.ts ."
+    "lint": "eslint --ext .js,.ts ."
   },
   "dependencies": {
     "lit-element": "^2.0.0",

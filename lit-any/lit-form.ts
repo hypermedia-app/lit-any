@@ -1,31 +1,31 @@
-import { LitElement } from 'lit-element';
-import { html } from 'lit-html';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import contract from './elements/contract-helpers';
-import FieldTemplates from './forms';
+import { LitElement } from 'lit-element'
+import { html } from 'lit-html'
+import { ifDefined } from 'lit-html/directives/if-defined'
+import contract from './elements/contract-helpers'
+import FieldTemplates from './forms'
 
 function onSubmit(e) {
-    this.submit();
-    e.preventDefault();
-    return false;
+    this.submit()
+    e.preventDefault()
+    return false
 }
 
 export default class LitForm extends LitElement {
     constructor() {
-        super();
+        super()
 
-        this.contract = null;
-        this.noLabels = false;
-        this.value = {};
-        this.submitButtonLabel = 'Submit';
-        this.noSubmitButton = false;
-        this.resetButtonLabel = 'Reset';
-        this.noResetButton = false;
-        this.templateRegistry = '';
+        this.contract = null
+        this.noLabels = false
+        this.value = {}
+        this.submitButtonLabel = 'Submit'
+        this.noSubmitButton = false
+        this.resetButtonLabel = 'Reset'
+        this.noResetButton = false
+        this.templateRegistry = ''
     }
 
     get form() {
-        return this.shadowRoot.querySelector('form');
+        return this.shadowRoot.querySelector('form')
     }
 
     static get properties() {
@@ -38,7 +38,7 @@ export default class LitForm extends LitElement {
             resetButtonLabel: { type: String, attribute: 'reset-button-label' },
             noResetButton: { type: Boolean, attribute: 'no-reset-button', reflect: true },
             templateRegistry: { type: String, attribute: 'template-registry' },
-        };
+        }
     }
 
     submit() {
@@ -48,20 +48,20 @@ export default class LitForm extends LitElement {
                 target: this.form.action,
                 method: this.form.getAttribute('method') || this.form.method.toUpperCase(),
             },
-        }));
+        }))
     }
 
     async reset() {
-        this.value = {};
-        await this.requestUpdate();
+        this.value = {}
+        await this.requestUpdate()
     }
 
     render() {
         if (this.contract) {
-            return this.__formTemplate();
+            return this.__formTemplate()
         }
 
-        return html``;
+        return html``
     }
 
     __formTemplate() {
@@ -76,7 +76,7 @@ export default class LitForm extends LitElement {
                 
                 ${this.noSubmitButton ? '' : this.__submitButtonTemplate()}
                 ${this.noResetButton ? '' : this.__resetButtonTemplate()}
-            </form>`;
+            </form>`
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -95,27 +95,27 @@ export default class LitForm extends LitElement {
                     
                     .field {
                         @apply --lit-form-field;
-                    }`;
+                    }`
     }
 
     __submitButtonTemplate() {
         return FieldTemplates.byName(this.templateRegistry).components.button({
             label: this.submitButtonLabel,
             onClick: this.submit.bind(this),
-        });
+        })
     }
 
     __resetButtonTemplate() {
         return FieldTemplates.byName(this.templateRegistry).components.button({
             label: this.resetButtonLabel,
             onClick: this.reset.bind(this),
-        });
+        })
     }
 
     __fieldsetTemplate() {
-        let fieldsArray = [];
+        let fieldsArray = []
         if (contract.fieldsAreIterable(this.contract)) {
-            fieldsArray = this.contract.fields;
+            fieldsArray = this.contract.fields
         }
 
         return html`
@@ -123,68 +123,68 @@ export default class LitForm extends LitElement {
                 ${this.__fieldsetHeading(this.contract)}
                 
                 ${fieldsArray.map(f => this.__fieldWrapperTemplate(f))}
-            </div>`;
+            </div>`
     }
 
     __fieldWrapperTemplate(field) {
-        const fieldId = field.property;
+        const fieldId = field.property
 
-        let fieldLabel = html``;
+        let fieldLabel = html``
         if (this.noLabels === false) {
-            fieldLabel = html`<label for="${fieldId}">${field.title || field.property}</label>`;
+            fieldLabel = html`<label for="${fieldId}">${field.title || field.property}</label>`
         }
 
         return html`<div class="field">
                         ${fieldLabel}
                         ${this.__fieldTemplate(field, fieldId)}
-                    </div>`;
+                    </div>`
     }
 
     __fieldTemplate(field, fieldId) {
-        const setter = this.__createModelValueSetter(field);
+        const setter = this.__createModelValueSetter(field)
 
-        const fieldTemplate = FieldTemplates.byName(this.templateRegistry).getTemplate({ field });
-        const fieldValue = this.__getPropertyValue(field, this.value);
+        const fieldTemplate = FieldTemplates.byName(this.templateRegistry).getTemplate({ field })
+        const fieldValue = this.__getPropertyValue(field, this.value)
 
         if (fieldTemplate === null) {
-            const renderFunc = FieldTemplates.byName(this.templateRegistry).components.textbox();
-            return renderFunc(field, fieldId, fieldValue, setter);
+            const renderFunc = FieldTemplates.byName(this.templateRegistry).components.textbox()
+            return renderFunc(field, fieldId, fieldValue, setter)
         }
 
-        return html`${fieldTemplate.render(field, fieldId, fieldValue, setter)}`;
+        return html`${fieldTemplate.render(field, fieldId, fieldValue, setter)}`
     }
 
     __createModelValueSetter(field) {
         return (fieldInput) => {
-            let newValue = fieldInput;
+            let newValue = fieldInput
 
             if (field.valueDecorator && typeof field.valueDecorator.wrap === 'function') {
-                newValue = field.valueDecorator.wrap(newValue);
+                newValue = field.valueDecorator.wrap(newValue)
             }
 
-            this.value[field.property] = newValue;
-        };
+            this.value[field.property] = newValue
+        }
     }
 
     // eslint-disable-next-line class-methods-use-this
     __getPropertyValue(field, model) {
-        let value = model[field.property] || null;
+        let value = model[field.property] || null
 
         if (value && field.valueDecorator && typeof field.valueDecorator.unwrap === 'function') {
-            value = field.valueDecorator.unwrap(value);
+            value = field.valueDecorator.unwrap(value)
         }
 
-        return value;
+        return value
     }
 
     // eslint-disable-next-line class-methods-use-this
     __fieldsetHeading(currentContract) {
         if (!currentContract.title) {
-            return html``;
+            return html``
         }
 
-        return html`<legend>${currentContract.title}</legend>`;
+        return html`<legend>${currentContract.title}</legend>`
     }
 }
 
-window.customElements.define('lit-form', LitForm);
+window.customElements.define('lit-form', LitForm)

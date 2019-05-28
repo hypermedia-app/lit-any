@@ -1,4 +1,4 @@
-import TemplateRegistry from './'
+import TemplateRegistry from '.'
 
 type Constructor = new (...args: any[]) => TemplateRegistry;
 

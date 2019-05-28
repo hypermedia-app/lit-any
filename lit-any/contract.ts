@@ -1,13 +1,13 @@
 export interface IContract {
-    title: String;
-    description: String;
-    body: Array<IFieldContract>;
+    title: string;
+    description: string;
+    body: IFieldContract[];
 }
 
 export interface IFieldContract {
-    property: String;
-    range: String;
-    required: Boolean;
-    title: String;
-    description: String;
+    property: string;
+    range: string;
+    required: boolean;
+    title: string;
+    description: string;
 }

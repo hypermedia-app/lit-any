@@ -1,5 +1,10 @@
 {
   "lerna": "2.11.0",
-  "useWorkspaces": true,
+  "packages": [
+    "lit-any",
+    "components/*",
+    "test",
+    "storybook"
+  ],
   "version": "0.8.1"
 }
