@@ -1,6 +1,4 @@
-const path = require('path')
-
-module.exports = {
+{
   "extends": [
     "@open-wc/eslint-config",
     "plugin:@typescript-eslint/recommended",
@@ -33,16 +31,13 @@ module.exports = {
   "env": {
     "browser": true
   },
-  settings: {
-    'import/resolver': {
-      'eslint-import-resolver-lerna': {
-        packages: [
-          path.resolve(__dirname, 'components'),
-          path.resolve(__dirname, 'lit-any'),
-          path.resolve(__dirname, 'storybook'),
-          path.resolve(__dirname, 'test'),
-        ]
+  "overrides":[
+    {
+      "files": "*.test.ts",
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "no-unused-expressions": "off"
       }
     }
-  }
+  ]
 }

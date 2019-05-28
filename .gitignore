@@ -95,3 +95,4 @@ components/**/*.js.map
 lit-any/**/*.js
 lit-any/**/*.js.map
 *.d.ts
+!karma*.js

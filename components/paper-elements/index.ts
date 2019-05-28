@@ -1,6 +1,9 @@
 import { html } from 'lit-html'
 import { until } from 'lit-html/directives/until'
 import { repeat } from 'lit-html/directives/repeat'
+import LitView from '@lit-any/lit-any/lit-view'
+
+class Dup extends LitView {}
 
 export function textbox({
     type = 'single line',
@@ -56,7 +59,7 @@ export function dropdown({
         const paperItems = options.then(resolved => html`${repeat(resolved, renderItem)}`)
 
         return html`<paper-dropdown-menu label="${f.title}" 
-                                         ?no-animations="${!window.KeyframeEffect}"
+                                         ?no-animations="${!('KeyframeEffect' in window)}"
                                          @value-changed="${setValue}"
                                          ?required="${f.required}">
   <paper-listbox slot="dropdown-content" attr-for-selected="value" .selected="${v}">

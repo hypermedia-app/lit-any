@@ -4,8 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prepare": "tsc",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint ./*.ts test/*.js"
   },
   "peerDependencies": {
     "@lit-any/lit-any": ">= 0.7.0",
