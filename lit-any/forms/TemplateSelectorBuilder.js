@@ -1,5 +1,6 @@
 import FieldTemplateSelector from './TemplateSelector';
 import TemplateSelectorBuilder from '../template-registry/TemplateSelectorBuilder';
+import * as Fallback from '../forms/FallbackComponents';
 
 export default class FieldTemplateSelectorBuilder extends TemplateSelectorBuilder {
     fieldMatches(fieldMatchFunc) {
@@ -20,7 +21,8 @@ export default class FieldTemplateSelectorBuilder extends TemplateSelectorBuilde
             }
 
             const componentFunc = this._registry.components[component.name]
-                || this._registry.components.textbox;
+                || this._registry.components.textbox
+                || Fallback.textbox;
 
             return componentFunc(component.options).call(null, ...args);
         });

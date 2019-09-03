@@ -1,0 +1,13 @@
+{
+  "name": "@lit-any/components-aybolit-bootstrap",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "@lit-any/lit-any": ">= 0.7.0",
+    "lit-html": ">= 1"
+  },
+  "dependencies": {
+    "@aybolit/bootstrap": "^0.1.0"
+  }
+}
